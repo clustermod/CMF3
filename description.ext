@@ -31,6 +31,7 @@ class CfgFunctions
 			class limitedRespawnsSet {};																								// Doesn't seem to function correctly or at all, will look into it
 			class rallypoint {};																												// Requires to be reworked, alot of old spaghetti code
 			class chemical {};																													// Not functional (Will probably fix at a later stage)
+			class safeStart {};
 		};
 		class Init																																		// Main init functions subclass
 		{

@@ -7,7 +7,6 @@ _obj addEventHandler ["GetIn", {
 	params ["_vehicle", "_role", "_unit", "_turret"];
 
 	if (_role == "driver" && !(_unit getVariable [EMF_GVAR_RV_restricedVehicleVarName, false]) || _role == "gunner" && !(_unit getVariable [EMF_GVAR_RV_restricedVehicleVarName, false])) then {
-		hint str(EMF_GVAR_RV_restricedVehicleVarName);
 		[EMF_GVAR_RV_failText] remoteExec ["hint", _unit];
 		_unit action ["getOut", _vehicle];
 	};
