@@ -17,6 +17,9 @@ class CfgFunctions
 			class kosherAmmoBox {};																											// hidden controls pertain after arsenal is closed and affects other arsenals (including full arsenals and EMF_fnc_kosherArsenalForce)
 			class kosherArsenalForce {};																								// Fails to load the Unit's allowed loadouts which kinda sucks cock
 
+			// Required Utilities
+			class EMFRoleSet {};																												// Sets playerunit role and team, it's required for most functions within EMF and is recommended to be set.
+
 			// Misc utilities
 			class enhancedAttachTo {};																									// Requires to be tested in a multiplayer enviroment (probably will never use it)
 			class setDate {};																														// Should probably rename to something more descriptive

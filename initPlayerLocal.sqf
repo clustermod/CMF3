@@ -10,10 +10,12 @@ if ((player getVariable ["EMF_PlayerZeus", false]) && ((getPlayerUID player) != 
 	["wrongZeus", false, 0.01, false] call BIS_fnc_endMission;											// Kick player back to lobby if they are zeus and not Eric
 };
 
-// Color corrections, will be applied for all players
+// Color corrections, will be applied for all players (currently commented out and won't affect players)
+/*
 "colorCorrections" ppEffectEnable true;
 "colorCorrections" ppEffectAdjust [0.9, 0.6, 0, [0.1, 0.1, 0.1, -0.1], [0.6, 0.4, 0.2, 0.5],  [1, 0.6, 0, 0]];
 "colorCorrections" ppEffectCommit 0;
+*/
 
 
 [["RUSSIA_LATE90_VDV_WDL", "RUSSIA_LATE90_PILOT_MIXED"]] call EMF_fnc_kosherArsenalLoad;	// Load loadouts for 2 teams
