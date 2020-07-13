@@ -1,10 +1,8 @@
-private _time = _this select 0;
-private _text = [_this, 1, "Time Left"] call BIS_fnc_param;
+params["_time", "_text", ["_blocking", false]];
 
 [_time, _text] spawn
 {
-    private _time = _this select 0;
-    private _text = _this select 1;
+    params["_time", "_text"];
 
     for [{_i=_time},{_i>=0},{_i=_i-1}] do
     {
@@ -12,4 +10,8 @@ private _text = [_this, 1, "Time Left"] call BIS_fnc_param;
         sleep 1;
     };
     "" remoteExec ["hintSilent"];
+};
+
+if (_blocking) then {
+    uisleep _time+3;
 };
