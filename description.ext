@@ -1,53 +1,53 @@
-debriefing = 1;																																		// Enable Debrief
-forceRotorLibSimulation = 0;																											// Disable forced complex flightmodel
+debriefing = 1; // Enable Debrief
+forceRotorLibSimulation = 0; // Disable forced complex flightmodel
 enableDebugConsole[] = { "76561198098666924", "76561198065818848" }; // Enable Debug for Dary and Eric
-#include "taw_vd\GUI.h"																														// Include the ctrlConfines classes for taw_vd's GUI elements
-#include "rsc\rallypoint\rallypointDialog.hpp"																		// Include the ctrlConfines classes for Erics Rallypoints's GUI elements (Not really sure wtf is going on here, should probably redo)
+#include "taw_vd\GUI.h" // Include the ctrlConfines classes for taw_vd's GUI elements
+#include "rsc\rallypoint\rallypointDialog.hpp" // Include the ctrlConfines classes for Erics Rallypoints's GUI elements (Not really sure wtf is going on here, should probably redo)
 
 class CfgFunctions
 {
 	class EMF
 	{
-		class Functions																																// Main functions subclass
+		class Functions // Main functions subclass
 		{
-			file = "functions\functions";																								// Set default function directory
+			file = "functions\functions"; // Set default function directory
 			// Kosher Arsenal functions (should probably sepperate to it's own subclass)
 			class kosherArsenal {};
 			class kosherArsenalLoad {};
-			class kosherAmmoBox {};																											// hidden controls pertain after arsenal is closed and affects other arsenals (including full arsenals and EMF_fnc_kosherArsenalForce)
-			class kosherArsenalForce {};																								// Fails to load the Unit's allowed loadouts which kinda sucks cock
+			class kosherAmmoBox {};
+			class kosherArsenalForce {};
 
 			// Required Utilities
-			class EMFRoleSet {};																												// Sets playerunit role and team, it's required for most functions within EMF and is recommended to be set.
+			class EMFRoleSet {};
 
 			// Misc utilities
-			class enhancedAttachTo {};																									// Requires to be tested in a multiplayer enviroment (probably will never use it)
-			class setDate {};																														// Should probably rename to something more descriptive
+			class enhancedAttachTo {};
+			class setDate {};
 			class zeusFPS {};
-			class preventProne {};																											// Requires to be reworked, lots of old spaghetti code (it's fucked)
+			class preventProne {}; 
 			class countDown {};
 
 			// Misc gameplay utilities
-			class restrictedVehicle {};																									// Seems to fail grabbing unitNameSpace vars within eventhandlers, will have to look into it's kinda fucked, but slightly
+			class restrictedVehicle {};
 			class repairRearmTrigger {};
 			class limitedRespawns {};
-			class limitedRespawnsSet {};																								// Doesn't seem to function correctly or at all, will look into it
-			class rallypoint {};																												// Requires to be reworked, alot of old spaghetti code
-			class chemical {};																													// Not functional (Will probably fix at a later stage)
+			class limitedRespawnsSet {};
+			class rallypoint {};
+			class chemical {};
 			class safeStart {};
 		};
-		class Init																																		// Main init functions subclass
+		class Init // Main init functions subclass
 		{
-			file = "functions\init";																										// Set default function directory
+			file = "functions\init"; // Set default function directory
 		};
 	};
 
-	#include "taw_vd\CfgFunctions.hpp"																							// Include the main functions library of taw_vd
+	#include "taw_vd\CfgFunctions.hpp" // Include the main functions library of taw_vd
 };
 
-class CfgDebriefing																																// Declare custom debrief classes
+class CfgDebriefing // Declare custom debrief classes
 {
-	class wrongZeus																																	// Kick back to lobby if player is not Eric
+	class wrongZeus // Kick back to lobby if player is not zeus
 	{
 		title = "You're not zeus";
 		subtitle = "";
