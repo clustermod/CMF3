@@ -1,6 +1,6 @@
 debriefing = 1;																																		// Enable Debrief
 forceRotorLibSimulation = 0;																											// Disable forced complex flightmodel
-enableDebugConsole[] = { "76561198098666924", "76561198065818848" };							// Enable Debug for Dary and Eric
+enableDebugConsole[] = { "76561198098666924", "76561198065818848" }; // Enable Debug for Dary and Eric
 #include "taw_vd\GUI.h"																														// Include the ctrlConfines classes for taw_vd's GUI elements
 #include "rsc\rallypoint\rallypointDialog.hpp"																		// Include the ctrlConfines classes for Erics Rallypoints's GUI elements (Not really sure wtf is going on here, should probably redo)
 
@@ -49,9 +49,9 @@ class CfgDebriefing																																// Declare custom debrief cla
 {
 	class wrongZeus																																	// Kick back to lobby if player is not Eric
 	{
-		title = "You're not Eric";
+		title = "You're not zeus";
 		subtitle = "";
-		description = "This slot is reserved for Eric";
+		description = "This slot is reserved for zeus";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = {0.0,0.3,0.6,1};
