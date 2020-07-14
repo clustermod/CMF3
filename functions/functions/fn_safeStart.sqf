@@ -13,24 +13,22 @@ if (!isServer) exitWith {};
 	 if (!isPlayer _entity) exitWith {};
 	 [_corpse] remoteExec ["deleteVehicle", 0, true];
 	 [_entity, false] remoteExec ["allowDamage", 0, true];
-	 [_entity, ["", { player sideChat "Weapons are cold, game hasn't started"; }, "", 0, false, true, "DefaultAction"]] remoteExec ["addAction", 0, true];
-	 [_entity, ["", { player sideChat "Weapons are cold, game hasn't started"; }, "", 0, false, true, "throw"]] remoteExec ["addAction", 0, true];
+	 [_entity, ["", { player sideChat "Weapons are cold, game hasn't started"; }, "", 0, false, true, "DefaultAction", "!(missionNamespace getVariable ['EMF_missionSafeStart', false])"]] remoteExec ["addAction", 0, true];
+	 [_entity, ["", { player sideChat "Weapons are cold, game hasn't started"; }, "", 0, false, true, "throw", "!(missionNamespace getVariable ['EMF_missionSafeStart', false])"]] remoteExec ["addAction", 0, true];
 	}];
 
-	/*private _throwEventHandler = ["ace_throwableThrown", {
-		if (missionNamespace getVariable ["EMF_missionSafeStart", false]) then {
-		    ["ace_throwableThrown", _thisScript] remoteExecCall ["CBA_fnc_removeEventHandler", 0];
+	private _throwEventHandler = ["ace_throwableThrown", {
+		if (!(missionNamespace getVariable ["EMF_missionSafeStart", false])) then {
+			[player, "Weapons are cold, game hasn't started"] remoteExec ["sideChat", (_this select 0)];
+			(_this select 1) setPos [0,0,0];
+			deleteVehicle (_this select 1);
 		};
-		[player, "Weapons are cold, game hasn't started"] remoteExec ["sideChat", (_this select 0)];
-		(_this select 1) setPos [0,0,0];
-		deleteVehicle (_this select 1);
-	}] remoteExecCall ["CBA_fnc_addEventHandler", 0, true];*/
+	}] remoteExecCall ["CBA_fnc_addEventHandler", 0, true];
 
 	waitUntil{(missionNamespace getVariable ["EMF_missionSafeStart", false])};
 
 	[60, "Weapons are hot in: ", true] call EMF_fnc_countDown;
 	["Weapons are hot, game has started"] remoteExec ["hintSilent", 0];
 	removeMissionEventHandler ["EntityRespawned", _eventHandlerId];
-	{[_x] remoteExec ["removeAllActions", 0, true];} forEach allPlayers;
 	{[_x, true] remoteExec ["allowDamage", 0, true];} forEach allPlayers;
 };
