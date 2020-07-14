@@ -14,11 +14,11 @@ klpq_musicRadio_radioThemes = ["t_russian"]; // Set theme of music radio
 		_x setSkill ["aimingShake", 	0.5 ];
 		_x setSkill ["aimingSpeed", 	0.3 ];
 		_x setSkill ["spotDistance", 	0.2 ];
-		_x setSkill ["spotTime", 		0.5 ];
-		_x setSkill ["courage", 		0.5 ];
-		_x setSkill ["commanding", 		0.5 ];
-		_x setSkill ["general", 		0.4 ];
+		_x setSkill ["spotTime", 	0.5 ];
+		_x setSkill ["courage", 	0.5 ];
+		_x setSkill ["commanding", 	0.5 ];
+		_x setSkill ["general", 	0.4 ];
 		_x setSkill ["reloadSpeed", 	0.5 ];
-		_x setSkill ["endurance", 		0.5 ];
+		_x setSkill ["endurance", 	0.5 ];
 	};
 }forEach allUnits;
