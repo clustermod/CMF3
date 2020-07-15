@@ -22,7 +22,7 @@ if ((player getVariable ["EMF_PlayerZeus", false]) && ((getPlayerUID player) != 
 [false] call EMF_fnc_kosherArsenal; // Call for kosherArsenal (could probably embedd into EMF_fnc_kosherArsenal);
 
 
-if (player getVariable ["unitSquadRole", "RFL"] == "SL" && (player getVariable ["unitTeamRole", 0] != 1)) then
+if (player getVariable ["unitSquadRole", "RFL"] == "SL") then
 {
 	[player, 5] call EMF_fnc_rallypoint; // If player has role "SL" allow spawning rallypoints
 };
