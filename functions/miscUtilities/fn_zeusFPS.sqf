@@ -1,3 +1,17 @@
+/*
+ * Author: Eric
+ * Creates a 3D widget displaying playerunit's FPS for zeus.
+ *
+ *Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * call EMF_fnc_zeusFPS
+*/
+
 if (!hasInterface) exitwith {};
 [] spawn {
    while {true} do {
@@ -5,18 +19,21 @@ if (!hasInterface) exitwith {};
         sleep 0.1;
     };
 };
+
+// Wait until zeus module is initialized
 waitUntil {
     private _hasCurators = (count allcurators) > 0;
     private _hasInitializedCurators = (count (call BIS_fnc_listCuratorPlayers)) > 0;
     private _curatorsInitialized = !_hasCurators || _hasInitializedCurators;
     ((time > 2) || _curatorsInitialized)
     };
+    
 if (player in (call bis_fnc_listcuratorplayers)) then {
 	addMissionEventHandler ["Draw3D", {
 		{
-			_distance = position curatorCamera distance _x;
+			private _distance = position curatorCamera distance _x;
 			if (_distance < 1200) then {
-				_playerFPS = _x getVariable ["DNI_PlayerFPS",50];
+				private _playerFPS = _x getVariable ["DNI_PlayerFPS",50];
 				if (_playerFPS  <20) then
 				{
 					drawIcon3D

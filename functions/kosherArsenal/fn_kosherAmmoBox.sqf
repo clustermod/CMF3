@@ -1,10 +1,28 @@
+/*
+ * Author: Eric
+ * Creates a arsenal at which players can restock on magazines and items.
+ *
+ *Arguments:
+ * 0: obj <OBJECT>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [this] call EMF_fnc_kosherAmmoBox
+ *
+ * public: Yes
+*/
+
 params["_obj"];
+
 [_obj] spawn
 {
 	params["_obj"];
 
+	// Wait until the whitelists has been defined and create an array of allowed items and magazines
 	waitUntil{typeName (missionNamespace getVariable ["EMF_KA_ArsenalKit", false]) != "BOOL"};
-	_arsenalLoadouts = missionNamespace getVariable "EMF_KA_ArsenalKit";
+	private _arsenalLoadouts = missionNamespace getVariable "EMF_KA_ArsenalKit";
 
 	[ "AmmoboxInit", [ _obj, false, {(_this distance _target) < 10} ] ] call BIS_fnc_arsenal;
 
@@ -13,10 +31,11 @@ params["_obj"];
 		_this addaction [
 			 "Rearm at Arsenal",
 			 {
-			  _box = _this select 0;
-			  _unit = _this select 1;
+			  private _box = _this select 0;
+			  private _unit = _this select 1;
 			  ["Open",[nil,_box,_unit]] call bis_fnc_arsenal;
-			  _removeCtrl =
+				// Define a function to remove all unecessary tabs from the arsenal GUI
+			  private _removeCtrl =
 			  {
 				  {((findDisplay -1) displayCtrl _x) ctrlShow false} forEach [44151, 44150, 44147, 44148, 44149, 44346]; 								  // Remove Controlbar Controls
 				  {((findDisplay -1) displayCtrl _x) ctrlShow false} forEach [965, 963, 964, 994, 1801]; 												  // Remove Itemlist controls
@@ -29,13 +48,15 @@ params["_obj"];
 			  call _removeCtrl;
 			  (findDisplay -1) displayAddEventHandler ['keydown', '_this select 3'];
 
-			  _CtrlDrawEH = _removeCtrl spawn {
-				while {!isnull (uinamespace getvariable "RSCDisplayArsenal")} do
-				{
-					waitUntil {ctrlShown ((findDisplay -1) displayCtrl 847)};
-					call _this;
-				};
+				// Create a event handler to
+			  private _CtrlDrawEH = _removeCtrl spawn {
+					while {!isnull (uinamespace getvariable "RSCDisplayArsenal")} do
+					{
+						waitUntil {ctrlShown ((findDisplay -1) displayCtrl 847)};
+						call _this;
+					};
 			  };
+			// Create an event handler to delete the previous event handler upon arsenal close.
 			[missionNamespace, "arsenalClosed", {
 				terminate _CtrlDrawEH;
 			}] call BIS_fnc_addScriptedEventHandler;

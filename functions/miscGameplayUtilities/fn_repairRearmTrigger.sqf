@@ -1,10 +1,29 @@
+/*
+ * Author: Eric
+ * Repairs and rearms vehicles of supplied units.
+ *
+ *Arguments:
+ * 0: thisTriggerList <ARRAY>
+ * 1: allowDamage <BOOL> [true]
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [thisList, false] call EMF_fnc_repairRearmTrigger
+ *
+ * public: Yes
+*/
+
 params["_thisTriggerList", ["_allowDamage", true]];
 
+// only run on server.
 if (!isServer) exitWith {};
 
-_vehicleArray = [];
+// Run through the array and select the vehicles that has received damage or in need of rearming
+private _vehicleArray = [];
 {
-	_vic = _x;
+	private _vic = _x;
 	if (!(_x isKindOf "Man") && (({getNumber (configFile >> "CfgMagazines" >> _x select 0 >> "count") != _x select 1} count (magazinesAmmo _vic)) > 0 || (damage _vic > 0.05))) then
 	{
 		_vehicleArray pushBackUnique _vic;
@@ -18,42 +37,59 @@ if (count _vehicleArray > 0) then
 		[_x, _allowDamage] spawn
 		{
 			params["_vic", "_allowDamage"];
-			_vehicleCrew = nil;
+			private _vehicleCrew = nil;
+
+			// Get the player crew of the vehicle
 			_vehicleCrew = [];
 			{
 				if (isPlayer _x) then {_vehicleCrew pushBackUnique _x ;};
 			} forEach (crew _vic);
 
-			hint str(_vehicleCrew);
-
+			// Set fuel to 0 to restrict the vehicle from moving
 			[_vic, 0] remoteExec ["setFuel", 0, true];
+
 			if (!_allowDamage) then {
+				// Disable damage if _allowDamage is true
 				[_vic, false] remoteExec ["allowDamage", 0, true];
 			};
+
+			// Lock the vehicle
 			[_vic, true] remoteExec ["lock", 0, true];
-			//{["Repair Center", ["Service is initializing","Vehicle will be locked for your safety"]] remoteExec ["hintC", _x, true];} forEach _vehicleCrew;
+
+			{["Repair Center", ["Service is initializing","Vehicle will be locked for your safety"]] remoteExec ["hintC", _x, true];} forEach _vehicleCrew;
 			sleep 3;
+
 			{[_vic, "Initializing PM sequence..."] remoteExec ["vehicleChat", _x, true];} forEach _vehicleCrew;
 			sleep random 10;
+
 			{[_vic, "Diagnosing Problems..."] remoteExec ["vehicleChat", _x, true];} forEach _vehicleCrew;
 			sleep random 30;
+
+			// Fix the vehicle if it's damaged
 			if (damage _vic > 0.05) then {
 				{[_vic, "Repairing..."] remoteExec ["vehicleChat", _x, true];} forEach _vehicleCrew;
 				sleep random 30;
 				[_vic, 0] remoteExec ["setDammage", 0, true];
 			};
+
+			// Rearm the vehicle if it's ammo is less than 1
 			if (({getNumber (configFile >> "CfgMagazines" >> _x select 0 >> "count") != _x select 1} count (magazinesAmmo _vic)) > 0) then {
 				{[_vic, "Rearming..."] remoteExec ["vehicleChat", _x, true];} forEach _vehicleCrew;
 				sleep random 30;
 				[_vic, 1] remoteExec ["setVehicleAmmo", 0, true];
 			};
+
 			{[_vic, "Refueling..."] remoteExec ["vehicleChat", _x, true];} forEach _vehicleCrew;
 			sleep 5;
 			{[_vic, "Finished..."] remoteExec ["vehicleChat", _x, true];} forEach _vehicleCrew;
 
+			// Refuel vehicle to allow it to move again
 			[_vic, 1] remoteExec ["setFuel", 0, true];
+
+			// Unlock vehicle
 			[_vic, false] remoteExec ["lock", 0, true];
 			if (!_allowDamage) then {
+				// Enable damage
 				[_vic, true] remoteExec ["allowDamage", 0, true];
 			};
 

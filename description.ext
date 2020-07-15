@@ -1,53 +1,79 @@
-debriefing = 1; // Enable Debrief
-forceRotorLibSimulation = 0; // Disable forced complex flightmodel
-enableDebugConsole[] = { "76561198098666924", "76561198065818848" }; // Enable Debug for Dary and Eric
-#include "taw_vd\GUI.h" // Include the ctrlConfines classes for taw_vd's GUI elements
-#include "rsc\rallypoint\rallypointDialog.hpp" // Include the ctrlConfines classes for Erics Rallypoints's GUI elements (Not really sure wtf is going on here, should probably redo)
+/*
+ * Author: Eric
+ * set mission attributes and define global entities.
+ *
+ *Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * None
+*/
+
+// Enable Debrief
+debriefing = 1;
+// Disable forced complex flightmodel
+forceRotorLibSimulation = 0;
+// Enable Debug for Dary and Eric
+enableDebugConsole[] = { "76561198098666924", "76561198065818848" };
+// Include the RscTitles classes for taw_vd's GUI elements
+#include "taw_vd\GUI.h"
+// Include the RscTitles classes for Erics Rallypoints's GUI elements
+#include "rsc\rallypoint\rallypointDialog.hpp"
 
 class CfgFunctions
 {
 	class EMF
 	{
-		class Functions // Main functions subclass
+		class requiredUtilityFunctions
 		{
-			file = "functions\functions"; // Set default function directory
-			// Kosher Arsenal functions (should probably sepperate to it's own subclass)
+			file = "functions\requiredUtilityFunctions";
+			class EMFRoleSet {};
+		};
+		class kosherArsenal
+		{
+			file = "functions\kosherArsenal";
 			class kosherArsenal {};
 			class kosherArsenalLoad {};
 			class kosherAmmoBox {};
 			class kosherArsenalForce {};
-
-			// Required Utilities
-			class EMFRoleSet {};
-
-			// Misc utilities
+		};
+		class limitedRespawns
+		{
+			file = "functions\limitedRespawns";
+			class limitedRespawns {};
+			class limitedRespawnsSet {};
+		};
+		class miscGameplayUtilities
+		{
+			file = "functions\miscGameplayUtilities";
+			class restrictedVehicle {};
+			class repairRearmTrigger {};
+			class rallypoint {};
+			class safeStart {};
+		};
+		class miscUtilities
+		{
+			file = "functions\miscUtilities";
 			class enhancedAttachTo {};
 			class setDate {};
 			class zeusFPS {};
-			class preventProne {}; 
+			class preventProne {};
 			class countDown {};
-
-			// Misc gameplay utilities
-			class restrictedVehicle {};
-			class repairRearmTrigger {};
-			class limitedRespawns {};
-			class limitedRespawnsSet {};
-			class rallypoint {};
-			class chemical {};
-			class safeStart {};
-		};
-		class Init // Main init functions subclass
-		{
-			file = "functions\init"; // Set default function directory
 		};
 	};
 
-	#include "taw_vd\CfgFunctions.hpp" // Include the main functions library of taw_vd
+	// Include the main functions library of taw_vd
+	#include "taw_vd\CfgFunctions.hpp"
 };
 
-class CfgDebriefing // Declare custom debrief classes
+// Declare custom debrief classes
+class CfgDebriefing
 {
-	class wrongZeus // Kick back to lobby if player is not zeus
+	// Kick back to lobby if player is not zeus
+	class wrongZeus
 	{
 		title = "You're not zeus";
 		subtitle = "";

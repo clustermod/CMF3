@@ -1,3 +1,20 @@
+/*
+ * Author: Eric
+ * Simplify sling loading by removing creatin required parameters.
+ *
+ *Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * None
+ *
+ * Public: No
+*/
+
+// Create a function for setting the x,y,z rotation
 KK_fnc_vectorDirAndUpRelative = {
     private ["_o1","_o2","_v"];
     _o1 = _this select 0;

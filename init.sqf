@@ -1,15 +1,35 @@
-call EMF_fnc_setDate; // Freeze time entirely
-tawvd_disablenone = true; // Don't allow removing grass entirely in tawd view distance script
-STHud_NoSquadBarMode = true; // Remove squad bar from ShackTack User Interface
-cTab_vehicleClass_has_FBCB2 = []; // Disable CTAB on vehicles
-klpq_musicRadio_radioThemes = ["t_russian"]; // Set theme of music radio
+/*
+ * Author: Eric
+ * example mission initialization, executed when mission is started (before briefing screen).
+ *
+ *Arguments:
+ * None
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * None
+*/
+
+// Freeze time entirely
+call EMF_fnc_setDate;
+// Don't allow removing grass in tawd view distance script
+tawvd_disablenone = true;
+// Remove squad bar from ShackTack User Interface
+STHud_NoSquadBarMode = true;
+// Disable CTAB on vehicles
+cTab_vehicleClass_has_FBCB2 = [];
+// Set theme of music radio
+klpq_musicRadio_radioThemes = ["t_russian"];
 
 {
 	if (!isPlayer _x) then {
-		[false, _x] call EMF_fnc_preventProne; // Prevent AI units from going prone (Only applied to pre-init units, any units spawned after init will not be affected)
+		// Prevent AI units from going prone
+		[false, _x] call EMF_fnc_preventProne;
 	};
-
-	if ((Side _x) == east) then { // Set Opfor AI Units skill to engage enemy units with area suppression rather than accurate suppression (Only applied to pre-init units, any units spawned after init will not be affected)
+	// Set skill of Opfor Units for area suppression
+	if ((Side _x) == east) then {
 		_x setSkill ["aimingAccuracy", 	0.3 ];
 		_x setSkill ["aimingShake", 	0.5 ];
 		_x setSkill ["aimingSpeed", 	0.3 ];

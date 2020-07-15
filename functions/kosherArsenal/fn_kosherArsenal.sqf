@@ -1,10 +1,31 @@
+/*
+ * Author: Eric
+ * Launches kosherArsenal, a arsenal rewrite that only allows the player to pick a loadout upon respawn. Player will be able to open "rearm arsenal's" later
+ * created with: EMF_fnc_kosherAmmoBox.
+ *
+ *Arguments:
+ * 0: arsenalLight <BOOL>
+ * 1: forcedPrimary <BOOL>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [true, true] call EMF_fnc_kosherArsenal
+ *
+ * public: No
+*/
+
 params[["_arsenalLight", false], ["_forcePrimary", true]];
+// Wait until player respawns the first time (replace with a respawn eventhandler)
 waitUntil{!alive player};
 waitUntil{alive player};
 uisleep 0.1;
 
+// Since players won't be able to move immediately randomly move them around in a 5m radius from the respawn position
 player setpos [((getPos player) select 0) + random[-5, 0, 5], ((getPos player) select 1) + random[-5, 0, 5], ((getPos player) select 2)];
 
+// If _arsenalLight is true attach a light to the player
 if (_arsenalLight) then
 {
 	EMF_KA_LIGHT = "#lightpoint" createVehicle getPos player;
@@ -13,9 +34,12 @@ if (_arsenalLight) then
 	EMF_KA_LIGHT setLightAmbient [1.0, 1.0, 1.0];
 	EMF_KA_LIGHT setLightColor [1.0, 1.0, 1.0];
 };
-_arsenalLoadouts = missionNamespace getVariable "EMF_KA_ArsenalKit";
-_arsenalObj = "HeliHEmpty" createVehicleLocal [0,0,0];
 
+// Get whitelists set with EMF_fnc_kosherArsenalLoad
+private _arsenalLoadouts = missionNamespace getVariable "EMF_KA_ArsenalKit";
+private _arsenalObj = "HeliHEmpty" createVehicleLocal [0,0,0];
+
+// Open the whitelist corresponding with the player's team
 if (typeName _arsenalLoadouts == "ARRAY") then
 {
 	{
@@ -30,6 +54,8 @@ if (typeName _arsenalLoadouts == "ARRAY") then
 		[(toUpper(player getVariable ["unitSquadRole", "RFL"])), _arsenalObj, false] execVM (format["rsc\loadouts\%1.sqf", _arsenalLoadouts]);
 	}
 };
+
+// Remove all weapons and items from the player
 removeAllWeapons player;
 removeAllItems player;
 player unlinkItem "Itemradio";
@@ -37,9 +63,10 @@ player unlinkItem "ItemRadioAcreFlagged";
 [player, "ACRE_PRC343"] call acre_sys_core_fnc_removeGear;
 [player] call acre_sys_core_fnc_getGear;
 
-_valid = false;
+private _valid = false;
 
-_newfirearmEH = [(primaryWeapon player), (handgunWeapon player), (secondaryWeapon player)] spawn
+// Create a eventHandler to remove any magazines from newly equipped weapons aswell as remove magazines spawned by them.
+private _newfirearmEH = [(primaryWeapon player), (handgunWeapon player), (secondaryWeapon player)] spawn
 {
 	params["_prevPrimary", "_prevHandgun", "_prevSecondary"];
 	while {true} do
@@ -48,7 +75,7 @@ _newfirearmEH = [(primaryWeapon player), (handgunWeapon player), (secondaryWeapo
 
 		if ((primaryWeapon player) != _prevPrimary) then
 		{
-			_magazine = primaryWeaponMagazine player;
+			private _magazine = primaryWeaponMagazine player;
 			{
 				player removeMagazines _x;
 				player removePrimaryWeaponItem _x;
@@ -57,7 +84,7 @@ _newfirearmEH = [(primaryWeapon player), (handgunWeapon player), (secondaryWeapo
 
 		if ((handgunWeapon player) != _prevHandgun) then
 		{
-			_magazine = handgunMagazine player;
+			private _magazine = handgunMagazine player;
 			{
 				player removeMagazines _x;
 				player removeHandgunItem _x;
@@ -66,29 +93,32 @@ _newfirearmEH = [(primaryWeapon player), (handgunWeapon player), (secondaryWeapo
 
 		if ((secondaryWeapon player) != _prevSecondary) then
 		{
-			_magazine = secondaryWeaponMagazine player;
+		private	_magazine = secondaryWeaponMagazine player;
 			{
 				player removeMagazines _x;
 			} forEach _magazine;
 		};
-		_magazine = nil;
 	};
 };
 
+// Main loop, opens the arsenal and validates wether or not the player loadout is valid upon exitting the arsenal.
 while {!_valid} do
 {
+	// Open arsenal
 	["Open",[nil, _arsenalObj, false]] call bis_fnc_arsenal;
 	waitUntil { isnull ( uinamespace getvariable "RSCDisplayArsenal" ) };
 	player removeAction (player getvariable "bis_fnc_arsenal_action");
 	player setvariable ['bis_fnc_arsenal_action',nil];
 
-	_permittedGear 	= player getVariable ["EMF_KA_permittedGear", 0];
-	_weapons = [(primaryWeapon player), (handgunWeapon player), (secondaryWeapon player), (binocular player)];
-	_magazines = magazines player;
-	_items = ((items player) + [(uniform player)] + [(vest player)] + [(goggles player)] + [(hmd player)] + [(headGear player)] + (assignedItems player));
-	_backpack = backpack player;
+	// Create arrays of player's selected loadout
+	private _permittedGear 	= player getVariable ["EMF_KA_permittedGear", 0];
+	private _weapons = [(primaryWeapon player), (handgunWeapon player), (secondaryWeapon player), (binocular player)];
+	private _magazines = magazines player;
+	private _items = ((items player) + [(uniform player)] + [(vest player)] + [(goggles player)] + [(hmd player)] + [(headGear player)] + (assignedItems player));
+	private _backpack = backpack player;
 
-	_loadoutValid = [true, ""];
+	// Validate if the player's loadout is valid according to the whitelist
+	private _loadoutValid = [true, ""];
 	{
 		if (typeName _x == "STRING") then
 		{
@@ -112,6 +142,7 @@ while {!_valid} do
 		_loadoutValid = [false, "REQ"];
 	};
 
+	// If the loadout was valid exit the current loop
 	if (!(_loadoutValid select 0)) then
 	{
 		if ((_loadoutValid select 1) == "REQ") then
@@ -123,16 +154,18 @@ while {!_valid} do
 	} else {
 		_valid = true;
 	};
-	uisleep 0;
 };
 
+// Remove the switchWeapon eventHandler
 terminate _newfirearmEH;
 
+// delete the arsenalLight
 if (_arsenalLight) then
 {
 	deleteVehicle EMF_KA_LIGHT;
 };
 
+// Set EMF_KA_Done to true so that the player can't force open a arsenal again and delete the arsenal object
 player setVariable ["EMF_KA_Done", true];
 ["AmmoboxExit", _arsenalObj] call BIS_fnc_arsenal;
 deleteVehicle _arsenalObj;
