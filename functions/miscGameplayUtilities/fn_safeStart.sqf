@@ -2,7 +2,7 @@
  * Author: Eric
  * disables shooting and throwing grenades upon mission start until zeus starts mission.
  *
- *Arguments:
+ * Arguments:
  * None
  *
  * Return Value:
