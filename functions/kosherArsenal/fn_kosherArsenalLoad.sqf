@@ -2,7 +2,7 @@
  * Author: Eric
  * Sets the whitelists to be used in the mission.
  *
- *Arguments:
+ * Arguments:
  * 0: loadout <ARRAY>
  *
  * Return Value:
