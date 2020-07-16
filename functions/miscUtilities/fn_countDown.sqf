@@ -2,7 +2,7 @@
  * Author: Eric
  * Creates a global countdown.
  *
- *Arguments:
+ * Arguments:
  * 0: Time <NUMBER>
  * 1: Text <STRING>
  * 2: Blocking <BOOL>
