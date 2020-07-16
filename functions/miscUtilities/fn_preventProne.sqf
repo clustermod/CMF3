@@ -3,21 +3,21 @@
  * Disable going prone for supplied unit.
  *
  * Arguments:
- * (Will be rewritten)
+ * 0: Unit <OBJECT/ARRAY>
  *
  * Return Value:
  * None
  *
  * Example:
- * (Will be rewritten)
+ * [[Unit1, Unit2, Unit3]] call EMF_fnc_preventProne
  *
  * Public: Yes
 */
 
 
-params["_all", "_mixed"];
+params["_unit"];
 
-private _EMFPPFunc =
+private _EMF_FUNC_PreventProne =
 {
 	EMF_Prevent_Prone = ["AmovPercMstpSlowWrflDnon_AmovPpneMstpSrasWrflDnon ","AmovPercMstpSrasWrflDnon_AmovPpneMstpSrasWrflDnon ","amovppnemstpsraswrfldnon","AmovPknlMstpSrasWrflDnon_AmovPpneMstpSrasWrflDnon "];
 	(_this select 0) addEventHandler ["AnimChanged",
@@ -30,25 +30,20 @@ private _EMFPPFunc =
 	];
 };
 
-if (_all) then
-{
-	{
-		if (!isPlayer _x) then
-		{
-			if (isNil "_mixed") then
+if (isNil "_unit") then {
+    'EMFpreventProne!Error [Unit not set]' remoteExec ["hint", 0];
+};
+
+switch (typeName _unit) do {
+    case ("ARRAY"): {
 			{
-				[_x] call _EMFPPFunc;
-			} else {
-				if (side _x == _mixed) then
-				{
-					[_x] call _EMFPPFunc;
-				};
-			};
+				[_x] call _EMF_FUNC_PreventProne;
+			} forEach _unit;
+    };
+		case ("OBJECT"): {
+			[_unit] call _EMF_FUNC_PreventProne;
 		};
-	}forEach allUnits;
-} else {
-	if (!isNil "_mixed") then
-	{
-		[_mixed] call _EMFPPFunc;
-	};
+		default {
+		    (format['EMFpreventProne!Error [Unit must be a object or an array : %1', (typeName _unit)]) remoteExec ["hint", 0];
+		};
 };
