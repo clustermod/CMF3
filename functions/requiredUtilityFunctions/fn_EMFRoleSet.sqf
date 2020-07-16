@@ -1,3 +1,21 @@
+/*
+ * Author: Eric
+ * Sets role and team of supplied unit, is required for most of EMF functions.
+ *
+ * Arguments:
+ * 0: Unit <OBJECT>
+ * 1: Role <STRING>
+ * 2: Team <NUMBER>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [this, 5] call EMF_fnc_EMFRoleSet
+ *
+ * public: Yes
+*/
+
 params["_obj", "_role", ["_team", 0]];
 
 //Set team variable
