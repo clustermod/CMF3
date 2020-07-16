@@ -10,6 +10,8 @@
  *
  * Example:
  * None
+ *
+ * Public: No
 */
 
 // Save inventory upon player death
