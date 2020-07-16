@@ -2,7 +2,7 @@
  * Author: Eric
  * Freezes time completly as opposed to setting skipTime 0.
  *
- *Arguments:
+ * Arguments:
  * None
  *
  * Return Value:
