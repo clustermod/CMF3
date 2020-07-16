@@ -2,7 +2,7 @@
  * Author: Eric
  * example mission initialization, executed when mission is started (before briefing screen).
  *
- *Arguments:
+ * Arguments:
  * None
  *
  * Return Value:
