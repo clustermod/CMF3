@@ -2,7 +2,7 @@
  * Author: Eric
  * Forces the spawn arsenal on a player to allow changing all gear within a whitelist
  *
- *Arguments:
+ * Arguments:
  * 0: obj <OBJECT>
  *
  * Return Value:
