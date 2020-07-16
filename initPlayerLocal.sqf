@@ -2,7 +2,7 @@
  * Author: Eric
  * example local initialization, executed locally when player joins mission (includes both mission start and JIP).
  *
- *Arguments:
+ * Arguments:
  * None
  *
  * Return Value:
