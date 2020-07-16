@@ -36,7 +36,7 @@ if (_arsenalLight) then
 };
 
 // Get whitelists set with EMF_fnc_kosherArsenalLoad
-private _arsenalLoadouts = missionNamespace getVariable "EMF_KA_ArsenalKit";
+private _arsenalLoadouts = player getVariable "EMF_KA_ArsenalKit";
 private _arsenalObj = "HeliHEmpty" createVehicleLocal [0,0,0];
 
 // Open the whitelist corresponding with the player's team

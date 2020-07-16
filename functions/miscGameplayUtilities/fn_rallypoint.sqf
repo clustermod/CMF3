@@ -22,31 +22,65 @@ if (!hasInterface) exitwith {};
 // Define function to place Rallypoint
 private _EMF_FUNC_PLACE =
 {
+	private _cooldown = (player getVariable ["EMF_RP_PARAMS", [player, 10, "Misc_backpackheap_EP1"]] select 1);
+	private _PHObj = (player getVariable ["EMF_RP_PARAMS", [player, 10, "Misc_backpackheap_EP1"]] select 2);
+
 	// Define 2 variables to be used as states
 	EMF_RP_Placed = false;
 	EMF_RP_Canceled = false;
 
+	// Create dialog
+	5000 cutRsc ["EMF_rallyPointDialog", "PLAIN"];
+
+	// Create a eventHandler detecting mouse inputs
+	private _keyEventhandler = (findDisplay 46) displayAddEventHandler ["mouseButtonDown", '
+		params ["_displayorcontrol", "_button"];
+		if (_button == 1) then {
+		    EMF_RP_Canceled = true;
+		};
+		if (_button == 0) then {
+				EMF_RP_Placed = true;
+		};
+	'];
+
 	// Create a physical representation
-	private _RPObj = _PHObj createVehicle [0,0,0];
+	private _RPObj = _PHObj createVehicle (getPos player);
+
+	// Create a loop to move the physical object
+	private _moveRP = _RPObj spawn {
+		while {true} do
+		{
+			private _dir = screenToWorld [0.5,0.5];
+
+			if (player distance _dir < 5) then {
+				_this setPosASL _dir;
+			};
+		};
+	};
 
 	// Create a eventHandler listening for DefaultAction key press
-	private _RPPlaceEH = [_RPObj, _cooldown] spawn
+	private _RPPlaceEH = [_RPObj, _cooldown, _moveRP, _keyEventhandler] spawn
 	{
-		params["_RPObj", "_cooldown"];
+		params["_RPObj", "_cooldown", "_moveRP", "_keyEventhandler"];
 
 		// Block defaultAction from firing
 		[player, ["", {}, "", 0, false, true, "DefaultAction", "!EMF_RP_Placed && !EMF_RP_Canceled"]] remoteExec ["addAction", 0, true];
-		waitUntil {inputAction "DefaultAction" > 0};
+		waitUntil {EMF_RP_Placed};
 		if ((player distance _RPObj) <= 5) then {
-			EMF_RP_Placed = true;
+			terminate _moveRP;
+			(findDisplay 46) displayRemoveEventHandler ["mouseButtonDown", _keyEventhandler];
+			5000 cutRsc ["Default", "PLAIN"];
 
 			// Get and remove any old Rallypoint
-			private _PREVRP = player getVariable ["EMF_RP_PREVRP", [objNull, objNull]];
-			(_PREVRP select 0) remoteExec ["deleteVehicle", 0, true];
-			(_PREVRP select 1) remoteExecCall ["BIS_fnc_removeRespawnPosition", 0, true];
+			private _PREVRP = player getVariable ["EMF_RP_PREVRP", nil];
+			if (!isNil "_PREVRP") then
+			{
+				(_PREVRP select 0) remoteExec ["deleteVehicle", 0, true];
+				(_PREVRP select 1) call BIS_fnc_removeRespawnPosition;
+			};
 
 			// Create new Rallypoint spawnpoint
-			private _RPRespawn = [(side player), (getPos _RPObj)] remoteExecCall ["BIS_fnc_addRespawnPosition", 0, true];
+			private _RPRespawn = [(side player), (getPosASL _RPObj)] call BIS_fnc_addRespawnPosition;
 
 			// Create a variable to facilitate data on the rallypoint
 			player setVariable ["EMF_RP_PREVRP", [_RPObj, _RPRespawn], true];
@@ -57,33 +91,24 @@ private _EMF_FUNC_PLACE =
 			_cooldown spawn
 			{
 				// Unlock the rallypoint action after _cooldown has lasted
-				sleep (_this*60);
-				player setVariable ["EMF_RP_Lock", true, true];
+				sleep (_this * 60);
+				player setVariable ["EMF_RP_Lock", false, true];
 			};
 		} else {
 			hint "Too far away from RP";
 		};
 	};
 
-	// Create a eventHandler listening for Optics key press
-	[_RPObj, _RPPlaceEH] spawn
+	[_RPObj, _RPPlaceEH, _moveRP, _keyEventhandler] spawn
 	{
-		params["_RPObj", "_RPPlaceEH"];
-		waitUntil {inputAction "Optics" > 0};
-		EMF_RP_Canceled = true;
+		params["_RPObj", "_RPPlaceEH", "_moveRP", "_keyEventhandler"];
+		waitUntil {EMF_RP_Canceled};
+		terminate _moveRP;
+		(findDisplay 46) displayRemoveEventHandler ["mouseButtonDown", _keyEventhandler];
+		5000 cutRsc ["Default", "PLAIN"];
 
 		deleteVehicle _RPObj;
 		terminate _RPPlaceEH;
-	};
-
-	// Create a loop to move the physical object
-	while {!EMF_RP_Placed || !EMF_RP_Canceled} do
-	{
-		private _dir = screenToWorld [0.5,0.5];
-
-		if (player distance _dir < 5) then {
-			_RPObj setPos [(_dir select 0), (_dir select 1), ((getPos player) select 2)];
-		};
 	};
 };
 
@@ -91,26 +116,26 @@ if (isNil "_unit") then {
     'EMFpreventProne!Error [Unit not set]' remoteExec ["hint", 0];
 };
 
+private _RPlace = ["EMF_RPlace", "Place rallypoint", "\A3\ui_f\data\map\markers\military\end_CA.paa", _EMF_FUNC_PLACE, {(vehicle player) == player && !(player getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
+private _Rwait = ["EMF_RWait", "Place rallypoint", "\A3\ui_f\data\map\markers\military\objective_CA.paa", {hint format["can only be done once every %1 minutes", str(_cooldown)];}, {(vehicle player) == player && (player getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
+
 switch (typeName _unit) do {
     case ("ARRAY"): {
 			{
-				private _RPlace = ["EMF_RPlace", "Place rallypoint", "rsc\rallypoint\place.paa", _EMF_FUNC_PLACE, {(vehicle _x) == _x && !(_x getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
-				private _Rwait = ["EMF_RWait", "Place rallypoint", "rsc\rallypoint\restricted.paa", {hint format["can only be done once every %1 minutes", str(_cooldown)];}, {(vehicle _x) == _x && (_x getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
+				_x setVariable ["EMF_RP_PARAMS", [_unit, _cooldown, _PHObj], true];
 				[_x, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
 				[_x, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
 			} forEach _unit;
     };
 		case ("OBJECT"): {
-			private _RPlace = ["EMF_RPlace", "Place rallypoint", "rsc\rallypoint\place.paa", _EMF_FUNC_PLACE, {(vehicle _unit) == _unit && !(_unit getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
-			private _Rwait = ["EMF_RWait", "Place rallypoint", "rsc\rallypoint\restricted.paa", {hint format["can only be done once every %1 minutes", str(_cooldown)];}, {(vehicle _unit) == _unit && (_unit getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
+			_unit setVariable ["EMF_RP_PARAMS", [_unit, _cooldown, _PHObj], true];
 			[_unit, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _unit];
 			[_unit, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _unit];
 		};
 		case ("STRING"): {
 			{
 				if ((_x getVariable ["unitSquadRole", "RFL"]) == "SL") then {
-					private _RPlace = ["EMF_RPlace", "Place rallypoint", "rsc\rallypoint\place.paa", _EMF_FUNC_PLACE, {(vehicle _x) == _x && !(_x getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
-					private _Rwait = ["EMF_RWait", "Place rallypoint", "rsc\rallypoint\restricted.paa", {hint format["can only be done once every %1 minutes", str(_cooldown)];}, {(vehicle _x) == _x && (_x getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
+					_x setVariable ["EMF_RP_PARAMS", [_unit, _cooldown, _PHObj], true];
 					[_x, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
 					[_x, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
 				};
