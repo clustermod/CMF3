@@ -2,7 +2,7 @@
  * Author: Eric
  * Restricts vehicle operator positions (Driver, gunner and commander) to specific units
  *
- *Arguments:
+ * Arguments:
  * 0: obj <OBJECT>
  * 1: varName <STRING>
  * 2: failText <STRING>
