@@ -2,7 +2,7 @@
  * Author: Eric
  * Repairs and rearms vehicles of supplied units.
  *
- *Arguments:
+ * Arguments:
  * 0: thisTriggerList <ARRAY>
  * 1: allowDamage <BOOL> [true]
  *
