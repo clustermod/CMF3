@@ -2,7 +2,7 @@
  * Author: Eric
  * Creates a arsenal at which players can restock on magazines and items.
  *
- *Arguments:
+ * Arguments:
  * 0: obj <OBJECT>
  *
  * Return Value:
