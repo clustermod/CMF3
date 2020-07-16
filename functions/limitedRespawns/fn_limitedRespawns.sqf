@@ -2,7 +2,7 @@
  * Author: Eric
  * Gives players a limited amount of lives which if all are spent will set player as a spectator.
  *
- *Arguments:
+ * Arguments:
  * 0: Respawns <NUMBER>
  *
  * Return Value:
