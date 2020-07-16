@@ -10,6 +10,8 @@
  *
  * Example:
  * None
+ *
+ * Public: No
 */
 
 // Enable player FPS counter for zeus
