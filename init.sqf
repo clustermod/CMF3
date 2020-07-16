@@ -10,6 +10,8 @@
  *
  * Example:
  * None
+ *
+ * Public: Yes
 */
 
 // Freeze time entirely
