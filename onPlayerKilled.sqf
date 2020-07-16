@@ -2,7 +2,7 @@
  * Author: Eric
  * Executed locally when player is killed in a singleplayer or in a multiplayer mission.
  *
- *Arguments:
+ * Arguments:
  * None
  *
  * Return Value:
