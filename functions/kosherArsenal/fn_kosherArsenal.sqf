@@ -3,7 +3,7 @@
  * Launches kosherArsenal, a arsenal rewrite that only allows the player to pick a loadout upon respawn. Player will be able to open "rearm arsenal's" later
  * created with: EMF_fnc_kosherAmmoBox.
  *
- *Arguments:
+ * Arguments:
  * 0: arsenalLight <BOOL>
  * 1: forcedPrimary <BOOL>
  *
