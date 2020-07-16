@@ -2,7 +2,7 @@
  * Author: Eric
  * Sets the remaining respawns of to supplied unit.
  *
- *Arguments:
+ * Arguments:
  * 0: obj <OBJECT>
  * 1: Respawns <NUMBER>
  *
