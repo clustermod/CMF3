@@ -17,4 +17,4 @@
 params["_loadout"];
 
 // Set the whitelist arrays in missionNamespace
-missionNamespace setVariable ["EMF_KA_ArsenalKit", _loadout];
+player setVariable ["EMF_KA_ArsenalKit", _loadout, true];

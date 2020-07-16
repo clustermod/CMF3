@@ -39,11 +39,7 @@ if ((player getVariable ["EMF_PlayerZeus", false]) && ((getPlayerUID player) != 
 
 // Load loadouts for 2 teams
 [["RUSSIA_LATE90_VDV_WDL", "RUSSIA_LATE90_PILOT_MIXED"]] call EMF_fnc_kosherArsenalLoad;
-// Start kosherArsenal
 [false] call EMF_fnc_kosherArsenal;
 
 // If player has role "SL" allow spawning rallypoints
-if (player getVariable ["unitSquadRole", "RFL"] == "SL") then
-{
-	[player, 5] call EMF_fnc_rallypoint;
-};
+["SL", 5] call EMF_fnc_rallypoint;
