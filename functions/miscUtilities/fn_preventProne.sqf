@@ -2,7 +2,7 @@
  * Author: Eric
  * Disable going prone for supplied unit.
  *
- *Arguments:
+ * Arguments:
  * (Will be rewritten)
  *
  * Return Value:
