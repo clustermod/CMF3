@@ -10,6 +10,8 @@
  *
  * Example:
  * None
+ *
+ * Public: No
 */
 
 // Load inventory upon player respawn
