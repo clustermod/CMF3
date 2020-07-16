@@ -2,7 +2,7 @@
  * Author: Eric
  * Simplify sling loading by removing creatin required parameters.
  *
- *Arguments:
+ * Arguments:
  * None
  *
  * Return Value:
