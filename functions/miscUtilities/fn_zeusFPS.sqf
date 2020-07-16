@@ -2,7 +2,7 @@
  * Author: Eric
  * Creates a 3D widget displaying playerunit's FPS for zeus.
  *
- *Arguments:
+ * Arguments:
  * None
  *
  * Return Value:
