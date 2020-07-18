@@ -16,8 +16,14 @@
 
 params["_respawns", "_teamLimit"];
 
+// Check if params are set and is of correct type
+if (isNil "_respawns") exitWith {  ['Respawns is not set'] call BIS_fnc_error; 'Respawns is not set' call BIS_fnc_log;};
+if (typeName _respawns != "SCALAR") exitWith {  ['Object must be type "SCALAR", type %1 supplied', (typeName _respawns)] call BIS_fnc_error; ['Respawns must be type "SCALAR", type %1 supplied', (typeName _respawns)] call BIS_fnc_log;};
+
 // If player is not in supplied team don't run
-if (!isNil "_teamLimit") then {if (player getVariable ["unitTeamRole", 0] == _teamLimit) exitWith {}};
+private _team = true;
+if (!isNil "_teamLimit") then {if (player getVariable ["unitTeamRole", 0] == _teamLimit) exitWith {_team = false}};
+if (!_team) exitWith{};
 
 // Set the amount of allowed respawns
 player setVariable["EMF_playerRespawns", (_respawns + 1), true];

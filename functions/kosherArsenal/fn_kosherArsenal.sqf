@@ -17,6 +17,7 @@
 */
 
 params[["_arsenalLight", false], ["_forcePrimary", true]];
+
 // Wait until player respawns the first time (replace with a respawn eventhandler)
 waitUntil{!alive player};
 waitUntil{alive player};
@@ -105,7 +106,7 @@ private _newfirearmEH = [(primaryWeapon player), (handgunWeapon player), (second
 while {!_valid} do
 {
 	// Open arsenal
-	["Open",[nil, _arsenalObj, false]] call bis_fnc_arsenal;
+	["Open",[nil, _arsenalObj, false]] remoteExecCall ["bis_fnc_arsenal", player];
 	waitUntil { isnull ( uinamespace getvariable "RSCDisplayArsenal" ) };
 	player removeAction (player getvariable "bis_fnc_arsenal_action");
 	player setvariable ['bis_fnc_arsenal_action',nil];
@@ -168,4 +169,6 @@ if (_arsenalLight) then
 // Set EMF_KA_Done to true so that the player can't force open a arsenal again and delete the arsenal object
 player setVariable ["EMF_KA_Done", true];
 ["AmmoboxExit", _arsenalObj] call BIS_fnc_arsenal;
-deleteVehicle _arsenalObj;
+//deleteVehicle _arsenalObj;
+
+player setVariable ["EMF_KA_ArsenalObj", _arsenalObj];

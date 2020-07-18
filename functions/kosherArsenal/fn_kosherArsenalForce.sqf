@@ -16,29 +16,16 @@
 
 params["_obj"];
 
+// Check if params are set and is of correct type
+if (isNil "_obj") exitWith {  ['Object is not set'] call BIS_fnc_error; 'Object is not set' call BIS_fnc_log;};
+if (typeName _obj != "OBJECT") exitWith {  ['Object must be type "OBJECT", type %1 supplied', (typeName _obj)] call BIS_fnc_error; ['Object must be type "OBJECT", type %1 supplied', (typeName _obj)] call BIS_fnc_log;};
+
 EMF_arsenalFunc =
 {
 	[] spawn
 		{
-		// Get whitelists set with EMF_fnc_kosherArsenalLoad
-		private _arsenalLoadouts = player getVariable "EMF_KA_ArsenalKit";
-		private _arsenalObj = "HeliHEmpty" createVehicleLocal [0,0,0];
-
-		// Open the whitelist corresponding with the player's team
-		if (typeName _arsenalLoadouts == "ARRAY") then
-		{
-			{
-				if (player getVariable ["unitTeamRole", 0] == _forEachIndex) then
-				{
-					[(toUpper(player getVariable ["unitSquadRole", "RFL"])), _arsenalObj, false] execVM (format["rsc\loadouts\%1.sqf", _x]);
-				}
-			} forEach _arsenalLoadouts;
-		} else {
-			if (typeName _arsenalLoadouts == "STRING") then
-			{
-				[(toUpper(player getVariable ["unitSquadRole", "RFL"])), _arsenalObj, false] execVM (format["rsc\loadouts\%1.sqf", _arsenalLoadouts]);
-			}
-		};
+		// Get arsenal object
+		private _arsenalObj = player getVariable ["EMF_KA_ArsenalObj", objNull];
 
 		private _valid = false;
 
@@ -139,8 +126,6 @@ EMF_arsenalFunc =
 
 	// Set EMF_KA_Done to true so that the player can't force open a arsenal again and delete the arsenal object
 	player setVariable ["EMF_KA_Done", true];
-	["AmmoboxExit", _arsenalObj] call BIS_fnc_arsenal;
-	deleteVehicle _arsenalObj;
 	};
 };
 

@@ -11,7 +11,7 @@
  * None
  *
  * Example:
- * [this, 5] call EMF_fnc_EMFRoleSet
+ * [this, "SL", 0] call EMF_fnc_EMFRoleSet
  *
  * public: Yes
 */
@@ -23,7 +23,8 @@ _obj setVariable ["unitTeamRole", _team, true];
 
 //Check if _role exists and is valid
 if (isNil "_role") then {
-  (format['EMFRoleSet!Error [%1][UnitRole not set : default unit role to "RFL"]', (name _obj)]) remoteExec ["hint", 0];
+  ['Units role is not set, setting default role to "RFL"'] call BIS_fnc_error;
+  'Units role is not set, setting default role to "RFL"' call BIS_fnc_log;
   //Set role variable to default
   _obj setVariable ["unitSquadRole", "RFL", true];
 } else {
@@ -31,7 +32,8 @@ if (isNil "_role") then {
     //Set role variable to _role
     _obj setVariable ["unitSquadRole", _role, true];
   } else {
-    (format['EMFRoleSet!Error [%1][UnitRole not string : default unit role to "RFL"]']) remoteExec ["hint", 0];
+    ['Units role is not a string, setting default role to "RFL"'] call BIS_fnc_error;
+    'Units role is not set, setting default role to "RFL"' call BIS_fnc_log;
     //Set role variable to default
     _obj setVariable ["unitSquadRole", "RFL", true];
   };

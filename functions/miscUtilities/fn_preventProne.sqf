@@ -30,9 +30,7 @@ private _EMF_FUNC_PreventProne =
 	];
 };
 
-if (isNil "_unit") then {
-    'EMFpreventProne!Error [Unit not set]' remoteExec ["hint", 0];
-};
+if (isNil "_unit") exitWith {  ['Unit is not set'] call BIS_fnc_error; 'Unit is not set' call BIS_fnc_log;};
 
 switch (typeName _unit) do {
     case ("ARRAY"): {
@@ -44,6 +42,7 @@ switch (typeName _unit) do {
 			[_unit] call _EMF_FUNC_PreventProne;
 		};
 		default {
-		    (format['EMFpreventProne!Error [Unit must be a object or an array : %1', (typeName _unit)]) remoteExec ["hint", 0];
+				['Unit must be type "ARRAY" or "OBJECT", type %1 supplied', (typeName _unit)] call BIS_fnc_error;
+				['Unit must be type "ARRAY" or "OBJECT", type %1 supplied', (typeName _unit)] call BIS_fnc_log;
 		};
 };

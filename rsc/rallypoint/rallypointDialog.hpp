@@ -56,8 +56,8 @@ class RscTitles
 				h = safeZoneH * 0.03;
 				style = 0+48;
 				text = "rsc\rallypoint\mouse_right_ca.paa";
-				colorBackground[] = {0.2392,0.1333,0.4078,1};
-				colorText[] = {0.7608,0.8667,0.5922,1};
+				colorBackground[] = {0,0,0,1};
+				colorText[] = {1,1,1,1};
 				font = "PuristaMedium";
 				sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
 

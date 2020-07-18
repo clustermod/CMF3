@@ -53,9 +53,10 @@ private _EMF_FUNC_PLACE =
 			private _dir = screenToWorld [0.5,0.5];
 
 			if (player distance _dir < 5) then {
-				_this setPosASL _dir;
+				_this setPos _dir;
 			};
 		};
+		[_this, _dir] remoteExec ["setPos", 0, true];
 	};
 
 	// Create a eventHandler listening for DefaultAction key press
@@ -80,7 +81,7 @@ private _EMF_FUNC_PLACE =
 			};
 
 			// Create new Rallypoint spawnpoint
-			private _RPRespawn = [(side player), (getPosASL _RPObj)] call BIS_fnc_addRespawnPosition;
+			private _RPRespawn = [(side player), (getPos _RPObj), format["%1 rally point", (groupId (group player))]] call BIS_fnc_addRespawnPosition;
 
 			// Create a variable to facilitate data on the rallypoint
 			player setVariable ["EMF_RP_PREVRP", [_RPObj, _RPRespawn], true];
@@ -112,12 +113,10 @@ private _EMF_FUNC_PLACE =
 	};
 };
 
-if (isNil "_unit") then {
-    'EMFpreventProne!Error [Unit not set]' remoteExec ["hint", 0];
-};
+if (isNil "_unit") exitWith {  ['Unit is not set'] call BIS_fnc_error; 'Unit is not set' call BIS_fnc_log;};
 
 private _RPlace = ["EMF_RPlace", "Place rallypoint", "\A3\ui_f\data\map\markers\military\end_CA.paa", _EMF_FUNC_PLACE, {(vehicle player) == player && !(player getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
-private _Rwait = ["EMF_RWait", "Place rallypoint", "\A3\ui_f\data\map\markers\military\objective_CA.paa", {hint format["can only be done once every %1 minutes", str(_cooldown)];}, {(vehicle player) == player && (player getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
+private _Rwait = ["EMF_RWait", "Place rallypoint", "\A3\ui_f\data\map\markers\military\objective_CA.paa", {hint format["can only be done once every %1 minutes", str((player getVariable ["EMF_RP_PARAMS", [objNull, 10, ""]]) select 1)];}, {(vehicle player) == player && (player getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
 
 switch (typeName _unit) do {
     case ("ARRAY"): {
@@ -134,7 +133,8 @@ switch (typeName _unit) do {
 		};
 		case ("STRING"): {
 			{
-				if ((_x getVariable ["unitSquadRole", "RFL"]) == "SL") then {
+				private _hasRally = _x getVariable ["EMF_RP_PARAMS", [objNull, 5, ""]];
+				if ((_x getVariable ["unitSquadRole", "RFL"]) == "SL" && isNull (_hasRally select 0)) then {
 					_x setVariable ["EMF_RP_PARAMS", [_unit, _cooldown, _PHObj], true];
 					[_x, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
 					[_x, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
@@ -142,6 +142,7 @@ switch (typeName _unit) do {
 			} forEach allPlayers;
 		};
 		default {
-		    (format['EMFrallypoint!Error [Unit must be a object, array or a string : %1', (typeName _unit)]) remoteExec ["hint", 0];
+				['Unit must be type "OBJECT", "ARRAY" or "STRING", type %1 supplied', (typeName _unit)] call BIS_fnc_error;
+				['Unit must be type "OBJECT", "ARRAY" or "STRING", type %1 supplied', (typeName _unit)] call BIS_fnc_log;
 		};
 };

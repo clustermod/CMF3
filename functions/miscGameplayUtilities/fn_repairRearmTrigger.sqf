@@ -17,6 +17,10 @@
 
 params["_thisTriggerList", ["_allowDamage", true]];
 
+// Check if params are set and is of correct type
+if (isNil "_thisTriggerList") exitWith {  ['thisList is not set'] call BIS_fnc_error; 'thisList is not set' call BIS_fnc_log;};
+if (typeName _thisTriggerList != "ARRAY") exitWith {  ['thisList must be type "ARRAY", type %1 supplied', (typeName _thisTriggerList)] call BIS_fnc_error; ['thisList must be type "ARRAY", type %1 supplied', (typeName _thisTriggerList)] call BIS_fnc_log;};
+
 // only run on server.
 if (!isServer) exitWith {};
 
