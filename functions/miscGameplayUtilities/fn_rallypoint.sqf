@@ -1,95 +1,147 @@
-params["_unit", ["_cooldown", 10]];
-scopeName "main";
+/*
+ * Author: Eric
+ * Create a rallypoint system similar to Squad's rallypoint system.
+ *
+ * Arguments:
+ * 0: Unit <OBJECT/ARRAY/STRING>
+ * 1: Cooldown <NUMBER>
+ * 2: PhysicalObject <STRING>
+ *
+ * Return Value:
+ * None
+ *
+ * Example:
+ * [this, 5] call EMF_fnc_rallypoint
+ *
+ * public: Yes
+*/
+
+params["_unit", ["_cooldown", 10], ["_PHObj", "Misc_backpackheap_EP1"]];
 if (!hasInterface) exitwith {};
 
-_rallyplace = ["_rallyplace", "Place Rallypoint", "rsc\rallypoint\place.paa", {rallyplace = true;}, {(vehicle player) == player}] call ace_interact_menu_fnc_createAction;
-_rallywait = ["_rallywait", "Place Rallypoint", "rsc\rallypoint\restricted.paa", {hint format["can only be done once every %1 minutes", str(_cooldown)];}, {true}] call ace_interact_menu_fnc_createAction;
+// Define function to place Rallypoint
+private _EMF_FUNC_PLACE =
+{
+	private _cooldown = (player getVariable ["EMF_RP_PARAMS", [player, 10, "Misc_backpackheap_EP1"]] select 1);
+	private _PHObj = (player getVariable ["EMF_RP_PARAMS", [player, 10, "Misc_backpackheap_EP1"]] select 2);
 
-[_unit, 1, ["ACE_SelfActions"], _rallyplace] call ace_interact_menu_fnc_addActionToObject;
+	// Define 2 variables to be used as states
+	EMF_RP_Placed = false;
+	EMF_RP_Canceled = false;
 
-rallyplace = false;
+	// Create dialog
+	5000 cutRsc ["EMF_rallyPointDialog", "PLAIN"];
 
-cancel = false;
-
-while {true} do {
-scopeName "mainloop";
-
-	waituntil {rallyplace};
-
-	// create temporary global variable
-	place = true;
-
-	// create the backpacks and add an action to "default action"
-	if (!isNil "_rallypoint") then {
-		deleteVehicle _rallypoint;
-	};
-	_rallypoint = "Misc_backpackheap_EP1" createvehicle [0, 0, 0];
-
-	_StartAction = player addAction ["", {place = false;}, "", 0, false, true, "DefaultAction"];
-
-	_StopAction = player addAction ["Cancel", {cancel = true;}, "", 1, false, true, "Optics"];
-
-	// block the create action
-	[player, 1, ["ACE_SelfActions", "_rallyplace"]] call ace_interact_menu_fnc_removeActionFromObject;
-	[player, 1, ["ACE_SelfActions"], _rallywait] call ace_interact_menu_fnc_addActionToObject;
-
-
-	1 cutRsc ["LMBhint","PLAIN"];
-
-
-	//move to where player is looking until _action is triggered
-	while {place} do {
-		scopeName "movepack";
-		_dir = screenToWorld [0.5,0.5];
-
-		if (player distance _dir < 5) then {
-			_rallypoint setPos _dir;
+	// Create a eventHandler detecting mouse inputs
+	private _keyEventhandler = (findDisplay 46) displayAddEventHandler ["mouseButtonDown", '
+		params ["_displayorcontrol", "_button"];
+		if (_button == 1) then {
+		    EMF_RP_Canceled = true;
 		};
-
-		if (cancel) then {
-			deleteVehicle _rallypoint;
-			breakTo "mainloop";
+		if (_button == 0) then {
+				EMF_RP_Placed = true;
 		};
+	'];
 
+	// Create a physical representation
+	private _RPObj = _PHObj createVehicle (getPos player);
+
+	// Create a loop to move the physical object
+	private _moveRP = _RPObj spawn {
+		while {true} do
+		{
+			private _dir = screenToWorld [0.5,0.5];
+
+			if (player distance _dir < 5) then {
+				_this setPosASL _dir;
+			};
+		};
 	};
 
-	//remove action
-	player removeAction _StartAction;
-	player removeAction _StopAction;
-	1 cutRsc ["Default","PLAIN"];
+	// Create a eventHandler listening for DefaultAction key press
+	private _RPPlaceEH = [_RPObj, _cooldown, _moveRP, _keyEventhandler] spawn
+	{
+		params["_RPObj", "_cooldown", "_moveRP", "_keyEventhandler"];
 
-	//remove temporary global variable
-	place = nil;
+		// Block defaultAction from firing
+		[player, ["", {}, "", 0, false, true, "DefaultAction", "!EMF_RP_Placed && !EMF_RP_Canceled"]] remoteExec ["addAction", 0, true];
+		waitUntil {EMF_RP_Placed};
+		if ((player distance _RPObj) <= 5) then {
+			terminate _moveRP;
+			(findDisplay 46) displayRemoveEventHandler ["mouseButtonDown", _keyEventhandler];
+			5000 cutRsc ["Default", "PLAIN"];
 
-	if (!cancel) then {
-		if (player distance (position _rallypoint) > 5) exitwith {
-			deleteVehicle _rallypoint;
-			hint "Rallypoint too far away";
+			// Get and remove any old Rallypoint
+			private _PREVRP = player getVariable ["EMF_RP_PREVRP", nil];
+			if (!isNil "_PREVRP") then
+			{
+				(_PREVRP select 0) remoteExec ["deleteVehicle", 0, true];
+				(_PREVRP select 1) call BIS_fnc_removeRespawnPosition;
+			};
+
+			// Create new Rallypoint spawnpoint
+			private _RPRespawn = [(side player), (getPosASL _RPObj)] call BIS_fnc_addRespawnPosition;
+
+			// Create a variable to facilitate data on the rallypoint
+			player setVariable ["EMF_RP_PREVRP", [_RPObj, _RPRespawn], true];
+
+			// Lock the rallypoint action for the duration of the cooldown
+			player setVariable ["EMF_RP_Lock", true, true];
+
+			_cooldown spawn
+			{
+				// Unlock the rallypoint action after _cooldown has lasted
+				sleep (_this * 60);
+				player setVariable ["EMF_RP_Lock", false, true];
+			};
+		} else {
+			hint "Too far away from RP";
 		};
-
-
-		_rallyrespawn = _unit getVariable [(format ["%1_RP", (name _unit)]), "notSet"];
-		_rallyobject = _unit getVariable [(format ["%1_RPObject", (name _unit)]), "notSet"];
-		if (typeName _rallyrespawn == "ARRAY") then {
-			_rallyrespawn call BIS_fnc_removeRespawnPosition;
-			deleteVehicle _rallyobject;
-		};
-
-		_rallymarker = [west, (position _rallypoint)] call BIS_fnc_addRespawnPosition;
-		_unit setVariable [format ["%1_RP", (name _unit)], _rallymarker];
-		_unit setVariable [format ["%1_RPObject", (name _unit)], _rallypoint];
-
-		// sleep x minutes
-		uisleep (_cooldown*60);
-
 	};
 
-	// initiate waituntil again
-	rallyplace = false;
+	[_RPObj, _RPPlaceEH, _moveRP, _keyEventhandler] spawn
+	{
+		params["_RPObj", "_RPPlaceEH", "_moveRP", "_keyEventhandler"];
+		waitUntil {EMF_RP_Canceled};
+		terminate _moveRP;
+		(findDisplay 46) displayRemoveEventHandler ["mouseButtonDown", _keyEventhandler];
+		5000 cutRsc ["Default", "PLAIN"];
 
-	// re-add the create action
-	[player, 1, ["ACE_SelfActions", "_rallywait"]] call ace_interact_menu_fnc_removeActionFromObject;
-	[player, 1, ["ACE_SelfActions"], _rallyplace] call ace_interact_menu_fnc_addActionToObject;
+		deleteVehicle _RPObj;
+		terminate _RPPlaceEH;
+	};
+};
 
-	cancel = false;
+if (isNil "_unit") then {
+    'EMFpreventProne!Error [Unit not set]' remoteExec ["hint", 0];
+};
+
+private _RPlace = ["EMF_RPlace", "Place rallypoint", "\A3\ui_f\data\map\markers\military\end_CA.paa", _EMF_FUNC_PLACE, {(vehicle player) == player && !(player getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
+private _Rwait = ["EMF_RWait", "Place rallypoint", "\A3\ui_f\data\map\markers\military\objective_CA.paa", {hint format["can only be done once every %1 minutes", str(_cooldown)];}, {(vehicle player) == player && (player getVariable ["EMF_RP_Lock", false])}] call ace_interact_menu_fnc_createAction;
+
+switch (typeName _unit) do {
+    case ("ARRAY"): {
+			{
+				_x setVariable ["EMF_RP_PARAMS", [_unit, _cooldown, _PHObj], true];
+				[_x, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
+				[_x, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
+			} forEach _unit;
+    };
+		case ("OBJECT"): {
+			_unit setVariable ["EMF_RP_PARAMS", [_unit, _cooldown, _PHObj], true];
+			[_unit, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _unit];
+			[_unit, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _unit];
+		};
+		case ("STRING"): {
+			{
+				if ((_x getVariable ["unitSquadRole", "RFL"]) == "SL") then {
+					_x setVariable ["EMF_RP_PARAMS", [_unit, _cooldown, _PHObj], true];
+					[_x, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
+					[_x, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
+				};
+			} forEach allPlayers;
+		};
+		default {
+		    (format['EMFrallypoint!Error [Unit must be a object, array or a string : %1', (typeName _unit)]) remoteExec ["hint", 0];
+		};
 };

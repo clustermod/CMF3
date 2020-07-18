@@ -23,7 +23,7 @@ _obj setVariable ["unitTeamRole", _team, true];
 
 //Check if _role exists and is valid
 if (isNil "_role") then {
-  (format['EMFRoleSet!Error [%1][UnitRole not set : default unit role to "RFL"]']) remoteExec ["hint", 0];
+  (format['EMFRoleSet!Error [%1][UnitRole not set : default unit role to "RFL"]', (name _obj)]) remoteExec ["hint", 0];
   //Set role variable to default
   _obj setVariable ["unitSquadRole", "RFL", true];
 } else {

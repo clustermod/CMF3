@@ -28,7 +28,7 @@ klpq_musicRadio_radioThemes = ["t_russian"];
 {
 	if (!isPlayer _x) then {
 		// Prevent AI units from going prone
-		[false, _x] call EMF_fnc_preventProne;
+		[_x] call EMF_fnc_preventProne;
 	};
 	// Set skill of Opfor Units for area suppression
 	if ((Side _x) == east) then {

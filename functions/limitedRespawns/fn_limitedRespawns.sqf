@@ -14,7 +14,10 @@
  * public: No
 */
 
-params["_respawns"];
+params["_respawns", "_teamLimit"];
+
+// If player is not in supplied team don't run
+if (!isNil "_teamLimit") then {if (player getVariable ["unitTeamRole", 0] == _teamLimit) exitWith {}};
 
 // Set the amount of allowed respawns
 player setVariable["EMF_playerRespawns", (_respawns + 1), true];
