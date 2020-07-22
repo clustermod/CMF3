@@ -17,8 +17,6 @@
 // For some reason arma thinks this is initPlayerServer and runs this for every client each time a new player initializes
 if ((_this select 0) != player) exitWith {};
 
-// Keep markers the same size when zooming in or out of map
-call EMF_fnc_resizeMapMarkers;
 
 // Enable player FPS counter for zeus
 call EMF_fnc_zeusFPS;
