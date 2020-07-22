@@ -33,7 +33,7 @@ call EMF_fnc_zeusFPS;
 
 // Load loadouts for 2 teams
 [["USA_EARLY90_RANGER_DESERT"]] call EMF_fnc_kosherArsenalLoad;
-[false, true] call EMF_fnc_kosherArsenal;
+[false] call EMF_fnc_kosherArsenal;
 
 // If player has role "SL" allow spawning rallypoints
 ["SL", 5] call EMF_fnc_rallypoint;
