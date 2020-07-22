@@ -8,7 +8,7 @@
  * 2: Team <NUMBER>
  *
  * Return Value:
- * None
+ * <Boolean>
  *
  * Example:
  * [this, "SL", 0] call EMF_fnc_EMFRoleSet
@@ -27,14 +27,17 @@ if (isNil "_role") then {
   'Units role is not set, setting default role to "RFL"' call BIS_fnc_log;
   //Set role variable to default
   _obj setVariable ["unitSquadRole", "RFL", true];
+  false;
 } else {
   if ((typeName _role) == "STRING") then {
     //Set role variable to _role
     _obj setVariable ["unitSquadRole", _role, true];
+    true;
   } else {
     ['Units role is not a string, setting default role to "RFL"'] call BIS_fnc_error;
     'Units role is not set, setting default role to "RFL"' call BIS_fnc_log;
     //Set role variable to default
     _obj setVariable ["unitSquadRole", "RFL", true];
+    false;
   };
 };

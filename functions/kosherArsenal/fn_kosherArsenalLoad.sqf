@@ -6,7 +6,7 @@
  * 0: loadout <ARRAY>
  *
  * Return Value:
- * None
+ * <Boolean>
  *
  * Example:
  * [["Whitelist1", "Whitelist2"]] call EMF_fnc_kosherArsenalLoad
@@ -17,8 +17,9 @@
 params["_loadout"];
 
 // Check if params are set and is of correct type
-if (isNil "_loadout") exitWith {  ['Loadouts is not set'] call BIS_fnc_error; 'Loadouts is not set' call BIS_fnc_log;};
-if (typeName _loadout != "ARRAY") exitWith {  ['Loadouts must be type "ARRAY", type %1 supplied', (typeName _loadout)] call BIS_fnc_error; ['Loadouts must be type "ARRAY", type %1 supplied', (typeName _loadout)] call BIS_fnc_log;};
+if (isNil "_loadout") exitWith {  ['Loadouts is not set'] call BIS_fnc_error; 'Loadouts is not set' call BIS_fnc_log; false;};
+if (typeName _loadout != "ARRAY") exitWith {  ['Loadouts must be type "ARRAY", type %1 supplied', (typeName _loadout)] call BIS_fnc_error; ['Loadouts must be type "ARRAY", type %1 supplied', (typeName _loadout)] call BIS_fnc_log; false;};
 
 // Set the whitelist arrays in missionNamespace
 player setVariable ["EMF_KA_ArsenalKit", _loadout, true];
+true;

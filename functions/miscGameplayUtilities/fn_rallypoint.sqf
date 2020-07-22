@@ -8,7 +8,7 @@
  * 2: PhysicalObject <STRING>
  *
  * Return Value:
- * None
+ * <Boolean>
  *
  * Example:
  * [this, 5] call EMF_fnc_rallypoint
@@ -125,11 +125,13 @@ switch (typeName _unit) do {
 				[_x, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
 				[_x, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
 			} forEach _unit;
+			true;
     };
 		case ("OBJECT"): {
 			_unit setVariable ["EMF_RP_PARAMS", [_unit, _cooldown, _PHObj], true];
 			[_unit, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _unit];
 			[_unit, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _unit];
+			true;
 		};
 		case ("STRING"): {
 			{
@@ -139,10 +141,12 @@ switch (typeName _unit) do {
 					[_x, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
 					[_x, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
 				};
+				true;
 			} forEach allPlayers;
 		};
 		default {
 				['Unit must be type "OBJECT", "ARRAY" or "STRING", type %1 supplied', (typeName _unit)] call BIS_fnc_error;
 				['Unit must be type "OBJECT", "ARRAY" or "STRING", type %1 supplied', (typeName _unit)] call BIS_fnc_log;
+				false;
 		};
 };

@@ -8,7 +8,7 @@
  * 2: failText <STRING>
  *
  * Return Value:
- * None
+ * <Boolean>
  *
  * Example:
  * [this, "BMPCREW", "You require a crewman kit to operate this vehicle"] call EMF_fnc_restrictedVehicle
@@ -19,13 +19,13 @@
 params["_obj", "_varName", ["_failText", "You require a crewmankit to operate this position"]];
 
 // Check if params are set and is of correct type
-if (isNil "_obj") exitWith {  ['Object is not set'] call BIS_fnc_error; 'Object is not set' call BIS_fnc_log;};
-if (typeName _obj != "OBJECT") exitWith {  ['Object must be type "OBJECT", type %1 supplied', (typeName _obj)] call BIS_fnc_error; ['Object must be type "OBJECT", type %1 supplied', (typeName _obj)] call BIS_fnc_log;};
+if (isNil "_obj") exitWith {  ['Object is not set'] call BIS_fnc_error; 'Object is not set' call BIS_fnc_log; false;};
+if (typeName _obj != "OBJECT") exitWith {  ['Object must be type "OBJECT", type %1 supplied', (typeName _obj)] call BIS_fnc_error; ['Object must be type "OBJECT", type %1 supplied', (typeName _obj)] call BIS_fnc_log; false;};
 
-if (isNil "_varName") exitWith {  ['varName is not set'] call BIS_fnc_error; 'varName is not set' call BIS_fnc_log;};
-if (typeName _varName != "STRING") exitWith {  ['varName must be type "STRING", type %1 supplied', (typeName _varName)] call BIS_fnc_error; ['varName must be type "STRING", type %1 supplied', (typeName _varName)] call BIS_fnc_log;};
+if (isNil "_varName") exitWith {  ['varName is not set'] call BIS_fnc_error; 'varName is not set' call BIS_fnc_log; false;};
+if (typeName _varName != "STRING") exitWith {  ['varName must be type "STRING", type %1 supplied', (typeName _varName)] call BIS_fnc_error; ['varName must be type "STRING", type %1 supplied', (typeName _varName)] call BIS_fnc_log; false;};
 
-if (typeName _failText != "STRING") exitWith {  ['failText must be type "STRING", type %1 supplied', (typeName _failText)] call BIS_fnc_error; ['failText must be type "STRING", type %1 supplied', (typeName _failText)] call BIS_fnc_log;};
+if (typeName _failText != "STRING") exitWith {  ['failText must be type "STRING", type %1 supplied', (typeName _failText)] call BIS_fnc_error; ['failText must be type "STRING", type %1 supplied', (typeName _failText)] call BIS_fnc_log; false;};
 
 // Variables to pass into the event handlers
 EMF_GVAR_RV_restricedVehicleVarName = _varName;
@@ -60,3 +60,5 @@ _obj addEventHandler ["SeatSwitched", {
 	};
 
 }];
+
+true;

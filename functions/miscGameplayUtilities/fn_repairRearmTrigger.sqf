@@ -7,7 +7,7 @@
  * 1: allowDamage <BOOL> [true]
  *
  * Return Value:
- * None
+ * <Boolean>
  *
  * Example:
  * [thisList, false] call EMF_fnc_repairRearmTrigger
@@ -18,8 +18,8 @@
 params["_thisTriggerList", ["_allowDamage", true]];
 
 // Check if params are set and is of correct type
-if (isNil "_thisTriggerList") exitWith {  ['thisList is not set'] call BIS_fnc_error; 'thisList is not set' call BIS_fnc_log;};
-if (typeName _thisTriggerList != "ARRAY") exitWith {  ['thisList must be type "ARRAY", type %1 supplied', (typeName _thisTriggerList)] call BIS_fnc_error; ['thisList must be type "ARRAY", type %1 supplied', (typeName _thisTriggerList)] call BIS_fnc_log;};
+if (isNil "_thisTriggerList") exitWith {  ['thisList is not set'] call BIS_fnc_error; 'thisList is not set' call BIS_fnc_log; false;};
+if (typeName _thisTriggerList != "ARRAY") exitWith {  ['thisList must be type "ARRAY", type %1 supplied', (typeName _thisTriggerList)] call BIS_fnc_error; ['thisList must be type "ARRAY", type %1 supplied', (typeName _thisTriggerList)] call BIS_fnc_log; false;};
 
 // only run on server.
 if (!isServer) exitWith {};
@@ -100,3 +100,4 @@ if (count _vehicleArray > 0) then
 		};
 	} forEach _vehicleArray;
 };
+true;

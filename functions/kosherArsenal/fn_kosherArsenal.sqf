@@ -8,7 +8,7 @@
  * 1: forcedPrimary <BOOL>
  *
  * Return Value:
- * None
+ * <Boolean>
  *
  * Example:
  * [true, true] call EMF_fnc_kosherArsenal
@@ -19,8 +19,8 @@
 params[["_arsenalLight", false], ["_forcePrimary", true]];
 
 // Wait until player respawns the first time (replace with a respawn eventhandler)
-waitUntil{!alive player};
-waitUntil{alive player};
+waitUntil {!alive Player};
+waitUntil {alive Player};
 uisleep 0.1;
 
 // Since players won't be able to move immediately randomly move them around in a 5m radius from the respawn position
@@ -106,10 +106,8 @@ private _newfirearmEH = [(primaryWeapon player), (handgunWeapon player), (second
 while {!_valid} do
 {
 	// Open arsenal
-	["Open",[nil, _arsenalObj, false]] remoteExecCall ["bis_fnc_arsenal", player];
+	["Open",[nil, _arsenalObj, false]] call bis_fnc_arsenal;
 	waitUntil { isnull ( uinamespace getvariable "RSCDisplayArsenal" ) };
-	player removeAction (player getvariable "bis_fnc_arsenal_action");
-	player setvariable ['bis_fnc_arsenal_action',nil];
 
 	// Create arrays of player's selected loadout
 	private _permittedGear 	= player getVariable ["EMF_KA_permittedGear", 0];
@@ -172,3 +170,4 @@ player setVariable ["EMF_KA_Done", true];
 //deleteVehicle _arsenalObj;
 
 player setVariable ["EMF_KA_ArsenalObj", _arsenalObj];
+true;

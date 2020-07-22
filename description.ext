@@ -14,6 +14,7 @@
  * Public: Yes
 */
 
+// ----- Misc Settings -----
 // Enable Debrief
 debriefing = 1;
 // Disable forced complex flightmodel
@@ -22,6 +23,9 @@ forceRotorLibSimulation = 0;
 enableDebugConsole[] = { "76561198098666924", "76561198065818848" };
 // Enable function logging
 allowFunctionsLog=1;
+//Disable respawn button
+respawnButton = 0;
+
 // Include the RscTitles classes for taw_vd's GUI elements
 #include "taw_vd\GUI.h"
 // Include the RscTitles classes for Erics Rallypoints's GUI elements
@@ -72,6 +76,7 @@ class CfgFunctions
 		{
 			file = "functions\init";
 			class setSkill {postInit = 1};
+			class blockTextChat {postInit = 1};
 		}
 	};
 

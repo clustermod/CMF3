@@ -14,13 +14,18 @@
  * public: No
 */
 
-params[["_allowedUIDs", "0"]];
+params["_allowedUIDs"];
 
 // Check if params are set and is of correct type
-if (isNil "_allowedUIDs") exitWith {  ['allowedUIDs is not set'] call BIS_fnc_error; 'allowedUIDs is not set' call BIS_fnc_log;};
-if (typeName _allowedUIDs != "ARRAY") exitWith {  ['allowedUIDs must be type "ARRAY", type %1 supplied', (typeName _allowedUIDs)] call BIS_fnc_error; ['allowedUIDs must be type "ARRAY", type %1 supplied', (typeName _allowedUIDs)] call BIS_fnc_log;};
+if (isNil "_allowedUIDs") exitWith {  ['allowedUIDs is not set'] call BIS_fnc_error; 'allowedUIDs is not set' call BIS_fnc_log; false;};
+if (typeName _allowedUIDs != "ARRAY") exitWith {  ['allowedUIDs must be type "ARRAY", type %1 supplied', (typeName _allowedUIDs)] call BIS_fnc_error; ['allowedUIDs must be type "ARRAY", type %1 supplied', (typeName _allowedUIDs)] call BIS_fnc_log; false;};
 
 // If player has zeus assigned and does not have a UID mentioned in _allowedUIDs and is not admin, kick him back to lobby
-if (!isNull (getAssignedCuratorLogic player) && !((getPlayerUID player) in _allowedUIDs)) then {
-  	["wrongZeus", false, 0.01, false] call BIS_fnc_endMission;
-}
+_allowedUIDs spawn {
+  waitUntil {!alive Player};
+  waitUntil {alive Player};
+  waitUntil {!isNull (getAssignedCuratorLogic player) || 10 < time};
+  if (!isNull (getAssignedCuratorLogic player) && !((getPlayerUID player) in _this)) then {
+    ["wrongZeus", false, 0.01, false] call BIS_fnc_endMission;
+  };
+};

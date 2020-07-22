@@ -6,7 +6,7 @@
  * 0: Unit <OBJECT/ARRAY>
  *
  * Return Value:
- * None
+ * <Boolean>
  *
  * Example:
  * [[Unit1, Unit2, Unit3]] call EMF_fnc_preventProne
@@ -37,12 +37,15 @@ switch (typeName _unit) do {
 			{
 				[_x] call _EMF_FUNC_PreventProne;
 			} forEach _unit;
+			true;
     };
 		case ("OBJECT"): {
 			[_unit] call _EMF_FUNC_PreventProne;
+			true;
 		};
 		default {
 				['Unit must be type "ARRAY" or "OBJECT", type %1 supplied', (typeName _unit)] call BIS_fnc_error;
 				['Unit must be type "ARRAY" or "OBJECT", type %1 supplied', (typeName _unit)] call BIS_fnc_log;
+				false;
 		};
 };

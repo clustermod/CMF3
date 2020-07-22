@@ -8,7 +8,7 @@
  * 2: Blocking <BOOL>
  *
  * Return Value:
- * None
+ * <Boolean>
  *
  * Example:
  * [60, "Finished unloading in: ", true] call EMF_fnc_countDown
@@ -19,13 +19,13 @@
 params["_time", "_text", ["_blocking", false]];
 
 // Check if params are set and is of correct type
-if (isNil "_time") exitWith {  ['Time is not set'] call BIS_fnc_error; 'Time is not set' call BIS_fnc_log;};
-if (typeName _time != "SCALAR") exitWith {  ['Time must be type "SCALAR", type %1 supplied', (typeName _time)] call BIS_fnc_error; ['Time must be type "SCALAR", type %1 supplied', (typeName _time)] call BIS_fnc_log;};
+if (isNil "_time") exitWith {  ['Time is not set'] call BIS_fnc_error; 'Time is not set' call BIS_fnc_log; false;};
+if (typeName _time != "SCALAR") exitWith {  ['Time must be type "SCALAR", type %1 supplied', (typeName _time)] call BIS_fnc_error; ['Time must be type "SCALAR", type %1 supplied', (typeName _time)] call BIS_fnc_log; false;};
 
-if (isNil "_text") exitWith {  ['Text is not set'] call BIS_fnc_error; 'Text is not set' call BIS_fnc_log;};
-if (typeName _text != "STRING") exitWith {  ['Text must be type "STRING", type %1 supplied', (typeName _text)] call BIS_fnc_error; ['Text must be type "STRING", type %1 supplied', (typeName _text)] call BIS_fnc_log;};
+if (isNil "_text") exitWith {  ['Text is not set'] call BIS_fnc_error; 'Text is not set' call BIS_fnc_log; false;};
+if (typeName _text != "STRING") exitWith {  ['Text must be type "STRING", type %1 supplied', (typeName _text)] call BIS_fnc_error; ['Text must be type "STRING", type %1 supplied', (typeName _text)] call BIS_fnc_log; false;};
 
-[_time, _text] spawn
+private _EMF_fnc_CD_CountDown =
 {
     params["_time", "_text"];
 
@@ -37,7 +37,11 @@ if (typeName _text != "STRING") exitWith {  ['Text must be type "STRING", type %
     "" remoteExec ["hintSilent"];
 };
 
+
 // If true will block further execution until timer is done
 if (_blocking) then {
-    uisleep _time + 5;
+  [_time, _text] call _EMF_fnc_CD_CountDown;
+} else {
+  [_time, _text] spawn _EMF_fnc_CD_CountDown;
 };
+true;

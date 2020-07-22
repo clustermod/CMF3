@@ -9,7 +9,7 @@
  * None
  *
  * Example:
- * None
+ * <Boolean>
  *
  * Public: No
 */
@@ -31,3 +31,5 @@ _o = _this select 0;
 _v = _this call KK_fnc_vectorDirAndUpRelative;
 _o attachTo [_this select 1];
 _o setVectorDirAndUp _v;
+
+true;
