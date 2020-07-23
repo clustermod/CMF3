@@ -1,5 +1,5 @@
 /*
- * Author: Eric
+ * Author: Bohemia Interactive, Eric
  * Executed locally when player respawns in a singleplayer or in a multiplayer mission with "NONE" respawn type.
  *
  * Arguments:

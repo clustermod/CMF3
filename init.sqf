@@ -1,5 +1,5 @@
 /*
- * Author: Eric
+ * Author: Bohemia Interactive, Eric
  * example mission initialization, executed when mission is started (before briefing screen).
  *
  * Arguments:

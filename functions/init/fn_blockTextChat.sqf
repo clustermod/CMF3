@@ -15,7 +15,8 @@
 */
 
 // Disable chatting in normal chats
-{[_x, [false, false]] remoteExec ["enableChannel", 0, true]} forEach [0,1,2,3,4,5];
+{[_x, [false, false]] remoteExec ["enableChannel", 0, true]} forEach [0,1,2,4,5];
+[3, [true, false]] remoteExec ["enableChannel", 0, true];
 
 if (isServer) then
 {
@@ -30,7 +31,6 @@ if (isServer) then
 
   // Re-add channels upon respawn
   addMissionEventHandler ["EntityRespawned", {
-    hint format["Unit: %1 respawned", (name (_this select 0))];
     [EMF_BTC_planChn, [player]] remoteExec ["radioChannelAdd", (_this select 0)];
     [EMF_BTC_zeusChn, [player]] remoteExec ["radioChannelAdd", (_this select 0)];
     [EMF_BTC_zeusChn, [true, false]] remoteExec ["enableChannel", (_this select 0), true];

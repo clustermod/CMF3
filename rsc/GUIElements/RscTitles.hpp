@@ -23,7 +23,7 @@ class RscTitles
 				w = safeZoneW * 0.016875;
 				h = safeZoneH * 0.03;
 				style = 0+48;
-				text = "rsc\rallypoint\mouse_left_ca.paa";
+				text = "rsc\GUIElements\mouse_left_ca.paa";
 				colorBackground[] = {0,0,0,1};
 				colorText[] = {1,1,1,1};
 				font = "PuristaMedium";
@@ -55,7 +55,7 @@ class RscTitles
 				w = safeZoneW * 0.016875;
 				h = safeZoneH * 0.03;
 				style = 0+48;
-				text = "rsc\rallypoint\mouse_right_ca.paa";
+				text = "rsc\GUIElements\mouse_right_ca.paa";
 				colorBackground[] = {0,0,0,1};
 				colorText[] = {1,1,1,1};
 				font = "PuristaMedium";
@@ -84,10 +84,6 @@ class RscTitles
 		{
 
 		};
-	};
-	class Controls
-	{
-
 	};
 
 };

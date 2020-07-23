@@ -1,5 +1,5 @@
 /*
- * Author: Eric
+ * Author: Bohemia Interactive, Eric
  * Executed locally when player is killed in a singleplayer or in a multiplayer mission.
  *
  * Arguments:

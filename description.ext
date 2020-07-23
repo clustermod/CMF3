@@ -1,5 +1,5 @@
 /*
- * Author: Eric
+ * Author: Bohemia Interactive, Eric
  * set mission attributes and define global entities.
  *
  * Arguments:
@@ -28,8 +28,12 @@ respawnButton = 0;
 
 // Include the RscTitles classes for taw_vd's GUI elements
 #include "taw_vd\GUI.h"
-// Include the RscTitles classes for Erics Rallypoints's GUI elements
-#include "rsc\rallypoint\rallypointDialog.hpp"
+// Include the RscTitles classes
+#include "rsc\GUIElements\RscTitles.hpp"
+// Include Dialogs
+#include "rsc\GUIElements\Dialogs.hpp"
+// Include Controls
+#include "rsc\GUIElements\Controls.hpp"
 
 class CfgFunctions
 {
@@ -71,6 +75,7 @@ class CfgFunctions
 			class preventProne {};
 			class countDown {};
 			class notZeus {};
+			class resizeMapMarkers {};
 		};
 		class init
 		{
