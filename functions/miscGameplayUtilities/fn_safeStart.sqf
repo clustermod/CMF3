@@ -30,7 +30,7 @@ if (!isServer) exitWith {
 	 if (!isPlayer (_this select 0)) exitWith {};
 	 [(_this select 1)] remoteExec ["deleteVehicle", 0, true];
 	 [(_this select 0), false] remoteExec ["allowDamage", 0, true];
-	 [(_this select 0), ["", { player sideChat "Weapons are cold, game hasn't started"; }, "", 0, false, true, "DefaultAction", "!(missionNamespace getVariable ['EMF_missionSafeStart', false])"]] remoteExec ["addAction", 0, true];
+	 [(_this select 0), ["", { player sideChat "Weapons are cold, game hasn't started"; }, "", 0, false, true, "DefaultAction", "(!(missionNamespace getVariable ['EMF_missionSafeStart', false]) && !((animationState player) in ['acinpknlmstpsraswrfldnon', 'acinpknlmwlksraswrfldb']))"]] remoteExec ["addAction", 0, true];
 
 	 // Create a event handler for vanilla thrown grenades
 	 (_this select 0) addEventHandler ["Fired", {

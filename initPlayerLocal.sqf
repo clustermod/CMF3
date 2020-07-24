@@ -20,6 +20,10 @@ if ((_this select 0) != player) exitWith {};
 // Keep markers the same size when zooming in or out of map
 call EMF_fnc_resizeMapMarkers;
 
+"colorCorrections" ppEffectEnable true;
+"colorCorrections" ppEffectAdjust [0.9, 0.9, 0, [0.1, 0.1, 0.1, -0.1], [0.9, 0.6, 0.1, 0.7],  [1, 0.6, 0, 0]];
+"colorCorrections" ppEffectCommit 0;
+
 // Enable player FPS counter for zeus
 call EMF_fnc_zeusFPS;
 
@@ -31,9 +35,9 @@ call EMF_fnc_zeusFPS;
 // Kick player back to lobby if they are zeus and not Eric, change "76561198065818848" to your steamID
 [["76561198065818848"]] call EMF_fnc_notZeus;
 
-// Load loadouts for 2 teams
+// Load loadouts for 1 team
 [["USA_EARLY90_RANGER_DESERT"]] call EMF_fnc_kosherArsenalLoad;
-[false, false] call EMF_fnc_kosherArsenal;
+[false] call EMF_fnc_kosherArsenal;
 
 // If player has role "SL" allow spawning rallypoints
 ["SL", 5] call EMF_fnc_rallypoint;

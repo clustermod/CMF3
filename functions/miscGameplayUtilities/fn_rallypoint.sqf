@@ -48,9 +48,10 @@ private _EMF_FUNC_PLACE =
 
 	// Create a loop to move the physical object
 	private _moveRP = _RPObj spawn {
+		private _dir = [0,0,0];
 		while {true} do
 		{
-			private _dir = screenToWorld [0.5,0.5];
+			_dir = screenToWorld [0.5,0.5];
 
 			if (player distance _dir < 5) then {
 				_this setPos _dir;
@@ -81,7 +82,7 @@ private _EMF_FUNC_PLACE =
 			};
 
 			// Create new Rallypoint spawnpoint
-			private _RPRespawn = [(side player), (getPos _RPObj), format["%1 rally point", (groupId (group player))]] call BIS_fnc_addRespawnPosition;
+			private _RPRespawn = [(side player), (getPos _RPObj), format["%1 rallypoint", (groupId (group player))]] call BIS_fnc_addRespawnPosition;
 
 			// Create a variable to facilitate data on the rallypoint
 			player setVariable ["EMF_RP_PREVRP", [_RPObj, _RPRespawn], true];

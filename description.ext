@@ -75,13 +75,14 @@ class CfgFunctions
 			class preventProne {};
 			class countDown {};
 			class notZeus {};
-			class resizeMapMarkers {};
 		};
 		class init
 		{
 			file = "functions\init";
 			class setSkill {postInit = 1};
 			class blockTextChat {postInit = 1};
+			class mapSwitchTextures {postInit = 1};
+			class resizeMapMarkers {postinit = 1};
 		}
 	};
 

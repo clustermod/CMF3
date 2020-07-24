@@ -9,25 +9,22 @@
  * None
  *
  * Example:
- * call EMF_fnc_resizeMapMarkers
+ * call EMF_fnc_safeStart
  *
  * public: Yes
 */
-
 disableSerialization;
+
+if (isDedicated) exitWith {};
 
 [] spawn {
     waitUntil {!isNull findDisplay 12};
-
-    // Create map controls for user defined variables
     (findDisplay 12) ctrlCreate ["BTN_ToggleResize", -1];
     (findDisplay 12) ctrlCreate ["EDT_MarkerSize", -1];
     (findDisplay 12) ctrlCreate ["ST_MarkerSizeText", -1];
 
-    // Change map marker size
     findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
         if (visibleMap && (profileNamespace getVariable ['EMF_RMM_Enabled', true])) then {
-              // get the user defined size and apply to all markers
               private _scale = (profileNamespace getVariable ['EMF_RMM_SIZE', 0.2]) / ctrlMapScale (_this select 0);
               {
                   private _m = "#markerSize_" + _x;
@@ -43,7 +40,6 @@ disableSerialization;
               } forEach allMapMarkers;
         } else {
           {
-              // If user disables this feature reset map marker to normal size
               if (markerShape _x == "ICON" && markerType _x != "respawn_inf") then {
                   _x setMarkerSizeLocal [1,1];
               };
