@@ -17,9 +17,6 @@
 // For some reason arma thinks this is initPlayerServer and runs this for every client each time a new player initializes
 if ((_this select 0) != player) exitWith {};
 
-// Keep markers the same size when zooming in or out of map
-call EMF_fnc_resizeMapMarkers;
-
 "colorCorrections" ppEffectEnable true;
 "colorCorrections" ppEffectAdjust [0.9, 0.9, 0, [0.1, 0.1, 0.1, -0.1], [0.9, 0.6, 0.1, 0.7],  [1, 0.6, 0, 0]];
 "colorCorrections" ppEffectCommit 0;

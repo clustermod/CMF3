@@ -79,10 +79,10 @@ class CfgFunctions
 		class init
 		{
 			file = "functions\init";
-			class setSkill {postInit = 1};
-			class blockTextChat {postInit = 1};
-			class mapSwitchTextures {postInit = 1};
-			class resizeMapMarkers {postinit = 1};
+			class setSkill {postInit = 1;};
+			class blockTextChat {postInit = 1;};
+			class mapSwitchTextures {postInit = 1;};
+			class resizeMapMarkers {postinit = 1;};
 		}
 	};
 
