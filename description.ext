@@ -65,6 +65,9 @@ class CfgFunctions
 			class repairRearmTrigger {};
 			class rallypoint {};
 			class safeStart {};
+			class tracers {};
+			class unitInvestigate {};
+			class slingPrimary {};
 		};
 		class miscUtilities
 		{
@@ -80,7 +83,7 @@ class CfgFunctions
 		{
 			file = "functions\init";
 			class setSkill {postInit = 1;};
-			class blockTextChat {postInit = 1;};
+			class blockTextChat {postInit = 0;};
 			class mapSwitchTextures {postInit = 1;};
 			class resizeMapMarkers {postinit = 1;};
 		}

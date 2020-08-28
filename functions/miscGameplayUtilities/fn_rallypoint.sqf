@@ -13,7 +13,7 @@
  * Example:
  * [this, 5] call EMF_fnc_rallypoint
  *
- * public: Yes
+ * public: False
 */
 
 params["_unit", ["_cooldown", 10], ["_PHObj", "Misc_backpackheap_EP1"]];
@@ -135,15 +135,12 @@ switch (typeName _unit) do {
 			true;
 		};
 		case ("STRING"): {
-			{
-				private _hasRally = _x getVariable ["EMF_RP_PARAMS", [objNull, 5, ""]];
-				if ((_x getVariable ["unitSquadRole", "RFL"]) == "SL" && isNull (_hasRally select 0)) then {
-					_x setVariable ["EMF_RP_PARAMS", [_unit, _cooldown, _PHObj], true];
-					[_x, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
-					[_x, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", _x];
-				};
-				true;
-			} forEach allPlayers;
+			private _hasRally = player getVariable ["EMF_RP_PARAMS", [objNull, 5, ""]];
+			if ((player getVariable ["unitSquadRole", "RFL"]) == "SL" && isNull (_hasRally select 0)) then {
+				player setVariable ["EMF_RP_PARAMS", [_unit, _cooldown, _PHObj], true];
+				[player, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", player];
+				[player, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", player];
+			};
 		};
 		default {
 				['Unit must be type "OBJECT", "ARRAY" or "STRING", type %1 supplied', (typeName _unit)] call BIS_fnc_error;

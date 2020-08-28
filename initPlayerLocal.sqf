@@ -17,10 +17,6 @@
 // For some reason arma thinks this is initPlayerServer and runs this for every client each time a new player initializes
 if ((_this select 0) != player) exitWith {};
 
-"colorCorrections" ppEffectEnable true;
-"colorCorrections" ppEffectAdjust [0.9, 0.9, 0, [0.1, 0.1, 0.1, -0.1], [0.9, 0.6, 0.1, 0.7],  [1, 0.6, 0, 0]];
-"colorCorrections" ppEffectCommit 0;
-
 // Enable player FPS counter for zeus
 call EMF_fnc_zeusFPS;
 
@@ -38,3 +34,9 @@ call EMF_fnc_zeusFPS;
 
 // If player has role "SL" allow spawning rallypoints
 ["SL", 5] call EMF_fnc_rallypoint;
+
+// Allow to Sling primary if has role:
+["BREACHER", 5] call EMF_fnc_slingPrimary;
+
+// Make enemy units within 300m to investigate shots
+[] call EMF_fnc_unitInvestigate;
