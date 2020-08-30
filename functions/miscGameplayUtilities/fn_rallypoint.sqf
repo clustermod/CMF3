@@ -136,7 +136,7 @@ switch (typeName _unit) do {
 		};
 		case ("STRING"): {
 			private _hasRally = player getVariable ["EMF_RP_PARAMS", [objNull, 5, ""]];
-			if ((player getVariable ["unitSquadRole", "RFL"]) == "SL" && isNull (_hasRally select 0)) then {
+			if ((player getVariable ["unitSquadRole", "RFL"]) == _unit && isNull (_hasRally select 0)) then {
 				player setVariable ["EMF_RP_PARAMS", [_unit, _cooldown, _PHObj], true];
 				[player, 1, ["ACE_SelfActions"], _RPlace] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", player];
 				[player, 1, ["ACE_SelfActions"], _Rwait] remoteExecCall ["ace_interact_menu_fnc_addActionToObject", player];

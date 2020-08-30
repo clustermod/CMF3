@@ -92,7 +92,7 @@ switch (typeName _unit) do {
 			true;
 		};
 		case ("STRING"): {
-			if ((player getVariable ["unitSquadRole", "RFL"]) == "SL") then {
+			if ((player getVariable ["unitSquadRole", "RFL"]) == _unit) then {
         // Call it on mission join
         [] call EMF_fnc_SP_slingPrimaryWeapon;
 
