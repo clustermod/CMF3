@@ -30,6 +30,7 @@ EMF_arsenalFunc =
 		private _valid = false;
 
 		// Create a eventHandler to remove any magazines from newly equipped weapons aswell as remove magazines spawned by them.
+		// Create a eventHandler to remove any magazines from newly equipped weapons aswell as remove magazines spawned by them.
 		private _newfirearmEH = [(primaryWeapon player), (handgunWeapon player), (secondaryWeapon player)] spawn
 		{
 			params["_prevPrimary", "_prevHandgun", "_prevSecondary"];
@@ -71,8 +72,6 @@ EMF_arsenalFunc =
 			// Open arsenal
 			["Open",[nil, _arsenalObj, false]] call bis_fnc_arsenal;
 			waitUntil { isnull ( uinamespace getvariable "RSCDisplayArsenal" ) };
-			player removeAction (player getvariable "bis_fnc_arsenal_action");
-			player setvariable ['bis_fnc_arsenal_action',nil];
 
 			// Create arrays of player's selected loadout
 			private _permittedGear 	= player getVariable ["EMF_KA_permittedGear", 0];
@@ -86,7 +85,7 @@ EMF_arsenalFunc =
 			{
 				if (typeName _x == "STRING") then
 				{
-					if (!(_x in (_permittedGear select 3) or _x == "")) exitWith {_loadoutValid = [false, getText(configfile >> "CfgWeapons" >> _x >> "displayName")];};
+					if (!(_x in (_permittedGear select 3) or _x == "")) exitWith {_loadoutValid = [false, /*getText(configfile >> "CfgWeapons" >> _x >> "displayName")*/_x];};
 				};
 			} forEach _weapons;
 			{
@@ -101,7 +100,7 @@ EMF_arsenalFunc =
 
 			if (!(_backpack in (_permittedGear select 0) or _backpack == "")) then {_loadoutValid = [false, getText(configfile >> "CfgVehicles" >> _backpack >> "displayName")];};
 
-			if ((primaryWeapon player) == "") then
+			if ((primaryWeapon player) == "" and _forcePrimary) then
 			{
 				_loadoutValid = [false, "REQ"];
 			};
@@ -120,12 +119,12 @@ EMF_arsenalFunc =
 			};
 		};
 
+		// Remove the switchWeapon eventHandler
+		terminate _newfirearmEH;
 
-	// Remove the switchWeapon eventHandler
-	terminate _newfirearmEH;
-
-	// Set EMF_KA_Done to true so that the player can't force open a arsenal again and delete the arsenal object
-	player setVariable ["EMF_KA_Done", true];
+		// Set EMF_KA_Done to true so that the player can't force open a arsenal again and delete the arsenal object
+		player setVariable ["EMF_KA_Done", true];
+		["AmmoboxExit", _arsenalObj] call BIS_fnc_arsenal;
 	};
 };
 

@@ -23,8 +23,6 @@ forceRotorLibSimulation = 0;
 enableDebugConsole[] = { "76561198098666924", "76561198065818848" };
 // Enable function logging
 allowFunctionsLog=1;
-//Disable respawn button
-respawnButton = 0;
 
 // Include the RscTitles classes for taw_vd's GUI elements
 #include "taw_vd\GUI.h"
@@ -78,6 +76,8 @@ class CfgFunctions
 			class preventProne {};
 			class countDown {};
 			class notZeus {};
+			class nearestPlayer {};
+			class getParamValue {};
 		};
 		class init
 		{
@@ -87,6 +87,20 @@ class CfgFunctions
 			class mapSwitchTextures {postInit = 1;};
 			class resizeMapMarkers {postinit = 1;};
 		}
+		class EHDM
+		{
+			file = "functions\EHDM";
+			class ehdm_vehicleInit {};
+			class handleCameraEffects {};
+			class handleEffects {};
+			class handleUnitOnFire {};
+			class handleMedical {};
+			class armorFire {};
+			class largeExplosion {};
+			class mediumExplosion {};
+			class smallExplosion {};
+			class postProcess {};
+		};
 	};
 
 	// Include the main functions library of taw_vd

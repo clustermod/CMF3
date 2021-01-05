@@ -1,16 +1,19 @@
 params["_role", "_obj", "_rearmOnly"];
-_availableUniforms = []; _availableWeapons = []; _availableMagazines = []; _availableVests = []; _availableItems = []; _availableBackpacks = []; _availableHeadgear = []; _availableFacewear = [];
+private _availableUniforms = []; private _availableWeapons = []; private _availableMagazines = []; private _availableVests = []; private _availableItems = []; private _availableBackpacks = []; private _availableHeadgear = []; private _availableFacewear = [];
 
 // Define default gear
-_defItems = ["ACE_adenosine", "ACE_fieldDressing", "ACE_elasticBandage", "ACE_packingBandage", "ACE_quikclot", "ACE_epinephrine", "ACE_Flashlight_MX991", "ACE_MapTools", "ACE_morphine", "ACE_splint", "ACE_tourniquet", "ItemMap", "ItemCompass", "ItemWatch"];
-_defMagazines = ["murshun_cigs_matches", "murshun_cigs_cigpack"];
-_defGrenades = [];
-_defUniforms = [];
-_defWeapons = [];
-_defVests = [];
-_defBackpacks = [];
-_defHeadgear = [];
-_defFacewear = [];
+private _defItems = ["ACE_adenosine", "ACE_fieldDressing", "ACE_elasticBandage", "ACE_packingBandage", "ACE_quikclot", "ACE_epinephrine", "ACE_Flashlight_MX991", "ACE_MapTools", "ACE_morphine", "ACE_splint", "ACE_tourniquet", "ItemMap", "ItemCompass", "ItemWatch"];
+private _defMagazines = ["murshun_cigs_matches", "murshun_cigs_cigpack"];
+private _defGrenades = [];
+private _defUniforms = [];
+private _defWeapons = [];
+private _defVests = [];
+private _defBackpacks = [];
+private _defHeadgear = [];
+private _defFacewear = [];
+
+// Set default Insignia
+[player, ""] call BIS_fnc_setUnitInsignia;
 
 // Rifleman
 if (_role == "RFL") then
@@ -41,6 +44,7 @@ if (_role == "SL") then
 // Medic
 if (_role == "MED") then
 {
+	[player, "UK3CB_BAF_Insignia_RedCross"] call BIS_fnc_setUnitInsignia;
 	player setVariable ["ace_medical_medicclass", 2, true];
 	_availableUniforms = [];
 	_availableWeapons = [];
@@ -145,10 +149,10 @@ if (_role == "ENG") then
 };
 
 //Populate with predefined items and whatever is already in the crate
-_backpacks 	= (_availableBackpacks + _defBackpacks);
-_items 		= (_availableVests + _availableItems + _availableUniforms + _defUniforms + _defVests + _defItems + _defFacewear + _availableFacewear + _defHeadgear + _availableHeadgear);
-_magazines 	= (_availableMagazines + _defGrenades + _defMagazines);
-_weapons 	= (_availableWeapons + _defWeapons);
+private _backpacks 	= (_availableBackpacks + _defBackpacks);
+private _items 		= (_availableVests + _availableItems + _availableUniforms + _defUniforms + _defVests + _defItems + _defFacewear + _availableFacewear + _defHeadgear + _availableHeadgear);
+private _magazines 	= (_availableMagazines + _defGrenades + _defMagazines);
+private _weapons 	= (_availableWeapons + _defWeapons);
 
 if (!_rearmOnly) then {
 	[_obj, _backpacks] 	call BIS_fnc_addVirtualBackpackCargo;

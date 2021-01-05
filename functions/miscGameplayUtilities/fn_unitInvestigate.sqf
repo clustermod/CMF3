@@ -16,12 +16,16 @@
 */
 
 params[["_InvestigationRadius", 300], ["_waypointRadius", 15]];
+EMF_uInvestigate_InvestigationRadius = _InvestigationRadius;
+EMF_uInvestigate_waypointRadius = _waypointRadius;
+publicVariable "EMF_uInvestigate_InvestigationRadius";
+publicVariable "EMF_uInvestigate_waypointRadius";
 
 player addEventHandler ["Fired", {
   // Make sure unit is not in airial or naval vehicle
   if (typeOf (vehicle (_this select 0)) != "Air" && typeOf (vehicle (_this select 0)) != "Ship") then {
-    [(_this select 0), _waypointRadius, _InvestigationRadius] spawn {
-      params["_unit", "_waypointRadius", "_InvestigationRadius"];
+    [(_this select 0)] spawn {
+      params["_unit"];
 
       // Get an array of affected groups
       private _unitGroups = [];
@@ -30,7 +34,7 @@ player addEventHandler ["Fired", {
           _unitGroups pushBackUnique (group _x);
           sleep 0.01;
         };
-      } forEach (nearestObjects [_unit, ["Man"], _InvestigationRadius]);
+      } forEach (nearestObjects [_unit, ["Man"], EMF_uInvestigate_InvestigationRadius]);
 
 
       {
@@ -40,8 +44,8 @@ player addEventHandler ["Fired", {
         };
 
         // Set a new waypoint within x radius of instigator
-        if (_unit distance (waypointPosition [(currentWaypoint _x), _x]) > (_waypointRadius + 15)) then {
-          private _newWP = _x addWaypoint [getPos _unit, _waypointRadius];
+        if (_unit distance (waypointPosition [(currentWaypoint _x), _x]) > (EMF_uInvestigate_waypointRadius + 15)) then {
+          private _newWP = _x addWaypoint [getPos _unit, EMF_uInvestigate_waypointRadius];
           _x setCurrentWaypoint _newWP;
         };
         sleep 0.01;

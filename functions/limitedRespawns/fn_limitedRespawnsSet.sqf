@@ -28,5 +28,9 @@ if (typeName _respawns != "SCALAR") exitWith {  ['Respawns must be type "SCALAR"
 _obj setVariable["EMF_playerRespawns", _respawns, true];
 _obj setVariable["EMF_playerDeaths", 0, true];
 
+if (_obj in ([] call ace_spectator_fnc_players)) then {
+    [false] call ace_spectator_fnc_setSpectator;
+};
+
 [format["Your respawns have been set to: %1", _respawns]] remoteExec ["hint", _obj];
 true;

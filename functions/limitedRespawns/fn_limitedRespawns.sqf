@@ -33,6 +33,10 @@ if (player getVariable ["unitTeamRole", 0] == _teamLimit) then {
 		// Check if player has spent all respawns
 		if ((player getVariable["EMF_playerDeaths", 0]) == _respawns) then
 		{
+			if ((vehicle player) != player) then {
+					player action ["getOut", (vehicle player)];
+			};
+			[player] joinSilent (createGroup west);
 			[true, true, true] call ace_spectator_fnc_setSpectator;
 		} else {
 			private _pCount = player getVariable["EMF_playerDeaths", 0];

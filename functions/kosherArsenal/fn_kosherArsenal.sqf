@@ -56,8 +56,7 @@ if (typeName _arsenalLoadouts == "ARRAY") then
 	}
 };
 
-// Remove all weapons and items from the player
-removeAllWeapons player;
+// Remove all items from the player
 removeAllItems player;
 player unlinkItem "Itemradio";
 player unlinkItem "ItemRadioAcreFlagged";
@@ -121,7 +120,7 @@ while {!_valid} do
 	{
 		if (typeName _x == "STRING") then
 		{
-			if (!(_x in (_permittedGear select 3) or _x == "")) exitWith {_loadoutValid = [false, getText(configfile >> "CfgWeapons" >> _x >> "displayName")];};
+			if (!(_x in (_permittedGear select 3) or _x == "")) exitWith {_loadoutValid = [false, /*getText(configfile >> "CfgWeapons" >> _x >> "displayName")*/_x];};
 		};
 	} forEach _weapons;
 	{

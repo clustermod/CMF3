@@ -21,7 +21,7 @@ EMF_fnc_SS_setSkill =
   _unit setSkill ["aimingAccuracy", 	0.3 ];
   _unit setSkill ["aimingShake", 	0.5 ];
   _unit setSkill ["aimingSpeed", 	0.3 ];
-  _unit setSkill ["spotDistance", 	0.2 ];
+  _unit setSkill ["spotDistance", 	0.5 ];
   _unit setSkill ["spotTime", 	0.5 ];
   _unit setSkill ["courage", 	0.5 ];
   _unit setSkill ["commanding", 	0.5 ];
