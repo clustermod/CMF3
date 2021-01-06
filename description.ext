@@ -87,10 +87,10 @@ class CfgFunctions
 			class mapSwitchTextures {postInit = 1;};
 			class resizeMapMarkers {postinit = 1;};
 		}
-		class EHDM
+		class EDHM
 		{
-			file = "functions\EHDM";
-			class ehdm_vehicleInit {};
+			file = "functions\EDHM";
+			class edhm_vehicleInit {};
 			class handleCameraEffects {};
 			class handleEffects {};
 			class handleUnitOnFire {};

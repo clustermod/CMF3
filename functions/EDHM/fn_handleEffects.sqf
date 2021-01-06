@@ -10,7 +10,7 @@
  * Boolean
  *
  * Example:
- * [this, 2500] call EMF_fnc_armorFire
+ * [this, 2500] call EMF_fnc_handleEffects
  *
  * Public: Yes
  */
