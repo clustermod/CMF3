@@ -9,10 +9,11 @@
  * None
  *
  * Example:
- * None
+ * [] call emf_init_fnc_setSkill
  *
  * public: Yes
 */
+scriptName "functions\init\fn_setSkill.sqf";
 
 // Create a inline function to set skills on supplied unit
 EMF_fnc_SS_setSkill =

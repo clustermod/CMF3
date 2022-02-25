@@ -18,7 +18,7 @@ switch (true) do {
 		_dist = tawvd_foot;
 	};
 
-	case ((vehicle player) isKindOf "LandVehicle"): {
+	case (((vehicle player) isKindOf "LandVehicle") || ((vehicle player) isKindOf "Ship")): {
 		setViewDistance tawvd_car;
 		_dist = tawvd_car;
 	};
@@ -29,7 +29,7 @@ switch (true) do {
 	};
 };
 
-if(tawvd_syncObject) then {
+if(tawvd_syncObject && !isNil "_dist") then {
 	setObjectViewDistance [_dist,100];
 	tawvd_object = _dist;
 };

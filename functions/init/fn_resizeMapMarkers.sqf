@@ -9,10 +9,11 @@
  * None
  *
  * Example:
- * call EMF_fnc_safeStart
+ * call emf_init_fnc_safeStart
  *
  * public: Yes
 */
+scriptName "functions\init\resizeMapMarkers.sqf";
 disableSerialization;
 
 if (isDedicated) exitWith {};

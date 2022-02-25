@@ -9,10 +9,11 @@
  * Boolean
  *
  * Example:
- * [1] call EMF_fnc_postProcess
+ * [1] call emf_edhm_fnc_postProcess
  *
  * Public: No
  */
+scriptName "functions\edhm\fn_postProcess.sqf";
 params["_playerDamage"];
 
 switch (_playerDamage) do

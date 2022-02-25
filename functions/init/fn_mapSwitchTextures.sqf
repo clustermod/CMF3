@@ -9,10 +9,11 @@
  * None
  *
  * Example:
- * None
+ * [] call emf_init_fnc_mapSwitchTextures
  *
  * public: No
 */
+scriptName "functions\init\fn_mapSwitchTextures.sqf";
 
 if ( isDedicated ) exitWith {};
 

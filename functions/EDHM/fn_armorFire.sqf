@@ -9,11 +9,13 @@
  * Boolean
  *
  * Example:
- * [this] call EMF_fnc_armorFire
+ * [this] call emf_edhm_fnc_armorFire
  *
  * Public: Yes
  */
- params["_veh"];
+scriptName "functions\edhm\fn_armorFire.sqf";
+params["_veh"];
+
 [_veh] spawn
 {
 	// Add flame effect on vehicle
@@ -91,7 +93,7 @@
 
 	{
 		if (!isPlayer _x) then {
-			[_x, 5, (random[4, 6, 8])] remoteExecCall ["EMF_fnc_handleUnitOnFire", 0];
+			[_x, 5, (random[4, 6, 8])] remoteExecCall ["emf_edhm_fnc_handleUnitOnFire", 0];
 			[_x] spawn
 			{
 				private _unit = _this select 0;
@@ -123,7 +125,7 @@
 			if (_x == player) then {
 				hint "You are on fire, disembark and roll to extinguish it!";
 			};
-			[_x, 10, (random[6, 9, 13])] remoteExecCall ["EMF_fnc_handleUnitOnFire", 0];
+			[_x, 10, (random[6, 9, 13])] remoteExecCall ["emf_edhm_fnc_handleUnitOnFire", 0];
 		} forEach crew _obj;
 	};
 };

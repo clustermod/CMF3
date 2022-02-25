@@ -11,10 +11,12 @@
  * Boolean
  *
  * Example:
- * [(getPos this), true, 4] call EMF_fnc_smallExplosion
+ * [(getPos this), true, 4] call emf_edhm_fnc_smallExplosion
  *
  * Public: Yes
  */
+scriptName "functions\edhm\fn_smallExplosion.sqf";
+
 IED_SMOKE_SMALL = {
 	_pos = _this select 0;
 	_aslPos = [_pos select 0, _pos select 1, getTerrainHeightASL [_pos select 0, _pos select 1]];

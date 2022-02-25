@@ -10,15 +10,16 @@
  * Boolean
  *
  * Example:
- * [this, 2500] call EMF_fnc_handleEffects
+ * [this, 2500] call emf_edhm_fnc_handleEffects
  *
  * Public: Yes
  */
+scriptName "functions\edhm\handleEffects.sqf";
 params ["_veh", "_Damage"];
 
 if (_veh isKindOf "tank") then
 {
-	[_veh, true] remoteExecCall ["EMF_fnc_armorFire", 0];
+	[_veh, true] remoteExecCall ["emf_edhm_fnc_armorFire", 0];
 };
 
 private _pos = position _veh;
@@ -51,10 +52,10 @@ if (isserver) then
 	//Dust Surface
 	if ((_dustArray find _surfaceSound) <=0) then { _surfaceType = 4 };
 
-	if (_Damage <= 1000) then {[_pos, true, _surfaceType] remoteExecCall ["EMF_fnc_smallExplosion" , 0, false]; _playerDamage = 0};
-	if (_Damage > 1000 && _Damage < 2000) then {[_pos, true, _surfaceType] remoteExecCall ["EMF_fnc_largeExplosion" , 0, false]; _playerDamage = 1};
-	if (_Damage >= 2000) then {[_pos, true, _surfaceType] remoteExecCall ["EMF_fnc_mediumExplosion", 0, false]; _playerDamage = 2};
+	if (_Damage <= 1000) then {[_pos, true, _surfaceType] remoteExecCall ["emf_edhm_fnc_smallExplosion" , 0, false]; _playerDamage = 0};
+	if (_Damage > 1000 && _Damage < 2000) then {[_pos, true, _surfaceType] remoteExecCall ["emf_edhm_fnc_largeExplosion" , 0, false]; _playerDamage = 1};
+	if (_Damage >= 2000) then {[_pos, true, _surfaceType] remoteExecCall ["emf_edhm_fnc_mediumExplosion", 0, false]; _playerDamage = 2};
 
 	if (_veh isKindOf "tank") then {_playerDamage = 3};
-	[_veh, _crew, _playerDamage] remoteExecCall ["EMF_fnc_handleCameraEffects", 0, false];
+	[_veh, _crew, _playerDamage] remoteExecCall ["emf_edhm_fnc_handleCameraEffects", 0, false];
 };

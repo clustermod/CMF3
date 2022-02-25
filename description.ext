@@ -1,133 +1,67 @@
 /*
- * Author: Bohemia Interactive, Eric
+ * Author: Eric
  * set mission attributes and define global entities.
  *
- * Arguments:
- * None
- *
- * Return Value:
- * None
- *
- * Example:
- * None
- *
- * Public: Yes
-*/
+ */
 
-// ----- Misc Settings -----
 // Enable Debrief
 debriefing = 1;
+
 // Disable forced complex flightmodel
 forceRotorLibSimulation = 0;
+
 // Enable Debug for Dary and Eric
-enableDebugConsole[] = { "76561198098666924", "76561198065818848" };
+enableDebugConsole[] = {"76561198098666924", "76561198065818848"};
+
 // Enable function logging
 allowFunctionsLog=1;
 
-// Include the RscTitles classes for taw_vd's GUI elements
-#include "taw_vd\GUI.h"
-// Include the RscTitles classes
-#include "rsc\GUIElements\RscTitles.hpp"
-// Include Dialogs
-#include "rsc\GUIElements\Dialogs.hpp"
-// Include Controls
-#include "rsc\GUIElements\Controls.hpp"
+// include emf config
+#include "emf_config.hpp"
 
-class CfgFunctions
-{
-	class EMF
-	{
-		class requiredUtilityFunctions
-		{
-			file = "functions\requiredUtilityFunctions";
-			class EMFRoleSet {};
+// include respawn config
+#include "configs\CfgRespawn.hpp"
+
+// Include viewDistance ui
+#include "taw_vd\GUI.h"
+
+// Include the RscTitles
+#include "rsc\ui\RscTitles.hpp"
+
+// Include Dialogs
+#include "rsc\ui\Dialogs.hpp"
+
+// Include Controls
+#include "rsc\ui\Controls.hpp"
+
+class CfgFunctions {
+	class EMF {
+		class common {
+			file = "functions\common";
+			class defineFunction {};
+			class throwError {};
 		};
-		class kosherArsenal
-		{
-			file = "functions\kosherArsenal";
-			class kosherArsenal {};
-			class kosherArsenalLoad {};
-			class kosherAmmoBox {};
-			class kosherArsenalForce {};
+		class DEBUG {
+			class DEBUG {
+				file = "configs\DEBUG.sqf";
+				preInit = 1;
+			};
 		};
-		class limitedRespawns
-		{
-			file = "functions\limitedRespawns";
-			class limitedRespawns {};
-			class limitedRespawnsSet {};
-		};
-		class miscGameplayUtilities
-		{
-			file = "functions\miscGameplayUtilities";
-			class restrictedVehicle {};
-			class repairRearmTrigger {};
-			class rallypoint {};
-			class safeStart {};
-			class tracers {};
-			class unitInvestigate {};
-			class slingPrimary {};
-		};
-		class miscUtilities
-		{
-			file = "functions\miscUtilities";
-			class enhancedAttachTo {};
-			class setDate {};
-			class zeusFPS {};
-			class preventProne {};
-			class countDown {};
-			class notZeus {};
-			class nearestPlayer {};
-			class getParamValue {};
-		};
-		class init
-		{
-			file = "functions\init";
-			class setSkill {postInit = 1;};
-			class blockTextChat {postInit = 0;};
-			class mapSwitchTextures {postInit = 1;};
-			class resizeMapMarkers {postinit = 1;};
+		class init {
+			class onMissionStart {
+				file = "configs\onMissionStart.sqf";
+				preInit = 1;
+			};
+			class modules {
+				file = "configs\XEH_MODULE.sqf";
+				preInit = 1;
+			};
 		}
-		class EDHM
-		{
-			file = "functions\EDHM";
-			class edhm_vehicleInit {};
-			class handleCameraEffects {};
-			class handleEffects {};
-			class handleUnitOnFire {};
-			class handleMedical {};
-			class armorFire {};
-			class largeExplosion {};
-			class mediumExplosion {};
-			class smallExplosion {};
-			class postProcess {};
-		};
 	};
 
-	// Include the main functions library of taw_vd
+	// Include taw_vd functions
 	#include "taw_vd\CfgFunctions.hpp"
 };
 
-// Declare custom debrief classes
-class CfgDebriefing
-{
-	// Kick back to lobby if player is not zeus
-	class wrongZeus
-	{
-		title = "You're not zeus";
-		subtitle = "";
-		description = "This slot is reserved for zeus";
-		pictureBackground = "";
-		picture = "";
-		pictureColor[] = {0.0,0.3,0.6,1};
-	};
-	// Kick back to lobby if not enough players to satisfy role
-	class notEnoughPlayers
-	{
-		title = "Not enough players";
-		subtitle = "";
-		description = "This slot is limited by amount of players";
-		pictureBackground = "";
-		picture = "";
-		pictureColor[] = {0.0,0.3,0.6,1};
-	};
-};
+// Include debriefings
+#include "configs\CfgDebriefing.hpp"

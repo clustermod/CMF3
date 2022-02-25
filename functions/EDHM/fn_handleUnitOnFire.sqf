@@ -11,10 +11,11 @@
  * Boolean
  *
  * Example:
- * [this, 60, 3] call EMF_fnc_handleUnitOnFire
+ * [this, 60, 3] call emf_edhm_fnc_handleUnitOnFire
  *
  * Public: Yes
  */
+scriptName "functions\edhm\handleUnitOnFire.sqf";
 params["_unit", "_lifetime", "_rolls"];
 
 fnc_unit_fire = {

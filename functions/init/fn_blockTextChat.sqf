@@ -9,10 +9,11 @@
  * None
  *
  * Example:
- * None
+ * [] call emf_init_fnc_blockTextChat
  *
  * public: Yes
 */
+scriptName "functions\init\blockTextChat.sqf";
 
 // Disable chatting in normal chats
 {[_x, [false, false]] remoteExec ["enableChannel", 0, true]} forEach [0,1,2,4,5];

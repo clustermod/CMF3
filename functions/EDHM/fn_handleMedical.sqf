@@ -9,10 +9,11 @@
  * Boolean
  *
  * Example:
- * [1] call EMF_fnc_handleMedical
+ * [1] call emf_edhm_fnc_handleMedical
  *
  * Public: No
  */
+scriptName "functions\edhm\handleMedical.sqf";
 params["_playerDamage"];
 
 switch (_playerDamage) do
