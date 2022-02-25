@@ -34,9 +34,11 @@ player addEventHandler ["Respawn", {
 // add playerKilled and playerRespawn handlers to new players
 ["INFO", "Registering events...", "onMissionStart"] call EMF_DEBUG;
 addMissionEventHandler ["PlayerConnected", {
-	params ["_id"];
+  private _owner = _this select 4;
+  
   ["INFO", "New player connected...", "onMissionStart"] call EMF_DEBUG;
   {
+    ["INFO", "Registering events...", "onMissionStart"] remoteExecCall ["EMF_DEBUG", 2];
     // Load ace settings
     call compile(preprocessFileLineNumbers "configs\ace_settings.sqf");
 
@@ -70,7 +72,7 @@ addMissionEventHandler ["PlayerConnected", {
       // Call event script
       _this execVM "events\onPlayerRespawn.sqf"
     }];
-  } remoteExec ["call", _id, true];
+  } remoteExec ["call", _owner];
 }];
 ["INFO", "Events registered", "onMissionStart"] call EMF_DEBUG;
 

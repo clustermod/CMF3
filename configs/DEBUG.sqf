@@ -15,8 +15,6 @@ if !(_missionDebugType in _types) exitWith {
   [format["Unknown DEBUG type: %1", _missionDebugType], "configs\DEBUG.sqf"] call emf_fnc_throwError;
 };
 
-EMF_DEBUG_LOG = [];
-
 // Define a function to handle debug logging
 EMF_DEBUG = {
   private["_levels", "_missionDebugLevel", "_missionDebugType"];
@@ -39,16 +37,13 @@ EMF_DEBUG = {
     };
     if (_missionDebugType isEqualTo "LOG") exitWith {
         [_stderr] call BIS_fnc_log;
-        EMF_DEBUG_LOG pushBack _stderr;
         true;
     };
     if (_missionDebugType isEqualTo "CHAT") exitWith {
         systemChat _stderr;
-        EMF_DEBUG_LOG pushBack _stderr;
         true;
     };
     [_stderr] call BIS_fnc_log;
-    EMF_DEBUG_LOG pushBack _stderr;
     systemChat _stderr;
     true;
   };
@@ -60,16 +55,13 @@ EMF_DEBUG = {
       };
       if (_missionDebugType isEqualTo "LOG") exitWith {
           [_stderr] call BIS_fnc_log;
-          EMF_DEBUG_LOG pushBack _stderr;
           true;
       };
       if (_missionDebugType isEqualTo "CHAT") exitWith {
           systemChat _stderr;
-          EMF_DEBUG_LOG pushBack _stderr;
           true;
       };
       [_stderr] call BIS_fnc_log;
-      EMF_DEBUG_LOG pushBack _stderr;
       systemChat _stderr;
       true;
   };
