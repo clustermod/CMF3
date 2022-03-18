@@ -17,10 +17,10 @@ scriptName "functions\utilities\fn_stripUnit.sqf";
 params["_unit"];
 
 
-[_unit, (primaryWeapon player)] remoteExec ["removeWeaponGlobal", _unit];
-[_unit, (handgunWeapon player)] remoteExec ["removeWeaponGlobal", _unit];
-[_unit, (secondaryWeapon player)] remoteExec ["removeWeaponGlobal", _unit];
-[_unit] remoteExec ["removeBackpackGlobal", _unit];
+[_unit, (primaryWeapon player)] remoteExecCall ["CBA_fnc_removeWeapon", (owner _unit)];
+[_unit, (handgunWeapon player)] remoteExecCall ["CBA_fnc_removeWeapon", (owner _unit)];
+[_unit, (secondaryWeapon player)] remoteExecCall ["CBA_fnc_removeWeapon", (owner _unit)];
+[_unit] remoteExec ["removeBackpackGlobal", (owner _unit)];
 removeAllItems _unit;
 removeAllAssignedItems _unit;
 removeUniform _unit;

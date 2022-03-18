@@ -48,8 +48,8 @@ class EDT_MarkerSize {
   thumb = "\A3\ui_f\data\GUI\Cfg\Slider\thumb_ca.paa";
   onSliderPosChanged = "profileNamespace setVariable ['EMF_RMM_SIZE', (_this select 1)];";
   sliderPosition = 0.2;
-  sliderRange[] = {0.05,2};
-  sliderStep = 0.001;
+  sliderRange[] = {0.0005,2};
+  sliderStep = 0.0001;
   lineSize = 0.05;
 };
 

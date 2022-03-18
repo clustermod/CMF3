@@ -12,9 +12,9 @@ call emf_utilities_fnc_setDate;
 klpq_musicRadio_radioThemes = ["t_american"];
 
 // Enable tracers for opfor
-[east, true, false, true] call emf_gameplay_fnc_tracers;
+[east, true, false, false] call emf_gameplay_fnc_tracers;
 
-// kosherAILoadout (uncomplete)
+// kosherAILoadout
 //[east, "testLoadout"] execVM "rsc\kosherAI.sqf";
 
 call emf_gameplay_fnc_safeStart;

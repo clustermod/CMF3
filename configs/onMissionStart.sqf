@@ -16,6 +16,8 @@ tawvd_disablenone = true;
 STHud_NoSquadBarMode = true;
 // Disable CTAB on vehicles
 cTab_vehicleClass_has_FBCB2 = [];
+// Disable vietnamese voices
+RUG_DSAI_TerminalDistance = -1;
 
 // add playerKilled and playerRespawn handlers to server
 player addEventHandler ["Killed", {
@@ -26,6 +28,9 @@ player addEventHandler ["Respawn", {
   _this execVM "events\onPlayerRespawn.sqf"
 }];
 
+// Load ace interaction menu
+[] spawn emf_aceMenu_fnc_menuinit;
+
 // band aid - remove this once they fix PlayerConnected mission event handler
 // https://forums.bistudio.com/topic/143930-general-discussion-dev-branch/page-942#entry3003074
 ["emf_onMissionStart_opcfix", "onPlayerConnected", {}] call BIS_fnc_addStackedEventHandler;
@@ -35,15 +40,21 @@ player addEventHandler ["Respawn", {
 ["INFO", "Registering events...", "onMissionStart"] call EMF_DEBUG;
 addMissionEventHandler ["PlayerConnected", {
   private _owner = _this select 4;
-  
-  ["INFO", "New player connected...", "onMissionStart"] call EMF_DEBUG;
+
   {
-    ["INFO", "Registering events...", "onMissionStart"] remoteExecCall ["EMF_DEBUG", 2];
+    ["INFO", format["Registering events for %1...", (name player)], "onMissionStart"] remoteExecCall ["EMF_DEBUG", 2];
+
+    // Don't allow removing grass in tawd view distance script
+    tawvd_disablenone = true;
+
     // Load ace settings
     call compile(preprocessFileLineNumbers "configs\ace_settings.sqf");
 
     // Load ace interaction menu
-    [] call emf_aceMenu_fnc_menuinit;
+    [] spawn emf_aceMenu_fnc_menuinit;
+
+    // Disable vietnamese voices
+    RUG_DSAI_TerminalDistance = -1;
 
     player addEventHandler ["Killed", {
       // Save inventory upon player death
@@ -72,9 +83,9 @@ addMissionEventHandler ["PlayerConnected", {
       // Call event script
       _this execVM "events\onPlayerRespawn.sqf"
     }];
+    ["INFO", format["Events registered for %1!", (name player)], "onMissionStart"] remoteExecCall ["EMF_DEBUG", 2];
   } remoteExec ["call", _owner];
 }];
-["INFO", "Events registered", "onMissionStart"] call EMF_DEBUG;
 
 // Misc custom eventhandlers
 ["INFO", "Registering customs events...", "onMissionStart"] call EMF_DEBUG;

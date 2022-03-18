@@ -29,18 +29,27 @@ EMF_DEBUG = {
   for "_i" from (count _this -1) to 2 step -1 do {
     _stderr = format["[%1] ", (_this select _i)] + _stderr;
   };
+  _stderr = format["[EMF] %1", _stderr];
 
   if (_missionDebugLevel isEqualTo "ALL") exitWith {
     if (_missionDebugLevel isEqualTo "ERR") then {
-      [_stderr] call BIS_fnc_error;
+        [_stderr] call BIS_fnc_error;
         true;
     };
     if (_missionDebugType isEqualTo "LOG") exitWith {
-        [_stderr] call BIS_fnc_log;
+        if (isServer) then {
+            diag_log _stderr;
+        } else {
+            [_stderr] remoteExec ["diag_log", 2];
+        };
         true;
     };
     if (_missionDebugType isEqualTo "CHAT") exitWith {
-        systemChat _stderr;
+        if (isServer) then {
+            systemChat _stderr;
+        } else {
+            [_stderr] remoteExec ["systemChat", 2];
+        };
         true;
     };
     [_stderr] call BIS_fnc_log;
@@ -50,15 +59,27 @@ EMF_DEBUG = {
 
   if ((_levels find (toUpper _debugLevel)) >= (_levels find _missionDebugLevel) || _missionDebugLevel isEqualTo 7) exitWith {
       if (_missionDebugLevel isEqualTo "ERR") then {
-        [_stderr] call BIS_fnc_error;
+          if (isServer) then {
+            [_stderr] call BIS_fnc_error;
+          } else {
+            [_stderr] remoteExecCall ["BIS_fnc_error", 2];
+          };
           true;
       };
       if (_missionDebugType isEqualTo "LOG") exitWith {
-          [_stderr] call BIS_fnc_log;
+          if (isServer) then {
+              diag_log _stderr;
+          } else {
+              [_stderr] remoteExec ["diag_log", 2];
+          };
           true;
       };
       if (_missionDebugType isEqualTo "CHAT") exitWith {
-          systemChat _stderr;
+          if (isServer) then {
+              systemChat _stderr;
+          } else {
+              [_stderr] remoteExec ["systemChat", 2];
+          };
           true;
       };
       [_stderr] call BIS_fnc_log;

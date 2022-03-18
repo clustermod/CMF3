@@ -1,4 +1,4 @@
-params["_role", "_unit", ["_rand", false]];
+params["_role"];
 private["_availableUniforms", "_availableWeapons", "_availableMagazines", "_availableVests", "_availableItems", "_availableBackpacks", "_availableHeadgear", "_availableFacewear", "_availableAttachments", "_availableGrenades"];
 
 // Define default gear

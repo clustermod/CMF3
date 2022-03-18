@@ -10,8 +10,8 @@ debriefing = 1;
 // Disable forced complex flightmodel
 forceRotorLibSimulation = 0;
 
-// Enable Debug for Dary and Eric
-enableDebugConsole[] = {"76561198098666924", "76561198065818848"};
+// Enable Debug for Eric
+enableDebugConsole[] = {"76561198065818848"};
 
 // Enable function logging
 allowFunctionsLog=1;
@@ -65,3 +65,13 @@ class CfgFunctions {
 
 // Include debriefings
 #include "configs\CfgDebriefing.hpp"
+
+class CfgSounds
+{
+	class flashbang_sound
+	{
+		name = "flashbang_sound";
+		sound[] = {"rsc\sounds\stun_grenade.ogg", db+30, 1.0};
+		titles[] = {0, ""};
+	};
+};

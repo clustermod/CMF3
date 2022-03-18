@@ -64,6 +64,6 @@ if (_object getVariable ["emf_kosherArsenal_ammoBoxInit", false]) exitWith {fals
   };
 
   [_object, ["Rearm at arsenal", _onOpen, [], 6, true, false,"", "_this getVariable ['emf_kosherArsenal_loadout', ''] != ''"]] remoteExec ["addAction", 0, true];
-  _object setVariable ["emf_kosherArsenal_ammoBoxInit", true];
+  _object setVariable ["emf_kosherArsenal_ammoBoxInit", true, true];
 
 true;

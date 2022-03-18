@@ -23,9 +23,9 @@ _rolesAction = ["emf_display_roles", "Show roles", "rsc\data\bug_icon.paa", {
   {
     private _p = _x;
     if (allCurators findIf {getAssignedCuratorUnit _x == _p} == -1) then {
-  	_roles pushBack format["%2	%1", (name _p), (_p getVariable ["unitSquadRole", "RFL"])];
+  	   _roles pushBack format["%2	%1", (name _p), (_p getVariable ["emf_utilities_setRole_role", "RFL"])];
     } else {
-  	_roles pushBack format["ZEUS	%1", (name _p), (_p getVariable ["unitSquadRole", "RFL"])];
+  	   _roles pushBack format["ZEUS	%1", (name _p)];
     }
   } forEach allPlayers;
 

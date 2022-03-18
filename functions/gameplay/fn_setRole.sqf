@@ -11,7 +11,7 @@
  * <Boolean>
  *
  * Example:
- * [this, "SL", 0] call emf_gameplay_fnc_EMFRoleSet
+ * [this, "SL", 0] call emf_gameplay_fnc_setRole
  *
  * public: Yes
 */

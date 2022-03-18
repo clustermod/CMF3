@@ -18,5 +18,6 @@ params["_category"];
 [_category, "zeusFPS", format["%1\fn_zeusFPS.sqf", _category], false] call emf_fnc_defineFunction;
 [_category, "endLoadingScreen", format["%1\fn_endLoadingScreen.sqf", _category], true] call emf_fnc_defineFunction;
 [_category, "stripUnit", format["%1\fn_stripUnit.sqf", _category], false] call emf_fnc_defineFunction;
+[_category, "enhancedAIConvoy", format["%1\fn_enhancedAIConvoy.sqf", _category], false] call emf_fnc_defineFunction;
 
 ["TRACE", "Finished defining functions...", _category, "xeh_prep"] call EMF_DEBUG;
