@@ -4,17 +4,18 @@
  *
  * Arguments:
  * 0: Respawns <NUMBER>
+ * 1: team <NUMBER> [Default: 0]
  *
  * Return Value:
  * <Boolean>
  *
  * Example:
- * [5] call emf_limitedRespawns_fnc_limitedRespawns
+ * [5] call emf_limitedRespawns_fnc_init
  *
  * public: yes
 */
 scriptName "functions\limitedRespawns\fn_init.sqf";
-params["_respawns", "_teamLimit"];
+params["_respawns", ["_teamLimit", 0]];
 
 // Check if params are set and is of correct type
 if (isNil "_respawns") exitWith {["ERR", "respawns cannot be nil", "init", "limitedRespawns"] call EMF_DEBUG; false;};

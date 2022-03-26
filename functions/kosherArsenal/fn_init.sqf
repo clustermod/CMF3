@@ -6,14 +6,13 @@
  * 0: loadouts <ARRAY>
  * 1: light <BOOL> (Default: false)
  * 2: forcePrimary <BOOL> (Default: true)
- * 3: random <BOOL> (Default: false)
- * 4: randomPos <BOOL> (Default: true)
+ * 3: randomPos <BOOL> (Default: true)
  *
  * Return Value:
  * None
  *
  * Example:
- * [["exampleLoadout"],true, false, true, true] call emf_kosherArsenal_fnc_init
+ * [["exampleLoadout"], true, false, true] call emf_kosherArsenal_fnc_init
  *
  * Public: Yes
  */

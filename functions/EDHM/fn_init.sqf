@@ -9,7 +9,7 @@
  * Boolean
  *
  * Example:
- * [this] call emf_edhm_fnc_ehdm_vehicleInit
+ * [this] call emf_edhm_fnc_ehdm_init
  *
  * Public: Yes
  */

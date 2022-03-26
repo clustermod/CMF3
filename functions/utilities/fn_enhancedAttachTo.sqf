@@ -3,13 +3,14 @@
  * Simplify sling loading by removing creatin required parameters.
  *
  * Arguments:
- * None
+ * 0: object1 <OBJECT>
+ * 1: object2 <OBJECT>
  *
  * Return Value:
  * <BOOL>
  *
  * Example:
- * [] call emf_utilities_fnc_enhancedAttachTo
+ * [helicopter, boat] call emf_utilities_fnc_enhancedAttachTo
  *
  * Public: Yes
 */

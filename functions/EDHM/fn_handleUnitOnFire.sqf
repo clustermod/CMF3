@@ -91,7 +91,7 @@ _li_fire setLightColor[1,0.2,0.1];
 	{
 		_lit setLightBrightness 0.1+(random 0.9);
 		_lit setLightAttenuation [0,0,100,0,0.1,5+(random 5)];
-		sleep (0.05)+(random 0.1);
+		sleep (0.05 + (random 0.1));
 	};
 };
 
