@@ -41,7 +41,7 @@ if (((count _loadouts) - 1) < _team) then {
 
 // Save loadout on unit
 private _loadout = format["rsc\loadouts\%1.sqf", (_loadouts select _team)];
-if !(fileExists _loadout) exitWith {};
+if !(fileExists _loadout) exitWith { ["ERR", format["Unable to find loadoutfile: %1", _loadout], "init", "kosherArsenal"] call EMF_DEBUG };
 player setVariable ["emf_kosherArsenal_loadout", _loadout, true];
 
 
@@ -57,6 +57,13 @@ private["_permittedGear"];
 _permittedGear = [];
 if (isNil "_whitelist") then {
     _permittedGear 	= player getVariable ["EMF_KA_permittedGear", 0];
+
+    // remove arsenal added by old laodout format:
+    {
+      if (((player actionParams _x) select 0) == "Arsenal") then {
+        player removeAction _x;
+       }
+    } forEach (actionIDs player)
 } else {
     _permittedGear 	= (_whitelist select 1);
 
