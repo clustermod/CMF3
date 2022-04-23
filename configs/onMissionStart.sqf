@@ -57,8 +57,8 @@ addMissionEventHandler ["PlayerConnected", {
     RUG_DSAI_TerminalDistance = -1;
 
     player addEventHandler ["Killed", {
-      // Save inventory upon player death
-      [player, [missionNamespace, "inventory_var"]] call BIS_fnc_saveInventory;
+      // Save loadout
+      player setVariable ["emf_onPlayerKilled_loadout", getUnitLoadout player];
 
       // Save group upon player death
       player setVariable ["EMF_OPK_Group", (group player)];
@@ -71,8 +71,8 @@ addMissionEventHandler ["PlayerConnected", {
     }];
 
     player addEventHandler ["Respawn", {
-      // Load inventory upon player respawn
-      [player, [missionNamespace, "inventory_var"]] call BIS_fnc_loadInventory;
+      // Load loadout
+      player setUnitLoadout (player getVariable ["emf_onPlayerKilled_loadout",[]]);
 
       // Join previous group
       [player] joinSilent (player getVariable ["EMF_OPK_Group", (group player)]);
