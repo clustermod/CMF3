@@ -102,6 +102,14 @@ if (_light) then {
   waitUntil{!isNull (findDisplay 1127001)};
   ((findDisplay 1127001) displayCtrl 1005) ctrlShow false;
   (findDisplay 1127001) ctrlCreate ["emf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
+
+  // Disable voice and insignia tabs
+  {
+			private _ctrl = (findDisplay 1127001) displayctrl _x;
+			_ctrl ctrlEnable false;
+			_ctrl ctrlSetFade 0.6;
+			_ctrl ctrlCommit 0;
+	} forEach [2035, 2037];
 };
 
 private _onClose = {
