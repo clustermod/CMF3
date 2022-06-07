@@ -15,7 +15,7 @@
  */
 
 // define a global variable of flashbangs to override and their time
-emf_flashbang_grenades = [["rhs_mag_mk84", 1.2], ["ACE_M84", 1.2], ["rhs_mag_plamyam", 1.2]];
+emf_flashbang_grenades = [["rhs_mag_mk84", [1.2]], ["ACE_M84", [1.2]], ["rhs_mag_plamyam", [1.2]]]];
 
 emf_flashbang_fnc_explosion = {
 	private _expSparkEmitter = "#particlesource" createVehicleLocal (_this select 0);
@@ -69,35 +69,64 @@ emf_flashbang_fnc_explosion = {
 };
 
 private _fired_event = {
-  private _grenadeFuze = (createHashMapFromArray emf_flashbang_grenades) getOrDefault [(_this select 5), -1];
+  private _grenadeConfig = (createHashMapFromArray emf_flashbang_grenades) getOrDefault [(_this select 5), -1];
   if (_grenadeFuze > -1) then {
-    [(_this select 6), _grenadeFuze] spawn {
-		params["_grenade", "_grenadeFuze"];
+    [(_this select 6), _grenadeConfig] spawn {
+			params["_grenade", "_grenadeConfig"];
+			_grenadeConfig params["_grenadeFuze", ["_bangs", 1], ["_bangDelay", {random [0.2, 0.5, 0.8]}]];
 
-		sleep _grenadeFuze;
+			sleep _grenadeFuze;
 
-		private _posASL = (getPosASL _grenade);
-		private _pos = (getPos _grenade);
+			private _posASL = (getPosASL _grenade);
+			private _pos = (getPos _grenade);
 
-		_grenade setPos [0,0,0];
-		deleteVehicle _grenade;
-		[[_pos], emf_flashbang_fnc_explosion] remoteExec ["call"];
+			_grenade setPos [0,0,0];
+			deleteVehicle _grenade;
 
-		private _units = _pos nearEntities 10;
-		{
-			private _inRoom = [_x, "VIEW"] checkVisibility [eyePos _x, _posASL];
-			if (!isplayer _x && _inRoom > 0.6 && lifeState _x != "INCAPACITATED") then {
-				_x spawn {
-				  [_this, "Acts_CrouchingCoveringRifle01"] remoteExec ["switchMove"];
-				  [_this, "all"] remoteExec ["disableAI"];
-				  sleep 5;
-				  [_this, "all"] remoteExec ["enableAI"];
-				  if (animationState _this == "Acts_CrouchingCoveringRifle01") then {
-					[_this, ""] remoteExec ["switchMove"];
-				  };
-				};
-			}
-		} forEach _units;
+			if (_bangDelay isEqualType {}) then {
+				_bangDelay = call _bangDelay;
+			};
+
+			if (_bangs < 1) then {
+			  for "_i" from 0 to _bangs do {
+			      [[_pos], emf_flashbang_fnc_explosion] remoteExec ["call"];
+
+						private _units = _pos nearEntities 10;
+						{
+							private _inRoom = [_x, "VIEW"] checkVisibility [eyePos _x, _posASL];
+							if (!isplayer _x && _inRoom > 0.6 && lifeState _x != "INCAPACITATED") then {
+								_x spawn {
+									[_this, "Acts_CrouchingCoveringRifle01"] remoteExec ["switchMove"];
+									[_this, "all"] remoteExec ["disableAI"];
+									sleep 5;
+									[_this, "all"] remoteExec ["enableAI"];
+									if (animationState _this == "Acts_CrouchingCoveringRifle01") then {
+									[_this, ""] remoteExec ["switchMove"];
+									};
+								};
+							}
+						} forEach _units;
+						sleep _bangDelay;
+			  };
+			} else {
+				[[_pos], emf_flashbang_fnc_explosion] remoteExec ["call"];
+
+				private _units = _pos nearEntities 10;
+				{
+					private _inRoom = [_x, "VIEW"] checkVisibility [eyePos _x, _posASL];
+					if (!isplayer _x && _inRoom > 0.6 && lifeState _x != "INCAPACITATED") then {
+						_x spawn {
+							[_this, "Acts_CrouchingCoveringRifle01"] remoteExec ["switchMove"];
+							[_this, "all"] remoteExec ["disableAI"];
+							sleep 5;
+							[_this, "all"] remoteExec ["enableAI"];
+							if (animationState _this == "Acts_CrouchingCoveringRifle01") then {
+							[_this, ""] remoteExec ["switchMove"];
+							};
+						};
+					}
+				} forEach _units;
+			};
     };
   };
 };
