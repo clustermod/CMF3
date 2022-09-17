@@ -1,27 +1,12 @@
 /*
  * Author: Bohemia Interactive, Eric
- * example mission initialization, executed when mission is started (before briefing screen).
+ * Gets executed when mission starts. Any code put in here will be executed when the mission starts and for every JIP player.
  *
  */
 scriptName "init.sqf";
 
-// Freeze time entirely
-call emf_utilities_fnc_setDate;
+/* Wait until EMF is initialized */
+waitUntil{ missionNamespace getVariable ["emf_main_server_initialized", false] };
 
-// Set theme of music radio
+/* Set the radio theme */
 klpq_musicRadio_radioThemes = ["t_american"];
-
-// Enable tracers for opfor
-[east, true, false, false] call emf_gameplay_fnc_tracers;
-
-// kosherAILoadout
-//[east, "testLoadout"] execVM "rsc\kosherAI.sqf";
-
-call emf_gameplay_fnc_safeStart;
-
-{
-	if (!isPlayer _x) then {
-		// Prevent AI units from going prone
-		[_x] call emf_utilities_fnc_preventProne;
-	};
-}forEach allUnits;

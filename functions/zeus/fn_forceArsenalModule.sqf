@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * Creates a zeus module to force kosher arsenal on a player
@@ -25,4 +26,4 @@ private _dialogFunction = {
   ["Forced open kosher arsenal on unit"] call zen_common_fnc_showMessage;
 };
 
-["EMF", "Force kosher arsenal", _dialogFunction, ""] call zen_custom_modules_fnc_register;
+["EMF", "Force kosher arsenal", _dialogFunction, "rsc\data\icon_module_kosherArsenal_ca.paa"] call zen_custom_modules_fnc_register;

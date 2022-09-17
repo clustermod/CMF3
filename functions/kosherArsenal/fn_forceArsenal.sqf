@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * Force opens kosher arsenal on a unit
@@ -14,63 +15,73 @@
  *
  * Public: Yes
  */
-scriptName "functions\kosherArsenal\fn_init.sqf";
+SCRIPT(forceArsenal);
 params["_unit", ["_forcePrimary", true]];
 
+/* Call where unit is local */
 {
-  // Save loadout on unit
-  private _loadout = player getVariable ["emf_kosherArsenal_loadout", ""];
-  private _role = player getVariable ["emf_utilities_setRole_role", "RFL"];
+    /* Get unit loadout */
+    private _loadout = player getVariable [QGVAR(loadout), ""];
+    private _role = player getVariable [QEGVAR(common,role), "RFL"];
 
-  // Create arsenal
-  private _arsenal = "HeliHEmpty" createVehicleLocal [0,0,0];
-  [_arsenal, []] call ace_arsenal_fnc_initBox;
+    /* Create arsenal object and initilize ace arsenal */
+    private _arsenal = "HeliHEmpty" createVehicleLocal [0,0,0];
+    [_arsenal, []] call ace_arsenal_fnc_initBox;
 
-  // Load arsenal whitelist
-  private _whitelist = [_role, player, true] call compile(preprocessFileLineNumbers _loadout);
+    /* Check if the file exists and load the whitelist */
+    if !(FILE_EXISTS(_loadout)) exitWith { ERROR_1("Loadoutfile %1 does not exist!",_loadout) };
+    private _whitelist = [_role, player, true] call compile(preprocessFileLineNumbers _loadout);
 
-  // Get gear from whitelist and check loadout file version (to add backwards compatability)
-  private["_permittedGear"];
-  _permittedGear = [];
-  if (isNil "_whitelist") then {
-    _permittedGear 	= player getVariable ["EMF_KA_permittedGear", 0];
+    /* Get gear from whitelist and check loadout file version */
+    private _permittedGear = [];
+    if (isNil "_whitelist") then {
+        /* Backwards compatability with old loadoutfiles */
+        _permittedGear 	= player getVariable ["EMF_KA_permittedGear", 0];
     } else {
-      _permittedGear 	= (_whitelist select 1);
+        _permittedGear 	= (_whitelist select 1);
     };
 
-    // Add items to arsenal
+    /* Add the allowed gear to the arsenal */
     {
-      [_arsenal, _x] call ace_arsenal_fnc_addVirtualItems;
-      } forEach _permittedGear;
+        [_arsenal, _x] call ace_arsenal_fnc_addVirtualItems;
+    } forEach _permittedGear;
 
-      [_arsenal, player, false] call ace_arsenal_fnc_openBox;
-      [] spawn {
+    /* Open the arsenal */
+    [_arsenal, player, false] call ace_arsenal_fnc_openBox;
+
+    /* Create the force close button in the arsenal */
+    [] spawn {
         waitUntil{!isNull (findDisplay 1127001)};
         ((findDisplay 1127001) displayCtrl 1005) ctrlShow false;
         (findDisplay 1127001) ctrlCreate ["emf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
-      };
+    };
 
-      private _onClose = {
+    /* handle closing the arsenal */
+    private _onClose = {
         _thisArgs params["_forcedprimary", "_arsenal"];
 
-        if (_forcedprimary && (primaryWeapon player == "") && !(player getVariable ["emf_kosherArsenal_init_cancel", false])) exitWith {
-          ["<t color='#ff0000'>You are required to have a primary firearm</t>", -1, -1, 5, 1, 0, 9459] spawn bis_fnc_dynamicText;
-          _arsenal spawn {
-            sleep 0.1;
-            [_this, player, false] call ace_arsenal_fnc_openBox;
-            [] spawn {
-              waitUntil{!isNull (findDisplay 1127001)};
-              ((findDisplay 1127001) displayCtrl 1005) ctrlShow false;
-              (findDisplay 1127001) ctrlCreate ["emf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
+        /* if force primary is enabled and the player doesn't have a primary selected kick him back into the arsenal */
+        if (_forcedprimary && (primaryWeapon player == "") && !(player getVariable [QGVAR(close), false])) exitWith {
+            ["<t color='#ff0000'>You are required to have a primary firearm</t>", -1, -1, 5, 1, 0, 9459] spawn bis_fnc_dynamicText;
+            _arsenal spawn {
+                sleep 0.1;
+                [_this, player, false] call ace_arsenal_fnc_openBox;
+                [] spawn {
+                    waitUntil{!isNull (findDisplay 1127001)};
+                    ((findDisplay 1127001) displayCtrl 1005) ctrlShow false;
+                    (findDisplay 1127001) ctrlCreate ["emf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
+                };
             };
-          }
         };
+
+        /* Delete the arsenal object */
         deleteVehicle _arsenal;
 
+        /* Remove the closed eventHandler */
         ["ace_arsenal_displayClosed", _thisId] call CBA_fnc_removeEventHandler;
-        player setVariable ["emf_kosherArsenal_init_cancel", false, true];
-      };
+        player setVariable [QGVAR(close), false, true];
+    };
 
-      ["ace_arsenal_displayClosed", _onClose, [_forcePrimary, _arsenal]] call CBA_fnc_addEventHandlerArgs;
-
+    /* Add closed eventhandler */
+    ["ace_arsenal_displayClosed", _onClose, [_forcePrimary, _arsenal]] call CBA_fnc_addEventHandlerArgs;
 } remoteExec ["call", _unit, true];

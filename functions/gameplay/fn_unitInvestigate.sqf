@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * Make AI within x radius investigate fired shots.

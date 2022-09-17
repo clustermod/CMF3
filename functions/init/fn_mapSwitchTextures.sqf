@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * Disables map textures by default.
@@ -14,6 +15,10 @@
  * public: No
 */
 scriptName "functions\init\fn_mapSwitchTextures.sqf";
+
+// Get config setting
+private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,switchMapTextures) ) isEqualTo 1;
+if !(_enabled) exitWith {};
 
 if ( isDedicated ) exitWith {};
 

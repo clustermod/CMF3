@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * Repairs and rearms vehicles of supplied units.
@@ -14,7 +15,7 @@
  *
  * public: Yes
 */
-scriptName "functions\gameplay\fn_reapirRearmTrigger.sqf";
+SCRIPT(repairRearmTrigger);
 params["_thisTriggerList", ["_allowDamage", true]];
 
 // Check if params are set and is of correct type

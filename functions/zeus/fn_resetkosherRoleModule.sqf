@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * module to reset a players role and/or team for kosher arsenal
@@ -46,7 +47,7 @@ private _dialogFunction = {
     ["Unit's kosher arsenal parameters have been changed"] call zen_common_fnc_showMessage
   };
 
-  ["Set lives", [
+  ["Set Role", [
     ["EDIT", ["Role", "Sets player's role"], [_defaultRole]],
     ["SLIDER", ["Team", "Sets player's team (If you are changing the units loadout leave this default)"], [0, 100, _defaultTeam, 0]],
     ["EDIT", ["Loadout", "Sets player's loadout. Only write filename without it's extension"], [_defaultLoadout]]

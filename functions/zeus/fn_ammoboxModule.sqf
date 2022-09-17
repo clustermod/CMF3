@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * Creates a zeus module to set object as an ammo box
@@ -27,4 +28,4 @@ private _dialogFunction = {
   };
 };
 
-["EMF", "Add kosher ammobox", _dialogFunction, ""] call zen_custom_modules_fnc_register;
+["EMF", "Add kosher ammobox", _dialogFunction, "rsc\data\icon_module_ammobox_ca.paa"] call zen_custom_modules_fnc_register;

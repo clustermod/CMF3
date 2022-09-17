@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * Force closes units kosher arsenal
@@ -13,9 +14,10 @@
  *
  * Public: Yes
  */
-scriptName "functions\kosherArsenal\fn_forceClose.sqf";
+SCRIPT(forceClose);
 params["_unit"];
 
+/* Forcefully close the units kosherArsenal */
 {
-  player setVariable ["emf_kosherArsenal_init_cancel", true, true];
+  player setVariable [QGVAR(close), true, true];
 } remoteExec ["call", _unit, true];

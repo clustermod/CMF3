@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * Restricts vehicle operator positions (Driver, gunner and commander) to specific units

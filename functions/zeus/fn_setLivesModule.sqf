@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * Creates a zeus module to set a player's lives
@@ -32,4 +33,4 @@ private _dialogFunction = {
   ], _onConfirm, {}, (_this select 1)] call zen_dialog_fnc_create;
 };
 
-["EMF", "Set lives", _dialogFunction, ""] call zen_custom_modules_fnc_register;
+["EMF", "Set lives", _dialogFunction, "rsc\data\icon_module_setLives_ca.paa"] call zen_custom_modules_fnc_register;

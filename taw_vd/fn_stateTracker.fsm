@@ -56,8 +56,8 @@ class FSM
                          "" \n
                          "tawvd_syncObject = true;" \n
                          "if(!isNil ""ace_interact_menu_fnc_createAction"") then {" \n
-                         "	_actionID = [""tawvd_menu"",""View Distance Settings"",""rsc\data\viewdistance_icon.paa"",{[] call TAWVD_fnc_openMenu},{true}] call ace_interact_menu_fnc_createAction;" \n
-                         "	[typeOf player, 1, [""ACE_SelfActions"", ""EMF_BUGACTIONS""], _actionID] call ace_interact_menu_fnc_addActionToClass;" \n
+                         "	_actionID = [""tawvd_menu"",""View Distance Settings"",""rsc\data\icon_viewDistance_ca.paa"",{[] call TAWVD_fnc_openMenu},{true}] call ace_interact_menu_fnc_createAction;" \n
+                         /*"	[typeOf player, 1, [""ACE_SelfActions"", ""EMF_BUGACTIONS""], _actionID] call ace_interact_menu_fnc_addActionToClass;" \n*/
                          "} else {" \n
                          "	_actionID = player addAction[""<t color='#FF0000'>Settings</t>"",TAWVD_fnc_openMenu,[],-99,false,false,"""",''];" \n
                          "};"/*%FSM</STATEINIT""">*/;

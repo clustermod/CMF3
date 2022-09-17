@@ -1,77 +1,54 @@
 /*
  * Author: Eric
  * set mission attributes and define global entities.
- *
  */
-
-// Enable Debrief
-debriefing = 1;
-
-// Disable forced complex flightmodel
-forceRotorLibSimulation = 0;
-
-// Enable Debug for Eric
-enableDebugConsole[] = {"76561198065818848"};
 
 // Enable function logging
 allowFunctionsLog=1;
 
-// include emf config
-#include "emf_config.hpp"
-
-// include respawn config
-#include "configs\CfgRespawn.hpp"
-
 // Include viewDistance ui
 #include "taw_vd\GUI.h"
 
-// Include the RscTitles
-#include "rsc\ui\RscTitles.hpp"
+// Include custom defines
+#include "rsc\ui\RscDefines.hpp"
 
 // Include Dialogs
-#include "rsc\ui\Dialogs.hpp"
+#include "rsc\ui\RscDialogs.hpp"
 
 // Include Controls
-#include "rsc\ui\Controls.hpp"
+#include "rsc\ui\RscControls.hpp"
+
+// include emf config
+#include "emf_config.hpp"
+
+// include ehv config
+#include "configs\CfgEnhancedVehicles.hpp"
+
+// include EMF respawn config
+#include "configs\CfgRespawn.hpp"
+
+// include Cluster Community ORBAT
+#include "configs\CfgORBAT.hpp"
+
+class RscTitles {
+	// Include EMF RscTitles
+	#include "rsc\ui\RscTitles.hpp"
+};
+
+class CfgDebriefing {
+	// Include EMF debriefings
+	#include "configs\CfgDebriefing.hpp"
+};
 
 class CfgFunctions {
-	class EMF {
-		class common {
-			file = "functions\common";
-			class defineFunction {};
-			class throwError {};
-		};
-		class DEBUG {
-			class DEBUG {
-				file = "configs\DEBUG.sqf";
-				preInit = 1;
-			};
-		};
-		class init {
-			class onMissionStart {
-				file = "configs\onMissionStart.sqf";
-				preInit = 1;
-			};
-			class modules {
-				file = "configs\XEH_MODULE.sqf";
-				preInit = 1;
-			};
-		}
-	};
+	// Include EMF functions
+	#include "configs\CfgFunctions.hpp"
 
 	// Include taw_vd functions
 	#include "taw_vd\CfgFunctions.hpp"
 };
 
-// Include debriefings
-#include "configs\CfgDebriefing.hpp"
-
-class CfgSounds
-{
-	class flashbang_sound
-	{
-		name = "flashbang_sound";
-		sound[] = {"rsc\sounds\stun_grenade.ogg", db+30, 1.0};
-		titles[] = {0, ""};
-	};
+class CfgSounds {
+	// Include EMF Sounds
+	#include "configs\CfgSounds.hpp"
 };

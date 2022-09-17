@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * Creates module that force closes kosher arsenal for supplied unit
@@ -24,4 +25,4 @@ private _dialogFunction = {
   ["Closed units arsenal"] call zen_common_fnc_showMessage;
 };
 
-["EMF", "Force close kosher arsenal", _dialogFunction, ""] call zen_custom_modules_fnc_register;
+["EMF", "Force close kosher arsenal", _dialogFunction, "rsc\data\icon_module_closeKosherArsenal_ca.paa"] call zen_custom_modules_fnc_register;
