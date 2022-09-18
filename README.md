@@ -9,13 +9,8 @@
     <a>
     <img src="https://img.shields.io/github/repo-size/Tapawingo/CMF3?style=flat-square" alt="repo Size">
     </a>
-    <a href="https://github.com/Tapawingo/Eric-s-Mission-Framework/issues" alt="Issue Tracker">
-        <img src="https://img.shields.io/github/issues-raw/Tapawingo/Eric-s-Mission-Framework?style=flat-square">
     <a href="https://github.com/Tapawingo/CMF3/issues" alt="Issue Tracker">
         <img src="https://img.shields.io/github/issues-raw/Tapawingo/CMF3?style=flat-square">
-    </a>
-    <a href="https://github.com/Tapawingo/CMF3/releases">
-        <img src="https://img.shields.io/github/downloads/Tapawingo/CMF3/total?style=flat-square" alt="Downloads">
     </a>
     <a href="https://github.com/Tapawingo/CMF3/blob/master/LICENSE">
         <img src="https://img.shields.io/github/license/Tapawingo/CMF3?style=flat-square" alt="License">
@@ -66,4 +61,4 @@ Please use our [Issue Tracker](https://github.com/Tapawingo/CMF3/issues) to repo
 </table>
 
 ## License
-CMF3 is licensed under the GNU General Public License ([GPLv3](https://github.com/Tapawingo/CMF3/blob/master/LICENSE)).
+**CMF3** is licensed under the GNU General Public License ([GPLv3](https://github.com/Tapawingo/CMF3/blob/master/LICENSE)).
