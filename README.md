@@ -3,20 +3,20 @@
 </p>
 
 <p align="center">
-    <a href="">
-        <img src="https://img.shields.io/github/v/release/Tapawingo/Eric-s-Mission-Framework?style=flat-square">
+    <a href="https://github.com/Tapawingo/Eric-s-Mission-Framework/releases">
+        <img src="https://img.shields.io/github/v/release/Tapawingo/Eric-s-Mission-Framework?style=flat-square" alt="Releases">
     </a>
-    <a href="">
+    <a href="https://github.com/Tapawingo/Eric-s-Mission-Framework/issues" alt="Issue Tracker">
         <img src="https://img.shields.io/github/issues-raw/Tapawingo/Eric-s-Mission-Framework?style=flat-square">
     </a>
-    <a href="">
-        <img src="https://img.shields.io/github/downloads/Tapawingo/Eric-s-Mission-Framework/total?style=flat-square">
+    <a href="https://github.com/Tapawingo/Eric-s-Mission-Framework/releases">
+        <img src="https://img.shields.io/github/downloads/Tapawingo/Eric-s-Mission-Framework/total?style=flat-square" alt="Downloads">
     </a>
-    <a href="">
-        <img src="https://img.shields.io/github/license/Tapawingo/Eric-s-Mission-Framework?style=flat-square">
+    <a href="https://github.com/Tapawingo/Eric-s-Mission-Framework/blob/master/LICENSE">
+        <img src="https://img.shields.io/github/license/Tapawingo/Eric-s-Mission-Framework?style=flat-square" alt="License">
     </a>
-    <a href="">
-        <img src="https://img.shields.io/badge/Discord-Join-darkviolet.svg?style=flat-square" alt="ACE3 Discord"">
+    <a href="https://discord.gg/MBP64PWz">
+        <img src="https://img.shields.io/badge/Discord-Join-darkviolet.svg?style=flat-square" alt="Cluster Discord"">
     </a>
 </p>
 
