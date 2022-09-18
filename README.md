@@ -27,7 +27,7 @@
 
 **CMF3** is an effort by the **Cluster Community Mod Team** to enhance the individual experience by our playerbase.
 
-This framework is entirely open source and all contributions are welcome. Feel free to maintain your own custom version, so long as the changes you make are open to the public in accordance with the GNU General Public License ([GPLv3]()).
+This framework is entirely open source and all contributions are welcome. Feel free to maintain your own custom version, so long as the changes you make are open to the public in accordance with the GNU General Public License ([GPLv3](https://github.com/Tapawingo/Eric-s-Mission-Framework/blob/master/LICENSE)).
 
 An attempt has been made to build the framework modularly so almost any *module* can easily be removed from the configuration. This way, a team can maintain it's own tailored version of **CMF3** by simply excluding any components they don't need. The entire framework has been built with customization in mind allowing mission designers to tweak it to suit their needs.
 
@@ -43,7 +43,7 @@ For a quick rundown on installing, configuring and running **CMF3** refer to the
 - Safestart system to prevent players from killing eachother at game start.
 - An enhanced vehicle system that simulates more realistic offroad driving and prevents unrealistic explosions.
 
-##Contributing
+## Contributing
 You can help out with the ongoing development by looking for potential bugs in the framework, or by contributing new features. We are always welcoming new pull requests containing bug fixes, refactors and new features.
 
 ### Contribution guidelines
@@ -61,4 +61,4 @@ Please use our [Issue Tracker](https://github.com/Tapawingo/Eric-s-Mission-Frame
 </table>
 
 ## License
-CMF3 is licensed under the GNU General Public License ([GPLv3]()).
+CMF3 is licensed under the GNU General Public License ([GPLv3](https://github.com/Tapawingo/Eric-s-Mission-Framework/blob/master/LICENSE)).
