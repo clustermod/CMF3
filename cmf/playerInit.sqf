@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Initializes players for EMF (executed preInit).
+ * Initializes players for CMF (executed when new player connects).
  *
  * Arguments:
  * None
@@ -19,10 +19,10 @@ missionNamespace setVariable [QGVAR(player_initialized), false];
 tawvd_disablenone = true;
 
 /* Load ace settings */
-call compile preprocessFileLineNumbers "emf\ace_settings.sqf";
+call compile preprocessFileLineNumbers "cmf\ace_settings.sqf";
 
 /* Load Shacktack UI changes */
-call compile preprocessFileLineNumbers "emf\stui_modifications.sqf";
+call compile preprocessFileLineNumbers "cmf\stuiMod.sqf";
 
 /* Remove KP ranks ace interactions */
 [] spawn {
@@ -37,7 +37,7 @@ call compile preprocessFileLineNumbers "emf\stui_modifications.sqf";
 };
 
 /* Load ace interaction menu */
-[] spawn emf_aceMenu_fnc_menuinit;
+[] spawn EFUNC(menu,init);
 
 /* Disable Unsung vietnamese voices */
 RUG_DSAI_TerminalDistance = -1;
@@ -75,6 +75,9 @@ player addEventHandler ["Respawn", {
      /* Call event script */
      _this execVM "events\onPlayerRespawn.sqf"
 }];
+
+/* Raise event */
+[QGVAR(player_initialized), []] call CBA_fnc_localEvent;
 
 INFO_1("Player %1 Initialized!", (name player));
 missionNamespace setVariable [QGVAR(player_initialized), true];

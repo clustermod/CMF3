@@ -5,5 +5,5 @@
  */
 scriptName "init3DEN.sqf";
 
-/* DO NOT DELETE, create 3den actions for EMF */
+/* DO NOT DELETE, create 3den actions for CMF */
 [] execVM "functions\3den\fn_init.sqf"

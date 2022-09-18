@@ -11,7 +11,7 @@
  * loadoutID <STRING>
  *
  * Example:
- * ["loadoutID", "LoadoutFile"] call emf_kosherGarage_fnc_registerWhitelist
+ * ["loadoutID", "LoadoutFile"] call cmf_kosherGarage_fnc_registerWhitelist
  *
  * Public: Yes
  */

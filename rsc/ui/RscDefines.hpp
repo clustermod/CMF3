@@ -1,5 +1,5 @@
 /*
- * Custom defines for EMF
+ * Custom defines for CMF
  */
 
 // Control types
@@ -95,7 +95,7 @@
 #define MB_BUTTON_CANCEL  2
 #define MB_BUTTON_USER    4
 
-class emf_ScrollBar {
+class cmf_ScrollBar {
 	color[] = {1,1,1,1};
 	colorActive[] = {1,1,1,1};
 	colorDisabled[] = {1,1,1,0.3};
@@ -113,7 +113,7 @@ class emf_ScrollBar {
 	autoScrollRewind = 0;
 };
 
-class emf_RscSlider {
+class cmf_RscSlider {
 	access = 0;
 	type = 43;
     idc = -1;
@@ -128,7 +128,7 @@ class emf_RscSlider {
     thumb = "\A3\ui_f\data\GUI\Cfg\Slider\thumb_ca.paa";
 };
 
-class emf_RscText {
+class cmf_RscText {
 	access = 0;
 	type = 0;
 	idc = -1;
@@ -148,7 +148,7 @@ class emf_RscText {
 	linespacing = 1;
 };
 
-class emf_RscEdit {
+class cmf_RscEdit {
 	access = 0;
 	type = 2;
 	idc = -1;
@@ -175,7 +175,7 @@ class emf_RscEdit {
 	canModify = 1;
 };
 
-class emf_RscButton {
+class cmf_RscButton {
 	access = 0;
 	type = 1;
     style = 2;
@@ -218,7 +218,7 @@ class emf_RscButton {
 	soundEscape[] = {"\A3\ui_f\data\sound\onescape", 0.09, 1};
 };
 
-class emf_RscPicture {
+class cmf_RscPicture {
 	access = 0;
 	type = 0;
 	idc = -1;
@@ -237,7 +237,7 @@ class emf_RscPicture {
 	h = 0.15;
 };
 
-class emf_RscCombo {
+class cmf_RscCombo {
 	access = 0;
 	type = 4;
 	idc = -1;
@@ -250,7 +250,7 @@ class emf_RscCombo {
 	soundExpand[] = {"", 0.1, 1};
 	soundCollapse[] = {"", 0.1, 1};
 	maxHistoryDelay = 1;
-	class ComboScrollBar: emf_ScrollBar {
+	class ComboScrollBar: cmf_ScrollBar {
 		color[] = {1,1,1,1};
 	};
 	x = 0;
@@ -269,7 +269,7 @@ class emf_RscCombo {
 	sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 };
 
-class emf_RscControlsGroup {
+class cmf_RscControlsGroup {
 	type = CT_CONTROLS_GROUP;
 	idc = -1;
 	x = 0;
@@ -280,19 +280,19 @@ class emf_RscControlsGroup {
 	fade = 0;
 	shadow = 0;
 	style = ST_MULTI;
-	class VScrollbar: emf_ScrollBar {
+	class VScrollbar: cmf_ScrollBar {
 		color[] = {1,1,1,1};
 		width = 0.021;
 		autoScrollEnabled = 1;
 	};
-	class HScrollbar: emf_ScrollBar {
+	class HScrollbar: cmf_ScrollBar {
 		color[] = {1,1,1,1};
 		height = 0.028;
 	};
 	class Controls {};
 };
 
-class emf_RscControlsGroupNoScrollbars: emf_RscControlsGroup {
+class cmf_RscControlsGroupNoScrollbars: cmf_RscControlsGroup {
 	class VScrollbar: VScrollbar {
 		width = 0;
 	};
@@ -307,7 +307,7 @@ class emf_RscControlsGroupNoScrollbars: emf_RscControlsGroup {
 #define GRID_3DEN_W (pixelW * pixelGrid * 0.5)
 #define GRID_3DEN_H (pixelH * pixelGrid * 0.5)
 
-class emf_ctrlDefault {
+class cmf_ctrlDefault {
 	access = 0;
 	idc = -1;
 	style = 0;
@@ -337,20 +337,20 @@ class emf_ctrlDefault {
 	};
 };
 
-class emf_ctrlDefaultText: emf_ctrlDefault {
+class cmf_ctrlDefaultText: cmf_ctrlDefault {
 	sizeEx = "4.32 * (1 / (getResolution select 3)) * pixelGrid * 0.5";
 	font = "RobotoCondensedLight";
 	shadow = 1;
 };
 
-class emf_ctrlDefaultButton: emf_ctrlDefaultText {
+class cmf_ctrlDefaultButton: cmf_ctrlDefaultText {
 	soundClick[] = {"\A3\ui_f\data\sound\RscButton\soundClick",0.09,1};
 	soundEnter[] = {"\A3\ui_f\data\sound\RscButton\soundEnter",0.09,1};
 	soundPush[] = {"\A3\ui_f\data\sound\RscButton\soundPush",0.09,1};
 	soundEscape[] = {"\A3\ui_f\data\sound\RscButton\soundEscape",0.09,1};
 };
 
-class emf_ctrlStatic: emf_ctrlDefaultText {
+class cmf_ctrlStatic: cmf_ctrlDefaultText {
 	type = 0;
 	colorBackground[] = {0,0,0,0};
 	text = "";
@@ -381,7 +381,7 @@ class emf_ctrlStatic: emf_ctrlDefaultText {
 	onVideoStopped = "";
 };
 
-class emf_ctrlButton: emf_ctrlDefaultButton {
+class cmf_ctrlButton: cmf_ctrlDefaultButton {
 	type = 1;
 	style = "0x02 + 0xC0";
 	colorBackground[] = {0,0,0,1};
@@ -428,7 +428,7 @@ class emf_ctrlButton: emf_ctrlDefaultButton {
 	onButtonUp = "";
 };
 
-class emf_ctrlEdit: emf_ctrlDefaultText {
+class cmf_ctrlEdit: cmf_ctrlDefaultText {
 	type = 2;
 	colorBackground[] = {0,0,0,0.5};
 	text = "";
@@ -452,7 +452,7 @@ class emf_ctrlEdit: emf_ctrlDefaultText {
 	onMouseHolding = "";
 };
 
-class emf_ctrlCombo: emf_ctrlDefaultText {
+class cmf_ctrlCombo: cmf_ctrlDefaultText {
 	type = 4;
 	style = "0x00 + 0x10 + 0x200";
 	colorBackground[] = {0.05,0.05,0.05,1};
@@ -502,7 +502,7 @@ class emf_ctrlCombo: emf_ctrlDefaultText {
 	onLBSelChanged = "";
 };
 
-class emf_ctrlStaticBackgroundDisable: emf_ctrlStatic {
+class cmf_ctrlStaticBackgroundDisable: cmf_ctrlStatic {
 	x = -4;
 	y = -2;
 	w = 8;
@@ -510,25 +510,25 @@ class emf_ctrlStaticBackgroundDisable: emf_ctrlStatic {
 	colorBackground[] = {1,1,1,0.5};
 };
 
-class emf_ctrlStaticBackground: emf_ctrlStatic {
+class cmf_ctrlStaticBackground: cmf_ctrlStatic {
 	colorBackground[] = {0.2,0.2,0.2,1};
 };
 
-class emf_ctrlStaticPictureTile: emf_ctrlStatic {
+class cmf_ctrlStaticPictureTile: cmf_ctrlStatic {
 	style = 144;
 };
 
-class emf_ctrlStaticFooter: emf_ctrlStatic {
+class cmf_ctrlStaticFooter: cmf_ctrlStatic {
 	colorBackground[] = {0,0,0,0.3};
 };
 
-class emf_ctrlStaticTitle: emf_ctrlStatic {
+class cmf_ctrlStaticTitle: cmf_ctrlStatic {
 	moving = 1;
 	colorBackground[] = {"(profilenamespace getvariable ['GUI_BCG_RGB_R',0.77])","(profilenamespace getvariable ['GUI_BCG_RGB_G',0.51])","(profilenamespace getvariable ['GUI_BCG_RGB_B',0.08])",1};
 	colorText[] = {1,1,1,1};
 };
 
-class emf_ctrlStaticBackgroundDisableTiles: emf_ctrlStaticPictureTile {
+class cmf_ctrlStaticBackgroundDisableTiles: cmf_ctrlStaticPictureTile {
 	x = -4;
 	y = -2;
 	w = 8;
@@ -539,13 +539,13 @@ class emf_ctrlStaticBackgroundDisableTiles: emf_ctrlStaticPictureTile {
 	colorText[] = {1,1,1,0.05};
 };
 
-class emf_ctrlButtonOK: emf_ctrlButton {
+class cmf_ctrlButtonOK: cmf_ctrlButton {
 	default = 1;
 	idc = 1;
 	text = "OK";
 };
 
-class emf_ctrlButtonCancel: emf_ctrlButton {
+class cmf_ctrlButtonCancel: cmf_ctrlButton {
 	idc = 2;
 	text = "CANCEL";
 };

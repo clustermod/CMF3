@@ -1,2 +1,2 @@
 #define MODULE init
-#include "..\..\emf\script_component.hpp"
+#include "..\..\cmf\script_component.hpp"

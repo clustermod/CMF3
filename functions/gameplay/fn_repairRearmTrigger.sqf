@@ -11,7 +11,7 @@
  * <Boolean>
  *
  * Example:
- * [thisList, false] call emf_gameplay_fnc_repairRearmTrigger
+ * [thisList, false] call cmf_gameplay_fnc_repairRearmTrigger
  *
  * public: Yes
 */

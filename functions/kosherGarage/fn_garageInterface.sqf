@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_kosherGarage_fnc_garageInterface
+ * [] call cmf_kosherGarage_fnc_garageInterface
  *
  * Public: No
  */
@@ -155,6 +155,9 @@ private _handle = _this spawn {
 
                     /* Play a sound when pylon is changed */
                     playSound3D [MISSION_PATH(format["rsc\sounds\%1.ogg",selectRandom["impact_drive_1", "impact_drive_2"]]), _veh, false ,getPos _veh, 2];
+
+                    /* Raise event */
+                    [QGVAR(onPylonChanged), [_pylon_index, _class]] call CBA_fnc_localEvent;
                 }];
 
                 /* Fade pylon combobox's when not moused over */

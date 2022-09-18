@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [_myVehicle] call emf_kosherGarage_fnc_syncVehicle
+ * [_myVehicle] call cmf_kosherGarage_fnc_syncVehicle
  *
  * Public: No
  */

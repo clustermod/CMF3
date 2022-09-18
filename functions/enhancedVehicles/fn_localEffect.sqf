@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_enhancedVehicles_fnc_localEffect
+ * [] call cmf_enhancedVehicles_fnc_localEffect
  *
  * Public: No
  */

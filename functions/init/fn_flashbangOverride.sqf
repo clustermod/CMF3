@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_init_fnc_flashbangOverride
+ * [] call cmf_init_fnc_flashbangOverride
  *
  * Public: No
  */
@@ -94,24 +94,24 @@ GVAR(flashbang_explosion) = {
 
 	if (_this select 1) then {
 		_soundSource spawn {
-			_this say3D "emf_flashbang_inside";
-			_this say3D "emf_flashbang_inside";
-			_this say3D "emf_flashbang_inside";
-			_this say3D "emf_flashbang_inside";
-			_this say3D "emf_flashbang_inside";
-			_this say3D "emf_flashbang_inside";
+			_this say3D "cmf_flashbang_inside";
+			_this say3D "cmf_flashbang_inside";
+			_this say3D "cmf_flashbang_inside";
+			_this say3D "cmf_flashbang_inside";
+			_this say3D "cmf_flashbang_inside";
+			_this say3D "cmf_flashbang_inside";
 
 			sleep 4;
 			deleteVehicle _this;
 		};
 	} else {
 		_soundSource spawn {
-			_this say3D "emf_flashbang_outside";
-			_this say3D "emf_flashbang_outside";
-			_this say3D "emf_flashbang_outside";
-			_this say3D "emf_flashbang_outside";
-			_this say3D "emf_flashbang_outside";
-			_this say3D "emf_flashbang_outside";
+			_this say3D "cmf_flashbang_outside";
+			_this say3D "cmf_flashbang_outside";
+			_this say3D "cmf_flashbang_outside";
+			_this say3D "cmf_flashbang_outside";
+			_this say3D "cmf_flashbang_outside";
+			_this say3D "cmf_flashbang_outside";
 
 			sleep 4;
 			deleteVehicle _this;

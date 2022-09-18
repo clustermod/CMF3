@@ -13,7 +13,7 @@
  * None
  *
  * Example:
- * [_myGroup, "A1", "ARMOR", "PLT"] call emf_common_fnc_setCallsign
+ * [_myGroup, "A1", "ARMOR", "PLT"] call cmf_common_fnc_setCallsign
  *
  * Public: Yes
  */
@@ -29,11 +29,11 @@ _group setVariable [QGVAR(sqd_callsign), _callsign, true];
 _group setVariable [QGVAR(sqd_type), _type, true];
 
 /* Set the groups size and the group's unit's the ranks */
-private _sizes = ("true" configClasses (missionConfigFile >> "EMF_ORBAT" >> "SIZES")) apply {configName _x};
+private _sizes = ("true" configClasses (missionConfigFile >> "CMF_ORBAT" >> "SIZES")) apply {configName _x};
 _group setVariable [QGVAR(sqd_size), _level, true];
 if (_level in _sizes) then {
-    private _leaderRank = getText (missionConfigFile >> "EMF_ORBAT" >> "SIZES" >> toUpper _level >> "leadRank");
-    private _generalRank = getText (missionConfigFile >> "EMF_ORBAT" >> "SIZES" >> toUpper _level >> "generalRank");
+    private _leaderRank = getText (missionConfigFile >> "CMF_ORBAT" >> "SIZES" >> toUpper _level >> "leadRank");
+    private _generalRank = getText (missionConfigFile >> "CMF_ORBAT" >> "SIZES" >> toUpper _level >> "generalRank");
     {
         if ((rank _x) isEqualTo "PRIVATE") then {
             if (_x isEqualTo (leader _group)) then {
@@ -53,3 +53,6 @@ if (_level in _sizes) then {
 {
     _x setVariable [QGVAR(group), [_callsign, _type, _level], true];
 } forEach units _group;
+
+/* Raise event */
+[QGVAR(onGroupCallsignChanged), _this, _group] call CBA_fnc_targetEvent;

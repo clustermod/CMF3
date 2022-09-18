@@ -3,9 +3,9 @@
  * Author: Eric
  * Orders the group playerlist by color and leader
  */
-SCRIPT(stuid_modifications);
+SCRIPT(stuiMod);
 
-// Redefine function
+/* Redefine the namelist function */
 STHud_Namelist = {
     params ["_canvas"];
 
@@ -119,3 +119,6 @@ STHud_Namelist = {
     	];
     };
 };
+
+/* Raise event */
+[QGVAR(onSTUIModified), []] call CBA_fnc_localEvent;

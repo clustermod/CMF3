@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [player] call emf_utility_fnc_endLoadingScreen
+ * [player] call cmf_utility_fnc_endLoadingScreen
  *
  * Public: Yes
  */

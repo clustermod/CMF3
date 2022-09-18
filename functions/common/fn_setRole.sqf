@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Sets role and team of supplied unit, is required for most of EMF functions.
+ * Sets role and team of supplied unit, is required for most of CMF functions.
  *
  * Arguments:
  * 0: Unit <OBJECT>
@@ -12,7 +12,7 @@
  * None
  *
  * Example:
- * [_myUnit, "SL", 0] call emf_common_fnc_setRole
+ * [_myUnit, "SL", 0] call cmf_common_fnc_setRole
  *
  * public: Yes
 */
@@ -36,3 +36,6 @@ _unit setVariable [QGVAR(role), _role, true];
 _unit setVariable [QGVAR(team), _team, true];
 
 LOG_3("team %1 and role %2 set for %3", _team, _role, name _unit);
+
+/* Raise event */
+[QGVAR(onUnitRoleChanged), _this, _unit] call CBA_fnc_targetEvent;

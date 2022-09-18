@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_zeus_fnc_playerInfo
+ * [] call cmf_zeus_fnc_playerInfo
  *
  * Public: No
  */

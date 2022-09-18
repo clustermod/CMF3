@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_3den_fnc_kosherArsenalTool
+ * [] call cmf_3den_fnc_kosherArsenalTool
  *
  * Public: No
  */
@@ -31,9 +31,9 @@ if (isNil QGVAR(kosherArsenal_ctrlEvents)) then {
 };
 
 // Add subcategories for ace items
-call compile preprocessFileLineNumbers "emf\ace_settings.sqf";
+call compile preprocessFileLineNumbers "cmf\ace_settings.sqf";
 
-emf_3den_fnc_kosherArsenalTool = {
+cmf_3den_fnc_kosherArsenalTool = {
     // spawn a unit and open arsenal on it
     private _unit = create3DENEntity ["Object", "B_Soldier_F", (screenToWorld [0.5, 0.5])];
     _unit setUnitLoadout [[],[],[],[],[],[],"","",[],["ItemMap","","","ItemCompass","ItemWatch",""]];
@@ -145,10 +145,10 @@ emf_3den_fnc_kosherArsenalTool = {
         ];
 
         GVAR(kosherArsenal_ctrls) = [];
-        private _selectCtrl = (_display ctrlCreate ["emf_kosherArsenalTool_selectRole", -1]);
-        private _deleteCtrl = (_display ctrlCreate ["emf_kosherArsenalTool_deleteRole", -1]);
-        private _textCtrl = (_display ctrlCreate ["emf_kosherArsenalTool_textRole", -1]);
-        private _addCtrl = (_display ctrlCreate ["emf_kosherArsenalTool_addRole", -1]);
+        private _selectCtrl = (_display ctrlCreate ["cmf_kosherArsenalTool_selectRole", -1]);
+        private _deleteCtrl = (_display ctrlCreate ["cmf_kosherArsenalTool_deleteRole", -1]);
+        private _textCtrl = (_display ctrlCreate ["cmf_kosherArsenalTool_textRole", -1]);
+        private _addCtrl = (_display ctrlCreate ["cmf_kosherArsenalTool_addRole", -1]);
         GVAR(kosherArsenal_ctrls) = [_selectCtrl,_deleteCtrl,_textCtrl,_addCtrl];
 
         _textCtrl ctrlAddEventHandler ["SetFocus", {

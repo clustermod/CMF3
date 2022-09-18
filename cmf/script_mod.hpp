@@ -1,4 +1,4 @@
-#define PREFIX emf
+#define PREFIX cmf
 
 #include "script_version.hpp"
 

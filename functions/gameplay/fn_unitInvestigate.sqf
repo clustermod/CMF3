@@ -11,7 +11,7 @@
  * None
  *
  * Example:
- * [300, 15] call emf_gameplay_fnc_unitInvestigate
+ * [300, 15] call cmf_gameplay_fnc_unitInvestigate
  *
  * public: Yes
 */

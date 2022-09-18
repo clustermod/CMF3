@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_enhancedVehicles_fnc_medicalHandler
+ * [] call cmf_enhancedVehicles_fnc_medicalHandler
  *
  * Public: No
  */

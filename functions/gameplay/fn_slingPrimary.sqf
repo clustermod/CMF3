@@ -10,7 +10,7 @@
  * <Boolean>
  *
  * Example:
- * ["BREACHER"] call emf_gameplay_fnc_slingPrimary
+ * ["BREACHER"] call cmf_gameplay_fnc_slingPrimary
  *
  * public: Yes
 */

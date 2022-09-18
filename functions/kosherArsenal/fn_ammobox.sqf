@@ -10,7 +10,7 @@
  * Success <BOOLEAN>
  *
  * Example:
- * [this] call emf_kosherArsenal_fnc_ammobox
+ * [this] call cmf_kosherArsenal_fnc_ammobox
  *
  * Public: Yes
  */
@@ -65,7 +65,16 @@ private _onOpen = {
     };
 
     /* When the arsenal is closed terminate the hiding script and delete the arsenal object */
-    ["ace_arsenal_displayClosed", { terminate (_thisArgs select 0); deleteVehicle (_thisArgs select 1) }, [_hideUI, _arsenal]] call CBA_fnc_addEventHandlerArgs;
+    ["ace_arsenal_displayClosed", {
+        terminate (_thisArgs select 0);
+        deleteVehicle (_thisArgs select 1);
+
+        /* Raise event */
+    	[QGVAR(onAmmoboxClose), []] call CBA_fnc_localEvent;
+    }, [_hideUI, _arsenal]] call CBA_fnc_addEventHandlerArgs;
+
+    /* Raise event */
+	[QGVAR(onAmmoboxOpen), []] call CBA_fnc_localEvent;
 };
 
 /* Add addAction to open arsenal */

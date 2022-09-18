@@ -13,7 +13,7 @@
  * None
  *
  * Example:
- * [["exampleLoadout"], true, false, true] call emf_kosherArsenal_fnc_init
+ * [["exampleLoadout"], true, false, true] call cmf_kosherArsenal_fnc_init
  *
  * Public: Yes
  */
@@ -106,7 +106,7 @@ if (_light) then {
 [] spawn {
   waitUntil{!isNull (findDisplay 1127001)};
   ((findDisplay 1127001) displayCtrl 1005) ctrlShow false;
-  (findDisplay 1127001) ctrlCreate ["emf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
+  (findDisplay 1127001) ctrlCreate ["cmf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
 
   /* Disable voices and insignias */
   {
@@ -130,7 +130,7 @@ private _onClose = {
         [] spawn {
           waitUntil{!isNull (findDisplay 1127001)};
           ((findDisplay 1127001) displayCtrl 1005) ctrlShow false;
-          (findDisplay 1127001) ctrlCreate ["emf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
+          (findDisplay 1127001) ctrlCreate ["cmf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
         };
       }
   };
@@ -143,8 +143,12 @@ private _onClose = {
   	deleteVehicle _lightobject;
   };
 
-  ["ace_arsenal_displayClosed", _thisId] call CBA_fnc_removeEventHandler;
   player setVariable [QGVAR(close), false, true];
+
+  /* Raise event */
+  [QGVAR(onClose), [(player getVariable [QGVAR(close), false])]] call CBA_fnc_localEvent;
+
+  ["ace_arsenal_displayClosed", _thisId] call CBA_fnc_removeEventHandler;
 };
 
 /* Handle force closing the arsenal */
@@ -156,3 +160,6 @@ private _onClose = {
 
 /* Add closed eventhandler */
 ["ace_arsenal_displayClosed", _onClose, [_forcePrimary, _arsenal, _light, _lightobject]] call CBA_fnc_addEventHandlerArgs;
+
+/* Raise event */
+[QGVAR(onOpen), [false]] call CBA_fnc_localEvent;

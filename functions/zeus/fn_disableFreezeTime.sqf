@@ -10,12 +10,12 @@
  * None
  *
  * Example:
- * [] call emf_zeus_fnc_disableFreezeTime
+ * [] call cmf_zeus_fnc_disableFreezeTime
  *
  * Public: No
  */
 SCRIPT(disableFreezeTime);
 
-["EMF: Common", "Disable setDate (Frozen time)", {
+["CMF: Common", "Disable setDate (Frozen time)", {
     missionNamespace setVariable [QEGVAR(utility,freezetime_disable), true, true];
 }, "rsc\data\icon_module_disableSetDate_ca.paa"] call zen_custom_modules_fnc_register;

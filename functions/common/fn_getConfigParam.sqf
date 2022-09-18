@@ -10,11 +10,11 @@
  * Parameter Value <ANY>
  *
  * Example:
- * [["SETTINGS", "init", "CLEAR_VEHICLE_CARGO"]] call emf_common_fnc_getConfigParam
+ * [["SETTINGS", "init", "CLEAR_VEHICLE_CARGO"]] call cmf_common_fnc_getConfigParam
  *
  * Public: Yes
  */
-
+SCRIPT(getConfigParam);
 params [["_path", [], [[]]]];
 
 /* If config array doesn't exist already define it and make it global */
@@ -33,7 +33,7 @@ private _value = GVAR(configParameters);
 
 /* If there is no value defined check the config */
 if (isNil "_value") then {
-    _value = (["EMF"] + _path) call BIS_fnc_getCfgData;
+    _value = (["CMF"] + _path) call BIS_fnc_getCfgData;
 };
 
 /* If it's still nil return empty string */

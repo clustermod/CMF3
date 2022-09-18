@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_aceMenu_fnc_menuinit
+ * [] call cmf_aceMenu_fnc_menuinit
  *
  * Public: No
  */
@@ -90,3 +90,6 @@ private _zeusAction = [QGVAR(main), "CC Menu", "rsc\data\icon_ace_settings_ca.pa
 /* Add actions */
 [typeOf player, 1, ["ACE_SelfActions"], _selfAction] call ace_interact_menu_fnc_addActionToClass;
 [["ACE_ZeusActions"], _zeusAction] call ace_interact_menu_fnc_addActionToZeus;
+
+/* Raise event */
+[QGVAR(addedMenu), []] call CBA_fnc_localEvent;

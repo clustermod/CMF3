@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_menu_fnc_toggleHUDAction
+ * [] call cmf_menu_fnc_toggleHUDAction
  *
  * Public: No
  */
@@ -41,6 +41,9 @@ if (GVAR(hud_show)) then {
     _staminaBarContainer ctrlCommit 0;
 
     GVAR(hud_show) = false;
+
+    /* Raise event */
+    [QGVAR(onHUDHidden), []] call CBA_fnc_localEvent;
 } else {
 
     /* Show vanilla HUD */
@@ -54,4 +57,7 @@ if (GVAR(hud_show)) then {
     _staminaBarContainer ctrlCommit 0;
 
     GVAR(hud_show) = true;
+
+    /* Raise event */
+    [QGVAR(onHUDShown), []] call CBA_fnc_localEvent;
 };

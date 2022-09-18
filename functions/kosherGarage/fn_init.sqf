@@ -14,7 +14,7 @@
  * None
  *
  * Example:
- * [this, _myGarageObject, 75, ["myLoadoutID", "TYPE"], 5] call emf_kosherGarage_fnc_init
+ * [this, _myGarageObject, 75, ["myLoadoutID", "TYPE"], 5] call cmf_kosherGarage_fnc_init
  *
  * Public: Yes
  */
@@ -157,6 +157,9 @@ if (isNil QGVAR(pylonWeapons)) then {
 			[missionNamespace, "garageOpened", _this] call BIS_fnc_removeScriptedEventHandler;
 		};
 
+		/* Raise event */
+		[QGVAR(onOpen), [_display]] call CBA_fnc_localEvent;
+
 		private _handles = missionNameSpace getVariable [QGVAR(spawns), []];
 		_handles pushBack _spawnHandle;
 		missionNameSpace setVariable [QGVAR(spawns), _handles];
@@ -198,6 +201,9 @@ if (isNil QGVAR(pylonWeapons)) then {
 
 		/* Remove this event handler */
 		[missionNamespace, "garageClosed", _thisScriptedEventHandler] call BIS_fnc_removeScriptedEventHandler;
+
+		/* Raise event */
+		[QGVAR(onClose), []] call CBA_fnc_localEvent;
 	}] call BIS_fnc_addScriptedEventHandler;
 
 	/* Set the direction and position of newly selected vehicles */
@@ -219,6 +225,9 @@ if (isNil QGVAR(pylonWeapons)) then {
 			/* Set the position and direction */
 			_veh setPos _garagePosition;
 			_veh setDir _garageDirection;
+
+			/* Raise event */
+			[QGVAR(onSelect), [_veh]] call CBA_fnc_localEvent;
 		};
 	};
 

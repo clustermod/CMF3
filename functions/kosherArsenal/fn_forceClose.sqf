@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [player] call emf_kosherArsenal_fnc_forceClose
+ * [player] call cmf_kosherArsenal_fnc_forceClose
  *
  * Public: Yes
  */

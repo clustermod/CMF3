@@ -10,14 +10,14 @@
  * <BOOL>
  *
  * Example:
- * [[Unit1, Unit2, Unit3]] call emf_utility_fnc_preventProne
+ * [[Unit1, Unit2, Unit3]] call cmf_utility_fnc_preventProne
  *
  * Public: Yes
 */
 SCRIPT(preventProne);
 params["_unit"];
 
-(_this select 0) addEventHandler ["AnimChanged", {
+_unit addEventHandler ["AnimChanged", {
 	private _proneAnimArray = ["AmovPercMstpSlowWrflDnon_AmovPpneMstpSrasWrflDnon", "AmovPercMstpSrasWrflDnon_AmovPpneMstpSrasWrflDnon", "amovppnemstpsraswrfldnon", "AmovPknlMstpSrasWrflDnon_AmovPpneMstpSrasWrflDnon"];
 	params ["_unit", "_anim"];
 

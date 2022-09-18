@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_menu_fnc_submitReportAction
+ * [] call cmf_menu_fnc_submitReportAction
  *
  * Public: No
  */
@@ -40,6 +40,9 @@ private _submit = {
         private _sql = format["INSERT INTO cc_session_reports (owner,mission_feedback,player_feedback,session_id)VALUES('%1','%2','%3',%4);", _name, (_diagValues select 2), (_diagValues select 1), str _sessionID];
         "extDB3" callExtension format["%1:cc_status:%2", 0, _sql];
     }] remoteExec ["call", 2];
+
+    /* Raise event */
+    [QGVAR(debrief_onSubmit), []] call CBA_fnc_localEvent;
 };
 
 /* Create dialog using Zeus Enhanced */

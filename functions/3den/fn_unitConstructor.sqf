@@ -10,19 +10,11 @@
  * UnitArray <Array>
  *
  * Example:
- * ["SQUAD"] call emf_3den_fnc_unitConstructor
+ * ["SQUAD"] call cmf_3den_fnc_unitConstructor
  *
  * Public: No
  */
-
-// unit array
-// [group1, group2]
-
-// group array
-// ["name", "type", "size", "groupOffset", "subUnitArray"]
-
-// sub unit array:
-// ["classname", "role", "isleader", "unitOffset", "unitGrpOffset"]
+SCRIPT(unitConstructor);
 
 GVAR(fnc_unitConstructor) = {
     params ["_unitID"];
@@ -114,7 +106,7 @@ GVAR(fnc_unitConstructor) = {
 
     private _fnc_customUnitControl = {
         private _display3DEN = uiNamespace getVariable "Display3DEN";
-        private _display = _display3DEN createDisplay "emf_3den_customUnitMenu";
+        private _display = _display3DEN createDisplay "cmf_3den_customUnitMenu";
 
         /* Collect button controls */
         private _spawnCtrl = _display displayCtrl 1;
@@ -126,12 +118,12 @@ GVAR(fnc_unitConstructor) = {
         /* Fill comboboxes with data */
         {
             _grpTypeCtrl lbAdd (configName _x);
-        } forEach ("true" configClasses (missionConfigFile >> "EMF_ORBAT" >> "TYPES"));
+        } forEach ("true" configClasses (missionConfigFile >> "CMF_ORBAT" >> "TYPES"));
         _grpTypeCtrl lbSetSelected [1, true];
 
         {
             _grpSizeCtrl lbAdd (configName _x);
-        } forEach ("true" configClasses (missionConfigFile >> "EMF_ORBAT" >> "SIZES"));
+        } forEach ("true" configClasses (missionConfigFile >> "CMF_ORBAT" >> "SIZES"));
         _grpSizeCtrl lbSetSelected [1, true];
 
         /* Handle unit spawn */

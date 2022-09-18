@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_zeus_fnc_ammoboxModule
+ * [] call cmf_zeus_fnc_ammoboxModule
  *
  * Public: No
  */
@@ -23,9 +23,12 @@ private _dialogFunction = {
     private _result = [(_this select 1)] call EFUNC(kosherArsenal,ammobox);
     if (_result) then {
         ["Added kosher ammobox"] call zen_common_fnc_showMessage;
+
+        /* Raise event */
+    	[QGVAR(ammobox_added), [_this select 1]] call CBA_fnc_globalEvent;
     } else {
         ["Failed to add kosher ammobox"] call zen_common_fnc_showMessage;
     };
 };
 
-["EMF: Kosher Arsenal", "Set as ammobox", _dialogFunction, "rsc\data\icon_module_ammobox_ca.paa"] call zen_custom_modules_fnc_register;
+["CMF: Kosher Arsenal", "Set as ammobox", _dialogFunction, "rsc\data\icon_module_ammobox_ca.paa"] call zen_custom_modules_fnc_register;

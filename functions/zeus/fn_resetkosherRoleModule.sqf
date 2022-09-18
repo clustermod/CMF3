@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_zeus_fnc_resetKosherRoleModule
+ * [] call cmf_zeus_fnc_resetKosherRoleModule
  *
  * Public: No
  */
@@ -53,4 +53,4 @@ private _dialogFunction = {
   ], _onConfirm, {}, (_this select 1), _defaultRole, _defaultTeam, _defaultLoadout] call zen_dialog_fnc_create;
 };
 
-["EMF: Kosher Arsenal", "Change kosher parameters", _dialogFunction, ""] call zen_custom_modules_fnc_register;
+["CMF: Kosher Arsenal", "Change kosher parameters", _dialogFunction, ""] call zen_custom_modules_fnc_register;

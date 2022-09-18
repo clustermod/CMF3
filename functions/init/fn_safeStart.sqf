@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Initializes safestart. calls emf_gameplay_fnc_safeStart.
+ * Initializes safestart. calls cmf_gameplay_fnc_safeStart.
  *
  * Arguments:
  * None
@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_init_fnc_safeStart
+ * [] call cmf_init_fnc_safeStart
  *
  * Public: No
  */

@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [["SL", "PL", _myUnit]] call emf_common_fnc_rallypoint
+ * [["SL", "PL", _myUnit]] call cmf_common_fnc_rallypoint
  *
  * public: Yes
 */

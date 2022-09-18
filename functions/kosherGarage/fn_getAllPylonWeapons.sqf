@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_kosherGarage_fnc_getAllPylonWeapons
+ * [] call cmf_kosherGarage_fnc_getAllPylonWeapons
  *
  * Public: No
  */

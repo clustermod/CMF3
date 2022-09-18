@@ -11,7 +11,7 @@
  * None
  *
  * Example:
- * [] call emf_menu_fnc_viewDistanceAction
+ * [] call cmf_menu_fnc_viewDistanceAction
  *
  * Public: No
  */

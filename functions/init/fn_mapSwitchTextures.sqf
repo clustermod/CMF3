@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_init_fnc_mapSwitchTextures
+ * [] call cmf_init_fnc_mapSwitchTextures
  *
  * Public: No
  */

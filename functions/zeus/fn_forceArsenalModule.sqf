@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_zeus_fnc_forceArsenalModule
+ * [] call cmf_zeus_fnc_forceArsenalModule
  *
  * Public: No
  */
@@ -25,4 +25,4 @@ private _dialogFunction = {
     ["Forced open kosher arsenal on unit"] call zen_common_fnc_showMessage;
 };
 
-["EMF: Kosher Arsenal", "Open Kosher Arsenal", _dialogFunction, "rsc\data\icon_module_kosherArsenal_ca.paa"] call zen_custom_modules_fnc_register;
+["CMF: Kosher Arsenal", "Open Kosher Arsenal", _dialogFunction, "rsc\data\icon_module_kosherArsenal_ca.paa"] call zen_custom_modules_fnc_register;

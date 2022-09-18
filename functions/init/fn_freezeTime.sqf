@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Freezes date and time. calls emf_utilities_fnc_setDate
+ * Freezes date and time. calls cmf_utilities_fnc_setDate
  *
  * Arguments:
  * None
@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_init_fnc_setDate
+ * [] call cmf_init_fnc_setDate
  *
  * Public: No
  */

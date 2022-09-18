@@ -10,7 +10,7 @@
  * nearestPlayer <OBJECT>
  *
  * Example:
- * [this] call emf_utility_fnc_nearestPlayer
+ * [this] call cmf_utility_fnc_nearestPlayer
  *
  * Public: Yes
  */

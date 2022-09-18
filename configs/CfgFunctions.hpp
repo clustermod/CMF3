@@ -1,28 +1,28 @@
 /*
  * Author: Eric
- * Defines functions for emf
+ * Defines functions for CMF
  */
-class EMF {
+class CMF {
 
-    /* EMF init scripts */
+    /* CMF init scripts */
     class init {
         class serverInit {
-            file = "emf\EMF_serverInit.sqf";
+            file = "cmf\serverInit.sqf";
             preInit = 1;
         };
 
         class missionInit {
-            file = "emf\EMF_missionInit.sqf";
+            file = "cmf\missionInit.sqf";
             postInit = 1;
         };
 
         class modules {
-            file = "emf\XEH_MODULE.sqf";
+            file = "cmf\XEH_MODULE.sqf";
             preInit = 1;
         };
     };
 
-    /* EMF event scripts in events directory */
+    /* CMF event scripts in events directory */
     class events {
         class preInit {
             file = "events\preInit.sqf";

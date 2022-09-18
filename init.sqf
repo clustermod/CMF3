@@ -5,8 +5,8 @@
  */
 scriptName "init.sqf";
 
-/* Wait until EMF is initialized */
-waitUntil{ missionNamespace getVariable ["emf_main_server_initialized", false] };
+/* Wait until CMF is initialized */
+waitUntil{ missionNamespace getVariable ["cmf_main_server_initialized", false] };
 
 /* Set the radio theme */
 klpq_musicRadio_radioThemes = ["t_american"];

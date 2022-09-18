@@ -10,10 +10,11 @@
  * None
  *
  * Example:
- * ["SQUAD"] call emf_3DEN_fnc_unitSpawner
+ * ["SQUAD"] call cmf_3DEN_fnc_unitSpawner
  *
  * Public: No
  */
+SCRIPT(unitSpawner);
 
 GVAR(fnc_unitSpawner) = {
     params ["_type"];
@@ -24,6 +25,8 @@ GVAR(fnc_unitSpawner) = {
 
     private _unitPos = (_position select 0);
     private _groupPos = (_position select 1);
+    private _spawnedGroups = [];
+    private _spawnedUnits = [];
     {
         _x params ["_groupName", "_groupType", "_groupSize", "_groupOffset", "_groupUnits"];
         private _groupOffset = _groupPos + _groupOffset;
@@ -44,7 +47,7 @@ GVAR(fnc_unitSpawner) = {
             _unit setUnitLoadout [[],[],[],[],[],[],"","",[],["ItemMap","","","ItemCompass","ItemWatch",""]];
             save3DENInventory [_unit];
             _unit switchMove "amovpercmstpsnonwnondnon";
-            _unit set3DENAttribute ["Init", format["[this, ""%1"", 0] call emf_common_fnc_setRole;", _role]];
+            _unit set3DENAttribute ["Init", format["[this, ""%1"", 0] call cmf_common_fnc_setRole;", _role]];
             _unit set3DENAttribute ["description", format["%1@%2", _roleName, _groupName]];
             _unit set3DENAttribute ["ControlMP", true];
 
@@ -59,12 +62,24 @@ GVAR(fnc_unitSpawner) = {
                 add3DENConnection ["Sync", [_zeusLogic], _unit];
             };
 
+            _spawnedUnits pushBack _unit;
+
+            /* Raise event */
+            [QGVAR(onUnitSpawned), [_unitGroup]] call CBA_fnc_localEvent;
         } forEach _groupUnits;
 
         _unitGroup set3DENAttribute ["groupID", _groupName];
-        _unitGroup set3DENAttribute ["Init", format["[this, ""%1"", ""%2"", ""%3""] call emf_common_fnc_setCallsign;", _groupName, _groupType, _groupSize]];
+        _unitGroup set3DENAttribute ["Init", format["[this, ""%1"", ""%2"", ""%3""] call cmf_common_fnc_setCallsign;", _groupName, _groupType, _groupSize]];
+
+        _spawnedGroups pushBack _unitGroup;
+
+        /* Raise event */
+        [QGVAR(onGroupSpawned), [_unitGroup]] call CBA_fnc_localEvent;
     } forEach _unitArr;
     if (count _unitArr != 0) then {
         [format["Spawned %1", _type], 0, 1] call BIS_fnc_3DENNotification;
+
+        /* Raise event */
+        [QGVAR(onUnitTemplateSpawned), [_spawnedUnits, _spawnedGroups]] call CBA_fnc_localEvent;
     };
 };

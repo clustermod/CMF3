@@ -12,7 +12,7 @@
  * Status <BOOL>
  *
  * Example:
- * [east, true, false] call emf_gameplay_fnc_tracers
+ * [east, true, false] call cmf_gameplay_fnc_tracers
  *
  * Public: Yes
  */

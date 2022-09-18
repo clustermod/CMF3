@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Get surface paramaters for emf_ehv_fnc_offroading
+ * Get surface paramaters for cmf_ehv_fnc_offroading
  *
  * Arguments:
  * 0: Surface <STRING>
@@ -12,7 +12,7 @@
  *  - 1: damageModifier <NUMBER>
  *
  * Example:
- * ["GdtRock"] call emf_ehv_fnc_getSurfaceParams
+ * ["GdtRock"] call cmf_ehv_fnc_getSurfaceParams
  *
  * Public: No
  */

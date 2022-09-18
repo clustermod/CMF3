@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Initializes mission for EMF (executed postInit).
+ * Initializes mission for CMF (executed postInit).
  *
  * Arguments:
  * None
@@ -15,3 +15,6 @@ SCRIPT(missionInit);
     waitUntil{ (missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false]) };
     [[], "events\onGameStart.sqf"] remoteExec ["execVM", 0, true];
 };
+
+/* Raise event */
+[QGVAR(mission_initialized), []] call CBA_fnc_globalEvent;

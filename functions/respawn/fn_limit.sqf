@@ -11,7 +11,7 @@
  * None
  *
  * Example:
- * [5] call emf_respawn_fnc_limit
+ * [5] call cmf_respawn_fnc_limit
  *
  * public: yes
 */

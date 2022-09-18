@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_menu_fnc_displayRolesAction
+ * [] call cmf_menu_fnc_displayRolesAction
  *
  * Public: No
  */

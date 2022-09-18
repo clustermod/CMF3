@@ -10,7 +10,7 @@
  * script handle <SCRIPT>
  *
  * Example:
- * [_myVehicle] call emf_enhancedVehicles_fnc_offroading
+ * [_myVehicle] call cmf_enhancedVehicles_fnc_offroading
  *
  * Public: Yes
  */
@@ -56,6 +56,20 @@ _this spawn {
         _cfgbin = ([ ["bin\config.bin"], configFile >> "CfgVehicles">> (typeOf _veh) >> "wheels" >> "L1" >> "mass" ] call BIS_fnc_loadClass);
     };
     private _wheelmass = call compile (format['getNumber (%1)', ([_cfgbin,"",true] call BIS_fnc_configPath)]);
+
+    /* check if vehicle is offroad */
+    [_veh] spawn {
+        params ["_veh"];
+
+        while { alive _veh && !(missionNamespace getVariable [QGVAR(disable), false]) } do {
+            waitUntil{ uiSleep 0.02; (((speed _veh) > 1) && !(isOnRoad getPos _veh) && (isTouchingGround _veh)) };
+
+            /* Raise event */
+            [QGVAR(onOffroad), [_veh], _veh] call CBA_fnc_targetEvent;
+
+            waitUntil{ uiSleep 0.02; !(((speed _veh) > 1) && !(isOnRoad getPos _veh) && (isTouchingGround _veh)) };
+        };
+    };
 
     /* Script that handles bumps */
     if (_offroadBumpEnabled) then {
@@ -130,4 +144,7 @@ _this spawn {
             };
         };
     };
+
+    /* Raise event */
+    [QGVAR(enabledOffroad), [_veh], _veh] call CBA_fnc_targetEvent;
 };

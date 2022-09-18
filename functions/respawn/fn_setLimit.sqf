@@ -12,7 +12,7 @@
  * <Boolean>
  *
  * Example:
- * [this, 5, true] call emf_respawns_fnc_setLimit
+ * [this, 5, true] call cmf_respawns_fnc_setLimit
  *
  * public: Yes
 */
@@ -34,5 +34,8 @@ if (_obj in ([] call ace_spectator_fnc_players)) then {
 if (!_silent) then {
   [FORMAT_1("Your respawns have been set to: %1", _respawns)] remoteExec ["hint", _obj];
 };
+
+/* Raise event */
+[QGVAR(onSetLimit), [_respawns, _silent], _obj] call CBA_fnc_targetEvent;
 
 true;

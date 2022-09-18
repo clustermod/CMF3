@@ -18,30 +18,30 @@ allowFunctionsLog=1;
 // Include Controls
 #include "rsc\ui\RscControls.hpp"
 
-// include emf config
-#include "emf_config.hpp"
+// include CMF config
+#include "cmf_config.hpp"
 
-// include ehv config
+// include Enhanced Vehicles config
 #include "configs\CfgEnhancedVehicles.hpp"
 
-// include EMF respawn config
+// include CMF respawn config
 #include "configs\CfgRespawn.hpp"
 
 // include Cluster Community ORBAT
 #include "configs\CfgORBAT.hpp"
 
 class RscTitles {
-	// Include EMF RscTitles
+	// Include CMF RscTitles
 	#include "rsc\ui\RscTitles.hpp"
 };
 
 class CfgDebriefing {
-	// Include EMF debriefings
+	// Include CMF debriefings
 	#include "configs\CfgDebriefing.hpp"
 };
 
 class CfgFunctions {
-	// Include EMF functions
+	// Include CMF functions
 	#include "configs\CfgFunctions.hpp"
 
 	// Include taw_vd functions
@@ -49,6 +49,6 @@ class CfgFunctions {
 };
 
 class CfgSounds {
-	// Include EMF Sounds
+	// Include CMF Sounds
 	#include "configs\CfgSounds.hpp"
 };

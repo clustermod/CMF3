@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [myVehicle] call emf_enhancedVehicles_fnc_init
+ * [myVehicle] call cmf_enhancedVehicles_fnc_init
  *
  * Public: Yes
  */
@@ -50,6 +50,9 @@ private _damageHandle = {
             };
         };
         _damage = 0.9;
+
+        /* Raise event */
+        [QGVAR(onDisabled), [_veh, _projectile, _hitPoint], _veh] call CBA_fnc_targetEvent;
     };
 
     /* Set the damage amount on the vehicle */
@@ -60,9 +63,12 @@ private _damageHandle = {
 if (_veh isKindOf "car" || _veh isKindOf "tank") then {
     _veh setVariable ["ace_cookoff_enable", false, true];
     _veh addEventHandler ["HandleDamage", _damageHandle];
+
+    /* Raise event */
+    [QGVAR(enableEnhancedVehicles), [_veh], _veh] call CBA_fnc_targetEvent;
 };
 
 /* Initialize Offroading script on vehicle */
 if (_veh isKindOf "car") then {
-    [_veh] call emf_ehv_fnc_offroading;
+    [_veh] call FUNC(offroading);
 };

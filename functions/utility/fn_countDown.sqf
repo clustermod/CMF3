@@ -12,7 +12,7 @@
  * <BOOL>
  *
  * Example:
- * [60, "Finished unloading in: ", true] call emf_utility_fnc_countDown
+ * [60, "Finished unloading in: ", true] call cmf_utility_fnc_countDown
  *
  * public: Yes
 */
@@ -21,7 +21,7 @@ params["_time", "_text", ["_blocking", false]];
 
 if (!isServer) exitWith {};
 
-private _EMF_fnc_CD_CountDown = {
+private _fnc_CD_CountDown = {
     params["_time", "_text", "_i"];
 
     for [{ _i=_time }, { _i >= 0 }, { _i = _i - 1 }] do {
@@ -34,7 +34,7 @@ private _EMF_fnc_CD_CountDown = {
 
 /* If true will block further execution until timer is done */
 if (_blocking) then {
-    [_time, _text] call _EMF_fnc_CD_CountDown;
+    [_time, _text] call _fnc_CD_CountDown;
 } else {
-    [_time, _text] spawn _EMF_fnc_CD_CountDown;
+    [_time, _text] spawn _fnc_CD_CountDown;
 };

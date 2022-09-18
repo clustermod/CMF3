@@ -11,7 +11,7 @@
  * None
  *
  * Example:
- * [this, true] call emf_kosherArsenal_fnc_forceArsenal
+ * [this, true] call cmf_kosherArsenal_fnc_forceArsenal
  *
  * Public: Yes
  */
@@ -53,7 +53,7 @@ params["_unit", ["_forcePrimary", true]];
     [] spawn {
         waitUntil{!isNull (findDisplay 1127001)};
         ((findDisplay 1127001) displayCtrl 1005) ctrlShow false;
-        (findDisplay 1127001) ctrlCreate ["emf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
+        (findDisplay 1127001) ctrlCreate ["cmf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
     };
 
     /* handle closing the arsenal */
@@ -80,8 +80,14 @@ params["_unit", ["_forcePrimary", true]];
         /* Remove the closed eventHandler */
         ["ace_arsenal_displayClosed", _thisId] call CBA_fnc_removeEventHandler;
         player setVariable [QGVAR(close), false, true];
+
+        /* Raise event */
+    	[QGVAR(onClose), [(player getVariable [QGVAR(close), false])]] call CBA_fnc_localEvent;
     };
 
     /* Add closed eventhandler */
     ["ace_arsenal_displayClosed", _onClose, [_forcePrimary, _arsenal]] call CBA_fnc_addEventHandlerArgs;
+
+    /* Raise event */
+	[QGVAR(onOpen), [true]] call CBA_fnc_localEvent;
 } remoteExec ["call", _unit, true];

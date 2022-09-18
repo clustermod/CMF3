@@ -4,7 +4,7 @@ IPREP(mapSwitchTextures);
 IPREP(resizeMapMarkers);
 IPREP(setSkill);
 IPREP(flashbangOverride);
-IPREP(earplugs);
+IPREP(hearing);
 IPREP(clearVehicleCargo);
 IPREP(preventProne);
 IPREP(freezeTime);

@@ -10,7 +10,7 @@
  * scriptHandle <HANDLE>
  *
  * Example:
- * call emf_utility_fnc_freezeTime
+ * call cmf_utility_fnc_freezeTime
  *
  * Public: Yes
 */
@@ -24,6 +24,9 @@ private _scriptHandle = [] spawn {
 		setdate _initdate;
 		sleep 0.5;
 	};
+
+	/* Raise event */
+	[QGVAR(freezeTime_onDisabled), []] call CBA_fnc_globalEvent;
 };
 
 /* Save the script handle to a global variable */

@@ -12,7 +12,7 @@
  * <Boolean>
  *
  * Example:
- * [this, "BMPCREW", "You require a crewman kit to operate this vehicle"] call emf_gameplay_fnc_restrictedVehicle
+ * [this, "BMPCREW", "You require a crewman kit to operate this vehicle"] call cmf_gameplay_fnc_restrictedVehicle
  *
  * public: Yes
 */

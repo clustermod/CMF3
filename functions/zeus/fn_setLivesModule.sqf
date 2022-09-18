@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_zeus_fnc_setLivesModule
+ * [] call cmf_zeus_fnc_setLivesModule
  *
  * Public: No
  */
@@ -31,4 +31,4 @@ private _dialogFunction = {
     ], _onConfirm, {}, (_this select 1)] call zen_dialog_fnc_create;
 };
 
-["EMF: Respawn", "Set limit", _dialogFunction, "rsc\data\icon_module_setLives_ca.paa"] call zen_custom_modules_fnc_register;
+["CMF: Respawn", "Set limit", _dialogFunction, "rsc\data\icon_module_setLives_ca.paa"] call zen_custom_modules_fnc_register;

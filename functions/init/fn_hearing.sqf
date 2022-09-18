@@ -10,11 +10,11 @@
  * None
  *
  * Example:
- * [] call emf_init_fnc_earplugs
+ * [] call cmf_init_fnc_hearing
  *
  * Public: No
  */
-SCRIPT(earplugs);
+SCRIPT(hearing);
 
 /* Check if it is enabled */
 private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,hearing) ) isEqualTo 1;
@@ -22,17 +22,23 @@ if !(_enabled) exitWith {};
 
 /* Code for putting in the earplugs */
 private _codein = {
-	player setVariable [QGVAR(earplug_in), true];
+	player setVariable [QGVAR(hearing_earplugsIn), true];
+
+	/* Raise event */
+	[QGVAR(hearing_onEarplugsIn), []] call CBA_fnc_localEvent;
 };
 
 /* Code for taking out earplugs */
 private _codeout = {
-	player setVariable [QGVAR(earplug_in), false];
+	player setVariable [QGVAR(hearing_earplugsIn), false];
+
+	/* Raise event */
+	[QGVAR(hearing_onEarplugsOut), []] call CBA_fnc_localEvent;
 };
 
 /* Add the ace action */
-private _actionIn = ["emf_earplug_in", "Insert earplugs", "", _codein, { "ACE_EarPlugs" in (items player) && !(player getVariable [QGVAR(earplug_in), false]) }] call ace_interact_menu_fnc_createAction;
-private _actionOut = ["emf_earplug_in", "Take out earplugs", "", _codeout, { (player getVariable [QGVAR(earplug_in), false]) }] call ace_interact_menu_fnc_createAction;
+private _actionIn = [QGVAR(hearing_insertEarplugs), "Insert earplugs", "", _codein, { "ACE_EarPlugs" in (items player) && !(player getVariable [QGVAR(hearing_earplugsIn), false]) }] call ace_interact_menu_fnc_createAction;
+private _actionOut = [QGVAR(hearing_takeOutEarplugs), "Take out earplugs", "", _codeout, { (player getVariable [QGVAR(hearing_earplugsIn), false]) }] call ace_interact_menu_fnc_createAction;
 [(typeOf player), 1, ["ACE_SelfActions", "ACE_Equipment"], _actionIn] call ace_interact_menu_fnc_addActionToClass;
 [(typeOf player), 1, ["ACE_SelfActions", "ACE_Equipment"], _actionOut] call ace_interact_menu_fnc_addActionToClass;
 
@@ -64,7 +70,7 @@ player addEventHandler ["Killed", _codeout];
 	};
 
     /* Check if earplugs are in */
-	if (player getVariable [QGVAR(earplug_in), false]) then {
+	if (player getVariable [QGVAR(hearing_earplugsIn), false]) then {
 		private _attenuation = _earplugVolumeSetting;
 		_volumeAttenuation = _volumeAttenuation * (1 - _attenuation);
 	};

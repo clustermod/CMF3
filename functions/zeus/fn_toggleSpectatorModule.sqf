@@ -10,13 +10,13 @@
  * None
  *
  * Example:
- * [] call emf_zeus_fnc_toggleSpectatorModule
+ * [] call cmf_zeus_fnc_toggleSpectatorModule
  *
  * Public: No
  */
 SCRIPT(toggleSpectatorModule);
 
-["EMF: Common", "Toggle Spectator", {
+["CMF: Common", "Toggle Spectator", {
     private _entity = _this select 1;
 
     if (_entity != objNull) then {

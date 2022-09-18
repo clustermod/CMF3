@@ -5,7 +5,7 @@ class Default {
    duration = 0;
 };
 
-class emf_common_rallypoint {
+class cmf_common_rallypoint {
 	idd = -1;
 	duration = 9999;
 

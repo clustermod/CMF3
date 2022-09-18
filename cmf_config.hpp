@@ -4,8 +4,8 @@ respawnDelay = 3;
 /* Enable Debug console for eric (you can add your own aswell) */
 enableDebugConsole[] = {"76561198065818848"};
 
-/* EMF settings */
-class EMF {
+/* CMF settings */
+class CMF {
     class SETTINGS {
         /* Enabled/Disable Auto init modules */
         class init {
@@ -51,8 +51,8 @@ class EMF {
     };
 };
 
-/* EMF ORBAT Settings */
-class EMF_ORBAT {
+/* CMF ORBAT Settings */
+class CMF_ORBAT {
     class SIZES {
         class BAT {
             leadRank = "COLONEL";

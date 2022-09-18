@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [east, "exampleLoadout"] call emf_kosherArsenal_fnc_kosherAI
+ * [east, "exampleLoadout"] call cmf_kosherArsenal_fnc_kosherAI
  *
  * Public: Yes
  */
@@ -99,6 +99,9 @@ private _fnc_setLoadout = {
                 /* Set the unit's loadout */
                 [_x, _role, _whitelist] call _fnc_setLoadout;
                 _x setVariable [QGVAR(kosherai_initialized), true];
+
+                /* Raise event */
+                [QGVAR(kosherai_onEnabled), [_x, _role]] call CBA_fnc_globalEvent;
             };
             sleep 0.03;
         } forEach allUnits;

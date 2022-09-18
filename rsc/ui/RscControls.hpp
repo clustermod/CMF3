@@ -1,5 +1,5 @@
-class emf_init_resizeMapMarkers_toggleResize {
-  onLoad="if (profileNamespace getVariable ['emf_init_resizeMapMarkers_enabled', true]) then {(_this select 0) ctrlSetTextColor [1, 1, 1, 1]} else {(_this select 0) ctrlSetTextColor [0.5, 0.5, 0.5, 1]};";
+class cmf_init_resizeMapMarkers_toggleResize {
+  onLoad="if (profileNamespace getVariable ['cmf_init_resizeMapMarkers_enabled', true]) then {(_this select 0) ctrlSetTextColor [1, 1, 1, 1]} else {(_this select 0) ctrlSetTextColor [0.5, 0.5, 0.5, 1]};";
   type = 1;
   idc = 9005;
   x = safeZoneX + safeZoneW * 0.89;
@@ -27,11 +27,11 @@ class emf_init_resizeMapMarkers_toggleResize {
   soundEnter[] = {"\A3\ui_f\data\sound\RscButton\soundEnter",0.09,1.0};
   soundEscape[] = {"\A3\ui_f\data\sound\RscButton\soundEscape",0.09,1.0};
   soundPush[] = {"\A3\ui_f\data\sound\RscButton\soundPush",0.09,1.0};
-  onButtonClick = "profileNamespace setVariable ['emf_init_resizeMapMarkers_enabled', !(profileNamespace getVariable ['emf_init_resizeMapMarkers_enabled', false])]; if (profileNamespace getVariable ['emf_init_resizeMapMarkers_enabled', true]) then {(_this select 0) ctrlSetTextColor [1, 1, 1, 1]} else {(_this select 0) ctrlSetTextColor [0.5, 0.5, 0.5, 1]};";
+  onButtonClick = "profileNamespace setVariable ['cmf_init_resizeMapMarkers_enabled', !(profileNamespace getVariable ['cmf_init_resizeMapMarkers_enabled', false])]; if (profileNamespace getVariable ['cmf_init_resizeMapMarkers_enabled', true]) then {(_this select 0) ctrlSetTextColor [1, 1, 1, 1]} else {(_this select 0) ctrlSetTextColor [0.5, 0.5, 0.5, 1]};";
 };
 
-class emf_init_resizeMapMarkers_markerSize {
-  onLoad="(_this select 0) sliderSetPosition (profileNamespace getVariable ['emf_init_resizeMapMarkers_size', 0.2]);";
+class cmf_init_resizeMapMarkers_markerSize {
+  onLoad="(_this select 0) sliderSetPosition (profileNamespace getVariable ['cmf_init_resizeMapMarkers_size', 0.2]);";
   type = 43;
   idc = 9006;
   x = safeZoneX + safeZoneW * 0.89;
@@ -45,14 +45,14 @@ class emf_init_resizeMapMarkers_markerSize {
   color[] = {1,1,1,1};
   colorActive[] = {1,1,1,1};
   thumb = "\A3\ui_f\data\GUI\Cfg\Slider\thumb_ca.paa";
-  onSliderPosChanged = "profileNamespace setVariable ['emf_init_resizeMapMarkers_size', (_this select 1)];";
+  onSliderPosChanged = "profileNamespace setVariable ['cmf_init_resizeMapMarkers_size', (_this select 1)];";
   sliderPosition = 0.2;
   sliderRange[] = {0.05,2};
   sliderStep = 0.001;
   lineSize = 0.05;
 };
 
-class emf_init_resizeMapMarkers_markerSizeLabel {
+class cmf_init_resizeMapMarkers_markerSizeLabel {
   type = 0;
   idc = 0;
   x = safeZoneX + safeZoneW * 0.89;
@@ -67,7 +67,7 @@ class emf_init_resizeMapMarkers_markerSizeLabel {
   sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.7);
 };
 
-class emf_arsenalForceCloseButton {
+class cmf_arsenalForceCloseButton {
   access = 0;
   idc = 2055;
   style = "0x02 + 0x40 + 0x80";
@@ -144,7 +144,7 @@ class emf_arsenalForceCloseButton {
 /*
  * kosherArsenalTool module controls
  */
-class emf_kosherArsenalTool_selectRole: emf_RscCombo {
+class cmf_kosherArsenalTool_selectRole: cmf_RscCombo {
 	x = safeZoneX + safeZoneW * 0.56625;
 	y = safeZoneY + safeZoneH * 0.00444445;
 	w = safeZoneW * 0.103125;
@@ -181,7 +181,7 @@ class emf_kosherArsenalTool_selectRole: emf_RscCombo {
     };
 };
 
-class emf_kosherArsenalTool_deleteRole: emf_RscButton {
+class cmf_kosherArsenalTool_deleteRole: cmf_RscButton {
 	x = safeZoneX + safeZoneW * 0.669375;
 	y = safeZoneY + safeZoneH * 0.00444445;
 	w = safeZoneW * 0.061875;
@@ -199,7 +199,7 @@ class emf_kosherArsenalTool_deleteRole: emf_RscButton {
 	sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8);
 };
 
-class emf_kosherArsenalTool_textRole: emf_RscEdit {
+class cmf_kosherArsenalTool_textRole: cmf_RscEdit {
 	x = safeZoneX + safeZoneW * 0.30875;
 	y = safeZoneY + safeZoneH * 0.00444445;
 	w = safeZoneW * 0.134375;
@@ -214,7 +214,7 @@ class emf_kosherArsenalTool_textRole: emf_RscEdit {
 	sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8);
 };
 
-class emf_kosherArsenalTool_addRole: emf_RscButton {
+class cmf_kosherArsenalTool_addRole: cmf_RscButton {
 	x = safeZoneX + safeZoneW * 0.4425;
 	y = safeZoneY + safeZoneH * 0.00444445;
 	w = safeZoneW * 0.061875;
@@ -236,7 +236,7 @@ class emf_kosherArsenalTool_addRole: emf_RscButton {
 /*
  * 3den module controls
  */
-class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
+class cmf_3den_customUnit: cmf_RscControlsGroupNoScrollbars {
     moving = 1;
 	x = safeZoneX + safeZoneW * 0.31875;
 	y = safeZoneY + safeZoneH * 0.32222223;
@@ -244,7 +244,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 	h = safeZoneH * 0.35444445;
 
     class controls {
-        class background: emf_RscText {
+        class background: cmf_RscText {
 			x = 0;
 			y = 0;
 			w = 0.87878788;
@@ -252,7 +252,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorBackground[] = {0.2,0.2,0.2,1};
 		};
 
-        class toolBar: emf_RscText {
+        class toolBar: cmf_RscText {
 			x = 0;
 			y = 0;
 			w = 0.87878788;
@@ -263,7 +263,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
 		};
 
-        class role_descriptor: emf_RscText {
+        class role_descriptor: cmf_RscText {
 			x = 0.05757578;
 			y = 0.09267681;
 			w = 0.21212122;
@@ -274,7 +274,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorText[] = {1,1,1,1};
 		};
 
-        class lobby_role_descriptor: emf_RscText {
+        class lobby_role_descriptor: cmf_RscText {
 			x = 0.05757578;
 			y = 0.18156569;
 			w = 0.21212122;
@@ -285,7 +285,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorText[] = {1,1,1,1};
 		};
 
-        class group_name_descriptor: emf_RscText {
+        class group_name_descriptor: cmf_RscText {
 			x = 0.05757578;
 			y = 0.27045458;
 			w = 0.21212122;
@@ -296,7 +296,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorText[] = {1,1,1,1};
 		};
 
-        class group_type_descriptor: emf_RscText {
+        class group_type_descriptor: cmf_RscText {
 			x = 0.05757578;
 			y = 0.35934346;
 			w = 0.21212122;
@@ -307,7 +307,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorText[] = {1,1,1,1};
 		};
 
-        class group_size_descriptor: emf_RscText {
+        class group_size_descriptor: cmf_RscText {
 			x = 0.05757578;
 			y = 0.44823235;
 			w = 0.21212122;
@@ -318,7 +318,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorText[] = {1,1,1,1};
 		};
 
-        class btn_spawn: emf_RscButton {
+        class btn_spawn: cmf_RscButton {
             idc = 200;
 			x = 0.60303032;
 			y = 0.53712123;
@@ -336,7 +336,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorText[] = {1,1,1,1};
 		};
 
-        class btn_cancel: emf_RscButton {
+        class btn_cancel: cmf_RscButton {
             idc = 201;
 			x = 0.05757578;
 			y = 0.53712123;
@@ -354,7 +354,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorText[] = {1,1,1,1};
 		};
 
-        class role_input: emf_RscEdit {
+        class role_input: cmf_RscEdit {
 			idc = 100;
 			x = 0.30000001;
 			y = 0.09267681;
@@ -367,7 +367,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorText[] = {1,1,1,1};
 		};
 
-        class lobby_role_input: emf_RscEdit {
+        class lobby_role_input: cmf_RscEdit {
 			idc = 101;
 			x = 0.30000001;
 			y = 0.18156569;
@@ -380,7 +380,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorText[] = {1,1,1,1};
 		};
 
-        class group_name_input: emf_RscEdit {
+        class group_name_input: cmf_RscEdit {
 			idc = 102;
 			x = 0.30000001;
 			y = 0.27045458;
@@ -393,7 +393,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorText[] = {1,1,1,1};
 		};
 
-        class group_size_input: emf_RscCombo {
+        class group_size_input: cmf_RscCombo {
 			idc = 104;
 			x = 0.30000001;
 			y = 0.44823235;
@@ -406,7 +406,7 @@ class emf_3den_customUnit: emf_RscControlsGroupNoScrollbars {
 			colorText[] = {1,1,1,1};
 		};
 
-        class group_type_input: emf_RscCombo {
+        class group_type_input: cmf_RscCombo {
 			idc = 103;
 			x = 0.30000001;
 			y = 0.35934346;

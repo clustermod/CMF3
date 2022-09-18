@@ -10,7 +10,7 @@
  * <Boolean>
  *
  * Example:
- * call emf_gameplay_fnc_safeStart
+ * call cmf_gameplay_fnc_safeStart
  *
  * public: Yes
 */
@@ -19,6 +19,9 @@ if (!isServer) exitWith {};
 
 _this spawn {
 	missionNamespace setVariable [QGVAR(safestart_disable), false, true];
+
+	/* Raise event */
+	[QGVAR(safestart_onEnable), []] call CBA_fnc_globalEvent;
 
 	/* Add events for respawned  */
 	addMissionEventHandler ["EntityRespawned", {
@@ -78,4 +81,7 @@ _this spawn {
 	["Weapons are hot, game has started"] remoteExec ["hintSilent", 0];
 
 	{ [_x, true] remoteExec ["allowDamage", 0, true] } forEach allPlayers;
+
+	/* Raise event */
+	[QGVAR(safestart_onDisable), []] call CBA_fnc_globalEvent;
 };

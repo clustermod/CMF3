@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_menu_fnc_fixLoadingBug
+ * [] call cmf_menu_fnc_fixLoadingBug
  *
  * Public: No
  */

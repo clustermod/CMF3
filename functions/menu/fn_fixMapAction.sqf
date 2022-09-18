@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call emf_menu_fnc_fixMapAction
+ * [] call cmf_menu_fnc_fixMapAction
  *
  * Public: No
  */
