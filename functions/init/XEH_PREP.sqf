@@ -1,6 +1,5 @@
 #include "script_component.hpp"
 
-IPREP(blockTextChat);
 IPREP(mapSwitchTextures);
 IPREP(resizeMapMarkers);
 IPREP(setSkill);
@@ -8,6 +7,6 @@ IPREP(flashbangOverride);
 IPREP(earplugs);
 IPREP(clearVehicleCargo);
 IPREP(preventProne);
-IPREP(setDate);
+IPREP(freezeTime);
 IPREP(safeStart);
 IPREP(hideRespawnMarker);

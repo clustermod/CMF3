@@ -3,9 +3,7 @@
 PREP(countDown);
 PREP(nearestPlayer);
 PREP(preventProne);
-PREP(setDate);
-PREP(notZeus);
-PREP(slotLimit);
+PREP(freezeTime);
+PREP(restrictZeus);
 PREP(endLoadingScreen);
 PREP(stripUnit);
-PREP(azimuthToVectorDir);

@@ -14,9 +14,10 @@
  *
  * Public: No
  */
+SCRIPT(freezeTime);
 
-// Get config setting
+/* Check if it's enabled */
 private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,freezeTime) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
-call emf_utilities_fnc_setDate;
+call EFUNC(utility,freezeTime);

@@ -5,6 +5,6 @@ IPREP(forceArsenalModule);
 IPREP(ammoboxModule);
 IPREP(resetKosherRoleModule);
 IPREP(kosherForceCloseModule);
-IPREP(disableSetDate);
+IPREP(disableFreezeTime);
 IPREP(toggleSpectatorModule);
 PREP(playerInfo);

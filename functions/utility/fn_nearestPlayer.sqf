@@ -10,18 +10,21 @@
  * nearestPlayer <OBJECT>
  *
  * Example:
- * [this] call emf_utilities_fnc_nearestPlayer
+ * [this] call emf_utility_fnc_nearestPlayer
  *
  * Public: Yes
  */
-scriptName "functions\utilities\EMF_fnc_nearestPlayer.sqf";
-private["_PlayerDistances", "_nearestPlayer", "_unit"];
+SCRIPT(nearestPlayer);
 params["_unit"];
 
-_PlayerDistances = allPlayers apply {[_x distance _unit,_x]};
+/* Get all players and their distances from the unit */
+private _PlayerDistances = allPlayers apply {[_x distance _unit,_x]};
 _PlayerDistances sort true;
-_nearestPlayer = (_PlayerDistances apply {_x select 1}) select 0;
 
+/* Select the closes of the players */
+private _nearestPlayer = (_PlayerDistances apply {_x select 1}) select 0;
+
+/* If no players return objNull */
 if (isNil "_nearestPlayer") then {
     _nearestPlayer = objNull;
 };

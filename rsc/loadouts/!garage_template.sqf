@@ -1,16 +1,18 @@
-params["_condition"];
+params["_unit"];
+/* Get the group type */
+private _condition = (group _unit) getVariable ["emf_common_group_type", "INF"];
 private _availableVehicles = []; private _availablePylons = []; private _availableCamos = []; private _availableComponents = [];
 
-// Only show pylons compatible with selected vehicle
+/* If true will only show pylons compatible with the selected vehicle, if false will show all available pylons */
 private _compPylons = true;
 
-// Default Vehicles
-private _defVehicles = [];
+/* Default Vehicles */
+private _defVehicles = []; // "ALL" for all vehicles
 private _defPylons = []; //  "ALL" for all pylons
 private _defCamos = []; //  "ALL" for all camos
 private _defComponents = []; //  "ALL" for all components
 
-// APC PLT
+/* SIERRA (APC) */
 if (_condition in ["SIERRA", "ARMOR"]) then {
 	_availableVehicles = [];
 	_availablePylons = [];
@@ -18,7 +20,7 @@ if (_condition in ["SIERRA", "ARMOR"]) then {
 	_availableComponents = [];
 };
 
-// IFV PLT
+/* MIKE (IFV) */
 if (_condition in ["MIKE", "ARMOR"]) then {
 	_availableVehicles = [];
 	_availablePylons = [];
@@ -26,7 +28,7 @@ if (_condition in ["MIKE", "ARMOR"]) then {
 	_availableComponents = [];
 };
 
-// MBT PLT
+/* TANGO (MBT) */
 if (_condition in ["TANGO", "ARMOR"]) then {
 	_availableVehicles = [];
 	_availablePylons = [];
@@ -34,7 +36,7 @@ if (_condition in ["TANGO", "ARMOR"]) then {
 	_availableComponents = [];
 };
 
-// Rotary Light Trans / cas
+/* PHANTOM (CAS/TRANS) */
 if (_condition in ["PHANTOM", "TRANS"]) then {
 	_availableVehicles = [];
 	_availablePylons = [];
@@ -42,7 +44,7 @@ if (_condition in ["PHANTOM", "TRANS"]) then {
 	_availableComponents = [];
 };
 
-// Rotary CAS
+/* REAPER (CAS) */
 if (_condition in ["REAPER", "CAS"]) then {
 	_availableVehicles = [];
 	_availablePylons = [];
@@ -50,7 +52,7 @@ if (_condition in ["REAPER", "CAS"]) then {
 	_availableComponents = [];
 };
 
-// Heavy Rotary CAS
+/* UGLY (HEAVY CAS) */
 if (_condition in ["UGLY", "CAS"]) then {
 	_availableVehicles = [];
 	_availablePylons = [];
@@ -58,7 +60,7 @@ if (_condition in ["UGLY", "CAS"]) then {
 	_availableComponents = [];
 };
 
-// Fixed Wing Ground Attack
+/* HAWG (Ground-Attack Jet) */
 if (_condition in ["HAWG", "CAS"]) then {
 	_availableVehicles = [];
 	_availablePylons = [];
@@ -66,7 +68,7 @@ if (_condition in ["HAWG", "CAS"]) then {
 	_availableComponents = [];
 };
 
-// Fixed Wing Air superiority / Bomber
+/* PAVEMENT (A2A/Bomber Jet) */
 if (_condition in ["PAVEMENT", "CAS"]) then {
 	_availableVehicles = [];
 	_availablePylons = [];
@@ -74,7 +76,7 @@ if (_condition in ["PAVEMENT", "CAS"]) then {
 	_availableComponents = [];
 };
 
-// Mortar squad
+/* MORTARS (Mortar squad) */
 if (_condition in ["MORTARS", "SUPPORT"]) then {
 	_availableVehicles = [];
 	_availablePylons = [];
@@ -82,7 +84,7 @@ if (_condition in ["MORTARS", "SUPPORT"]) then {
 	_availableComponents = [];
 };
 
-// Logistics Squad
+/* LOGISTICS (Logistics squad) */
 if (_condition in ["LOGI"]) then {
 	_availableVehicles = [];
 	_availablePylons = [];
@@ -90,7 +92,7 @@ if (_condition in ["LOGI"]) then {
 	_availableComponents = [];
 };
 
-// Engineer squad
+/* ENGI (Engineers squad) */
 if (_condition in ["ENGI", "SUPPORT"]) then {
 	_availableVehicles = [];
 	_availablePylons = [];
@@ -98,9 +100,12 @@ if (_condition in ["ENGI", "SUPPORT"]) then {
 	_availableComponents = [];
 };
 
-// Return loadout arrays
+/* Loadout array that's passed back to kosherGarage */
 [
-	"1.0", // loadout version
+	/* Loadoutfile version */
+	"1.0",
+
+	/* Loadout data */
 	(_defVehicles + _availableVehicles),
 	(_compPylons),
 	(_defPylons + _availablePylons),

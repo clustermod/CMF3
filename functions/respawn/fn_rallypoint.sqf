@@ -25,7 +25,6 @@ private _rallypointPlaceCode = {
         private _objectClass = CONFIG_PARAM_3(SETTINGS,rallypoint,rallyObjectClass);
         private _enemyKillRadius = CONFIG_PARAM_3(SETTINGS,rallypoint,enemyKillRadius);
         private _cooldown = CONFIG_PARAM_3(SETTINGS,rallypoint,cooldown);
-        private _hideRespawnMarkers = CONFIG_PARAM_3(SETTINGS,init,hideRespawnMarkers);
 
         /* Create placement UI */
         ([QGVAR(rallypoint_HUD)] call BIS_fnc_rscLayer) cutRsc [QGVAR(rallypoint), "PLAIN"];
@@ -48,7 +47,7 @@ private _rallypointPlaceCode = {
         /* Placement loop */
         private _obj = _objectClass createVehicle (getPos player);
         _obj setPosASL (getPosASL player);
-        while {GVAR(rallypoint_placeLoop)} do {
+        while { GVAR(rallypoint_placeLoop) } do {
             /* Get X and Y Coordinate */
         	private _intersections = lineIntersectsSurfaces [eyePos player, AGLToASL (screenToWorld[0.5, 0.5]), player, _obj, true, 1];
         	private _pos = ((_intersections select 0) select 0);
@@ -82,8 +81,8 @@ private _rallypointPlaceCode = {
         /* place rallypoint if not cancelled */
         if (GVAR(rallypoint_place)) then {
             /* Get old rallypoint */
-            private _oldRallyParams = player getVariable [QGVAR(rallypoint_lastRally), [objNull, [objNull, -1], "", scriptNull]];
-            _oldRallyParams params ["_oldObject", "_oldRespawn", "_oldMarker", "_oldKillSCript"];
+            private _oldRallyParams = player getVariable [QGVAR(rallypoint_lastRally), [objNull, [objNull, -1], scriptNull]];
+            _oldRallyParams params ["_oldObject", "_oldRespawn", "_oldKillSCript"];
 
             /* Check if enemies are close to rally */
             private _units = (nearestObjects [_obj, ["Man"], _enemyKillRadius]) apply { [side _x, side player] call BIS_fnc_sideIsFriendly };
@@ -95,16 +94,11 @@ private _rallypointPlaceCode = {
             /* Delete old rallypoint */
             deleteVehicle _oldObject;
             _oldRespawn call BIS_fnc_RemoveRespawnPosition;
-            deleteMarker _oldMarker;
             terminate _oldKillSCript;
 
             /* Create new rallypoint */
             private _respawn = [side player, getPosATL _obj, format["%1 Rallypoint", groupID group player]] call BIS_fnc_addRespawnPosition;
             private _marker = "";
-            //if (_hideRespawnMarkers isEqualTo 1) then {
-            //    _marker = createMarker ["rallypointMarker %2", _obj];
-            //    _marker setMarkerType "loc_heal";
-            //};
 
             /* Spawn script to Kill rally point if enemy units get too close */
             private _killScript = [player, _obj, _enemyKillRadius, side player, _respawn, _marker] spawn {
@@ -116,11 +110,11 @@ private _rallypointPlaceCode = {
                 _respawn call BIS_fnc_RemoveRespawnPosition;
                 deleteMarker _marker;
                 deleteVehicle _obj;
-                _unit setVariable [QGVAR(rallypoint_lastRally), [objNull, [objNull, -1], "", scriptNull], true];
+                _unit setVariable [QGVAR(rallypoint_lastRally), [objNull, [objNull, -1], scriptNull], true];
             };
 
             /* Save current rally to unit */
-            player setVariable [QGVAR(rallypoint_lastRally), [_obj, _respawn, _marker, _killScript], true];
+            player setVariable [QGVAR(rallypoint_lastRally), [_obj, _respawn, _killScript], true];
 
             /* Spawn cooldown timer */
             _cooldown spawn {
@@ -160,7 +154,7 @@ if (count _units isEqualTo 0) exitWith {
 {
     /* If the unit is a string check player role against it */
     if (IS_STRING(_x)) then {
-        if (((player getVariable [QGVAR(role), "RFL"]) isEqualTo _x) && !(player getVariable [QGVAR(rallypoint), false])) then {
+        if (([player, _x] call EFUNC(common,isRole)) && !(player getVariable [QGVAR(rallypoint), false])) then {
             [typeOf player, 1, ["ACE_SelfActions"], _rallypointPlaceAction] call ace_interact_menu_fnc_addActionToClass;
             [typeOf player, 1, ["ACE_SelfActions"], _rallypointFailedAction] call ace_interact_menu_fnc_addActionToClass;
 

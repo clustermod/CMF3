@@ -14,16 +14,16 @@
  *
  * Public: No
  */
-scriptName "functions\zeus\fn_resetKosherRoleModule.sqf";
+SCRIPT(resetKosherRoleModule);
 
 private _dialogFunction = {
-  if (isNull (_this select 1)) exitWith {["Must select a unit"] call zen_common_fnc_showMessage};
-  if !((_this select 1) isKindOf "Man") exitWith {["Selected object must be a unit"] call zen_common_fnc_showMessage};
-  if !(isPlayer (_this select 1)) exitWith {["Selected unit must be player"] call zen_common_fnc_showMessage};
+  if (isNull (_this select 1)) exitWith { ["Must select a unit"] call zen_common_fnc_showMessage };
+  if !((_this select 1) isKindOf "Man") exitWith { ["Selected object must be a unit"] call zen_common_fnc_showMessage };
+  if !(isPlayer (_this select 1)) exitWith { ["Selected unit must be player"] call zen_common_fnc_showMessage };
 
-  private _defaultRole = ((_this select 1) getVariable ["emf_utilities_setRole_role", "RFL"]);
-  private _defaultTeam = ((_this select 1) getVariable ["emf_utilities_setRole_team", 0]);
-  private _defaultLoadout = ((_this select 1) getVariable ["emf_kosherArsenal_loadout", ""]);
+  private _defaultRole = ((_this select 1) getVariable [QEGVAR(common,role), "RFL"]);
+  private _defaultTeam = ((_this select 1) getVariable [QEGVAR(common,team), 0]);
+  private _defaultLoadout = ((_this select 1) getVariable [QEGVAR(kosherArsenal,loadout), ""]);
   _defaultLoadout = _defaultLoadout splitString "\" select (count (_defaultLoadout splitString "\") - 1);
   _defaultLoadout = (_defaultLoadout splitString ".") select 0;
 
@@ -32,18 +32,17 @@ private _dialogFunction = {
 
     _dialogValues params[["_role", _defaultRole], ["_team", _defaultTeam], ["_loadout", _defaultLoadout]];
 
-    // Set team and role
-    _unit setVariable ["emf_utilities_setRole_team", _team, true];
-    _unit setVariable ["emf_utilities_setRole_role", _role, true];
+    /* Set the unit's role and team */
+    [_unit, _role, _team] call EFUNC(common,setRole);
 
-    // Set loadout
+    /* Set the unit's loadoutfile */
     private _loadout = format["rsc\loadouts\%1.sqf", _loadout];
-    if !(fileExists _loadout) exitWith {["Supplied loadoutfile doesn't exist"] call zen_common_fnc_showMessage};
-    _unit setVariable ["emf_kosherArsenal_loadout", _loadout, true];
+    if !(FILE_EXISTS(_loadout)) exitWith { ["Supplied loadoutfile doesn't exist"] call zen_common_fnc_showMessage };
+    _unit setVariable [QEGVAR(kosherArsenal,loadout), _loadout, true];
 
-    // open kosher arsenal
-    [_unit] call emf_utilities_fnc_stripUnit;
-    [_unit] call emf_kosherArsenal_fnc_forceArsenal;
+    /* Open kosher arsenal */
+    [_unit] call EFUNC(utility,stripUnit);
+    [_unit] call EFUNC(kosherArsenal,forceArsenal);
     ["Unit's kosher arsenal parameters have been changed"] call zen_common_fnc_showMessage
   };
 
@@ -54,4 +53,4 @@ private _dialogFunction = {
   ], _onConfirm, {}, (_this select 1), _defaultRole, _defaultTeam, _defaultLoadout] call zen_dialog_fnc_create;
 };
 
-["EMF", "Change kosher parameters", _dialogFunction, ""] call zen_custom_modules_fnc_register;
+["EMF: Kosher Arsenal", "Change kosher parameters", _dialogFunction, ""] call zen_custom_modules_fnc_register;

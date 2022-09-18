@@ -14,13 +14,18 @@ class EMF {
             switchMapTextures = 1;
             hideRespawnMarkers = 1;
             overrideFlashbangs = 1;
-            blockTextChat = 0;
             consistentMarkers = 1;
             preventProne = 1;
             forceSkill = 1;
             freezeTime = 0;
             safestart = 0; // ERIC REMEMBER TO SET TO 1
             hearing = 1;
+        };
+
+        /* Hearing settings */
+        class hearing {
+            attenuateHeadgear = 1;
+            earplugsVolume = 0.5;
         };
 
         /* Enhanced Vehicles Settings */
@@ -30,6 +35,11 @@ class EMF {
             soundEffects = 1;
             offroadBumpy = 1;
             offroadDamage = 1;
+        };
+
+        /* Safestart settings */
+        class safestart {
+            delay = 60;
         };
 
         /* Rallypoint settings */

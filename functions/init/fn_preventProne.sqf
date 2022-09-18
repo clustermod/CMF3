@@ -14,25 +14,19 @@
  *
  * Public: No
  */
+SCRIPT(preventProne);
 
-// Get config setting
+/* Check if it's enabled */
 private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,preventProne) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
-{
-    if (!isPlayer _x) then {
-        // Prevent AI units from going prone
-        [_x] call emf_utilities_fnc_preventProne;
-        _x setVariable [QGVAR(preventProne), true];
-    };
-} forEach allUnits;
-
+/* preventProne on AI units */
 [] spawn {
-    while { !(missionNamespace getVariable [QGVAR(preventProne_disable), false]) } do {
+    while { !(missionNamespace getVariable [QEGVAR(utility,preventProne_disable), false]) } do {
         {
-            if ((!isPlayer _x) && (_x getVariable [QGVAR(preventProne), false])) then {
-                [_x] call emf_utilities_fnc_preventProne;
-                _x setVariable [QGVAR(preventProne), true];
+            if ((!isPlayer _x) && (_x getVariable [QEGVAR(utility,preventProne_initialized), false])) then {
+                [_x] call EFUNC(utility,preventProne_initialized);
+                _x setVariable [QEGVAR(utility,preventProne_initialized), true];
             };
         } forEach allUnits;
         sleep 15;

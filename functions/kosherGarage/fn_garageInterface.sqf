@@ -79,7 +79,7 @@ private _handle = _this spawn {
             /* Add the pylon magazines to the selection if they are whitelisted */
             private _whitelist = missionNameSpace getVariable [QGVAR(whitelist), [[],[],true,[]]];
 			private _pylonOptions = [];
-			if (count _whitelist > 0) then {
+			if (!isNil "_whitelist") then {
 				if (count (_whitelist select 3) > 0) then {
                     if (((_whitelist select 3) select 0) != "ALL") then {
                         _pylonOptions = [];

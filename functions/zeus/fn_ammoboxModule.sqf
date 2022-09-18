@@ -14,18 +14,18 @@
  *
  * Public: No
  */
+SCRIPT(ammoboxModule);
 
-scriptName "functions\zeus\fn_ammoboxModule.sqf";
-
+/* Add kosher ammobox to object */
 private _dialogFunction = {
-  if (isNull (_this select 1)) exitWith {["Must select an object"] call zen_common_fnc_showMessage};
+    if (isNull (_this select 1)) exitWith {["Must select an object"] call zen_common_fnc_showMessage};
 
-  private _result = [(_this select 1)] call emf_kosherArsenal_fnc_ammobox;
-  if (_result) then {
-    ["Added kosher ammobox"] call zen_common_fnc_showMessage;
-  } else {
-    ["Failed to add kosher ammobox"] call zen_common_fnc_showMessage;
-  };
+    private _result = [(_this select 1)] call EFUNC(kosherArsenal,ammobox);
+    if (_result) then {
+        ["Added kosher ammobox"] call zen_common_fnc_showMessage;
+    } else {
+        ["Failed to add kosher ammobox"] call zen_common_fnc_showMessage;
+    };
 };
 
-["EMF", "Add kosher ammobox", _dialogFunction, "rsc\data\icon_module_ammobox_ca.paa"] call zen_custom_modules_fnc_register;
+["EMF: Kosher Arsenal", "Set as ammobox", _dialogFunction, "rsc\data\icon_module_ammobox_ca.paa"] call zen_custom_modules_fnc_register;

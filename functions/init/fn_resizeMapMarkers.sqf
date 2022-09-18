@@ -12,16 +12,16 @@
  * Example:
  * call emf_init_fnc_safeStart
  *
- * public: Yes
+ * Public: Yes
 */
-scriptName "functions\init\resizeMapMarkers.sqf";
+SCRIPT(resizeMapMarkers);
 disableSerialization;
 
-// Get config setting
+/* Check if it's enabled */
 private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,consistentMarkers) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
-if (isDedicated) exitWith {};
+if (!hasInterface) exitWith {};
 
 [] spawn {
     waitUntil {!isNull findDisplay 12};

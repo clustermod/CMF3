@@ -8,3 +8,4 @@
 
 #define REQUIRED_VERSION 2.08
 #define REQUIRED_CBA_VERSION {3,15,6}
+#define REQUIRED_ADDONS ["cba_a3", "ace3", "zen"]

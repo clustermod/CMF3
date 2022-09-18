@@ -14,16 +14,17 @@
  *
  * Public: No
  */
+SCRIPT(flashbangOverride);
 
-// Check if is enabled
+/* Check if it is enabled */
 private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,overrideFlashbangs) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
-// define a global variable of flashbangs to override and their time
+/* Define a variable to configure grenades */
 GVAR(flashbang_grenades) = [["rhs_mag_mk84", [1.2]], ["ACE_M84", [1.2]], ["rhs_mag_fakel", [1.2]],  ["rhs_mag_plamyam", [1.2]], ["rhs_mag_fakels", [1.2]], ["rhs_mag_zarya2", [1.2]], ["rhssaf_mag_rshb_p98", [1.2]], ["ACE_CTS9", [1.2, 9, {0.5}]]];
 
+/* Extra particle effects if the player is inside */
 GVAR(flashbang_extraEffects) = {
-	// If player is in house spawn particles
 	if (_this select 1) then {
 		private _SmokeEmitter = "#particlesource" createVehicleLocal [((_this select 0) select 0), ((_this select 0) select 1), ((_this select 0) select 2) + 0.1];
 		private _sparkEmitter = "#particlesource" createVehicleLocal [((_this select 0) select 0), ((_this select 0) select 1), ((_this select 0) select 2) + 0.1];
@@ -52,7 +53,8 @@ GVAR(flashbang_extraEffects) = {
 	};
 };
 
-GVAR(flashbang_fnc_explosion) = {
+/* Explosion effect */
+GVAR(flashbang_explosion) = {
 	private _soundSource = "HeliHEmpty" createVehicleLocal (_this select 0);
 	private _expSparkEmitter = "#particlesource" createVehicleLocal (_this select 0);
 	private _expSmokeEmitter = "#particlesource" createVehicleLocal (_this select 0);
@@ -117,11 +119,12 @@ GVAR(flashbang_fnc_explosion) = {
 	};
 };
 
+/* Check if player fired */
 private _fired_event = {
   private _grenadeConfig = (createHashMapFromArray GVAR(flashbang_grenades)) getOrDefault [(_this select 5), [-1]];
   if ((_grenadeConfig select 0) > -1) then {
-    [(_this select 6), _grenadeConfig, (_this select 5)] spawn {
-			params["_grenade", "_grenadeConfig", "_grenadeClassname"];
+    [(_this select 6), _grenadeConfig] spawn {
+			params["_grenade", "_grenadeConfig", ""];
 			_grenadeConfig params["_grenadeFuze", ["_bangs", 1], ["_bangDelay", {random [0.1, 0.3, 0.8]}]];
 
 			sleep _grenadeFuze;
@@ -137,7 +140,7 @@ private _fired_event = {
 			_grenadeObject setVectorUp [(random(selectRandom[1,-1])),(random(selectRandom[1,-1])),0];
 			_grenadeObject enableSimulation false;
 
-			// Disable ace pickup
+			/* Disable ACE Pickup on grenades */
 			private _acePickup = "Land_Can_V2_F" createVehicle getPos _grenadeObject;
 			_acePickup setPosASL getPosASL _grenadeObject;
 			_acePickup hideObjectGlobal true;
@@ -149,7 +152,7 @@ private _fired_event = {
 			_grenade setPos [0,0,0];
 			deleteVehicle _grenade;
 
-			// Check if player is in house
+			/* Check if the player is inside */
 			lineIntersectsSurfaces [
 				getPosWorld _grenadeObject,
 				getPosWorld _grenadeObject vectorAdd [0, 0, 50],
@@ -183,8 +186,6 @@ private _fired_event = {
 						}
 					} forEach _units;
 					sleep _bangDelay;
-					// TODO: BLOCK MOVEMENT THROUGH WALLS
-					// Move grenade slightly after bang
 					private _newPos = (getPos _grenadeObject) getPos [(random 1), (random 360)];
 					if ([_grenadeObject, "VIEW"] checkVisibility [[(_newPos select 0), (_newPos select 1), _height + 0.5], [(_posASL select 0), (_posASL select 1), _height + 0.5]] > 0.6) then {
 						_grenadeObject setPosASL [(_newPos select 0), (_newPos select 1), _height + 0.03];
@@ -195,7 +196,7 @@ private _fired_event = {
 			  };
 			} else {
 				[[_pos, _inHouse], GVAR(flashbang_extraEffects)] remoteExec ["call"];
-				[[_pos, _inHouse], GVAR(flashbang_fnc_explosion)] remoteExec ["call"];
+				[[_pos, _inHouse], GVAR(flashbang_explosion)] remoteExec ["call"];
 
 				private _units = _pos nearEntities 10;
 				{

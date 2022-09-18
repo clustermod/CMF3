@@ -14,8 +14,9 @@
  *
  * Public: No
  */
+SCRIPT(hideRespawnMarker);
 
-// Get config setting
+/* Check if it is enabled */
 private _enabled = ([["SETTINGS", "init", "hideRespawnMarkers"]] call EFUNC(common,getConfigParam)) isEqualTo 1;
 if !(_enabled) exitWith {};
 

@@ -14,8 +14,9 @@
  *
  * Public: No
  */
+SCRIPT(safeStart);
 
-// Get config setting
+/* Check if it's enabled */
 private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,safestart) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 

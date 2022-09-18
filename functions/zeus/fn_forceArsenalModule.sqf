@@ -14,16 +14,15 @@
  *
  * Public: No
  */
-
-scriptName "functions\zeus\fn_forceArsenalModule.sqf";
+SCRIPT(forceArsenalModule);
 
 private _dialogFunction = {
-  if (isNull (_this select 1)) exitWith {["Must select a unit"] call zen_common_fnc_showMessage};
-  if !((_this select 1) isKindOf "Man") exitWith {["Selected object must be a unit"] call zen_common_fnc_showMessage};
-  if !(isPlayer (_this select 1)) exitWith {["Selected unit must be player"] call zen_common_fnc_showMessage};
+    if (isNull (_this select 1)) exitWith {["Must select a unit"] call zen_common_fnc_showMessage};
+    if !((_this select 1) isKindOf "Man") exitWith {["Selected object must be a unit"] call zen_common_fnc_showMessage};
+    if !(isPlayer (_this select 1)) exitWith {["Selected unit must be player"] call zen_common_fnc_showMessage};
 
-  [(_this select 1)] call emf_kosherArsenal_fnc_forceArsenal;
-  ["Forced open kosher arsenal on unit"] call zen_common_fnc_showMessage;
+    [(_this select 1)] call EFUNC(kosherArsenal,forceArsenal);
+    ["Forced open kosher arsenal on unit"] call zen_common_fnc_showMessage;
 };
 
-["EMF", "Force kosher arsenal", _dialogFunction, "rsc\data\icon_module_kosherArsenal_ca.paa"] call zen_custom_modules_fnc_register;
+["EMF: Kosher Arsenal", "Open Kosher Arsenal", _dialogFunction, "rsc\data\icon_module_kosherArsenal_ca.paa"] call zen_custom_modules_fnc_register;

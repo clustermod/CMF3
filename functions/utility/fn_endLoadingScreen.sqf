@@ -10,15 +10,15 @@
  * None
  *
  * Example:
- * [player] call emf_utilities_fnc_endLoadingScreen
+ * [player] call emf_utility_fnc_endLoadingScreen
  *
  * Public: Yes
  */
-scriptName "functions\utilities\fn_endLoadingScreen.sqf";
+SCRIPT(endLoadingScreen);
 
 [] spawn {
-  for "_x" from 1 to 4 do {
-    endLoadingScreen;
-    sleep 3;
-  };
+    for "_x" from 1 to 4 do {
+        endLoadingScreen;
+        sleep 3;
+    };
 };

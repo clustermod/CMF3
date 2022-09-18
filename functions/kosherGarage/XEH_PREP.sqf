@@ -4,4 +4,4 @@ PREP(init);
 PREP(syncVehicle);
 PREP(garageInterface);
 PREP(getAllPylonWeapons);
-PREP(setKosherGarageLoadout);
+PREP(registerWhitelist);

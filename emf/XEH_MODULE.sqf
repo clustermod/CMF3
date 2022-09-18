@@ -14,7 +14,6 @@ private _modules = [
   "menu",
   "gameplay",
   "enhancedVehicles",
-  "afterActionReport",
   "kosherArsenal",
   "kosherGarage",
   "respawn",

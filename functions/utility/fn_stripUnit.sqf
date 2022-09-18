@@ -10,14 +10,14 @@
  * None
  *
  * Example:
- * [player] call emf_utilities_fnc_stripUnit
+ * [player] call emf_utility_fnc_stripUnit
  *
  * Public: yes
  */
-scriptName "functions\utilities\fn_stripUnit.sqf";
+SCRIPT(stripUnit);
 params["_unit"];
 
-
+/* Strip the unit of all gear and weapons */
 [_unit, (primaryWeapon player)] remoteExecCall ["CBA_fnc_removeWeapon", (owner _unit)];
 [_unit, (handgunWeapon player)] remoteExecCall ["CBA_fnc_removeWeapon", (owner _unit)];
 [_unit, (secondaryWeapon player)] remoteExecCall ["CBA_fnc_removeWeapon", (owner _unit)];

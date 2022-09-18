@@ -62,11 +62,15 @@ player addEventHandler ["Respawn", {
      /* Load loadout */
      player setUnitLoadout (player getVariable [QGVAR(player_loadout),[]]);
 
-     /* Join previous group */
-     [player] joinSilent (player getVariable [QGVAR(player_group), (group player)]);
+     /* Only run if players are not spectating */
+     if !((player getVariable[QGVAR(respawn,respawns), 1]) isEqualTo (player getVariable [QEGVAR(respawn,deaths), 0])) then {
+         /* Join previous group */
+         [player] joinSilent (player getVariable [QGVAR(player_group), (group player)]);
 
-     /* Assign previous team */
-     player assignTeam (player getVariable [QGVAR(player_team), (assignedTeam player)]);
+         /* Assign previous team */
+         player assignTeam (player getVariable [QGVAR(player_team), (assignedTeam player)]);
+     };
+
 
      /* Call event script */
      _this execVM "events\onPlayerRespawn.sqf"

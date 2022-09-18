@@ -14,8 +14,9 @@
  *
  * Public: No
  */
+SCRIPT(toggleSpectatorModule);
 
-["EMF", "Toggle Spectator", {
+["EMF: Common", "Toggle Spectator", {
     private _entity = _this select 1;
 
     if (_entity != objNull) then {

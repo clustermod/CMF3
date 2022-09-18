@@ -1,9 +1,9 @@
 #include "script_component.hpp"
 
-PREP(menuinit);
-PREP(createEndLoadingAction);
-PREP(createMapsFixAction);
-PREP(createDisplayRolesAction);
-PREP(createStartGameAction);
-PREP(createPerformanceReport);
+PREP(delayedSafestartAction);
+PREP(displayRolesAction);
+PREP(fixLoadingBug);
+PREP(fixMapAction);
+PREP(submitReportAction);
 PREP(toggleHUDAction);
+PREP(init);
