@@ -6,6 +6,9 @@
     <a href="https://github.com/Tapawingo/Eric-s-Mission-Framework/releases">
         <img src="https://img.shields.io/github/v/release/Tapawingo/Eric-s-Mission-Framework?style=flat-square" alt="Releases">
     </a>
+    <a>
+    <img src="https://img.shields.io/github/repo-size/Tapawingo/CMF3?style=flat-square" alt="repo Size">
+    </a>
     <a href="https://github.com/Tapawingo/Eric-s-Mission-Framework/issues" alt="Issue Tracker">
         <img src="https://img.shields.io/github/issues-raw/Tapawingo/Eric-s-Mission-Framework?style=flat-square">
     </a>
