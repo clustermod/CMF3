@@ -3,17 +3,17 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/Tapawingo/Eric-s-Mission-Framework/releases">
-        <img src="https://img.shields.io/github/v/release/Tapawingo/Eric-s-Mission-Framework?style=flat-square" alt="Releases">
+    <a href="https://github.com/Tapawingo/CMF3/releases">
+        <img src="https://img.shields.io/github/v/release/Tapawingo/CMF3?style=flat-square" alt="Releases">
     </a>
-    <a href="https://github.com/Tapawingo/Eric-s-Mission-Framework/issues" alt="Issue Tracker">
-        <img src="https://img.shields.io/github/issues-raw/Tapawingo/Eric-s-Mission-Framework?style=flat-square">
+    <a href="https://github.com/Tapawingo/CMF3/issues" alt="Issue Tracker">
+        <img src="https://img.shields.io/github/issues-raw/Tapawingo/CMF3?style=flat-square">
     </a>
-    <a href="https://github.com/Tapawingo/Eric-s-Mission-Framework/releases">
-        <img src="https://img.shields.io/github/downloads/Tapawingo/Eric-s-Mission-Framework/total?style=flat-square" alt="Downloads">
+    <a href="https://github.com/Tapawingo/CMF3/releases">
+        <img src="https://img.shields.io/github/downloads/Tapawingo/CMF3/total?style=flat-square" alt="Downloads">
     </a>
-    <a href="https://github.com/Tapawingo/Eric-s-Mission-Framework/blob/master/LICENSE">
-        <img src="https://img.shields.io/github/license/Tapawingo/Eric-s-Mission-Framework?style=flat-square" alt="License">
+    <a href="https://github.com/Tapawingo/CMF3/blob/master/LICENSE">
+        <img src="https://img.shields.io/github/license/Tapawingo/CMF3?style=flat-square" alt="License">
     </a>
     <a href="https://discord.gg/MBP64PWz">
         <img src="https://img.shields.io/badge/Discord-Join-darkviolet.svg?style=flat-square" alt="Cluster Discord"">
@@ -27,7 +27,7 @@
 
 **CMF3** is an effort by the **Cluster Community Mod Team** to enhance the individual experience by our playerbase.
 
-This framework is entirely open source and all contributions are welcome. Feel free to maintain your own custom version, so long as the changes you make are open to the public in accordance with the GNU General Public License ([GPLv3](https://github.com/Tapawingo/Eric-s-Mission-Framework/blob/master/LICENSE)).
+This framework is entirely open source and all contributions are welcome. Feel free to maintain your own custom version, so long as the changes you make are open to the public in accordance with the GNU General Public License ([GPLv3](https://github.com/Tapawingo/CMF3/blob/master/LICENSE)).
 
 An attempt has been made to build the framework modularly so almost any *module* can easily be removed from the configuration. This way, a team can maintain it's own tailored version of **CMF3** by simply excluding any components they don't need. The entire framework has been built with customization in mind allowing mission designers to tweak it to suit their needs.
 
@@ -50,7 +50,7 @@ You can help out with the ongoing development by looking for potential bugs in t
 To contribute something to **CMF3**, simply fork this repository and submit your pull requests for review by other collaborators.
 
 ### Submitting issues and requesting features
-Please use our [Issue Tracker](https://github.com/Tapawingo/Eric-s-Mission-Framework/issues) to report a bug, propose a feature, or suggest changes to the existing ones.
+Please use our [Issue Tracker](https://github.com/Tapawingo/CMF3/issues) to report a bug, propose a feature, or suggest changes to the existing ones.
 
 ### Get in touch
 <table>
@@ -61,4 +61,4 @@ Please use our [Issue Tracker](https://github.com/Tapawingo/Eric-s-Mission-Frame
 </table>
 
 ## License
-CMF3 is licensed under the GNU General Public License ([GPLv3](https://github.com/Tapawingo/Eric-s-Mission-Framework/blob/master/LICENSE)).
+CMF3 is licensed under the GNU General Public License ([GPLv3](https://github.com/Tapawingo/CMF3/blob/master/LICENSE)).
