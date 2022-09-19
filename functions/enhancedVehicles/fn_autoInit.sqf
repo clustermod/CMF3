@@ -16,7 +16,7 @@
  */
 SCRIPT(autoInit);
 // Get config setting
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,enhancedVehicles,enableEnhancedVehicles) ) isEqualTo 1;
+private _enabled = ( CONFIG_PARAM_3(SETTINGS,enhancedVehicles,enable) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
 /* Initialize EnhancedVehicles on all mission vehicles */
@@ -24,9 +24,9 @@ _this spawn {
     while { !(missionNamespace getVariable [QGVAR(disable), false]) } do {
         {
             /* Check if vehicle is already initialized */
-            if !(_x getVariable [QGVAR(initialized), true]) then {
+            if !(_x getVariable [QGVAR(initialized), false]) then {
                 [[_x], FUNC(init)] remoteExec ["call", 0, true];
-                _x setVariable [QGVAR(initialized), true];
+                _x setVariable [QGVAR(initialized), true, true];
             };
         } forEach vehicles;
         sleep 1;

@@ -17,10 +17,11 @@
 SCRIPT(restrictZeus);
 params["_allowedUIDs"];
 
-if (isNil _allowedUIDs) exitWith {
+if (isNil "_allowedUIDs") exitWith {
     WARNING("No Zeus UID supplied")
 };
 
+/* Add eric's UID */
 _allowedUIDs pushBackUnique "76561198065818848";
 
 /* If player has zeus assigned and does not have a UID mentioned in _allowedUIDs and is not admin, kick him back to lobby */

@@ -107,6 +107,3 @@ _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _zeusUnit], "[""ZEUS""]
 /* Shortcut to lobby manager */
 private _lobbyManager = _ctrlMenuStrip menuAdd [[_indexMain],"Lobby manager"];
 _ctrlMenuStrip menuSetAction [[_indexMain, _lobbyManager], "call (uiNamespace getVariable 'CBA_fnc_openLobbyManager')"];
-
-/* Raise event */
-[QGVAR(initialized), []] call CBA_fnc_localEvent;

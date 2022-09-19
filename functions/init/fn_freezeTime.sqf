@@ -20,4 +20,4 @@ SCRIPT(freezeTime);
 private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,freezeTime) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
-call EFUNC(utility,freezeTime);
+[] call EFUNC(utility,freezeTime);

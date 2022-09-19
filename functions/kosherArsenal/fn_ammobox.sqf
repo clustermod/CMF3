@@ -78,7 +78,7 @@ private _onOpen = {
 };
 
 /* Add addAction to open arsenal */
-[_object, ["Rearm at arsenal", _onOpen, [], 6, true, false,"", "_this getVariable [QQGVAR(loadout), ''] != ''"]] remoteExec ["addAction", 0, true];
+[_object, ["Rearm at arsenal", _onOpen, [], 6, true, false,"", "_this getVariable ['"+QGVAR(loadout)+"', ''] != ''"]] remoteExec ["addAction", 0, true];
 _object setVariable [QGVAR(ammobox_initialized), true, true];
 
 true;

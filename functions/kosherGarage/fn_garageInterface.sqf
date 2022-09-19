@@ -77,7 +77,7 @@ private _handle = _this spawn {
             private _selected = -1;
 
             /* Add the pylon magazines to the selection if they are whitelisted */
-            private _whitelist = missionNameSpace getVariable [QGVAR(whitelist), [[],[],true,[]]];
+            private _whitelist = missionNameSpace getVariable [QGVAR(whitelist), nil];
 			private _pylonOptions = [];
 			if (!isNil "_whitelist") then {
 				if (count (_whitelist select 3) > 0) then {
@@ -154,7 +154,7 @@ private _handle = _this spawn {
                     uiNamespace setVariable [format [QGVAR(loadout) + "_%1",typeOf _veh], getPylonMagazines _veh];
 
                     /* Play a sound when pylon is changed */
-                    playSound3D [MISSION_PATH(format["rsc\sounds\%1.ogg",selectRandom["impact_drive_1", "impact_drive_2"]]), _veh, false ,getPos _veh, 2];
+                    playSound3D [getMissionPath (format["rsc\sounds\%1.ogg",selectRandom["impact_drive_1", "impact_drive_2"]]), _veh, false ,getPos _veh, 2];
 
                     /* Raise event */
                     [QGVAR(onPylonChanged), [_pylon_index, _class]] call CBA_fnc_localEvent;

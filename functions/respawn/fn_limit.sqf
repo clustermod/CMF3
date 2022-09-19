@@ -27,7 +27,7 @@ if (call _condition) then {
 
 	/* Check if player is out of lives on respawn */
 	player addEventHandler ["Respawn", {
-		_respawns = player getVariable[QGVAR(deaths), 1];
+		_respawns = player getVariable[QGVAR(respawns), 1];
 
 		if ((player getVariable[QGVAR(deaths), 0]) == _respawns) then {
 			if ((vehicle player) != player) then {

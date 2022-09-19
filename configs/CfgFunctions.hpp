@@ -6,6 +6,11 @@ class CMF {
 
     /* CMF init scripts */
     class init {
+        class modules {
+            file = "cmf\XEH_MODULE.sqf";
+            preInit = 1;
+        };
+        
         class serverInit {
             file = "cmf\serverInit.sqf";
             preInit = 1;
@@ -14,11 +19,6 @@ class CMF {
         class missionInit {
             file = "cmf\missionInit.sqf";
             postInit = 1;
-        };
-
-        class modules {
-            file = "cmf\XEH_MODULE.sqf";
-            preInit = 1;
         };
     };
 

@@ -5,7 +5,7 @@ class Default {
    duration = 0;
 };
 
-class cmf_common_rallypoint {
+class cmf_respawn_rallypoint {
 	idd = -1;
 	duration = 9999;
 

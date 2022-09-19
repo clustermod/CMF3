@@ -32,7 +32,7 @@ private _damageHandle = {
     private _projectileType = getNumber (configfile >> "CfgAmmo" >> _projectile >> "explosive");
 
     /* Check if the damage is enough to kill the vehicle, and if it is take over the damage handling */
-    if (_damage > 0.9 && !(["wheel", _selection] call Bis_fnc_inString || ["glass", _selection] call Bis_fnc_inString || ["body", _selection] call Bis_fnc_inString)) then {
+    if (_damage > 0.95 && !(["wheel", _selection] call Bis_fnc_inString || ["glass", _selection] call Bis_fnc_inString || ["body", _selection] call Bis_fnc_inString)) then {
 
         /* If the projectile type was explosive play cool visual and audiable effects */
         if ((_projectileType isEqualTo 1)) then {
@@ -49,7 +49,11 @@ private _damageHandle = {
                 } forEach crew _veh;
             };
         };
-        _damage = 0.9;
+
+        /* Disable engine */
+        _veh setHit ["motor", 1];
+        
+        _damage = 0.95;
 
         /* Raise event */
         [QGVAR(onDisabled), [_veh, _projectile, _hitPoint], _veh] call CBA_fnc_targetEvent;
@@ -64,6 +68,8 @@ if (_veh isKindOf "car" || _veh isKindOf "tank") then {
     _veh setVariable ["ace_cookoff_enable", false, true];
     _veh addEventHandler ["HandleDamage", _damageHandle];
 
+    LOG_1("Added EnhancedVehicles to %1", typeOf _veh);
+
     /* Raise event */
     [QGVAR(enableEnhancedVehicles), [_veh], _veh] call CBA_fnc_targetEvent;
 };
@@ -71,4 +77,5 @@ if (_veh isKindOf "car" || _veh isKindOf "tank") then {
 /* Initialize Offroading script on vehicle */
 if (_veh isKindOf "car") then {
     [_veh] call FUNC(offroading);
+    LOG_1("Added Offroading to %1", typeOf _veh);
 };

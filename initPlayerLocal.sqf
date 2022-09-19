@@ -11,17 +11,19 @@ waitUntil{ missionNamespace getVariable ["cmf_main_player_initialized", false] }
 /* Add Zeus FPS and lives counter */
 call cmf_zeus_fnc_playerInfo;
 
+//["testLoadout", "test_garage"] call cmf_kosherGarage_fnc_registerWhitelist; // remove before release
+
 /* Set available respawns */
-[4] call cmf_limitedRespawns_fnc_init;
+[4] call cmf_respawn_fnc_limit;
 
 /* Kick players from zeus slot if their steam ID is not in the supplied array */
-[["YOURSTEAMID"]] call cmf_utilities_fnc_notZeus;
+[["YOURSTEAMID"]] call cmf_utility_fnc_restrictZeus;
 
 /* Initialize kosherArsenal */
-[["LOADOUTFILEHERE"], true, true] call cmf_kosherArsenal_fnc_init;
+[["test_arsenal"], true, true] call cmf_kosherArsenal_fnc_init; // clear before release
 
 /* Initialize rallypoints */
-[["FTL", "SL", "PL", "CO"]] call cmf_common_fnc_rallypoint;
+[["FTL", "SL", "PL", "CO"]] call cmf_respawn_fnc_rallypoint;
 
 /* Make units investigate shots */
 //[] call cmf_gameplay_fnc_unitInvestigate;

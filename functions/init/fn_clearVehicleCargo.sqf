@@ -25,7 +25,7 @@ if (!isServer) exitWith {};
 _this spawn {
     while {!(missionNamespace getVariable [QGVAR(clearCargo_disable), false])} do {
         {
-            if !((_x getVariable [QGVAR(clearCargo_vehicleDisable), false]) && !(_x getVariable [QGVAR(clearCargo_initialized), false])) then {
+            if (!(_x getVariable [QGVAR(clearCargo_vehicleDisable), false]) && !(_x getVariable [QGVAR(clearCargo_initialized), false])) then {
                 clearItemCargoGlobal _x;
                 clearMagazineCargoGlobal _x;
                 clearWeaponCargoGlobal _x;

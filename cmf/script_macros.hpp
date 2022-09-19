@@ -37,7 +37,7 @@
     #define PATHTO_SYS(var1,var2) functions\var1\var2.sqf
 #endif
 
-#define ARRAY_FLATTEN(var1) (fallten var1)
+#define ARRAY_FLATTEN(var1) (flatten var1)
 
 #define PREP(var1) TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1) = compile preProcessFileLineNumbers 'PATHTO_SYS(MODULE,DOUBLES(fn,var1))'
 #define IPREP(var1) TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1) = compile preProcessFileLineNumbers 'PATHTO_SYS(MODULE,DOUBLES(fn,var1))'; [] call TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1)
@@ -110,7 +110,7 @@ Macros: DEBUG_MODE_x
     #define DEBUG_MODE_MINIMAL
 #endif
 
-#define LOG_SYS_FORMAT(LEVEL,MESSAGE) format ['[%1] (%2) "%3" %4: %5', toUpper 'PREFIX', 'MODULE', __FILE__, LEVEL, MESSAGE]
+#define LOG_SYS_FORMAT(LEVEL,MESSAGE) format ['[%1] (%2) %3: %4', toUpper 'PREFIX', 'MODULE', LEVEL, MESSAGE]
 
 // if defined use Synchronus debug (log immediatly instead of queing)
 #ifdef DEBUG_SYNCHRONOUS

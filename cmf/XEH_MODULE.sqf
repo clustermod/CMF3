@@ -10,7 +10,6 @@ SCRIPT(XEH_MODULE);
 /* CMF Modules to define */
 private _modules = [
   "common",
-  "init",
   "menu",
   "gameplay",
   "enhancedVehicles",
@@ -18,7 +17,8 @@ private _modules = [
   "kosherGarage",
   "respawn",
   "utility",
-  "zeus"
+  "zeus",
+  "init"
 ];
 
 /* Call the files that compiles and defines the module's functions */

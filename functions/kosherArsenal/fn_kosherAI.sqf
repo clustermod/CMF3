@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 /*
  * Author: Eric
  * kosher arsenal for AI

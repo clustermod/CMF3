@@ -17,6 +17,8 @@
 SCRIPT(fn_safestart);
 if (!isServer) exitWith {};
 
+LOG("Enabled safestart");
+
 _this spawn {
 	missionNamespace setVariable [QGVAR(safestart_disable), false, true];
 
@@ -47,7 +49,7 @@ _this spawn {
 			_newEntity allowDamage false;
 
 			/* Add action to block shooting */
-			_newEntity addAction ["", {
+			private _action = _newEntity addAction ["", {
 				params ["_target", "_caller", "_actionId"];
 
 				/* Remove action if game has started */
@@ -55,22 +57,25 @@ _this spawn {
 
 				/* show message in sidechat */
 				_caller sideChat "Weapons are cold, game hasn't started";
-			}, "", 0, false, true, "DefaultAction", "!((animationState player) in ['acinpknlmstpsraswrfldnon', 'acinpknlmwlksraswrfldb'])"];
+			}, "", 0, false, true, "DefaultAction", "!((animationState player) in ['acinpknlmstpsraswrfldnon', 'acinpknlmwlksraswrfldb']) && !(missionNameSpace getVariable ['"+QGVAR(safestart_disable)+"', false])"];
 
 			/* Add event to block throwing grenades the vanilla way */
 			["ace_firedPlayer", {
-				params ["_unit", "", "_muzzle", "", "", "_grenade"];
+				params ["_unit", "", "_muzzle", "", "", "", "_projectile"];
 
 				/* Remove action if game has started */
-				if (missionNamespace getVariable [QGVAR(safestart_disable), false]) exitWith { ["ace_firedPlayer", _thisId] call CBA_fnc_removeEventHandler };
+				if (missionNamespace getVariable [QGVAR(safestart_disable), false]) exitWith {
+					["ace_firedPlayer", _thisId] call CBA_fnc_removeEventHandler;
+					player removeAction _thisArgs;
+				};
 
 					/* If the projectile is a grenade delete it */
 					if ((configname (inheritsFrom (configFile >> "cfgWeapons" >> "throw" >> _muzzle)) isEqualTo "ThrowMuzzle")) then {
-						_grenade setPos [0,0,0];
-						deleteVehicle _grenade;
+						_projectile setPos [0,0,0];
+						deleteVehicle _projectile;
 						_unit sideChat "Weapons are cold, game hasn't started";
 					};
-			}] call CBA_fnc_addEventHandler;
+			}, _action] call CBA_fnc_addEventHandlerArgs;
 
 		}] remoteExec ["call", (_this select 0)];
 	}];

@@ -39,9 +39,9 @@ For a quick rundown on installing, configuring and running **CMF3** refer to the
 - Role-based arsenal whitelist
 - Multiplayer virtual garage
 - Respawn limiter
-- Rallypoint system based on Squads system
-- Safestart system to prevent players from killing eachother at game start.
-- An enhanced vehicle system that simulates more realistic offroad driving and prevents unrealistic explosions.
+- Rallypoint respawn system
+- Safestart system
+- Vehicle damage overhaul system
 
 ## Contributing
 You can help out with the ongoing development by looking for potential bugs in the framework, or by contributing new features. We are always welcoming new pull requests containing bug fixes, refactors and new features.

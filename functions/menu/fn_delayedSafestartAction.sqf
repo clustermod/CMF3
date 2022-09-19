@@ -21,5 +21,5 @@ SCRIPT(delayedSafestartAction);
     /* Get the configured delay time and start the countdown */
     private _delay = CONFIG_PARAM_3(SETTINGS,safestart,delay);
     [_delay, "Weapons are hot in: ", true] call EFUNC(utility,countDown);
-    missionNamespace setVariable [QGVAR(gameplay,safestart_disable), true, true];
+    missionNamespace setVariable [QEGVAR(gameplay,safestart_disable), true, true];
 };

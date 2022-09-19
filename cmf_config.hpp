@@ -9,7 +9,6 @@ class CMF {
     class SETTINGS {
         /* Enabled/Disable Auto init modules */
         class init {
-            recordAfterAction = 0;
             clearVehicleCargo = 1;
             switchMapTextures = 1;
             hideRespawnMarkers = 1;
@@ -17,20 +16,19 @@ class CMF {
             consistentMarkers = 1;
             preventProne = 1;
             forceSkill = 1;
-            freezeTime = 0;
-            safestart = 0; // ERIC REMEMBER TO SET TO 1
-            hearing = 1;
+            freezeTime = 1;
         };
 
         /* Hearing settings */
         class hearing {
+            enable = 1;
             attenuateHeadgear = 1;
             earplugsVolume = 0.5;
         };
 
         /* Enhanced Vehicles Settings */
         class enhancedVehicles {
-            enableEnhancedVehicles = 1;
+            enable = 1;
             visualEffects = 1;
             soundEffects = 1;
             offroadBumpy = 1;
@@ -39,6 +37,7 @@ class CMF {
 
         /* Safestart settings */
         class safestart {
+            enable = 1;
             delay = 60;
         };
 

@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_init_fnc_blockProne
+ * [] call cmf_init_fnc_preventProne
  *
  * Public: No
  */
@@ -24,11 +24,13 @@ if !(_enabled) exitWith {};
 [] spawn {
     while { !(missionNamespace getVariable [QEGVAR(utility,preventProne_disable), false]) } do {
         {
-            if ((!isPlayer _x) && (_x getVariable [QEGVAR(utility,preventProne_initialized), false])) then {
-                [_x] call EFUNC(utility,preventProne_initialized);
+            if ((!isPlayer _x) && !(_x getVariable [QEGVAR(utility,preventProne_initialized), false])) then {
+                [_x] call EFUNC(utility,preventProne);
                 _x setVariable [QEGVAR(utility,preventProne_initialized), true];
+
+                LOG_1("Enabled preventProne for %1", name _x);
             };
         } forEach allUnits;
-        sleep 15;
+        sleep 5;
     };
 };

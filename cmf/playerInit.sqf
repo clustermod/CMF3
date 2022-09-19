@@ -63,7 +63,7 @@ player addEventHandler ["Respawn", {
      player setUnitLoadout (player getVariable [QGVAR(player_loadout),[]]);
 
      /* Only run if players are not spectating */
-     if !((player getVariable[QGVAR(respawn,respawns), 1]) isEqualTo (player getVariable [QEGVAR(respawn,deaths), 0])) then {
+     if !((player getVariable[QEGVAR(respawn,respawns), 1]) isEqualTo (player getVariable [QEGVAR(respawn,deaths), 0])) then {
          /* Join previous group */
          [player] joinSilent (player getVariable [QGVAR(player_group), (group player)]);
 
