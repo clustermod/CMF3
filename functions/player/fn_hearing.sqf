@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_init_fnc_hearing
+ * [] call cmf_player_fnc_hearing
  *
  * Public: No
  */
@@ -19,7 +19,7 @@ SCRIPT(hearing);
 _this spawn {
 
 	/* Check if it is enabled */
-	private _enabled = ( CONFIG_PARAM_3(SETTINGS,hearing,enable) ) isEqualTo 1;
+	private _enabled = ( CONFIG_PARAM_4(SETTINGS,player,hearing,enable) ) isEqualTo 1;
 	if !(_enabled) exitWith {};
 
 	/* Code for putting in the earplugs */
@@ -51,8 +51,8 @@ _this spawn {
 
 	/* Calculate the appropriate volume */
 	[{
-		private _headgearSetting = (CONFIG_PARAM_3(SETTINGS,hearing,attenuateHeadgear)) isEqualTo 1;
-		private _earplugVolumeSetting = CONFIG_PARAM_3(SETTINGS,hearing,earplugsVolume);
+		private _headgearSetting = (CONFIG_PARAM_4(SETTINGS,player,hearing,attenuateHeadgear)) isEqualTo 1;
+		private _earplugVolumeSetting = CONFIG_PARAM_4(SETTINGS,player,hearing,earplugsVolume);
 		private _volumeAttenuation = 1;
 
 		/* If player dies reset volume */

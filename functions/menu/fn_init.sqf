@@ -21,7 +21,7 @@ if (!hasInterface) exitWith {};
 waitUntil { alive player && !isNull player };
 
 /* Add configurable hotkeys */
-["EMF Common", QGVAR(toggleHUD), ["Toggle HUD", "Toggles HUD so you can take pretty screenshots :)"], {}, FUNC(toggleHUDAction), [15, [false, true, false]]] call CBA_fnc_addKeybind;
+["CMF Common", QGVAR(toggleHUD), ["Toggle HUD", "Toggles HUD so you can take pretty screenshots :)"], {}, FUNC(toggleHUDAction), [15, [false, true, false]]] call CBA_fnc_addKeybind;
 
 /* Menu items for the selfActions menu */
 private _childrenSelf = {

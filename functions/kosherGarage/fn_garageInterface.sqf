@@ -47,7 +47,8 @@ private _handle = _this spawn {
         reverse _pylons;
 
         /* Get the last used pylon loadout */
-        private _last_loadout = (uiNamespace getVariable format [QGVAR(loadout) + "_%1", typeOf _veh]);
+        private _loadoutsHash = (uiNamespace getVariable [QGVAR(pylonLoadouts), createHashMap]);
+        private _last_loadout = _loadoutsHash get typeOf _veh;
 
         /* Create ui elements for each pylon */
         {
@@ -151,7 +152,9 @@ private _handle = _this spawn {
                     };
 
                     /* Save the current pylon loadout */
-                    uiNamespace setVariable [format [QGVAR(loadout) + "_%1",typeOf _veh], getPylonMagazines _veh];
+                    private _loadoutsHash = (uiNamespace getVariable [QGVAR(pylonLoadouts), createHashMap]);
+                    private _last_loadout = _loadoutsHash set [typeOf _veh, getPylonMagazines _veh];
+                    (uiNamespace getVariable format [QGVAR(pylonLoadouts), _last_loadout]);
 
                     /* Play a sound when pylon is changed */
                     playSound3D [getMissionPath (format["rsc\sounds\%1.ogg",selectRandom["impact_drive_1", "impact_drive_2"]]), _veh, false ,getPos _veh, 2];

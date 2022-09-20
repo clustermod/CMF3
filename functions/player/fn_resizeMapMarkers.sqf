@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * call cmf_init_fnc_safeStart
+ * call cmf_player_fnc_safeStart
  *
  * Public: Yes
 */
@@ -18,7 +18,7 @@ SCRIPT(resizeMapMarkers);
 disableSerialization;
 
 /* Check if it's enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,consistentMarkers) ) isEqualTo 1;
+private _enabled = ( CONFIG_PARAM_3(SETTINGS,player,consistentMarkers) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
 if (!hasInterface) exitWith {};

@@ -10,14 +10,14 @@
  * None
  *
  * Example:
- * [] call cmf_init_fnc_mapSwitchTextures
+ * [] call cmf_player_fnc_mapSwitchTextures
  *
  * Public: No
  */
 SCRIPT(mapSwitchTextures);
 
 /* Check if it's enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,switchMapTextures) ) isEqualTo 1;
+private _enabled = ( CONFIG_PARAM_3(SETTINGS,player,switchMapTextures) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
 if ( isDedicated ) exitWith {};

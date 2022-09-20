@@ -10,14 +10,14 @@
  * None
  *
  * Example:
- * [] call cmf_init_fnc_setSkill
+ * [] call cmf_ai_fnc_setSkill
  *
  * public: Yes
 */
 SCRIPT(setSkill);
 
 /* Check if it's enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,forceSkill) ) isEqualTo 1;
+private _enabled = ( CONFIG_PARAM_3(SETTINGS,ai,forceSkill) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
 /* Set skill on all units */

@@ -17,7 +17,7 @@
 SCRIPT(clearVehicleCargo);
 
 /* Check if the function is enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,clearVehicleCargo) ) isEqualTo 1;
+private _enabled = ( CONFIG_PARAM_3(SETTINGS,utility,clearVehicleCargo) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
 if (!isServer) exitWith {};

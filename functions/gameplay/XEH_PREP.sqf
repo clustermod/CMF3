@@ -2,7 +2,7 @@
 
 PREP(repairRearmTrigger);
 PREP(restrictedVehicle);
-PREP(safestart);
 PREP(slingPrimary);
 PREP(tracers);
-PREP(unitInvestigate);
+IPREP(safestart);
+IPREP(flashbangOverride);

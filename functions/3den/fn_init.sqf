@@ -110,3 +110,7 @@ _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _zeusUnit], "[""ZEUS""]
 /* Shortcut to lobby manager */
 private _lobbyManager = _ctrlMenuStrip menuAdd [[_indexMain],"Lobby manager"];
 _ctrlMenuStrip menuSetAction [[_indexMain, _lobbyManager], "call (uiNamespace getVariable 'CBA_fnc_openLobbyManager')"];
+
+/* Enable simulation for selected objects */
+private _lobbyManager = _ctrlMenuStrip menuAdd [[_indexMain], "Enable Simulation"];
+_ctrlMenuStrip menuSetAction [[_indexMain, _lobbyManager], "{ _x enableSimulation true; } forEach get3DENSelected ""object"""];

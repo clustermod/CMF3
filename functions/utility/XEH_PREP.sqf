@@ -1,9 +1,10 @@
 #include "script_component.hpp"
 
+IPREP(clearVehicleCargo);
 PREP(countDown);
 PREP(nearestPlayer);
 PREP(preventProne);
-PREP(freezeTime);
+IPREP(freezeTime);
 PREP(restrictZeus);
 PREP(endLoadingScreen);
 PREP(stripUnit);

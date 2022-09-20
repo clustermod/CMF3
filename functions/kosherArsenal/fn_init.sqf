@@ -1,4 +1,5 @@
 #include "script_component.hpp"
+#include "\z\ace\addons\arsenal\defines.hpp"
 /*
  * Author: Eric
  * Loads kosherArsenal
@@ -106,13 +107,13 @@ _this spawn {
 
     /* add the force close button and disable voices and insignias */
     [] spawn {
-        waitUntil{!isNull (findDisplay 1127001)};
-        ((findDisplay 1127001) displayCtrl 1005) ctrlShow false;
-        (findDisplay 1127001) ctrlCreate ["cmf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
+        waitUntil{!isNull (findDisplay IDD_ace_arsenal)};
+        ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
+        (findDisplay IDD_ace_arsenal) ctrlCreate ["cmf_arsenalForceCloseButton", 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
 
         /* Disable voices and insignias */
         {
-            private _ctrl = (findDisplay 1127001) displayctrl _x;
+            private _ctrl = (findDisplay IDD_ace_arsenal) displayctrl _x;
             _ctrl ctrlEnable false;
             _ctrl ctrlSetFade 0.6;
             _ctrl ctrlCommit 0;
@@ -130,9 +131,9 @@ _this spawn {
                 sleep 0.1;
                 [_this, player, false] call ace_arsenal_fnc_openBox;
                 [] spawn {
-                    waitUntil{!isNull (findDisplay 1127001)};
-                    ((findDisplay 1127001) displayCtrl 1005) ctrlShow false;
-                    (findDisplay 1127001) ctrlCreate ["cmf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
+                    waitUntil{!isNull (findDisplay IDD_ace_arsenal)};
+                    ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
+                    (findDisplay IDD_ace_arsenal) ctrlCreate ["cmf_arsenalForceCloseButton", 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
                 };
             }
         };
@@ -156,7 +157,7 @@ _this spawn {
     /* Handle force closing the arsenal */
     [] spawn {
         waitUntil{(player getVariable [QGVAR(close), false])};
-        (findDisplay 1127001) closeDisplay 1;
+        (findDisplay IDD_ace_arsenal) closeDisplay 1;
         [player] call EFUNC(utility,stripUnit);
     };
 

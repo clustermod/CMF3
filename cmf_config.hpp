@@ -1,29 +1,47 @@
-/* Respawn delay (in seconds) */
-respawnDelay = 3;
-
-/* Enable Debug console for eric (you can add your own aswell) */
-enableDebugConsole[] = {"76561198065818848"};
-
-/* CMF settings */
 class CMF {
     class SETTINGS {
-        /* Enabled/Disable Auto init modules */
-        class init {
-            clearVehicleCargo = 1;
+        class player {
             switchMapTextures = 1;
             hideRespawnMarkers = 1;
-            overrideFlashbangs = 1;
             consistentMarkers = 1;
-            preventProne = 1;
-            forceSkill = 1;
-            freezeTime = 1;
+
+            /* Hearing settings */
+            class hearing {
+                enable = 1;
+                attenuateHeadgear = 1;
+                earplugsVolume = 0.5;
+            };
         };
 
-        /* Hearing settings */
-        class hearing {
-            enable = 1;
-            attenuateHeadgear = 1;
-            earplugsVolume = 0.5;
+        /* Gameplay settings */
+        class gameplay {
+            overrideFlashbangs = 1;
+
+            /* safestart settings */
+            class safestart {
+                enable = 1;
+                delay = 60;
+            };
+        };
+
+        /* Rallypoint settings */
+        class rallypoint {
+            cooldown = 300;
+            enemyKillRadius = 10;
+            rallyObjectClass = "Misc_backpackheap_EP1";
+        };
+
+        /* ai settings */
+        class ai {
+            reinforce = 1;
+            preventProne = 1;
+            forceSkill = 1;
+        };
+
+        /* Utility settings */
+        class utility {
+            clearVehicleCargo = 1;
+            freezeTime = 1;
         };
 
         /* Enhanced Vehicles Settings */
@@ -34,21 +52,14 @@ class CMF {
             offroadBumpy = 1;
             offroadDamage = 1;
         };
-
-        /* Safestart settings */
-        class safestart {
-            enable = 1;
-            delay = 60;
-        };
-
-        /* Rallypoint settings */
-        class rallypoint {
-            cooldown = 300;
-            enemyKillRadius = 10;
-            rallyObjectClass = "Misc_backpackheap_EP1";
-        };
     };
 };
+
+/* Respawn delay (in seconds) */
+respawnDelay = 3;
+
+/* Enable Debug console for eric (you can add your own aswell) */
+enableDebugConsole[] = {"76561198065818848"};
 
 /* CMF ORBAT Settings */
 class CMF_ORBAT {

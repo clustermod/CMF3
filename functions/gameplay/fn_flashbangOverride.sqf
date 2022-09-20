@@ -10,14 +10,14 @@
  * None
  *
  * Example:
- * [] call cmf_init_fnc_flashbangOverride
+ * [] call cmf_gameplay_fnc_flashbangOverride
  *
  * Public: No
  */
 SCRIPT(flashbangOverride);
 
 /* Check if it is enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,overrideFlashbangs) ) isEqualTo 1;
+private _enabled = ( CONFIG_PARAM_4(SETTINGS,gameplay,overrideFlashbangs) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
 /* Define a variable to configure grenades */
@@ -168,7 +168,7 @@ private _fired_event = {
 				[[_pos, _inHouse], GVAR(flashbang_extraEffects)] remoteExec ["call"];
 			  for "_i" from 0 to _bangs do {
 					_pos = [((_pos select 0)+random[-0.5,0,0.5]), ((_pos select 1)+random[-0.5,0,0.5]), (_pos select 2)];
-		      [[_pos, _inHouse], GVAR(flashbang_fnc_explosion)] remoteExec ["call"];
+		      [[_pos, _inHouse], GVAR(flashbang_explosion)] remoteExec ["call"];
 
 					private _units = _pos nearEntities 10;
 					{

@@ -18,7 +18,8 @@ GVAR(components) = [
   "respawn",
   "utility",
   "zeus",
-  "init"
+  "ai",
+  "player"
 ];
 
 /* Call the files that compiles and defines the module's functions */

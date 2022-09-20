@@ -75,7 +75,8 @@ _this spawn {
                 _obj setPosASL _finalPos;
                 _obj setDir _dir;
 
-                sleep 0.01;
+                /* Basically onEachFrame */
+                Sleep 0.001;
             };
 
             /* Make object global */

@@ -1,4 +1,5 @@
 #include "script_component.hpp"
+#include "\z\ace\addons\arsenal\defines.hpp"
 /*
  * Author: Eric
  * Force opens kosher arsenal on a unit
@@ -51,9 +52,9 @@ params["_unit", ["_forcePrimary", true]];
 
     /* Create the force close button in the arsenal */
     [] spawn {
-        waitUntil{!isNull (findDisplay 1127001)};
-        ((findDisplay 1127001) displayCtrl 1005) ctrlShow false;
-        (findDisplay 1127001) ctrlCreate ["cmf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
+        waitUntil{!isNull (findDisplay IDD_ace_arsenal)};
+        ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
+        (findDisplay IDD_ace_arsenal) ctrlCreate ["cmf_arsenalForceCloseButton", 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
     };
 
     /* handle closing the arsenal */
@@ -67,9 +68,9 @@ params["_unit", ["_forcePrimary", true]];
                 sleep 0.1;
                 [_this, player, false] call ace_arsenal_fnc_openBox;
                 [] spawn {
-                    waitUntil{!isNull (findDisplay 1127001)};
-                    ((findDisplay 1127001) displayCtrl 1005) ctrlShow false;
-                    (findDisplay 1127001) ctrlCreate ["emf_arsenalForceCloseButton", 2055, ((findDisplay 1127001) displayCtrl 10)];
+                    waitUntil{!isNull (findDisplay IDD_ace_arsenal)};
+                    ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
+                    (findDisplay IDD_ace_arsenal) ctrlCreate ["emf_arsenalForceCloseButton", 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
                 };
             };
         };

@@ -1,5 +1,5 @@
-#define MODULE init
+#define MODULE player
 #define REQUIRED_ADDONS ["ace_hearing"]
-#define REQUIRED_MODULES ["common", "gameplay", "utility"]
+#define REQUIRED_MODULES ["common"]
 
 #include "..\..\cmf\script_component.hpp"

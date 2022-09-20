@@ -10,14 +10,14 @@
  * None
  *
  * Example:
- * [] call cmf_init_fnc_hideRespawnMarker
+ * [] call cmf_player_fnc_hideRespawnMarker
  *
  * Public: No
  */
 SCRIPT(hideRespawnMarker);
 
 /* Check if it is enabled */
-private _enabled = ([["SETTINGS", "init", "hideRespawnMarkers"]] call EFUNC(common,getConfigParam)) isEqualTo 1;
+private _enabled = ( CONFIG_PARAM_3(SETTINGS,player,hideRespawnMarkers) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
 [] spawn {

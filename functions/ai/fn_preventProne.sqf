@@ -10,14 +10,14 @@
  * None
  *
  * Example:
- * [] call cmf_init_fnc_preventProne
+ * [] call cmf_ai_fnc_preventProne
  *
  * Public: No
  */
 SCRIPT(preventProne);
 
 /* Check if it's enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,init,preventProne) ) isEqualTo 1;
+private _enabled = ( CONFIG_PARAM_3(SETTINGS,ai,preventProne) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
 /* preventProne on AI units */

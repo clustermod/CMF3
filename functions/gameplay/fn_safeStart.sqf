@@ -17,6 +17,10 @@
 SCRIPT(fn_safestart);
 if (!isServer) exitWith {};
 
+/* Check if it's enabled */
+private _enabled = ( CONFIG_PARAM_4(SETTINGS,gameplay,safestart,enable) ) isEqualTo 1;
+if !(_enabled) exitWith {};
+
 LOG("Enabled safestart");
 
 _this spawn {

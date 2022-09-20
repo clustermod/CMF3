@@ -1,4 +1,5 @@
 #include "script_component.hpp"
+#include "\z\ace\addons\arsenal\defines.hpp"
 /*
  * Author: Eric
  * initializes an object as a ammobox
@@ -51,15 +52,33 @@ private _onOpen = {
     /* Open the arsenal */
     [_arsenal, player, false] call ace_arsenal_fnc_openBox;
 
-    waitUntil{!isNull findDisplay 1127001};
-    ctrlActivate ((findDisplay 1127001) displayCtrl 2010);
+    waitUntil{!isNull findDisplay IDD_ace_arsenal};
+    [findDisplay IDD_ace_arsenal, (findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonUniform] call ace_arsenal_fnc_fillLeftPanel;
 
     /* Hide unwanted parts of the arsenal for ammobox */
     private _hideUI = [] spawn {
-        while {true} do {
+        while { true } do {
+            if (isNil "ace_arsenal_currentLeftPanel") exitWith {};
             {
-                ((findDisplay 1127001) displayCtrl _x) ctrlShow false;
-            } forEach [3, 4, 13, 16, 18, 41, 51, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035, 2036, 2037, 1003, 1004, 1005];
+                if ( (ace_arsenal_currentLeftPanel isEqualTo IDC_buttonSecondaryWeapon) && (_x in [IDC_blockLeftFrame, IDC_blockLeftBackground, IDC_leftTabContent, IDC_sortLeftTab, IDC_leftSearchbar, IDC_leftSearchbarButton]) ) then {
+                    ((findDisplay IDD_ace_arsenal) displayCtrl _x) ctrlShow true;
+                } else {
+                    ((findDisplay IDD_ace_arsenal) displayCtrl _x) ctrlShow false;
+                }
+            } forEach [
+                IDC_blockLeftFrame, IDC_blockLeftBackground, IDC_leftTabContent, IDC_sortLeftTab, IDC_leftSearchbar, IDC_leftSearchbarButton, IDC_iconBackgroundPrimaryWeapon, IDC_buttonPrimaryWeapon,
+                IDC_iconBackgroundHandgun, IDC_buttonHandgun, IDC_iconBackgroundHeadgear, IDC_buttonHeadgear, IDC_iconBackgroundGoggles, IDC_buttonGoggles,
+                IDC_iconBackgroundNVG, IDC_buttonNVG, IDC_iconBackgroundBinoculars, IDC_buttonBinoculars, IDC_iconBackgroundMap, IDC_buttonMap, IDC_iconBackgroundGPS, IDC_buttonGPS, IDC_iconBackgroundRadio, IDC_buttonRadio,
+                IDC_iconBackgroundCompass, IDC_buttonCompass, IDC_iconBackgroundWatch, IDC_buttonWatch, IDC_iconBackgroundFace, IDC_buttonFace, IDC_iconBackgroundVoice, IDC_buttonVoice, IDC_iconBackgroundInsigna, IDC_buttonInsignia,
+                /*IDC_buttonLoadouts,*/ IDC_buttonExport, IDC_buttonImport];
+            sleep 0.1;
+        };
+    };
+
+    /* Hide unwanted parts of the arsenal loadout display */
+    private _hideUI = [] spawn {
+        while { true } do {
+            ((findDisplay IDD_loadouts_display ) displayCtrl IDC_buttonLoad ) ctrlShow false;
             sleep 0.1;
         };
     };

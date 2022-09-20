@@ -16,6 +16,10 @@
 */
 SCRIPT(freezeTime);
 
+/* Check if it's enabled */
+private _enabled = ( CONFIG_PARAM_3(SETTINGS,utility,freezeTime) ) isEqualTo 1;
+if !(_enabled) exitWith {};
+
 LOG("Enabled freezeTime");
 
 /* Spawn the process so it can be terminated at a later date */
