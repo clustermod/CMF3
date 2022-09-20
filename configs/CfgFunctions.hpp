@@ -5,23 +5,9 @@
 class cmf {
     /* CMF init scripts */
     class init {
-        class localize {
-            file = "cmf\localize.sqf";
-        };
-
         class modules {
-            file = "cmf\XEH_MODULE.sqf";
+            file = "components\main\XEH_MODULE.sqf";
             preInit = 1;
-        };
-
-        class serverInit {
-            file = "cmf\serverInit.sqf";
-            preInit = 1;
-        };
-
-        class missionInit {
-            file = "cmf\missionInit.sqf";
-            postInit = 1;
         };
     };
 
