@@ -8,7 +8,7 @@
 SCRIPT(XEH_MODULE);
 
 /* CMF Modules to define */
-private _modules = [
+GVAR(components) = [
   "common",
   "menu",
   "gameplay",
@@ -27,7 +27,11 @@ private _modules = [
     if (FILE_EXISTS(_modulePrepPath)) then {
         [_x] call compile preprocessFileLineNumbers _modulePrepPath;
     };
-} forEach _modules;
+} forEach GVAR(components);
 
 /* Raise event */
 [QGVAR(modules_initialized), []] call CBA_fnc_globalEvent;
+
+if (count (REQUIRED_MODULES - GVAR(components)) > 0) then {PREP_SYS(var1)} else {FUNC(var1) = {ERROR_2("%1 missing required modules: %2",FUNC(var1),REQUIRED_MODULES-GVAR(components))}};
+
+if (REQUIRED_ADDONS findIf {!isClass(configFile >> "CfgPatches" >> _x)} == -1) then {PREP_MODULE(var1)} else {FUNC(var1) = {ERROR_2("%1 missing a required addon",FUNC(var1))}};

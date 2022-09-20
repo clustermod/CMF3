@@ -20,6 +20,9 @@ SCRIPT(init);
 #include "fn_unitConstructor.sqf"
 #include "fn_unitSpawner.sqf"
 
+/* Define the string localize function */
+cmf_fnc_localize = compile preprocessFileLineNumbers "cmf\localize.sqf";
+
 /* Creates menu in top bar */
 disableSerialization;
 
@@ -42,7 +45,7 @@ private _indexMain = _ctrlMenuStrip menuAdd [[], "CMF"];
 private _unitSpawner = _ctrlMenuStrip menuAdd [[_indexMain],"Cluster ORBAT spawner"];
 
 /* Unit sizes (fireteam, squad, platoon, Company) */
-private _unitSizes = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner],"Infantry Elements"];
+private _unitSizes = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner], LSTRING(infantry_elements)];
 private _fireteamSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _unitSizes],"Fireteam"];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _unitSizes, _fireteamSpawner], "[""FIRETEAM""] spawn cmf_3den_fnc_unitSpawner"];
 private _squadSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _unitSizes],"Squad"];

@@ -42,6 +42,9 @@ call compile preprocessFileLineNumbers "cmf\stuiMod.sqf";
 /* Disable Unsung vietnamese voices */
 RUG_DSAI_TerminalDistance = -1;
 
+/* Disable AI sentences */
+enableSentences false;
+
 /* Player killed event */
 player addEventHandler ["Killed", {
     /* Save loadout */

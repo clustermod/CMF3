@@ -4,6 +4,8 @@
 #define TRIPLES(var1,var2,var3) var1##_##var2##_##var3
 #define QUOTE(var1) #var1
 
+#define COMPONENT DOUBLES(PREFIX,MODULE)
+
 #define FORMAT_1(STR,ARG1) format[STR, ARG1]
 #define FORMAT_2(STR,ARG1,ARG2) format[STR, ARG1, ARG2]
 #define FORMAT_3(STR,ARG1,ARG2,ARG3) format[STR, ARG1, ARG2, ARG3]
@@ -37,10 +39,32 @@
     #define PATHTO_SYS(var1,var2) functions\var1\var2.sqf
 #endif
 
+#ifndef PATHTOF_SYS
+    #define PATHTOF_SYS(var1,var2) functions\var1\var2
+#endif
+
+#define DSTRING(var1) QUOTE(TRIPLES(STR,COMPONENT,var1))
+#define EDSTRING(var1,var2) QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
+#define LSTRING(var1) ([QUOTE(PATHTO_SYS(MODULE,stringtable)), DSTRING(var1)] call cmf_fnc_localize)
+#define ELSTRING(var1,var2) ([QUOTE(PATHTO_SYS(MODULE,stringtable)), EDSTRING(var1,var2)] call cmf_fnc_localize)
+
 #define ARRAY_FLATTEN(var1) (flatten var1)
 
-#define PREP(var1) TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1) = compile preProcessFileLineNumbers 'PATHTO_SYS(MODULE,DOUBLES(fn,var1))'
-#define IPREP(var1) TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1) = compile preProcessFileLineNumbers 'PATHTO_SYS(MODULE,DOUBLES(fn,var1))'; [] call TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1)
+#define PREP_SYS(var1) TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1) = compile preProcessFileLineNumbers 'PATHTO_SYS(MODULE,DOUBLES(fn,var1))'
+
+#define PREP_MODULE(var1) if (((count REQUIRED_MODULES) == 0) || count (REQUIRED_MODULES - EGVAR(main,components)) == 0) then {\
+    PREP_SYS(var1)\
+} else {\
+    FUNC(var1) = { ERROR_2("%1 missing required modules: %2.", QFUNC(var1), REQUIRED_MODULES - EGVAR(main,components)) }\
+}
+#define PREP_ADDON(var1) if (((count REQUIRED_ADDONS) == 0) || REQUIRED_ADDONS findIf {!isClass(configFile >> "CfgPatches" >> _x)} == -1) then {\
+    PREP_MODULE(var1)\
+} else {\
+    FUNC(var1) = {ERROR_1("%1 missing a required addon.",QFUNC(var1))}\
+}
+
+#define PREP(var1) PREP_ADDON(var1)
+#define IPREP(var1) PREP(var1); [] call FUNC(var1)
 
 #define FILE_EXISTS(FILE) (fileExists (FILE))
 

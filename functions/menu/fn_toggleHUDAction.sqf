@@ -30,6 +30,8 @@ if (isNil QGVAR(hud_show)) then {
 private _staminaBarContainer = uiNamespace getVariable ["ace_advanced_fatigue_staminaBarContainer", controlNull];
 if (GVAR(hud_show)) then {
 
+    GVAR(hud_show) = false;
+
     /* Hide vanilla elements */
     showHUD [false, false, false, false, false, false, false, false, false, false, false];
 
@@ -40,11 +42,24 @@ if (GVAR(hud_show)) then {
     _staminaBarContainer ctrlShow false;
     _staminaBarContainer ctrlCommit 0;
 
-    GVAR(hud_show) = false;
+    /* Hide ACRE PAX */ // This code needs refactoring
+    [] spawn {
+        while { !GVAR(hud_show) && !(vehicle player isEqualTo player) } do {
+            ("acre_sys_gui_vehicleInfo" call BIS_fnc_rscLayer) cutText ["", "PLAIN"];
+            sleep 0.01;
+        };
+
+        if !(vehicle player isEqualTo player) then {
+            [true] call acre_sys_gui_fnc_showVehicleInfo;
+        };
+    };
+
 
     /* Raise event */
     [QGVAR(onHUDHidden), []] call CBA_fnc_localEvent;
 } else {
+
+    GVAR(hud_show) = true;
 
     /* Show vanilla HUD */
     showHUD GVAR(hud_default);
@@ -56,7 +71,6 @@ if (GVAR(hud_show)) then {
     _staminaBarContainer ctrlShow true;
     _staminaBarContainer ctrlCommit 0;
 
-    GVAR(hud_show) = true;
 
     /* Raise event */
     [QGVAR(onHUDShown), []] call CBA_fnc_localEvent;

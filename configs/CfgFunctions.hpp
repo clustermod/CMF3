@@ -2,15 +2,18 @@
  * Author: Eric
  * Defines functions for CMF
  */
-class CMF {
-
+class cmf {
     /* CMF init scripts */
     class init {
+        class localize {
+            file = "cmf\localize.sqf";
+        };
+
         class modules {
             file = "cmf\XEH_MODULE.sqf";
             preInit = 1;
         };
-        
+
         class serverInit {
             file = "cmf\serverInit.sqf";
             preInit = 1;

@@ -29,7 +29,8 @@ _this spawn {
             private _cooldown = CONFIG_PARAM_3(SETTINGS,rallypoint,cooldown);
 
             /* Create placement UI */
-            ([QGVAR(rallypoint_HUD)] call BIS_fnc_rscLayer) cutRsc [QGVAR(rallypoint), "PLAIN"];
+            //([QGVAR(rallypoint_HUD)] call BIS_fnc_rscLayer) cutRsc [QGVAR(rallypoint), "PLAIN"];
+            ["Place", "Cancel"] call ace_interaction_fnc_showMouseHint;
 
             /* Detect mouse input */
             GVAR(rallypoint_placeLoop) = true;
@@ -47,7 +48,7 @@ _this spawn {
             player addAction ["", { player removeAction (_this select 2)}, "", 0, false, true, "DefaultAction"];
 
             /* Placement loop */
-            private _obj = _objectClass createVehicle (getPos player);
+            private _obj = _objectClass createVehicleLocal (getPos player);
             _obj setPosASL (getPosASL player);
             while { GVAR(rallypoint_placeLoop) } do {
                 /* Get X and Y Coordinate */
@@ -77,8 +78,17 @@ _this spawn {
                 sleep 0.01;
             };
 
+            /* Make object global */
+            private _rallyPos = getPosASL _obj;
+            private _rallyDir = getDir _obj;
+            deleteVehicle _obj;
+            _obj = _objectClass createVehicle [0,0,0];
+            _obj setPosASL _rallyPos;
+            _obj setDir _rallyDir;
+
             /* Remove placement UI */
-            ([QGVAR(rallypoint_HUD)] call BIS_fnc_rscLayer) cutRsc ["Default", "PLAIN"];
+            //([QGVAR(rallypoint_HUD)] call BIS_fnc_rscLayer) cutRsc ["Default", "PLAIN"];
+            [] call ace_interaction_fnc_hideMouseHint;
 
             /* place rallypoint if not cancelled */
             if (GVAR(rallypoint_place)) then {
