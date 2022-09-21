@@ -14,6 +14,7 @@ missionNamespace setVariable [QGVAR(components_initialized), false, true];
 GVAR(components) = [
     "main",
     "common",
+    "viewdistance",
     "menu",
     "gameplay",
     "enhancedVehicles",

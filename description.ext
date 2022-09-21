@@ -3,52 +3,46 @@
  * set mission attributes and define global entities.
  */
 
-// Enable function logging
+/* Enable function logging */
 allowFunctionsLog=1;
 
-// Include viewDistance ui
-#include "taw_vd\GUI.h"
-
-// Include custom defines
+/* Include custom defines */
 #include "rsc\ui\RscDefines.hpp"
 
-// Include Dialogs
+/* Include Dialogs */
 #include "rsc\ui\RscDialogs.hpp"
 
-// Include Controls
+/* Include Controls */
 #include "rsc\ui\RscControls.hpp"
 
-// include CMF config
+/* include CMF config */
 #include "cmf_config.hpp"
 
-// include Enhanced Vehicles config
+/* include Enhanced Vehicles config */
 #include "configs\CfgEnhancedVehicles.hpp"
 
-// include CMF respawn config
+/* include CMF respawn config */
 #include "configs\CfgRespawn.hpp"
 
-// include Cluster Community ORBAT
+/* include Cluster Community ORBAT */
 #include "configs\CfgORBAT.hpp"
 
 class RscTitles {
-	// Include CMF RscTitles
+	/* Include CMF RscTitles */
 	#include "rsc\ui\RscTitles.hpp"
 };
 
 class CfgDebriefing {
-	// Include CMF debriefings
+	/* Include CMF debriefings */
 	#include "configs\CfgDebriefing.hpp"
 };
 
 class CfgFunctions {
-	// Include CMF functions
+	/* Include CMF functions */
 	#include "configs\CfgFunctions.hpp"
-
-	// Include taw_vd functions
-	#include "taw_vd\CfgFunctions.hpp"
 };
 
 class CfgSounds {
-	// Include CMF Sounds
+	/* Include CMF Sounds */
 	#include "configs\CfgSounds.hpp"
 };

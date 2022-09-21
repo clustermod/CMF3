@@ -12,3 +12,13 @@ class cmf_utility_notZeus {
 	picture = "";
 	pictureColor[] = {0.0,0.3,0.6,1};
 };
+
+/* Message displayed to players who have blacklisted addons */
+class cmf_main_blacklistedAddon {
+	title = "Blacklisted addon";
+	subtitle = "";
+	description = "You have a blacklisted addon, please remove it from your modlist and try again";
+	pictureBackground = "";
+	picture = "";
+	pictureColor[] = {0.0,0.3,0.6,1};
+};

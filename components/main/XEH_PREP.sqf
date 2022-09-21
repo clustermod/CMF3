@@ -4,3 +4,4 @@ PREP(localize);
 PREP(playerInit);
 IPREP(serverInit);
 IPREP(missionInit);
+IPREP(addonBlacklist);

@@ -40,6 +40,7 @@ class CMF {
         /* ai settings */
         class ai {
             reinforce = 1;
+            reinforceRange = 1000;
             preventProne = 1;
             forceSkill = 1;
         };
@@ -58,6 +59,8 @@ class CMF {
             offroadBumpy = 1;
             offroadDamage = 1;
         };
+
+        blacklistedAddons[] = {};
     };
 };
 

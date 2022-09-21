@@ -18,5 +18,5 @@
  */
 SCRIPT(viewDistanceAction);
 
-/* Call TAW View Distance Function */
-_this call TAWVD_fnc_openMenu
+/* Call viewdistance open */
+_this call EFUNC(viewdistance,openDialog);
