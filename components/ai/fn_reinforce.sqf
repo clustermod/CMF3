@@ -44,6 +44,10 @@ while { !(missionNamespace getVariable [QGVAR(reinforce_disable), false]) } do {
 
                     [_thisGroup, 100, 15, [], getPos _target, false] spawn lambs_wp_fnc_taskRush;
 
+                    /* Delete old waypoints and add new */
+                    for "_i" from count waypoints _thisGroup - 1 to 0 step -1 do {
+                    	deleteWaypoint [_group, _i];
+                    };
                     private _wp = _thisGroup addWaypoint [_target, 0];
                     _wp setWaypointType "MOVE";
                     _thisGroup setVariable [QGVAR(reinforce_targetGroup), _group, true];

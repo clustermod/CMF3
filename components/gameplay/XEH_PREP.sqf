@@ -3,6 +3,6 @@
 PREP(repairRearmStation);
 PREP(restrictedVehicle);
 PREP(slingPrimary);
-PREP(tracers);
+IPREP(tracers);
 IPREP(safestart);
 IPREP(flashbangOverride);

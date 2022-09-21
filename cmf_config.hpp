@@ -22,6 +22,12 @@ class CMF {
                 enable = 1;
                 delay = 60;
             };
+
+            /* tracers settings */
+            class tracers {
+                enable = 1;
+                side = "east";
+            };
         };
 
         /* Rallypoint settings */
