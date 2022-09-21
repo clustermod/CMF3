@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-PREP(repairRearmTrigger);
+PREP(repairRearmStation);
 PREP(restrictedVehicle);
 PREP(slingPrimary);
 PREP(tracers);

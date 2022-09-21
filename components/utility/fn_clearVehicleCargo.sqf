@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_init_fnc_clearVehicleCargo
+ * [] call cmf_utility_fnc_clearVehicleCargo
  *
  * Public: No
  */

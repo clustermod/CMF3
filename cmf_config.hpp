@@ -41,7 +41,7 @@ class CMF {
         /* Utility settings */
         class utility {
             clearVehicleCargo = 1;
-            freezeTime = 1;
+            freezeTime = 0;
         };
 
         /* Enhanced Vehicles Settings */

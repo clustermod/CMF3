@@ -88,7 +88,7 @@ private _childrenZeus = {
         _actions pushBack [_action, [], _target];
 
         _actions;
-    }, { !(missionNamespace getVariable [QEGVAR(gameplay,safestart_disable)]) }] call ace_interact_menu_fnc_createAction);
+    }, { !(missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false]) }] call ace_interact_menu_fnc_createAction);
     _actions pushBack [_action, [], _target];
 
     /* Fix endless loading bug Action */
