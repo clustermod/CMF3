@@ -108,15 +108,19 @@ if (isNil "_unit") then {
 		private _enabled = ( CONFIG_PARAM_4(SETTINGS,gameplay,tracers,enable) ) isEqualTo 1;
 		if !(_enabled) exitWith {};
 
-		private _side = CONFIG_PARAM_4(SETTINGS,gameplay,tracers,side);
+		private _sides = CONFIG_PARAM_4(SETTINGS,gameplay,tracers,side);
 
 		while { !(missionNamespace getVariable [QGVAR(tracers_disable), false]) } do {
 			{
-				if (!isPlayer _x) then {
-					[_x, false, false] spawn _fnc_applyTracers;
-					sleep 0.03;
-				};
-			} forEach units call compile _side;
+
+				{
+					if (!isPlayer _x) then {
+						[_x, false, false] spawn _fnc_applyTracers;
+						sleep 0.03;
+					};
+				} forEach units call compile _x;
+				sleep 0.03;
+			} forEach _sides;
 			sleep 1;
 		};
 	};

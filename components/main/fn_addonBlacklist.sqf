@@ -34,7 +34,7 @@ addMissionEventHandler ["PlayerConnected", {
         /* Get the variable difference */
         private _serverAddons = missionNamespace getVariable [QGVAR(serverAddons), []];
         private _addonDifference = _clientAddons - _serverAddons;
-        missionNamespace setVariable [QGVAR(addonDifference), _addonDifference];
+        player setVariable [QGVAR(addonDifference), _addonDifference, true];
 
         /* Check if any addons are blacklisted */
         private _addonBlacklist = CONFIG_PARAM_2(SETTINGS,blacklistedAddons);

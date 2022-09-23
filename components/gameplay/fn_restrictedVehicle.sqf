@@ -1,65 +1,55 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Restricts vehicle operator positions (Driver, gunner and commander) to specific units
+ * Restricts vehicle operator positions based on supplied condition
  *
  * Arguments:
- * 0: obj <OBJECT>
- * 1: varName <STRING>
- * 2: failText <STRING>
+ * 0: Vehicle <OBJECT>
+ * 1: Condition <CODE>
  *
  * Return Value:
- * <Boolean>
+ * None
  *
  * Example:
- * [this, "BMPCREW", "You require a crewman kit to operate this vehicle"] call cmf_gameplay_fnc_restrictedVehicle
+ * [_myVehicle, { (_this getVariable ["cmf_common_role", "RFL"]) isEqualTo "CREW" }] call cmf_gameplay_fnc_restrictedVehicle
  *
  * public: Yes
 */
-scriptName "functions\gameplay\fn_restrictedVehicle.sqf";
-params["_obj", "_varName", ["_failText", "You require a crewmankit to operate this position"]];
+SCRIPT(restrictedVehicle);
+params ["_vehicle", "_condition"];
 
-// Check if params are set and is of correct type
-if (isNil "_obj") exitWith {["ERR", "Object is not set", "restrictedVehicle", "gameplay"] call EMF_DEBUG; false;};
-if (typeName _obj != "OBJECT") exitWith {["ERR", format['Object must be type "OBJECT", type %1 supplied', (typeName _obj)], "restrictedVehicle", "gameplay"] call EMF_DEBUG; false};
+_vehicle setVariable [QGVAR(restrictedVehicle_condition), _condition, true];
 
-if (isNil "_varName") exitWith {["ERR", 'varName not set', "rallypoint", "gameplay"] call EMF_DEBUG; false;};
-if (typeName _varName != "STRING") exitWith {["ERR", format['varName must be type "STRING", type %1 supplied', (typeName _varName)], "restrictedVehicle", "gameplay"] call EMF_DEBUG; false};
-
-if (typeName _failText != "STRING") exitWith {["ERR", format['failText must be type "STRING", type %1 supplied', (typeName _failText)], "rallypoint", "gameplay"] call EMF_DEBUG; false};
-
-// Variables to pass into the event handlers
-EMF_GVAR_RV_restricedVehicleVarName = _varName;
-EMF_GVAR_RV_failText = _failText;
-
-// Create a event handler for when a unit enters the vehicle
-_obj addEventHandler ["GetIn", {
+/* Check units entering vehicle */
+_vehicle addEventHandler ["GetIn", {
 	params ["_vehicle", "_role", "_unit", "_role"];
 
-	// If the unit isn't allowed to enter the given position kick it out
-	if (_role == "driver" && !(_unit getVariable [EMF_GVAR_RV_restricedVehicleVarName, false]) || _role == "gunner" && !(_unit getVariable [EMF_GVAR_RV_restricedVehicleVarName, false])) then {
-		[EMF_GVAR_RV_failText] remoteExec ["hint", _unit];
+	LOG("Unit entered vehicle");
+
+	//if (!isPlayer _unit) exitWith {};
+	private _condition = _unit call (_vehicle getVariable [QGVAR(restrictedVehicle_condition), { true }]);
+	private _role = (assignedVehicleRole _unit) select 0;
+
+	/* Check if player is allowed to be in seat */
+	if ((_role in ["driver", "Turret"]) && !_condition) then {
+		["You do not know how to operate this vehicle"] remoteExec ["hint", _unit];
 		_unit action ["getOut", _vehicle];
+		LOG_2("Kicked %1 out of vehicle %2", name _unit, typeOf _vehicle);
 	};
 }];
 
-// Create a event handler for when a unit switches seats
-_obj addEventHandler ["SeatSwitched", {
-	params ["_vehicle", "_unit1", "_unit2"];
-	private _role = (assignedVehicleRole _unit1) select 0;
+/* Check units switching seats */
+_vehicle addEventHandler ["SeatSwitched", {
+	params ["_vehicle", "_unit"];
 
-	// If unit1 isn't allowed to enter the given position kick it out
-	if (_role == "driver" && !(_unit1 getVariable [EMF_GVAR_RV_restricedVehicleVarName, false]) || _role == "Turret" && !(_unit1 getVariable [EMF_GVAR_RV_restricedVehicleVarName, false])) then {
-		[EMF_GVAR_RV_failText] remoteExec ["hint", _unit1];
-		_unit1 action ["getOut", _vehicle];
+	if (!isPlayer _unit) exitWith {};
+	private _role = (assignedVehicleRole _unit) select 0;
+	private _condition = _unit call (_vehicle getVariable [QGVAR(restrictedVehicle_condition), { true }]);
+
+	/* Check if player is allowed to be in seat */
+	if ((_role in ["driver", "Turret"]) && !_condition) then {
+		["You do not know how to operate this vehicle"] remoteExec ["hint", _unit];
+		_unit action ["getOut", _vehicle];
+		LOG_2("Kicked %1 out of vehicle %2", name _unit, typeOf _vehicle);
 	};
-
-	// If unit2 isn't allowed to enter the given position kick it out
-	if (_role == "driver" && !(_unit2 getVariable [EMF_GVAR_RV_restricedVehicleVarName, false]) || _role == "Turret" && !(_unit2 getVariable [EMF_GVAR_RV_restricedVehicleVarName, false])) then {
-		[EMF_GVAR_RV_failText] remoteExec ["hint", _unit2];
-		_unit2 action ["getOut", _vehicle];
-	};
-
 }];
-
-true;

@@ -38,6 +38,8 @@ while { !(missionNamespace getVariable [QGVAR(reinforce_disable), false]) } do {
 
                 if (_thisGroup getVariable [QGVAR(reinforce_disableGroup), false]) exitWith {};
 
+                if ((group _target) getVariable [QGVAR(reinforce_disableTarget), false]) exitWith {};
+
                 private _range = CONFIG_PARAM_3(SETTINGS,ai,reinforceRange);
                 if ( (leader _thisGroup distance leader _group) < _range && _thisGroup != _group && !(_thisGroup getVariable [QGVAR(reinforce_targetGroup), grpNull] isEqualTo _group) && side _thisGroup isEqualTo side _group ) then {
                     LOG_2("%1 reinforcing %2(TaskRush)", groupId _thisGroup, groupId _group);

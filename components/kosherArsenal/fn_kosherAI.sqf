@@ -90,7 +90,7 @@ private _fnc_setLoadout = {
     params ["_side", "_loadoutFile", "_fnc_aiType", "_fnc_setLoadout"];
     while { missionNamespace getVariable [QGVAR(kosherai_disable), true] } do {
         {
-            if (side _x isEqualTo _side && !(_x getVariable [QGVAR(kosherai_initialized), false])) then {
+            if (side _x isEqualTo _side && !isPlayer _x && !(_x getVariable [QGVAR(kosherai_initialized), false])) then {
                 /* Get unit's role */
                 private _role = [_x] call _fnc_aiType;
 
