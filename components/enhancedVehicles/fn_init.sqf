@@ -31,6 +31,8 @@ private _damageHandle = {
     /* Get the projectile type the vehicle was hit with */
     private _projectileType = getNumber (configfile >> "CfgAmmo" >> _projectile >> "explosive");
 
+    LOG_2("Registered damage on selection: %1 = %2", _selection, str _damage);
+
     /* Check if the damage is enough to kill the vehicle, and if it is take over the damage handling */
     if (_damage > 0.95 && !(["wheel", _selection] call Bis_fnc_inString || ["glass", _selection] call Bis_fnc_inString || ["body", _selection] call Bis_fnc_inString)) then {
 
@@ -51,8 +53,9 @@ private _damageHandle = {
         };
 
         /* Disable engine */
+        LOG_2("Vehicled disabled: %1 = %2", _selection, str _damage);
         _veh setHit ["motor", 1];
-        
+
         _damage = 0.95;
 
         /* Raise event */

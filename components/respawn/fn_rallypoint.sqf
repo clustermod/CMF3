@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [["SL", "PL", _myUnit]] call cmf_common_fnc_rallypoint
+ * [["SL", "PL", _myUnit]] call cmf_respawn_fnc_rallypoint
  *
  * public: Yes
 */
@@ -151,12 +151,17 @@ _this spawn {
 
     /* Create Place action */
     private _rallypointPlaceAction = [QGVAR(rallypoint_place), "Place rallypoint", "rsc\data\icon_ace_rallypoint_place_ca.paa", _rallypointPlaceCode, {
-        ((vehicle player) == player) && (player getVariable [QGVAR(rallypoint_canCreate), true]) && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false])
+        (((vehicle player) == player) && (player getVariable [QGVAR(rallypoint_canCreate), true]) && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]))
+        && (player getVariable [QGVAR(showRallypoint), true])
+        && !visibleMap
     }] call ace_interact_menu_fnc_createAction;
 
     /* Create Unable to place action */
     private _rallypointFailedAction = [QGVAR(rallypoint_disabled), "Place rallypoint", "rsc\data\icon_ace_rallypoint_disabled_ca.paa", _rallypointFailedCode, {
-        (((vehicle player) == player) && !(player getVariable [QGVAR(rallypoint_canCreate), true])) || (missionNamespace getVariable [QGVAR(rallypoint_disabled), false])
+        ((((vehicle player) == player) && !(player getVariable [QGVAR(rallypoint_canCreate), true]))
+        || (missionNamespace getVariable [QGVAR(rallypoint_disabled), false]))
+        && (player getVariable [QGVAR(showRallypoint), true])
+        && !visibleMap
     }] call ace_interact_menu_fnc_createAction;
 
     /* Throw warning if units array is empty */

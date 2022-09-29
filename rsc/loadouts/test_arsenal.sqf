@@ -74,13 +74,13 @@ if (_condition in ["AR"]) then {
 /* Assistant Autorifleman */
 if (_condition in ["AAR"]) then {
 	_availableUniforms = [];
-	_availableWeapons = [];
-	_availableAttachments = [];
-	_availableMagazines = [];
-	_availableVests = [];
+	_availableWeapons = ["CUP_arifle_Colt727", "rhs_weap_m14_rail_fiberglass"];
+	_availableAttachments = ["cup_optic_aimpoint_5000", "tier1_m600v_black"];
+	_availableMagazines = ["rhsusf_20Rnd_762x51_m993_Mag", "rhs_mag_30Rnd_556x45_Mk318_Stanag"];
+	_availableVests = ["V_Simc_vest_fauf_rig_1", "V_Simc_vest_fauf_rig_3", "V_Simc_vest_fauf_alice", "V_Simc_vest_fauf_alice_45"];
 	_availableItems = [];
 	_availableGrenades = [];
-	_availableBackpacks = [];
+	_availableBackpacks = ["B_simc_pack_alice_flak_frame_1_alt"];
 	_availableHeadgear = [];
 	_availableFacewear = [];
 };
@@ -88,13 +88,13 @@ if (_condition in ["AAR"]) then {
 /* Anti-Tank, Light */
 if (_condition in ["LAT"]) then {
 	_availableUniforms = [];
-	_availableWeapons = [];
-	_availableAttachments = [];
-	_availableMagazines = [];
-	_availableVests = [];
+	_availableWeapons = ["CUP_arifle_Colt727", "rhs_weap_m14_rail_fiberglass", "CUP_launch_M72A6"];
+	_availableAttachments = ["cup_optic_aimpoint_5000", "tier1_m600v_black"];
+	_availableMagazines = ["rhsusf_20Rnd_762x51_m993_Mag", "rhs_mag_30Rnd_556x45_Mk318_Stanag"];
+	_availableVests = ["V_Simc_vest_fauf_rig_1", "V_Simc_vest_fauf_rig_3", "V_Simc_vest_fauf_alice", "V_Simc_vest_fauf_alice_45"];
 	_availableItems = [];
 	_availableGrenades = [];
-	_availableBackpacks = [];
+	_availableBackpacks = ["CUP_B_AssaultPack_Black"];
 	_availableHeadgear = [];
 	_availableFacewear = [];
 };

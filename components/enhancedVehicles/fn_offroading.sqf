@@ -76,8 +76,8 @@ _this spawn {
         [_veh, _bumpSpeed, _i3, _i2] spawn {
             params["_veh", "_bumpSpeed", "_ix", "_iy"];
 
-            /* Only run it serverside */
-            if !(isServer) exitWith {};
+            /* Only run it if the vehicle is local and you are the driver */
+            if (!(local _veh) || (player != driver _veh)) exitWith {};
 
             /* Loop the offroad checks */
             while { alive _veh && !(missionNamespace getVariable [QGVAR(disable), false]) } do {
@@ -112,8 +112,8 @@ _this spawn {
         [_veh, _damageModifier, _damagespeed, _wheelmass, _wheelIndex] spawn {
             params["_veh", "_damageModifier", "_damageSpeed", "_wheelmass", "_index"];
 
-            /* Only run it serverside */
-            if !(isServer) exitWith {};
+            /* Only run it if the vehicle is local and you are the driver */
+            if (!(local _veh) || (player != driver _veh)) exitWith {};
 
             /* Loop the offroad checks */
             while { alive _veh && !(missionNamespace getVariable [QGVAR(disable), false])} do {

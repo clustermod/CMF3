@@ -4,3 +4,6 @@ IPREP(mapSwitchTextures);
 IPREP(resizeMapMarkers);
 IPREP(hearing);
 IPREP(hideRespawnMarker);
+IPREP(restrictLauncher);
+IPREP(drinking);
+IPREP(spectator);
