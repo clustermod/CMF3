@@ -36,19 +36,11 @@ if (GVAR(hud_show)) then {
     showHUD [false, false, false, false, false, false, false, false, false, false, false];
 
     /* Hide Shacktac elements */
-    GVAR(hud_STUI_UIMode) = STHud_Settings_HUDMode;
-    GVAR(hud_STUI_nametags) = STNT_Settings_Enabled;
-    GVAR(hud_STUI_groupIndicators) = STGI_Settings_Enabled;
     STHud_UIMode = 0;
-    STNT_Enabled = false;
-    STGI_Enabled = false;
 
     /* Hide Ace elements */
     _staminaBarContainer ctrlShow false;
     _staminaBarContainer ctrlCommit 0;
-    GVAR(hud_ace_nametags) = ace_nametags_showPlayerNames;
-    ace_nametags_showPlayerNames = 0;
-    call ace_nametags_fnc_updateSettings;
 
     /* Hide ACRE PAX */ // This code needs refactoring
     [] spawn {
@@ -73,15 +65,12 @@ if (GVAR(hud_show)) then {
     showHUD GVAR(hud_default);
 
     /* Show Shacktac elements */
-    STHud_UIMode = GVAR(hud_STUI_UIMode);
-    STNT_Enabled = GVAR(hud_STUI_nametags);
-    STGI_Enabled = GVAR(hud_STUI_groupIndicators);
+    STHud_UIMode = STHud_Settings_HUDMode;
 
     /* Show Ace elements */
     _staminaBarContainer ctrlShow true;
     _staminaBarContainer ctrlCommit 0;
-    ace_nametags_showPlayerNames = GVAR(hud_ace_nametags);
-    call ace_nametags_fnc_updateSettings;
+
 
     /* Raise event */
     [QGVAR(onHUDShown), []] call CBA_fnc_localEvent;

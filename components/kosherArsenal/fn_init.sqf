@@ -109,7 +109,7 @@ _this spawn {
     [] spawn {
         waitUntil{!isNull (findDisplay IDD_ace_arsenal)};
         ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
-        (findDisplay IDD_ace_arsenal) ctrlCreate ["cmf_kosherArsenal_forceClose", 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
+        (findDisplay IDD_ace_arsenal) ctrlCreate ["cmf_arsenalForceCloseButton", 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
 
         /* Disable voices and insignias */
         {

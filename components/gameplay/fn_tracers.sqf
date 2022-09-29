@@ -42,10 +42,6 @@ private _fnc_applyTracers = {
 				{
 					private _curMag = getText (configfile >> "CfgMagazines" >> _x >> "model");
 					private _curprimaryMag = getText (configfile >> "CfgMagazines" >> ((primaryWeaponMagazine _unit) select 0) >> "model");
-					if (isNil "_curprimaryMag") then {
-					    _curprimaryMag = "";
-					};
-
 					if (_curMag isEqualTo _curprimaryMag) then {
 						_newMagazine pushBack _x;
 					};

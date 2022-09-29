@@ -8,4 +8,3 @@ IPREP(freezeTime);
 PREP(restrictZeus);
 PREP(endLoadingScreen);
 PREP(stripUnit);
-PREP(submitAAR);
