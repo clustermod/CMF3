@@ -3,9 +3,6 @@
  * Author: Eric
  * Initializes Server for CMF (executed preInit).
  *
- * Arguments:
- * None
- *
  * Public: No
  */
 SCRIPT(serverInit);

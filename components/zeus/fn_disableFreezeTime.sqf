@@ -16,7 +16,7 @@
  */
 SCRIPT(disableFreezeTime);
 
-["CMF: Common", "Disable setDate (Frozen time)", {
+[LSTRING(common_module_category_displayname), LSTRING(dis_freezeTime_module_displayname), {
     missionNamespace setVariable [QEGVAR(utility,freezetime_disable), true, true];
-    ["Unfroze time"] call zen_common_fnc_showMessage
+    [LSTRING(dis_freezeTime_success_message)] call zen_common_fnc_showMessage
 }, "rsc\data\icon_module_disableSetDate_ca.paa"] call zen_custom_modules_fnc_register;

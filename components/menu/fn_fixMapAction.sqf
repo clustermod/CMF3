@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Creates the fix map action in ace
+ * Fixes the RR immersive maps bug where the map gets stuck to the playerunit.
  *
  * Arguments:
  * None

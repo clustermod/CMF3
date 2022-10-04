@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Enables ACE earplugs without ringing or deafness
+ * Enables ACE hearing without ringing or deafness
  *
  * Arguments:
  * None

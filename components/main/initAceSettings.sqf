@@ -5,7 +5,7 @@
  *
  * Public: No
  */
-SCRIPT(ace_settings);
+SCRIPT(initAceSettings);
 
 private _medicalEquipment = [
     "kat_aatKit", "kat_accuvac", "kat_X_AED", "Attachable_Helistretcher", "kat_AED", "adv_aceCPR_AED", "kat_crossPanel", "ACE_bloodIV", "kat_bloodIV_O", "kat_bloodIV_A", "kat_bloodIV_AB", "kat_bloodIV_B", "ACE_bloodIV_250", "kat_bloodIV_O_250", "kat_bloodIV_A_250", "kat_bloodIV_AB_250", "kat_bloodIV_B_250", "ACE_bloodIV_500", "kat_bloodIV_O_500", "kat_bloodIV_A_500", "kat_bloodIV_AB_500", "kat_bloodIV_B_500", "ACE_bodyBag", "usm_fielddressing",

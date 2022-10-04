@@ -35,14 +35,6 @@ It should be noted that **CMF3** has been developed with **Cluster Community** a
 
 For a quick rundown on installing, configuring and running **CMF3** refer to the [Cluster Community Wiki](https://zeus.cluster-community.com/index.php/Category:Eric%27s_Mission_Framework_(EMF)).
 
-## Core Features
-- Role-based arsenal whitelist
-- Multiplayer virtual garage
-- Respawn limiter
-- Rallypoint respawn system
-- Safestart system
-- Vehicle damage overhaul system
-
 ## Contributing
 You can help out with the ongoing development by looking for potential bugs in the framework, or by contributing new features. We are always welcoming new pull requests containing bug fixes, refactors and new features.
 

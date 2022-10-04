@@ -1,10 +1,10 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Ends a players loading screen.
+ * Ends a local player's loading screen.
  *
  * Arguments:
- * 0: player/id <OBJECT>/<NUMBER>
+ * None
  *
  * Return Value:
  * None

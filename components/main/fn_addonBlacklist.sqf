@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Blacklist Addons
+ * Blacklist Addons on a per user basis
  *
  * Arguments:
  * None

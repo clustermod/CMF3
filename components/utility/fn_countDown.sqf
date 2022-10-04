@@ -17,7 +17,8 @@
  * public: Yes
 */
 SCRIPT(countdown);
-params["_time", "_text", ["_blocking", false]];
+
+params ["_time", "_text", ["_blocking", false]];
 
 if (!isServer) exitWith {};
 

@@ -17,17 +17,13 @@
  * public: Yes
 */
 SCRIPT(setRole);
-params["_unit", ["_role", "RFL", [""]], ["_team", 0]];
+params ["_unit", ["_role", "RFL", [""]], ["_team", 0]];
 
 /* Throw error if object is not defined */
-if (isNil {(_this select 0)}) exitWith {
-    ERROR_MSG("No object");
-};
+if (isNil {(_this select 0)}) exitWith { ERROR_MSG("No object") };
 
 /* Throw warning if role is not defined */
-if (isNil {(_this select 1)}) exitWith {
-    WARNING("No role, defaulting to ""RFL""");
-};
+if (isNil {(_this select 1)}) exitWith { WARNING("No role, defaulting to ""RFL""") };
 
 /* Set the objects role */
 _unit setVariable [QGVAR(role), _role, true];

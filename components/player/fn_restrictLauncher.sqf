@@ -54,5 +54,5 @@ player addEventHandler ["Respawn", {
     ";
 
     /* Restrict launcher if the above function is true */
-    _unit addAction ["", { player sideChat "You do not know how to operate this weapon." }, "", 0, false, true, "DefaultAction", _allowedLauncher];
+    _unit addAction ["", { player sideChat LSTRING(restrictLauncher_message) }, "", 0, false, true, "DefaultAction", _allowedLauncher];
 }];

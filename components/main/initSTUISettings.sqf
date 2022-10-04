@@ -2,8 +2,10 @@
 /*
  * Author: Eric
  * Orders the group playerlist by color and leader
+ *
+ * Public: No
  */
-SCRIPT(stuiMod);
+SCRIPT(initSTUISettings);
 
 /* Redefine the namelist function */
 STHud_Namelist = {

@@ -17,7 +17,6 @@
 SCRIPT(rallypoint);
 
 _this spawn {
-
     params [["_units", []]];
 
     /* Code to place rallypoint */
@@ -29,8 +28,7 @@ _this spawn {
             private _cooldown = CONFIG_PARAM_3(SETTINGS,rallypoint,cooldown);
 
             /* Create placement UI */
-            //([QGVAR(rallypoint_HUD)] call BIS_fnc_rscLayer) cutRsc [QGVAR(rallypoint), "PLAIN"];
-            ["Place", "Cancel"] call ace_interaction_fnc_showMouseHint;
+            [LSTRING(place_displayName), LSTRING(cancel_displayName)] call ace_interaction_fnc_showMouseHint;
 
             /* Detect mouse input */
             GVAR(rallypoint_placeLoop) = true;
@@ -88,7 +86,6 @@ _this spawn {
             _obj setDir _rallyDir;
 
             /* Remove placement UI */
-            //([QGVAR(rallypoint_HUD)] call BIS_fnc_rscLayer) cutRsc ["Default", "PLAIN"];
             [] call ace_interaction_fnc_hideMouseHint;
 
             /* place rallypoint if not cancelled */
@@ -100,7 +97,7 @@ _this spawn {
                 /* Check if enemies are close to rally */
                 private _units = (nearestObjects [_obj, ["Man"], _enemyKillRadius]) apply { [side _x, side player] call BIS_fnc_sideIsFriendly };
                 if (false in _units) exitWith {
-                    hint format["Enemy within %1 meters of rally", _enemyKillRadius];
+                    hint format[LSTRING(rally_too_close_message), _enemyKillRadius];
                     deleteVehicle _obj;
                 };
 
@@ -146,18 +143,18 @@ _this spawn {
     /* Code to run when rallypoint is unavailable */
     private _rallypointFailedCode = {
         private _cooldown = CONFIG_PARAM_3(SETTINGS,rallypoint,cooldown);
-        hint format["can only be done once every %1 minutes", (_cooldown / 60)];
+        hint format[LSTRING(time_restriction_message), (_cooldown / 60)];
     };
 
     /* Create Place action */
-    private _rallypointPlaceAction = [QGVAR(rallypoint_place), "Place rallypoint", "rsc\data\icon_ace_rallypoint_place_ca.paa", _rallypointPlaceCode, {
+    private _rallypointPlaceAction = [QGVAR(rallypoint_place), LSTRING(place_rallypoint), "rsc\data\icon_ace_rallypoint_place_ca.paa", _rallypointPlaceCode, {
         (((vehicle player) == player) && (player getVariable [QGVAR(rallypoint_canCreate), true]) && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]))
         && (player getVariable [QGVAR(showRallypoint), true])
         && !visibleMap
     }] call ace_interact_menu_fnc_createAction;
 
     /* Create Unable to place action */
-    private _rallypointFailedAction = [QGVAR(rallypoint_disabled), "Place rallypoint", "rsc\data\icon_ace_rallypoint_disabled_ca.paa", _rallypointFailedCode, {
+    private _rallypointFailedAction = [QGVAR(rallypoint_disabled), LSTRING(place_rallypoint), "rsc\data\icon_ace_rallypoint_disabled_ca.paa", _rallypointFailedCode, {
         ((((vehicle player) == player) && !(player getVariable [QGVAR(rallypoint_canCreate), true]))
         || (missionNamespace getVariable [QGVAR(rallypoint_disabled), false]))
         && (player getVariable [QGVAR(showRallypoint), true])

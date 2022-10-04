@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Make ai reinforce groups in contact
+ * Makes ai reinforce groups in contact
  *
  * Arguments:
  * None

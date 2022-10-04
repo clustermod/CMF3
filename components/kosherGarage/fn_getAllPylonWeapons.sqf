@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Gets all available pylons in the game and saves them to a variable
+ * Gets all available pylons in the game and saves them to a variable (this is a very heavy process and is only run once serversided)
  *
  * Arguments:
  * None

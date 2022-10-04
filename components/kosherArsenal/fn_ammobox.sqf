@@ -16,7 +16,8 @@
  * Public: Yes
  */
 SCRIPT(ammobox);
-params["_object"];
+
+params ["_object"];
 
 /* Check if ammobox already initialized on object */
 if (_object getVariable [QGVAR(ammobox_initialized), false]) exitWith { false };
@@ -97,7 +98,7 @@ private _onOpen = {
 };
 
 /* Add addAction to open arsenal */
-[_object, ["Rearm at arsenal", _onOpen, [], 6, true, false,"", "_this getVariable ['"+QGVAR(loadout)+"', ''] != ''"]] remoteExec ["addAction", 0, true];
+[_object, [LSTRING(rearm_ammobox), _onOpen, [], 6, true, false,"", "_this getVariable ['"+QGVAR(loadout)+"', ''] != ''"]] remoteExec ["addAction", 0, true];
 _object setVariable [QGVAR(ammobox_initialized), true, true];
 
 true;

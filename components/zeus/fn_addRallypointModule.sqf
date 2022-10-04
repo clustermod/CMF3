@@ -17,16 +17,16 @@
 SCRIPT(setLivesModule);
 
 private _moduleFunction = {
-    if (isNull (_this select 1)) exitWith { ["Must select a unit"] call zen_common_fnc_showMessage };
-    if !((_this select 1) isKindOf "Man") exitWith { ["Selected object must be a unit"] call zen_common_fnc_showMessage };
-    if !(isPlayer (_this select 1)) exitWith { ["Selected unit must be player"] call zen_common_fnc_showMessage };
+    if (isNull (_this select 1)) exitWith { [LSTRING(unitObject_requirement_message)] call zen_common_fnc_showMessage };
+    if !((_this select 1) isKindOf "Man") exitWith { [LSTRING(unit_requirement_message)] call zen_common_fnc_showMessage };
+    if !(isPlayer (_this select 1)) exitWith { [LSTRING(player_requirement_message)] call zen_common_fnc_showMessage };
 
     if !((_this select 1) getVariable [QEGVAR(respawn,rallypoint), false]) then {
         [[(_this select 1)]] call EFUNC(respawn,rallypoint);
     } else {
         (_this select 1) setVariable [QEGVAR(respawn,showRallypoint), true, true];
     };
-    [format["Added rallypoints for %1", name (_this select 1)]] call zen_common_fnc_showMessage;
+    [format[LSTRING(rallypoint_success_message), name (_this select 1)]] call zen_common_fnc_showMessage;
 };
 
-["CMF: Respawn", "Add rallypoint", _moduleFunction, "rsc\data\icon_ace_rallypoint_place_ca.paa"] call zen_custom_modules_fnc_register;
+[LSTRING(respawn_module_category_displayname), LSTRING(rallypoint_module_displayname), _moduleFunction, "rsc\data\icon_ace_rallypoint_place_ca.paa"] call zen_custom_modules_fnc_register;

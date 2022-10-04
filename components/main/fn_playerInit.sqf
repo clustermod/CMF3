@@ -3,9 +3,6 @@
  * Author: Eric
  * Initializes players for CMF (executed when new player connects).
  *
- * Arguments:
- * None
- *
  * Public: No
  */
 SCRIPT(playerInit);

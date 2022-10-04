@@ -4,9 +4,7 @@
  * Open viewdistance UI
  *
  * Arguments:
- * 0: Target <OBJECT>
- * 1: Player <OBJECT>
- * 2: Parameters <ARRAY>
+ * None
  *
  * Return Value:
  * None

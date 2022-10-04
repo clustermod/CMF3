@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * sets AI Skill to be more balanced. Launched postInit, do not call this!
+ * Sets AI Skill to be more balanced.
  *
  * Arguments:
  * None

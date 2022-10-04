@@ -18,17 +18,17 @@ SCRIPT(ammoboxModule);
 
 /* Add kosher ammobox to object */
 private _dialogFunction = {
-    if (isNull (_this select 1)) exitWith {["Must select an object"] call zen_common_fnc_showMessage};
+    if (isNull (_this select 1)) exitWith {[LSTRING(object_requirement_message)] call zen_common_fnc_showMessage};
 
     private _result = [(_this select 1)] call EFUNC(kosherArsenal,ammobox);
     if (_result) then {
-        ["Added kosher ammobox"] call zen_common_fnc_showMessage;
+        [LSTRING(ammobox_success_message)] call zen_common_fnc_showMessage;
 
         /* Raise event */
     	[QGVAR(ammobox_added), [_this select 1]] call CBA_fnc_globalEvent;
     } else {
-        ["Failed to add kosher ammobox"] call zen_common_fnc_showMessage;
+        [LSTRING(ammobox_fail_message)] call zen_common_fnc_showMessage;
     };
 };
 
-["CMF: Kosher Arsenal", "Set as ammobox", _dialogFunction, "rsc\data\icon_module_ammobox_ca.paa"] call zen_custom_modules_fnc_register;
+[LSTRING(kosherArsenal_module_category_displayname), LSTRING(ammobox_module_displayname), _dialogFunction, "rsc\data\icon_module_ammobox_ca.paa"] call zen_custom_modules_fnc_register;

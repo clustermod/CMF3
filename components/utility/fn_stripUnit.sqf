@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Strips supplied unit of everything
+ * Strips supplied unit of all gear (will fail to remove weapon and backpack in multiplayer)
  *
  * Arguments:
  * 0: unit <OBJECT>

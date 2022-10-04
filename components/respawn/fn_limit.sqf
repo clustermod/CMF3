@@ -16,7 +16,8 @@
  * public: yes
 */
 SCRIPT(limit);
-params["_respawns", ["_condition", { true }]];
+
+params ["_respawns", ["_condition", { true }]];
 
 /* Check if params are set and is of correct type */
 if (isNil "_respawns") exitWith { ERROR_MSG("respawns cannot be nil"); false };
@@ -42,7 +43,7 @@ if (call _condition) then {
 			private _pCount = player getVariable[QGVAR(deaths), 0];
 			private _pCount = _pCount + 1;
 			player setVariable[QGVAR(deaths), _pCount, true];
-			[format["you have %1 respawns left", (_respawns - _pCount)], -1, -1, 5, 1, 0, 9459] spawn bis_fnc_dynamicText;
+			[format[LSTRING(respawns_left), (_respawns - _pCount)], -1, -1, 5, 1, 0, 9459] spawn bis_fnc_dynamicText;
 		};
 	}];
 };

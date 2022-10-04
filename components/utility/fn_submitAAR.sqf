@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Creates the Debrief report action in ace
+ * Opens a dialog to submit an after action report, this will only work on the clusterCommunity server.
  *
  * Arguments:
  * None
@@ -49,8 +49,8 @@ private _submit = {
 };
 
 /* Create dialog using Zeus Enhanced */
-["Performance Report", [
-    ["CHECKBOX", ["Anonymous", "Do you want this debrief article to remain anonymous?"], true],
-    ["EDIT:MULTI", ["Player Performance Feedback", "Feedback on player performance"], [""]],
-    ["EDIT:MULTI", ["Mission Feedback", "Feedback on mission"], [""]]
+[LSTRING(performance_report_displayname), [
+    ["CHECKBOX", [LSTRING(anonymous_title), LSTRING(anonymous_tooltip)], true],
+    ["EDIT:MULTI", [LSTRING(player_feedback_title), LSTRING(player_feedback_tooltip)], [""]],
+    ["EDIT:MULTI", [LSTRING(mission_feedback_title), LSTRING(mission_feedback_tooltip)], [""]]
 ], _submit] call zen_dialog_fnc_create;

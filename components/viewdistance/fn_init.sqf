@@ -2,7 +2,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Initializes viewdistance script
+ * Initializes the viewdistance component and loads player's previous settings
  *
  * Arguments:
  * None
@@ -52,13 +52,13 @@
 	GVAR(vehType) = 0;
 
 	/* Register keybinds */
-	["CMF: Viewdistance", QGVAR(dec_viewdistance), "Decrease Viewdistance", {[0] call FUNC(keyDown)}, "", [26, [false, true, false]], true] call CBA_fnc_addKeybind;
-	["CMF: Viewdistance", QGVAR(inc_viewdistance), "Increase Viewdistance", {[1] call FUNC(keyDown)}, "", [27, [false, true, false]], true] call CBA_fnc_addKeybind;
+	[LSTRING(settings_category_displayname), QGVAR(dec_viewdistance), LSTRING(setting_decrease_vd_displayname), {[0] call FUNC(keyDown)}, "", [26, [false, true, false]], true] call CBA_fnc_addKeybind;
+	[LSTRING(settings_category_displayname), QGVAR(inc_viewdistance), LSTRING(settings_increase_vd_displayname), {[1] call FUNC(keyDown)}, "", [27, [false, true, false]], true] call CBA_fnc_addKeybind;
 
-	["CMF: Viewdistance", QGVAR(open_settings), "Open settings", {call FUNC(openDialog)}, "", [43, [false, true, false]], false] call CBA_fnc_addKeybind;
+	[LSTRING(settings_category_displayname), QGVAR(open_settings), LSTRING(settings_open_settings_displayname), {call FUNC(openDialog)}, "", [43, [false, true, false]], false] call CBA_fnc_addKeybind;
 
-	["CMF: Viewdistance", QGVAR(dec_terrain_quality), "Decrease Terrain", {[-1] call FUNC(keyDownTerrain)}, "", [26, [true, false, false]], true] call CBA_fnc_addKeybind;
-	["CMF: Viewdistance", QGVAR(inc_terrain_quality), "Increase Terrain", {[1] call FUNC(keyDownTerrain)}, "", [27, [true, false, false]], true] call CBA_fnc_addKeybind;
+	[LSTRING(settings_category_displayname), QGVAR(dec_terrain_quality), LSTRING(settings_decrease_terrain_displayname), {[-1] call FUNC(keyDownTerrain)}, "", [26, [true, false, false]], true] call CBA_fnc_addKeybind;
+	[LSTRING(settings_category_displayname), QGVAR(inc_terrain_quality), LSTRING(settings_increase_terrain_displayname), {[1] call FUNC(keyDownTerrain)}, "", [27, [true, false, false]], true] call CBA_fnc_addKeybind;
 
 	/* Begin initialization */
 	waitUntil {!isNull player};

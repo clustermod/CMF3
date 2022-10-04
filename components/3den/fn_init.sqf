@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * 3DEN function init
+ * 3DEN function init, adds all 3den tools for cmf
  *
  * Arguments:
  * 0: Argument Name <TYPE>
@@ -38,96 +38,92 @@ for "_i" from 0 to (_ctrlMenuStrip menuSize []) -1 step 1 do {
 /* Create CMF menu */
 private _indexMain = _ctrlMenuStrip menuAdd [[], "CMF"];
 
-/* Create ORBAT viewer */ // Will need to start scenario to open this
-//private _viewORBAT = _ctrlMenuStrip menuAdd [[_indexMain],"View Cluster Community ORBAT"];
-//_ctrlMenuStrip menuSetAction [[_indexMain, _viewORBAT], "[((loadConfig (""configs\CfgORBAT.hpp"")) >> ""CfgORBAT"" >> ""cluster"")] call BIS_fnc_ORBATOpen;"];
-
 /* Create unit spawner menu */
-private _unitSpawner = _ctrlMenuStrip menuAdd [[_indexMain],"Cluster ORBAT spawner"];
+private _unitSpawner = _ctrlMenuStrip menuAdd [[_indexMain], LSTRING(unitSpawner_displayName)];
 
 /* Unit sizes (fireteam, squad, platoon, Company) */
-private _unitSizes = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner], LSTRING(infantry_elements)];
-private _fireteamSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _unitSizes],"Fireteam"];
+private _unitSizes = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner], LSTRING(infantry_elements_displayName)];
+private _fireteamSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _unitSizes], LSTRING(fireteam_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _unitSizes, _fireteamSpawner], "[""FIRETEAM""] spawn cmf_3den_fnc_unitSpawner"];
-private _squadSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _unitSizes],"Squad"];
+private _squadSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _unitSizes], LSTRING(squad_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _unitSizes, _squadSpawner], "[""SQUAD""] spawn cmf_3den_fnc_unitSpawner"];
-private _platoonSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _unitSizes],"Platoon"];
+private _platoonSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _unitSizes], LSTRING(platoon_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _unitSizes, _platoonSpawner], "[""PLATOON""] spawn cmf_3den_fnc_unitSpawner"];
-private _CompanySpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _unitSizes],"Company"];
+private _CompanySpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _unitSizes], LSTRING(company_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _unitSizes, _CompanySpawner], "[""COMPANY""] spawn cmf_3den_fnc_unitSpawner"];
 
 /* Air Elements */
-private _airUnits = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner],"Air Elements"];
-private _phantomSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _airUnits],"Phantom (Light Rotary CAS/Trans)"];
+private _airUnits = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner], LSTRING(air_elements_displayName)];
+private _phantomSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _airUnits], LSTRING(light_rotary_cas_trans_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _airUnits, _phantomSpawner], "[""PHANTOM""] spawn cmf_3den_fnc_unitSpawner"];
-private _reaperSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _airUnits],"Reaper (Rotary CAS)"];
+private _reaperSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _airUnits], LSTRING(rotary_cas)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _airUnits, _reaperSpawner], "[""REAPER""] spawn cmf_3den_fnc_unitSpawner"];
-private _uglySpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _airUnits],"Ugly (Heavy Rotary CAS)"];
+private _uglySpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _airUnits], LSTRING(heavy_rotary_cas_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _airUnits, _uglySpawner], "[""UGLY""] spawn cmf_3den_fnc_unitSpawner"];
-private _hawgSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _airUnits],"Hawg (Ground-Attack Jet)"];
+private _hawgSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _airUnits], LSTRING(ground_attack_jet_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _airUnits, _hawgSpawner], "[""HAWG""] spawn cmf_3den_fnc_unitSpawner"];
-private _pavementSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _airUnits],"Pavement (Fighter / Bomber Jet)"];
+private _pavementSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _airUnits], LSTRING(fighter_bomber_jet_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _airUnits, _pavementSpawner], "[""PAVEMENT""] spawn cmf_3den_fnc_unitSpawner"];
 
 /* Armor Elements */
-private _armorUnits = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner],"Armor Elements"];
-private _sierraSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _armorUnits],"Sierra (APC)"];
+private _armorUnits = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner], LSTRING(armor_elements_displayName)];
+private _sierraSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _armorUnits], LSTRING(apc_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _armorUnits, _sierraSpawner], "[""SIERRA""] spawn cmf_3den_fnc_unitSpawner"];
-private _mikeSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _armorUnits],"Mike (IFV)"];
+private _mikeSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _armorUnits], LSTRING(ifv_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _armorUnits, _mikeSpawner], "[""MIKE""] spawn cmf_3den_fnc_unitSpawner"];
-private _tangoSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _armorUnits],"Tango (MBT)"];
+private _tangoSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _armorUnits], LSTRING(mbt_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _armorUnits, _tangoSpawner], "[""TANGO""] spawn cmf_3den_fnc_unitSpawner"];
 
 /* Support Elements */
-private _supportUnits = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner],"Support Elements"];
-private _mortarsSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _supportUnits],"Mortars (Mortar Team)"];
+private _supportUnits = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner], LSTRING(support_elements_displayName)];
+private _mortarsSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _supportUnits], LSTRING(mortar_team_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _supportUnits, _mortarsSpawner], "[""MORTARS""] spawn cmf_3den_fnc_unitSpawner"];
-private _romeoSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _supportUnits],"Romeo (Recon / Sniper Team)"];
+private _romeoSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _supportUnits], LSTRING(recon_sniper_team_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _supportUnits, _romeoSpawner], "[""ROMEO""] spawn cmf_3den_fnc_unitSpawner"];
-private _logiSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _supportUnits],"Logi (Logistics Team)"];
+private _logiSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _supportUnits], LSTRING(logistics_team_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _supportUnits, _logiSpawner], "[""LOGI""] spawn cmf_3den_fnc_unitSpawner"];
-private _engiSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _supportUnits],"Engi (Engineers Team)"];
+private _engiSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _supportUnits], LSTRING(engineers_team_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _supportUnits, _engiSpawner], "[""ENGI""] spawn cmf_3den_fnc_unitSpawner"];
 
 /* Weapons Elements */
-private _weaponUnits = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner],"Weapons Elements"];
-private _mmgSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _weaponUnits],"MMG (Medium Machinegunner Team)"];
+private _weaponUnits = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner], LSTRING(weapons_elements_displayName)];
+private _mmgSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _weaponUnits], LSTRING(mmg_team_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _weaponUnits, _mmgSpawner], "[""MMG""] spawn cmf_3den_fnc_unitSpawner"];
-private _hmgSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _weaponUnits],"HMG (Heavy Machinegunner Team)"];
+private _hmgSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _weaponUnits], LSTRING(hmg_team_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _weaponUnits, _hmgSpawner], "[""HMG""] spawn cmf_3den_fnc_unitSpawner"];
-private _matSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _weaponUnits],"MAT (Medium Anti-Tank Team)"];
+private _matSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _weaponUnits], LSTRING(mat_team_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _weaponUnits, _matSpawner], "[""MAT""] spawn cmf_3den_fnc_unitSpawner"];
-private _hatSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _weaponUnits],"HAT (Heavy Anti-Tank Team)"];
+private _hatSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _weaponUnits], LSTRING(hat_team_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _weaponUnits, _hatSpawner], "[""HAT""] spawn cmf_3den_fnc_unitSpawner"];
 
 /* Special Elements */
-private _specialUnits = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner],"Special Elements"];
-private _rgrRifleSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _specialUnits],"Ranger Rifle Squad"];
+private _specialUnits = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner], LSTRING(special_elements_displayName)];
+private _rgrRifleSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _specialUnits], LSTRING(rgr_riflesquad_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _specialUnits, _rgrRifleSpawner], "[""RGR_RFL_SQUAD""] spawn cmf_3den_fnc_unitSpawner"];
-private _rgrMGSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _specialUnits],"Ranger Machinegun Squad"];
+private _rgrMGSpawner = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner, _specialUnits], LSTRING(rgr_machinegunsquad_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _specialUnits, _rgrMGSpawner], "[""RGR_MG_SQUAD""] spawn cmf_3den_fnc_unitSpawner"];
 
 /* Custom unit */
-private _singleUnit = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner],"Custom Unit"];
+private _singleUnit = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner], LSTRING(custom_unit_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _singleUnit], "[""UNIT""] spawn cmf_3den_fnc_unitSpawner"];
 
 /* Zeus unit */
-private _zeusUnit = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner],"Zeus Unit"];
+private _zeusUnit = _ctrlMenuStrip menuAdd [[_indexMain, _unitSpawner], LSTRING(zeus_unit_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _zeusUnit], "[""ZEUS""] spawn cmf_3den_fnc_unitSpawner"];
 
 /* Create a tools menu */
-private _tools = _ctrlMenuStrip menuAdd [[_indexMain], "Tools"];
+private _tools = _ctrlMenuStrip menuAdd [[_indexMain], LSTRING(tools_displayName)];
 
 /* Enable simulation for selected objects */
-private _3denSimulationEn = _ctrlMenuStrip menuAdd [[_indexMain, _tools], "Enable Simulation in 3den (will only be enabled in 3den)"];
+private _3denSimulationEn = _ctrlMenuStrip menuAdd [[_indexMain, _tools], LSTRING(enable_sim_3den_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _tools, _3denSimulationEn], "{ _x enableSimulation true; } forEach get3DENSelected ""object"""];
 
 /* Disable simulation for selected objects */
-private _3denSimulationDis = _ctrlMenuStrip menuAdd [[_indexMain, _tools], "Disable Simulation in 3den (will only be disabled in 3den)"];
+private _3denSimulationDis = _ctrlMenuStrip menuAdd [[_indexMain, _tools], LSTRING(disable_sim_3den_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _tools, _3denSimulationDis], "{ _x enableSimulation false; } forEach get3DENSelected ""object"""];
 
 /* Make simple objects and disable simulation and damage */
-private _simpleObj = _ctrlMenuStrip menuAdd [[_indexMain, _tools], "Make object simple"];
+private _simpleObj = _ctrlMenuStrip menuAdd [[_indexMain, _tools], LSTRING(make_obj_simple_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _tools, _simpleObj], "
     {
         _x set3DENAttribute [""enableSimulation"", false];
@@ -143,10 +139,14 @@ _ctrlMenuStrip menuSetAction [[_indexMain, _tools, _simpleObj], "
     } forEach get3DENSelected ""object"""
 ];
 
+/* Make selected objects into ammoboxes */
+private _3denSimulationDis = _ctrlMenuStrip menuAdd [[_indexMain, _tools], LSTRING(make_ammobox_displayName)];
+_ctrlMenuStrip menuSetAction [[_indexMain, _tools, _3denSimulationDis], "{ _x set3DENAttribute [""Init"", ""[this] call cmf_kosherArsenal_fnc_ammobox;""]; } forEach get3DENSelected ""object"""];
+
 /* Shortcut to lobby manager */
-private _lobbyManager = _ctrlMenuStrip menuAdd [[_indexMain],"Lobby manager"];
+private _lobbyManager = _ctrlMenuStrip menuAdd [[_indexMain], LSTRING(lobby_manager_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _lobbyManager], "call (uiNamespace getVariable 'CBA_fnc_openLobbyManager')"];
 
-/* Disable simulation for selected objects */
-private _iconViewer = _ctrlMenuStrip menuAdd [[_indexMain], "Icon Viewer"];
-_ctrlMenuStrip menuSetAction [[_indexMain, _iconViewer], "[""onload""] call fn_iconViewer;"];
+/* Open menu where you can view all the textures in arma */
+private _iconViewer = _ctrlMenuStrip menuAdd [[_indexMain], LSTRING(iconviewer_displayName)];
+_ctrlMenuStrip menuSetAction [[_indexMain, _iconViewer], "[""onload""] call cmf_3den_fnc_iconViewer;"];

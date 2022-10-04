@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * kosher arsenal for AI
+ * allows using kosherArsenal files with ai units
  *
  * Arguments:
  * 0: side <SIDE>
@@ -16,7 +16,8 @@
  * Public: Yes
  */
 SCRIPT(kosherAI);
-params["_side", "_loadoutFile"];
+
+params ["_side", "_loadoutFile"];
 
 if (!isServer) exitWith {};
 

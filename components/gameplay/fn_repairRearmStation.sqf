@@ -16,7 +16,7 @@
  *
  * public: Yes
 */
-SCRIPT(repairRearmTrigger);
+SCRIPT(repairRearmStation);
 
 if (!isServer) exitWith {};
 

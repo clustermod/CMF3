@@ -3,9 +3,6 @@
  * Author: Eric
  * Initializes mission for CMF (executed postInit).
  *
- * Arguments:
- * None
- *
  * Public: No
  */
 SCRIPT(missionInit);

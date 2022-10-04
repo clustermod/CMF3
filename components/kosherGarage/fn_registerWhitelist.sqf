@@ -16,7 +16,8 @@
  * Public: Yes
  */
 SCRIPT(registerWhitelist);
-params["_loadoutid", "_file"];
+
+params ["_loadoutid", "_file"];
 
 private _loadout = format["rsc\loadouts\%1.sqf", _file];
 if !(FILE_EXISTS(_loadout)) exitWith { ERROR_MSG_1("Loadoutfile %1 does not exist", str _file) };

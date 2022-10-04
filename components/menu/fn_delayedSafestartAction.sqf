@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Starts a countdown which will .
+ * Starts a countdown which will disable safestart once it reaches 0.
  *
  * Arguments:
  * None

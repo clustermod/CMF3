@@ -30,7 +30,7 @@ _this spawn {
 	};
 
 	/* Create an addAction */
-	[_actionObject, ["<t color='#FF0000'>Open Garage</t>", {
+	[_actionObject, [LSTRING(open_garage), {
 		(_this select 3) params["_actionObject", "_garageObject", ["_garageDirection", 0], ["_whitelist", nil], ["_clearRange", 8]];
 
 		/* Create events to check if garage is open */

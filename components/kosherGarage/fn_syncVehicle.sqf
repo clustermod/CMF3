@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * make garage vehicle global
+ * Make garage vehicle global
  *
  * Arguments:
  * 0: Vehicle <OBJECT>
@@ -15,6 +15,7 @@
  * Public: No
  */
 SCRIPT(syncVehicle);
+
 private _veh = _this;
 
 /* Get all the vehicle settings and spawn a global vehicle */

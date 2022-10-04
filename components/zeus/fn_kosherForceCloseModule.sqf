@@ -17,12 +17,12 @@
 SCRIPT(kosherForceCloseModule);
 
 private _dialogFunction = {
-    if (isNull (_this select 1)) exitWith {["Must select a unit"] call zen_common_fnc_showMessage};
-    if !((_this select 1) isKindOf "Man") exitWith {["Selected object must be a unit"] call zen_common_fnc_showMessage};
-    if !(isPlayer (_this select 1)) exitWith {["Selected unit must be player"] call zen_common_fnc_showMessage};
+    if (isNull (_this select 1)) exitWith { [LSTRING(unitObject_requirement_message)] call zen_common_fnc_showMessage };
+    if !((_this select 1) isKindOf "Man") exitWith { [LSTRING(unit_requirement_message)] call zen_common_fnc_showMessage };
+    if !(isPlayer (_this select 1)) exitWith { [LSTRING(player_requirement_message)] call zen_common_fnc_showMessage };
 
     [(_this select 1)] call EFUNC(kosherArsenal,forceClose);
-    ["Closed units arsenal"] call zen_common_fnc_showMessage;
+    [LSTRING(forceclose_kosherArsenal_message)] call zen_common_fnc_showMessage;
 };
 
-["CMF: Kosher Arsenal", "Close Kosher Arsenal", _dialogFunction, "rsc\data\icon_module_closeKosherArsenal_ca.paa"] call zen_custom_modules_fnc_register;
+[LSTRING(kosherArsenal_module_category_displayname), LSTRING(forceclose_kosherArsenal_module_displayname), _dialogFunction, "rsc\data\icon_module_closeKosherArsenal_ca.paa"] call zen_custom_modules_fnc_register;

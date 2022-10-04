@@ -4,9 +4,9 @@
  * Set the respawn limit for a unit mid-mission.
  *
  * Arguments:
- * 0: obj <OBJECT>
+ * 0: Unit <OBJECT>
  * 1: Respawns <NUMBER>
- * 2: silent <BOOL>
+ * 2: Hide hint <BOOL>
  *
  * Return Value:
  * <Boolean>
@@ -32,7 +32,7 @@ if (_obj in ([] call ace_spectator_fnc_players)) then {
 
 /* Show a hint for the affected unit */
 if (!_silent) then {
-  [FORMAT_1("Your respawns have been set to: %1", _respawns)] remoteExec ["hint", _obj];
+  [FORMAT_1(LSTRING(respawns_set), _respawns)] remoteExec ["hint", _obj];
 };
 
 /* Raise event */

@@ -70,11 +70,11 @@ for "_i" from (37.125) to 3.125 step -1 do {
 };
 
 private _terrainQualityArray = [
-	"Low",
-	"Standard",
-	"High",
-	"Very High",
-	"Ultra"
+	LSTRING(low),
+	LSTRING(standard),
+	LSTRING(high),
+	LSTRING(very_high),
+	LSTRING(ultra)
 ];
 private _terrainQuality = _terrainQualityArray select _terrainIndex;
 

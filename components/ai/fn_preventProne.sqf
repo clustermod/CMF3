@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Prevents AI going prone
+ * Prevents AI 'from going prone
  *
  * Arguments:
  * None

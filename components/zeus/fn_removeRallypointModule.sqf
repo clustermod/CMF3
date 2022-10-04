@@ -17,12 +17,12 @@
 SCRIPT(setLivesModule);
 
 private _moduleFunction = {
-    if (isNull (_this select 1)) exitWith { ["Must select a unit"] call zen_common_fnc_showMessage };
-    if !((_this select 1) isKindOf "Man") exitWith { ["Selected object must be a unit"] call zen_common_fnc_showMessage };
-    if !(isPlayer (_this select 1)) exitWith { ["Selected unit must be player"] call zen_common_fnc_showMessage };
+    if (isNull (_this select 1)) exitWith { [LSTRING(unitObject_requirement_message)] call zen_common_fnc_showMessage };
+    if !((_this select 1) isKindOf "Man") exitWith { [LSTRING(unit_requirement_message)] call zen_common_fnc_showMessage };
+    if !(isPlayer (_this select 1)) exitWith { [LSTRING(player_requirement_message)] call zen_common_fnc_showMessage };
 
     (_this select 1) setVariable [QEGVAR(respawn,showRallypoint), false, true];
-    [format["Removed rallypoints from %1", name (_this select 1)]] call zen_common_fnc_showMessage;
+    [format[LSTRING(rallypoint_remove_success_message), name (_this select 1)]] call zen_common_fnc_showMessage;
 };
 
-["CMF: Respawn", "Remove rallypoint", _moduleFunction, "rsc\data\icon_ace_rallypoint_disabled_ca.paa"] call zen_custom_modules_fnc_register;
+[LSTRING(respawn_module_category_displayname), LSTRING(rallypoint_remove_module_displayname), _moduleFunction, "rsc\data\icon_ace_rallypoint_disabled_ca.paa"] call zen_custom_modules_fnc_register;

@@ -109,7 +109,7 @@ _this spawn {
     [] spawn {
         waitUntil{!isNull (findDisplay IDD_ace_arsenal)};
         ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
-        (findDisplay IDD_ace_arsenal) ctrlCreate ["cmf_kosherArsenal_forceClose", 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
+        (findDisplay IDD_ace_arsenal) ctrlCreate [QGVAR(forceClose), 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
 
         /* Disable voices and insignias */
         {
@@ -126,14 +126,14 @@ _this spawn {
 
         /* if force primary is enabled and the player doesn't have a primary selected kick him back into the arsenal */
         if (_forcedprimary && (primaryWeapon player == "") && !(player getVariable [QGVAR(close), false])) exitWith {
-            ["<t color='#ff0000'>You are required to have a primary firearm</t>", -1, -1, 5, 1, 0, 9459] spawn bis_fnc_dynamicText;
+            ["<t color='#ff0000'>"+LSTRING(required_primary)+"</t>", -1, -1, 5, 1, 0, 9459] spawn bis_fnc_dynamicText;
             _arsenal spawn {
                 sleep 0.1;
                 [_this, player, false] call ace_arsenal_fnc_openBox;
                 [] spawn {
                     waitUntil{!isNull (findDisplay IDD_ace_arsenal)};
                     ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
-                    (findDisplay IDD_ace_arsenal) ctrlCreate ["cmf_arsenalForceCloseButton", 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
+                    (findDisplay IDD_ace_arsenal) ctrlCreate [QGVAR(forceClose), 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
                 };
             }
         };

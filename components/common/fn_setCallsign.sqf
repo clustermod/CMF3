@@ -94,7 +94,7 @@ switch (_level) do {
         };
     };
 };
-[_callsign, _color, _leadColor] call ace_map_gestures_fnc_addGroupColorMapping;
+[[_callsign, _color, _leadColor], ace_map_gestures_fnc_addGroupColorMapping] remoteExec ["call", 0, true];
 
 /* Set the group parameters for each unit in the group */
 {

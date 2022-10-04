@@ -16,14 +16,8 @@ call cmf_zeus_fnc_playerInfo;
 /* Set available respawns */
 [4] call cmf_respawn_fnc_limit;
 
-/* Kick players from zeus slot if their steam ID is not in the supplied array */
-[["YOURSTEAMID"]] call cmf_utility_fnc_restrictZeus;
-
 /* Initialize kosherArsenal */
 [["test_arsenal"], true, true] call cmf_kosherArsenal_fnc_init; // clear before release
 
 /* Initialize rallypoints */
 [["FTL", "SL", "PL", "CO"]] call cmf_respawn_fnc_rallypoint;
-
-/* Make units investigate shots */
-//[] call cmf_gameplay_fnc_unitInvestigate;

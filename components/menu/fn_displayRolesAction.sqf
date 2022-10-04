@@ -16,7 +16,7 @@
  */
 SCRIPT(displayRolesAction);
 
-/* Geta  list of all player roles */
+/* Get a list of all player roles */
 private _roles = [];
 {
     private _p = _x;

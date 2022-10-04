@@ -14,7 +14,8 @@
  *
  * public: Yes
 */
-SCRIPT(fn_safestart);
+SCRIPT(safestart);
+
 if (!isServer) exitWith {};
 
 /* Check if it's enabled */
@@ -77,7 +78,7 @@ _this spawn {
 					if ((configname (inheritsFrom (configFile >> "cfgWeapons" >> "throw" >> _muzzle)) isEqualTo "ThrowMuzzle")) then {
 						_projectile setPos [0,0,0];
 						deleteVehicle _projectile;
-						_unit sideChat "Weapons are cold, game hasn't started";
+						_unit sideChat LSTRING(weapons_cold);
 					};
 			}, _action] call CBA_fnc_addEventHandlerArgs;
 
@@ -87,7 +88,7 @@ _this spawn {
 
 	/* When the game is started show a hint and enable damage for all units */
 	waitUntil{ missionNamespace getVariable [QGVAR(safestart_disable), false] };
-	["Weapons are hot, game has started"] remoteExec ["hintSilent", 0];
+	[LSTRING(weapons_hot)] remoteExec ["hintSilent", 0];
 
 	{ [_x, true] remoteExec ["allowDamage", 0, true] } forEach allPlayers;
 

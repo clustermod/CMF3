@@ -15,7 +15,8 @@
  * Public: Yes
  */
 SCRIPT(forceClose);
-params["_unit"];
+
+params ["_unit"];
 
 /* Forcefully close the units kosherArsenal */
 {

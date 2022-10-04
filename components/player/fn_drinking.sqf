@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Allows you tu drink water to speed up stamina recovery
+ * Allows players to drink to speed up stamina recovery
  *
  * Arguments:
  * None
@@ -20,7 +20,7 @@ SCRIPT(drinking);
 waitUntil { alive player && !isNull player };
 
 GVAR(drinking_hydrationItems) = [
-    ["ACE_Canteen", ["Land_Canteen_F", 0.2, 10]], ["ACE_Canteen_Half", ["Land_Canteen_F", 0.2, 10]], ["ACE_WaterBottle", ["Land_BottlePlastic_V2_F", 0.2, 10]], ["ACE_WaterBottle_Half", ["Land_BottlePlastic_V2_F", 0.2, 10]],
+    ["ACE_Canteen", ["Land_Canteen_F", 0.2, 15]], ["ACE_Canteen_Half", ["Land_Canteen_F", 0.2, 15]], ["ACE_WaterBottle", ["Land_BottlePlastic_V2_F", 0.2, 15]], ["ACE_WaterBottle_Half", ["Land_BottlePlastic_V2_F", 0.2, 15]],
     ["ACE_Can_Franta", ["Land_Can_V2_F", 0.1, 5]], ["ACE_Can_RedGull", ["Land_Can_V3_F", 0.1, 8]], ["ACE_Can_Spirit", ["Land_Can_V1_F", 0.1, 5]]
 ];
 
@@ -62,6 +62,9 @@ GVAR(drinking_fnc_consume) = {
 		_baseObj setVectorUp _rotation;
         private _position = [[-0.03, 0.0, -0.15], [-0.03, (_itemData select 1), -0.02], _i, 0.4] call BIS_fnc_interpolateVectorConstant;
 		_baseObj attachTo [player, _position, "righthandmiddle1"];
+
+        /* For some reason it's still visible for players in a dedicated enviroment */
+        _baseObj hideObjectGlobal true;
 		sleep 0.03;
 	};
 	_baseObj setVectorUp [-0.070, -0.997, 0.001];
@@ -121,7 +124,7 @@ private _children = {
         if ((_x in ([[GVAR(drinking_hydrationItems)] call CBA_fnc_hashCreate] call CBA_fnc_hashKeys)) && !(_x in _hydrationItems)) then {
             private _displayName = getText (configFile >> "CfgWeapons" >> _x >> "displayName");
             private _icon = getText (configFile >> "CfgWeapons" >> _x >> "picture");
-            private _action = [format [QGVAR(drinking_)+"%1", _x], format["Drink from %1", _displayName], _icon, { _this spawn GVAR(drinking_fnc_consume) }, { true }, {}, _x] call ace_interact_menu_fnc_createAction;
+            private _action = [format [QGVAR(drinking_)+"%1", _x], format[LSTRING(drink_from), _displayName], _icon, { _this spawn GVAR(drinking_fnc_consume) }, { true }, {}, _x] call ace_interact_menu_fnc_createAction;
             _actions pushBack [_action, [], _target];
             _hydrationItems pushBack _x;
         };
@@ -130,5 +133,5 @@ private _children = {
     _actions;
 };
 
-private _action = [QGVAR(drinking_menu), "Hydration", "", {}, _condition, _children] call ace_interact_menu_fnc_createAction;
+private _action = [QGVAR(drinking_menu), LSTRING(hydration), "", {}, _condition, _children] call ace_interact_menu_fnc_createAction;
 [typeOf player, 1, ["ACE_SelfActions"], _action] call ace_interact_menu_fnc_addActionToClass;

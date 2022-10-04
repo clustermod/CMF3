@@ -12,7 +12,7 @@
  *  - 1: damageModifier <NUMBER>
  *
  * Example:
- * ["GdtRock"] call cmf_ehv_fnc_getSurfaceParams
+ * ["GdtRock"] call cmf_enhancedVehicles_fnc_getSurfaceParams
  *
  * Public: No
  */

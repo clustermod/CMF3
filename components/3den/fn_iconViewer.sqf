@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 /*
- * Author: Eric
+ * Author: Hal, Eric
  * Opens a window where you can see all textures in arma and copy their path
  *
  * Arguments:
@@ -39,11 +39,11 @@ FUNC(iconViewer) = {
 			private _display = findDisplay 313 createDisplay "RscDisplayEmpty";
 			if (isNull _display) exitWith {};
 
-			uiNamespace setVariable ["HALs_icons_idd", _display];
+			uiNamespace setVariable [QGVAR(icons_idd), _display];
 
-			["create", []] call fn_iconViewer;
+			["create", []] call FUNC(iconViewer);
 
-			if (isNil {localNamespace getVariable "HALs_gameIcons"}) then {
+			if (isNil {localNamespace getVariable QGVAR(gameIcons)}) then {
 				[] spawn {
 					systemChat "Fetching images from available pbos.";
 
@@ -56,19 +56,19 @@ FUNC(iconViewer) = {
 						_icons append (addonFiles [_x, ".bmp"]);
 					} forEach _addons;
 
-					localNamespace setVariable ["HALs_gameIcons", _icons];
-					localNamespace setVariable ["HALs_icons_numIcons", count _icons];
-					localNamespace setVariable ["HALs_icons", _icons];
+					localNamespace setVariable [QGVAR(gameIcons), _icons];
+					localNamespace setVariable [QGVAR(icons_numIcons), count _icons];
+					localNamespace setVariable [QGVAR(icons), _icons];
 
-					["update", []] call fn_iconViewer;
+					["update", []] call FUNC(iconViewer);
 				};
 			} else {
-				["update", []] call fn_iconViewer;
+				["update", []] call FUNC(iconViewer);
 			};
 		};
 
 		case "create": {
-			private _display = uiNamespace getVariable ["HALs_icons_idd", displayNull];
+			private _display = uiNamespace getVariable [QGVAR(icons_idd), displayNull];
 			if (isNull _display) exitWith {};
 
 			private _TABLE_WIDTH = 130;
@@ -115,7 +115,7 @@ FUNC(iconViewer) = {
 			_closeButton ctrlSetText "\a3\3DEN\Data\Displays\Display3DEN\search_end_ca.paa";
 			_closeButton ctrlSetPosition [(_pos select 2) - ((3 + 0.5) call _fnc_GRID_X), 0, ((3 + 0.5) call _fnc_GRID_X), ((3) call _fnc_GRID_Y)];
 			_closeButton ctrlAddEventHandler ["ButtonClick", {
-				private _display = uiNamespace getVariable ["HALs_icons_idd", displayNull];
+				private _display = uiNamespace getVariable [QGVAR(icons_idd), displayNull];
 				if (!isNull _display) then {_display closeDisplay 2;};
 			}];
 			_closeButton ctrlCommit 0;
@@ -137,8 +137,8 @@ FUNC(iconViewer) = {
 			_ctrlGroupList ctrlCommit 0;
 
 			private _origPos = ctrlPosition _ctrlGroupList;
-			private _boxesX = localNamespace getVariable ["HALs_icons_boxesX", 5];
-			private _boxesY = localNamespace getVariable ["HALs_icons_boxesY", 5];
+			private _boxesX = localNamespace getVariable [QGVAR(icons_boxesX), 5];
+			private _boxesY = localNamespace getVariable [QGVAR(icons_boxesY), 5];
 
 			private _w0 = (
 				(_origPos select 2) - ((_boxesX + 1) * ((0.5) call _fnc_GRID_X))
@@ -198,7 +198,7 @@ FUNC(iconViewer) = {
 
 						if (!isNil "_data") then {
 							copyToClipboard str _data;
-							hint "Copied to clipboard.";
+							hint LSTRING(copied_to_clipboard);
 						};
 					}];
 					_ctrlButton ctrlAddEventHandler ["MouseEnter", {
@@ -233,7 +233,7 @@ FUNC(iconViewer) = {
 			_ctrlSearchInfo ctrlSetTextColor [0.95, 0.95, 0.95, 1];
 			_ctrlSearchInfo ctrlEnable false;
 			_ctrlSearchInfo ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
-			_ctrlSearchInfo ctrlSetStructuredText parseText format ["<t align='right'>%1 images found</t>", 0];
+			_ctrlSearchInfo ctrlSetStructuredText parseText format ["<t align='right'>%1 "+LSTRING(images_found)+"</t>", 0];
 			_ctrlSearchInfo ctrlCommit 0;
 
 			_display setVariable ["searchInfo", _ctrlSearchInfo];
@@ -248,15 +248,15 @@ FUNC(iconViewer) = {
 			_ctrlSearchCheckbox ctrlAddEventHandler ["CheckedChanged", {
 				private _checked = (_this select 1) == 1;
 
-				(_this select 0) ctrlSetTooltip (["Case Insensitive.", "Case Sensitive."] select _checked);
-				localNamespace setVariable ["HALs_icons_caseSensitive", _checked];
+				(_this select 0) ctrlSetTooltip ([LSTRING(case_insensitive), LSTRING(case_sensitive)] select _checked);
+				localNamespace setVariable [QGVAR(icons_caseSensitive), _checked];
 
-				["filterItems", []] call fn_iconViewer;
+				["filterItems", []] call FUNC(iconViewer);
 			}];
 			_ctrlSearchCheckbox ctrlCommit 0;
 
-			private _checked = localNamespace getVariable ["HALs_icons_caseSensitive", true];
-			_ctrlSearchCheckbox ctrlSetTooltip (["Case Insensitive.", "Case Sensitive."] select _checked);
+			private _checked = localNamespace getVariable [QGVAR(icons_caseSensitive), true];
+			_ctrlSearchCheckbox ctrlSetTooltip ([LSTRING(case_insensitive), LSTRING(case_sensitive)] select _checked);
 			_ctrlSearchCheckbox cbSetChecked _checked;
 
 			private _ctrlSearch = _display ctrlCreate ["RscEdit", 12001, _ctrlGroupMain];
@@ -268,7 +268,7 @@ FUNC(iconViewer) = {
 			];
 			_ctrlSearch ctrlSetFont "RobotoCondensed";
 			_ctrlSearch ctrlSetTextColor [0.95, 0.95, 0.95, 1];
-			_ctrlSearch ctrlSetText (localNamespace getVariable ["HALs_icons_searchText", ""]);
+			_ctrlSearch ctrlSetText (localNamespace getVariable [QGVAR(icons_searchText), ""]);
 			_ctrlSearch ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
 			_ctrlSearch ctrlSetBackgroundColor [0, 0, 0, 0.7];
 			_ctrlSearch ctrlCommit 0;
@@ -292,12 +292,12 @@ FUNC(iconViewer) = {
 
 				private _ctrlEditSearch = _ctrl getVariable ["edit", controlNull];
 				private _searchText = ctrlText _ctrlEditSearch;
-				private _oldText = localNamespace getVariable ["HALs_icons_searchText", ""];
+				private _oldText = localNamespace getVariable [QGVAR(icons_searchText), ""];
 
 				if (_searchText != _oldText) then {
-					localNamespace setVariable ["HALs_icons_searchText", _searchText];
+					localNamespace setVariable [QGVAR(icons_searchText), _searchText];
 
-					["filterItems", []] call fn_iconViewer;
+					["filterItems", []] call FUNC(iconViewer);
 				};
 			}];
 			_ctrlButtonSearch ctrlCommit 0;
@@ -326,11 +326,11 @@ FUNC(iconViewer) = {
 			];
 			_ctrlButtonL ctrlSetFont "PuristaMedium";
 			_ctrlButtonL ctrlSetText "<";
-			_ctrlButtonL ctrlSetTooltip "Previous page.";
+			_ctrlButtonL ctrlSetTooltip LSTRING(previous_page);
 			_ctrlButtonL ctrlSetBackgroundColor [1, 1, 1, 0.15];
 			_ctrlButtonL ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
 			_ctrlButtonL ctrlSetTextColor [0.95, 0.95, 0.95, 1];
-			_ctrlButtonL ctrlAddEventHandler ["ButtonClick", {["changePage", [-1]] call fn_iconViewer;}];
+			_ctrlButtonL ctrlAddEventHandler ["ButtonClick", {["changePage", [-1]] call FUNC(iconViewer);}];
 			_ctrlButtonL ctrlCommit 0;
 
 			private _ctrlButtonR = _display ctrlCreate ["ctrlButton", -1, _ctrlGroupMain];
@@ -342,20 +342,20 @@ FUNC(iconViewer) = {
 			];
 			_ctrlButtonR ctrlSetFont "PuristaMedium";
 			_ctrlButtonR ctrlSetText ">";
-			_ctrlButtonR ctrlSetTooltip "Next page.";
+			_ctrlButtonR ctrlSetTooltip LSTRING(next_page);
 			_ctrlButtonR ctrlSetBackgroundColor [1, 1, 1, 0.15];
 			_ctrlButtonR ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
 			_ctrlButtonR ctrlSetTextColor [0.95, 0.95, 0.95, 1];
-			_ctrlButtonR ctrlAddEventHandler ["ButtonClick", {["changePage", [1]] call fn_iconViewer;}];
+			_ctrlButtonR ctrlAddEventHandler ["ButtonClick", {["changePage", [1]] call FUNC(iconViewer);}];
 			_ctrlButtonR ctrlCommit 0;
 		};
 
 		case "filterItems": {
-			private _searchText = localNamespace getVariable ["HALs_icons_searchText", ""];
-			private _items = localNamespace getVariable ["HALs_gameIcons", []];
+			private _searchText = localNamespace getVariable [QGVAR(icons_searchText), ""];
+			private _items = localNamespace getVariable [QGVAR(gameIcons), []];
 
 			if (_searchText != "") then {
-				if (localNamespace getVariable ["HALs_icons_caseSensitive", true]) then {
+				if (localNamespace getVariable [QGVAR(icons_caseSensitive), true]) then {
 					_items = _items select {(_x find _searchText) > -1};
 				} else {
 					_searchText = toLowerANSI _searchText;
@@ -364,22 +364,22 @@ FUNC(iconViewer) = {
 				};
 			};
 
-			localNamespace setVariable ["HALs_icons", _items];
-			localNamespace setVariable ["HALs_icons_page", 0];
-			["update", []] call fn_iconViewer;
+			localNamespace setVariable [QGVAR(icons), _items];
+			localNamespace setVariable [QGVAR(icons_page), 0];
+			["update", []] call FUNC(iconViewer);
 		};
 
 		case "changePage": {
-			private _maxIcons = count (localNamespace getVariable ["HALs_icons", []]);
-			private _iconsPerPage = (localNamespace getVariable ["HALs_icons_boxesX", 5]) * (localNamespace getVariable ["HALs_icons_boxesY", 5]);
+			private _maxIcons = count (localNamespace getVariable [QGVAR(icons), []]);
+			private _iconsPerPage = (localNamespace getVariable [QGVAR(icons_boxesX), 5]) * (localNamespace getVariable [QGVAR(icons_boxesY), 5]);
 			private _maxPages = ceil (_maxIcons / _iconsPerPage);
 
 			if (_maxPages == 0) exitWith {
-				localNamespace setVariable ["HALs_icons_page", 0];
-				["update", []] call fn_iconViewer;
+				localNamespace setVariable [QGVAR(icons_page), 0];
+				["update", []] call FUNC(iconViewer);
 			};
 
-			private _page = localNamespace getVariable ["HALs_icons_page", 0];
+			private _page = localNamespace getVariable [QGVAR(icons_page), 0];
 			private _amt = (_args param [0, 0, [0]]) + _page;
 
 			if (_amt < 0) then {
@@ -388,24 +388,24 @@ FUNC(iconViewer) = {
 				_amt = _amt % _maxPages;
 			};
 
-			localNamespace setVariable ["HALs_icons_page", _amt];
-			["update", []] call fn_iconViewer;
+			localNamespace setVariable [QGVAR(icons_page), _amt];
+			["update", []] call FUNC(iconViewer);
 		};
 
 		case "update": {
-			private _display = uiNamespace getVariable ["HALs_icons_idd", displayNull];
+			private _display = uiNamespace getVariable [QGVAR(icons_idd), displayNull];
 			private _ctrlGroupList = _display getVariable ["ctrlList", controlNull];
 			private _ctrls = _ctrlGroupList getVariable ["ctrls", []];
 
-			private _items = localNamespace getVariable ["HALs_icons", []];
+			private _items = localNamespace getVariable [QGVAR(icons), []];
 			if (_items isEqualTo []) then {
 				{_x ctrlShow false} forEach _ctrls;
 
 				(_display getVariable ["pageInfo", controlNull]) ctrlSetStructuredText parseText format ["<t align='center'>0 | 0</t>"];
 				(_display getVariable ["searchInfo", controlNull]) ctrlSetStructuredText parseText format ["<t align='right'>0 images found.</t>"];
 			} else {
-				private _page = localNamespace getVariable ["HALs_icons_page", 0];
-				private _iconsPerPage = (localNamespace getVariable ["HALs_icons_boxesX", 5]) * (localNamespace getVariable ["HALs_icons_boxesY", 5]);
+				private _page = localNamespace getVariable [QGVAR(icons_page), 0];
+				private _iconsPerPage = (localNamespace getVariable [QGVAR(icons_boxesX), 5]) * (localNamespace getVariable [QGVAR(icons_boxesY), 5]);
 				private _maxPages = ceil (count _items / _iconsPerPage);
 
 				private _n = count _items;

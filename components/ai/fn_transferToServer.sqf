@@ -9,7 +9,7 @@
  * None
  *
  * Example:
- * [] call emf_init_fnc_transferToServer
+ * [] call cmf_ai_fnc_transferToServer
  *
  * Public: No
  */
