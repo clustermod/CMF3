@@ -150,3 +150,8 @@ _ctrlMenuStrip menuSetAction [[_indexMain, _lobbyManager], "call (uiNamespace ge
 /* Open menu where you can view all the textures in arma */
 private _iconViewer = _ctrlMenuStrip menuAdd [[_indexMain], LSTRING(iconviewer_displayName)];
 _ctrlMenuStrip menuSetAction [[_indexMain, _iconViewer], "[""onload""] call cmf_3den_fnc_iconViewer;"];
+
+/* Report a bug with CMF */
+private _reportBug = _ctrlMenuStrip menuAdd [[_indexMain], LSTRING(report_bug)];
+_ctrlMenuStrip menuSetAction [[_indexMain, _reportBug], " createDialog ""cmf_utility_reportBug"" "];
+_ctrlMenuStrip menuSetPicture [[_indexMain, _reportBug], "\a3\3DEN\Data\Controls\ctrlMenu\link_ca.paa"]

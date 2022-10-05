@@ -1,15 +1,9 @@
 /*
- * Author: Bohemia Interactive, Eric
  * Gets executed locally for joined players. Any code put in here will only be run for the joined player.
- *
  */
-scriptName "initPlayerLocal.sqf";
 
 /* Wait until CMF is initialized */
 waitUntil{ missionNamespace getVariable ["cmf_main_player_initialized", false] };
-
-/* Add Zeus FPS and lives counter */
-call cmf_zeus_fnc_playerInfo;
 
 //["testLoadout", "test_garage"] call cmf_kosherGarage_fnc_registerWhitelist; // remove before release
 

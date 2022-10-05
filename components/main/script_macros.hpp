@@ -46,7 +46,7 @@
 #define DSTRING(var1) QUOTE(TRIPLES(STR,COMPONENT,var1))
 #define EDSTRING(var1,var2) QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
 #define LSTRING(var1) ([QUOTE(PATHTO_SYS(MODULE,stringtable)), DSTRING(var1)] call EFUNC(main,localize))
-#define ELSTRING(var1,var2) ([QUOTE(PATHTO_SYS(MODULE,stringtable)), EDSTRING(var1,var2)] call EFUNC(main,localize))
+#define ELSTRING(var1,var2) ([QUOTE(PATHTO_SYS(var1,stringtable)), EDSTRING(var1,var2)] call EFUNC(main,localize))
 
 #define ARRAY_FLATTEN(var1) (flatten var1)
 

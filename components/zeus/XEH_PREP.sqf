@@ -9,4 +9,4 @@ IPREP(disableFreezeTime);
 IPREP(toggleSpectatorModule);
 IPREP(addRallypointModule);
 IPREP(removeRallypointModule);
-PREP(playerInfo);
+IPREP(playerInfo);

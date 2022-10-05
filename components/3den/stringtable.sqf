@@ -181,5 +181,9 @@
     [DSTRING(lobby_manager_displayName), [
         ["English", "Lobby manager"],
         ["Spanish", "Gestor de Lobby"]
+    ]],
+    [DSTRING(report_bug), [
+        ["English", "Report CMF Bug"],
+        ["Spanish", "Informar de un error en el CMF"]
     ]]
 ]

@@ -52,12 +52,16 @@ private _childrenSelf = {
     }] call ace_interact_menu_fnc_createAction);
     _actions pushBack [_action, [], _target];
 
-    /* Player Role List Action */
-    private _action = ([QGVAR(submitAAR), LSTRING(player_roled_displayname), "rsc\data\icon_ace_team_ca.paa", { _this call FUNC(displayRolesAction) }, { true }] call ace_interact_menu_fnc_createAction);
+    /* Report Bug action */
+    private _action = ([QGVAR(reportBug), ELSTRING(3den,report_bug), "\a3\3DEN\Data\Controls\ctrlMenu\link_ca.paa", { createDialog "cmf_utility_reportBug" }, { true }] call ace_interact_menu_fnc_createAction);
     _actions pushBack [_action, [], _target];
 
     /* After Action Report Action */
     private _action = ([QGVAR(submitAAR), LSTRING(aar_displayname), "rsc\data\icon_ace_debrief_ca.paa", { _this call EFUNC(utility,submitAAR) }, { (serverName isEqualTo "Clustercommunity") }] call ace_interact_menu_fnc_createAction);
+    _actions pushBack [_action, [], _target];
+
+    /* Player Role List Action */
+    private _action = ([QGVAR(submitAAR), LSTRING(player_roled_displayname), "rsc\data\icon_ace_team_ca.paa", { _this call FUNC(displayRolesAction) }, { true }] call ace_interact_menu_fnc_createAction);
     _actions pushBack [_action, [], _target];
 
     /* Hide HUD Action */

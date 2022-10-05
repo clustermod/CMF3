@@ -33,7 +33,7 @@ An attempt has been made to build the framework modularly so almost any *module*
 
 It should be noted that **CMF3** has been developed with **Cluster Community** as it's focus and therefore contains features that will only be available on the **Cluster Community Server**.
 
-For a quick rundown on installing, configuring and running **CMF3** refer to the [Cluster Community Wiki](https://zeus.cluster-community.com/index.php/Category:Eric%27s_Mission_Framework_(EMF)).
+For a quick rundown on installing, configuring and running **CMF3** refer to the [Cluster Community Wiki](https://wiki.cluster-community.com/index.php/Category:Eric%27s_Mission_Framework_(EMF)).
 
 ## Contributing
 You can help out with the ongoing development by looking for potential bugs in the framework, or by contributing new features. We are always welcoming new pull requests containing bug fixes, refactors and new features.

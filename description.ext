@@ -46,3 +46,7 @@ class CfgSounds {
 	/* Include CMF Sounds */
 	#include "configs\CfgSounds.hpp"
 };
+
+class CfgCommands {
+	#include "configs\CfgCommands.hpp"
+};

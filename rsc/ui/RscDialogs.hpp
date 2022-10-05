@@ -1,3 +1,59 @@
+/* Report bug web link workaround */
+class cmf_utility_reportBug {
+    idd = -1;
+    enableDisplay = 1;
+    movingEnable = 1;
+
+    class controls {
+        class Background: cmf_ctrlStaticBackground {
+            x = (getResolution select 2) * 0.5 * pixelW - (90/2) * GRID_3DEN_W;
+            y = 0.5 - (35/2 - 5) * GRID_3DEN_H;
+            w = 90 * GRID_3DEN_W;
+            h = (35 - 10) * GRID_3DEN_H;
+        };
+
+        class BackgroundButtons: cmf_ctrlStaticFooter {
+            x = (getResolution select 2) * 0.5 * pixelW - (90/2) * GRID_3DEN_W;
+            y = 0.5 + (35/2 - 10 - 2) * GRID_3DEN_H;
+            w = 90 * GRID_3DEN_W;
+            h = 7 * GRID_3DEN_H;
+        };
+
+        class Title: cmf_ctrlStaticTitle {
+            text = "CMF: Report Bug";
+            x = (getResolution select 2) * 0.5 * pixelW - (90/2) * GRID_3DEN_W;
+            y = 0.5 - (35/2 - 5) * GRID_3DEN_H;
+            w = 90 * GRID_3DEN_W;
+            h = 5 * GRID_3DEN_H;
+        };
+
+		class roleLabel: cmf_ctrlStatic {
+			text = "This will open the issue-tracker in your browser.";
+            tooltip = "The unit's assigned kosherArsenal role, e.g. RFL";
+            x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1) * GRID_3DEN_W;
+            y = 0.5 - (35/2 - 10 - 5) * GRID_3DEN_H;
+            w = 80 * GRID_3DEN_W;
+            h = 5 * GRID_3DEN_H;
+        };
+
+        class ButtonOK: cmf_ctrlButtonOK {
+			text = "Open page";
+            url= "https://github.com/clustermod/CMF3/issues";
+            x = (getResolution select 2) * 0.5 * pixelW + (90/2 - 25 - 1) * GRID_3DEN_W;
+            y = 0.5 + (35/2 - 10 - 1) * GRID_3DEN_H;
+            w = 25 * GRID_3DEN_W;
+            h = 5 * GRID_3DEN_H;
+        };
+
+        class ButtonCancel: cmf_ctrlButtonCancel {
+            x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1) * GRID_3DEN_W;
+            y = 0.5 + (35/2 - 10 - 1) * GRID_3DEN_H;
+            w = 25 * GRID_3DEN_W;
+            h = 5 * GRID_3DEN_H;
+        };
+    };
+};
+
 /* 3DEN Custom Unit Menu */
 class cmf_3den_customUnitMenu {
     idd = -1;
