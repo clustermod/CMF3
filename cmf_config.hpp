@@ -66,6 +66,9 @@ class CMF {
     };
 };
 
+/* Disable forced complex flightmodel */
+forceRotorLibSimulation = 0;
+
 /* Respawn delay (in seconds) */
 respawnDelay = 3;
 

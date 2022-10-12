@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Repairs and rearms player vehicles inside radius.
+ * Repairs and rearms player vehicles inside radius. (BROKEN)
  *
  * Arguments:
  * 0: Center Position <ARRAY>

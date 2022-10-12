@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Restricts vehicle operator positions based on supplied condition
+ * Restricts vehicle operator positions based on supplied condition. (BROKEN)
  *
  * Arguments:
  * 0: Vehicle <OBJECT>
@@ -11,7 +11,7 @@
  * None
  *
  * Example:
- * [_myVehicle, { (_this getVariable ["cmf_common_role", "RFL"]) isEqualTo "CREW" }] call cmf_gameplay_fnc_restrictedVehicle
+ * [_myVehicle, { [_this, "CREW"] call cmf_common_fnc_isRole }] call cmf_gameplay_fnc_restrictedVehicle
  *
  * public: Yes
 */

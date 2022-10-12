@@ -46,7 +46,7 @@ GVAR(drinking_fnc_consume) = {
         _drinkObj = objNull;
     } else {
         /* Create physical objects */
-        _baseObj = "Land_Can_V2_F" createVehicle getPos player;
+        _baseObj = "Land_HelipadEmpty_F" createVehicle getPos player;
         _baseObj hideObjectGlobal true;
         _drinkObj = _objClass createVehicle getPos player;
 
@@ -63,8 +63,6 @@ GVAR(drinking_fnc_consume) = {
         private _position = [[-0.03, 0.0, -0.15], [-0.03, (_itemData select 1), -0.02], _i, 0.4] call BIS_fnc_interpolateVectorConstant;
 		_baseObj attachTo [player, _position, "righthandmiddle1"];
 
-        /* For some reason it's still visible for players in a dedicated enviroment */
-        _baseObj hideObjectGlobal true;
 		sleep 0.03;
 	};
 	_baseObj setVectorUp [-0.070, -0.997, 0.001];
