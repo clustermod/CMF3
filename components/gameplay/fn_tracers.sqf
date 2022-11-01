@@ -68,13 +68,13 @@ private _fnc_applyTracers = {
 			} forEach magazines _unit;
 
 			if (!isNil "_newMagazine") then {
-				[_unit, _primaryWeaon] call CBA_fnc_removeWeapon;
+				_unit addMagazines [_newMagazine, 1];
+				_unit reload [primaryWeapon _unit, _newMagazine];
 				{
 					[_unit, _x] call CBA_fnc_removeMagazine;
 				} forEach _magReplace;
 
 				_unit addMagazines [_newMagazine, _magCount];
-				[_unit, _primaryWeaon] call CBA_fnc_addWeapon;
 			};
 
 			LOG_1("Added tracers for %1", name _unit);
