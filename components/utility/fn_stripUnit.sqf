@@ -18,10 +18,10 @@ SCRIPT(stripUnit);
 params["_unit"];
 
 /* Strip the unit of all gear and weapons */
-[_unit, (primaryWeapon player)] remoteExecCall ["CBA_fnc_removeWeapon", (owner _unit)];
-[_unit, (handgunWeapon player)] remoteExecCall ["CBA_fnc_removeWeapon", (owner _unit)];
-[_unit, (secondaryWeapon player)] remoteExecCall ["CBA_fnc_removeWeapon", (owner _unit)];
-[_unit] remoteExec ["removeBackpackGlobal", (owner _unit)];
+[_unit, (primaryWeapon _unit)] remoteExecCall ["CBA_fnc_removeWeapon", _unit];
+[_unit, (handgunWeapon _unit)] remoteExecCall ["CBA_fnc_removeWeapon", _unit];
+[_unit, (secondaryWeapon _unit)] remoteExecCall ["CBA_fnc_removeWeapon", _unit];
+removeBackpackGlobal _unit;
 removeAllItems _unit;
 removeAllAssignedItems _unit;
 removeUniform _unit;

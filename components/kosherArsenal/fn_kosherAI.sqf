@@ -59,16 +59,31 @@ private _fnc_setLoadout = {
     _unit forceAddUniform (selectRandom (_whitelist select 2));
     _unit addGoggles (selectRandom (_whitelist select 3));
     _unit addHeadgear (selectRandom (_whitelist select 4));
-    _unit addWeapon (selectRandom (_whitelist select 7));
+
+    /* Add random weapons for each slot */
+    private _primaries = (_whitelist select 7) select { getNumber (configFile >> "CfgWeapons" >> _x >> "type") isEqualTo 1 };
+    private _secondaries = (_whitelist select 7) select { getNumber (configFile >> "CfgWeapons" >> _x >> "type") isEqualTo 4 };
+    private _handguns = (_whitelist select 7) select { getNumber (configFile >> "CfgWeapons" >> _x >> "type") isEqualTo 2 };
+
+    _unit addWeapon selectRandom _primaries;
+    _unit addWeapon selectRandom _secondaries;
+    _unit addWeapon selectRandom _handguns;
 
     /* Add random weapon attachments if they are available */
     for "_i" from 0 to 2 do {
         _unit addPrimaryWeaponItem (selectRandom (_whitelist select 5));
     };
 
-    /* Add random magazines (this also adds grenades) */
-    for "_i" from 0 to (random 6) do {
-        _unit addMagazineGlobal (selectRandom (_whitelist select 6));
+    /* Add random magazines, grenades and explosives (no way to check for explosives unfortunatly) */
+    private _grenades = (_whitelist select 6) select { _x call BIS_fnc_isThrowable };
+    private _magazines = (_whitelist select 6) select { !(_x call BIS_fnc_isThrowable) };
+
+    for "_i" from 0 to (random 5) do {
+        _unit addMagazineGlobal selectRandom _magazines;
+    };
+
+    for "_i" from 0 to (random 3) do {
+        _unit addMagazineGlobal selectRandom _grenades;
     };
 
     /* Add medical equipment */
@@ -99,7 +114,7 @@ private _fnc_setLoadout = {
                 private _whitelist = ([_role] call compile(preprocessFileLineNumbers format["rsc\loadouts\%1.sqf", _loadoutFile])) select 1;
 
                 /* Set the unit's loadout */
-                [_x, _role, _whitelist] call _fnc_setLoadout;
+                [_x, _role, _whitelist] spawn _fnc_setLoadout;
                 _x setVariable [QGVAR(kosherai_initialized), true];
 
                 /* Raise event */

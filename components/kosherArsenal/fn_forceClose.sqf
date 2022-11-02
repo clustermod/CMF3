@@ -19,6 +19,4 @@ SCRIPT(forceClose);
 params ["_unit"];
 
 /* Forcefully close the units kosherArsenal */
-{
-  player setVariable [QGVAR(close), true, true];
-} remoteExec ["call", _unit, true];
+_unit setVariable [QGVAR(close), true, true];
