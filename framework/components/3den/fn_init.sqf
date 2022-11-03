@@ -20,6 +20,7 @@ SCRIPT(init);
 #include "fn_unitConstructor.sqf"
 #include "fn_unitSpawner.sqf"
 #include "fn_iconViewer.sqf"
+#include "fn_addRadioRack.sqf"
 
 /* Define the string localize function */
 EFUNC(main,localize) = compile preprocessFileLineNumbers QUOTE(PATHTO_SYS(main,fn_localize));
@@ -113,6 +114,9 @@ _ctrlMenuStrip menuSetAction [[_indexMain, _unitSpawner, _zeusUnit], "[""ZEUS""]
 
 /* Create a tools menu */
 private _tools = _ctrlMenuStrip menuAdd [[_indexMain], LSTRING(tools_displayName)];
+
+/* Add ACRE rack tool */
+[_ctrlMenuStrip, [_indexMain, _tools]] call FUNC(addRadioRack);
 
 /* Enable simulation for selected objects */
 private _3denSimulationEn = _ctrlMenuStrip menuAdd [[_indexMain, _tools], LSTRING(enable_sim_3den_displayName)];

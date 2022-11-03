@@ -5,7 +5,7 @@
  */
 [
     [DSTRING(iconviewer_displayName), [
-        ["English", "Infantry Elements"],
+        ["English", "Icon Viewer"],
         ["Spanish", "Visor de iconos"]
     ]],
     [DSTRING(copied_to_clipboard), [
@@ -159,7 +159,7 @@
         ["Spanish", "Unidad Zeus"]
     ]],
     [DSTRING(tools_displayName), [
-        ["English", "Tools"],
+        ["English", "Entity Tools"],
         ["Spanish", "Herramientas"]
     ]],
     [DSTRING(enable_sim_3den_displayName), [

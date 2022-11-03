@@ -203,6 +203,76 @@ class cmf_3den_customUnitMenu {
     };
 };
 
+/* 3DEN Add ACRE Rack Menu */
+class cmf_3den_addRack {
+    idd = -1;
+    enableDisplay = 1;
+    movingEnable = 1;
+
+    class controlsBackground {
+        class Disable: cmf_ctrlStaticBackgroundDisable {};
+        class DisableTiles: cmf_ctrlStaticBackgroundDisableTiles {};
+    };
+
+    class controls {
+        class Background: cmf_ctrlStaticBackground {
+            x = (getResolution select 2) * 0.5 * pixelW - (90/2) * GRID_3DEN_W;
+            y = 0.5 - (40/2 - 5) * GRID_3DEN_H;
+            w = 90 * GRID_3DEN_W;
+            h = (40 - 10) * GRID_3DEN_H;
+        };
+
+        class BackgroundButtons: cmf_ctrlStaticFooter {
+            x = (getResolution select 2) * 0.5 * pixelW - (90/2) * GRID_3DEN_W;
+            y = 0.5 + (40/2 - 10 - 2) * GRID_3DEN_H;
+            w = 90 * GRID_3DEN_W;
+            h = 7 * GRID_3DEN_H;
+        };
+
+        class Title: cmf_ctrlStaticTitle {
+            text = "Edit: Add ACRE Radio";
+            x = (getResolution select 2) * 0.5 * pixelW - (90/2) * GRID_3DEN_W;
+            y = 0.5 - (40/2 - 5) * GRID_3DEN_H;
+            w = 90 * GRID_3DEN_W;
+            h = 5 * GRID_3DEN_H;
+        };
+
+		class radioLabel: cmf_ctrlStatic {
+			text = "Radio";
+            tooltip = "Radio to add to vehicle";
+            x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1) * GRID_3DEN_W;
+            y = 0.5 - (40/2 - 10 - 5) * GRID_3DEN_H;
+            w = 49 * GRID_3DEN_W;
+            h = 5 * GRID_3DEN_H;
+        };
+
+		class radio: cmf_ctrlCombo {
+			idc = 100;
+            x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1 - 20) * GRID_3DEN_W;
+            y = 0.5 - (40/2 - 10 - 5) * GRID_3DEN_H;
+            w = 65 * GRID_3DEN_W;
+            h = 5 * GRID_3DEN_H;
+			colorDisabled[] = {1, 1, 1, 1};
+            colorBackground[] = {0, 0, 0, 0.25};
+        };
+
+        class ButtonOK: cmf_ctrlButtonOK {
+			text = "Add";
+            x = (getResolution select 2) * 0.5 * pixelW + (90/2 - 50 - 2) * GRID_3DEN_W;
+            y = 0.5 + (40/2 - 10 - 2) * GRID_3DEN_H;
+            w = 25 * GRID_3DEN_W;
+            h = 5 * GRID_3DEN_H;
+        };
+
+        class ButtonCancel: cmf_ctrlButtonCancel {
+            x = (getResolution select 2) * 0.5 * pixelW + (90/2 - 25 - 1) * GRID_3DEN_W;
+            y = 0.5 + (40/2 - 10 - 2) * GRID_3DEN_H;
+            w = 25 * GRID_3DEN_W;
+            h = 5 * GRID_3DEN_H;
+        };
+    };
+};
+
 /* Viewdistance dialog */
 class cmf_viewdistance_dialog {
 	idd = 2900;

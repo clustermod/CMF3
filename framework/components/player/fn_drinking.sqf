@@ -46,7 +46,7 @@ GVAR(drinking_fnc_consume) = {
         _drinkObj = objNull;
     } else {
         /* Create physical objects */
-        _baseObj = "Land_HelipadEmpty_F" createVehicle getPos player;
+        _baseObj = "Land_Can_V2_F" createVehicle getPos player;
         _baseObj hideObjectGlobal true;
         _drinkObj = _objClass createVehicle getPos player;
 
