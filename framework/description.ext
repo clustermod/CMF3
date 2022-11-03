@@ -1,0 +1,52 @@
+/*
+ * Author: Eric
+ * set mission attributes and define global entities.
+ */
+
+/* Enable function logging */
+allowFunctionsLog=1;
+
+/* Include custom defines */
+#include "rsc\ui\RscDefines.hpp"
+
+/* Include Dialogs */
+#include "rsc\ui\RscDialogs.hpp"
+
+/* Include Controls */
+#include "rsc\ui\RscControls.hpp"
+
+/* include CMF config */
+#include "cmf_config.hpp"
+
+/* include Enhanced Vehicles config */
+#include "configs\CfgEnhancedVehicles.hpp"
+
+/* include CMF respawn config */
+#include "configs\CfgRespawn.hpp"
+
+/* include Cluster Community ORBAT */
+#include "configs\CfgORBAT.hpp"
+
+class RscTitles {
+	/* Include CMF RscTitles */
+	#include "rsc\ui\RscTitles.hpp"
+};
+
+class CfgDebriefing {
+	/* Include CMF debriefings */
+	#include "configs\CfgDebriefing.hpp"
+};
+
+class CfgFunctions {
+	/* Include CMF functions */
+	#include "configs\CfgFunctions.hpp"
+};
+
+class CfgSounds {
+	/* Include CMF Sounds */
+	#include "configs\CfgSounds.hpp"
+};
+
+class CfgCommands {
+	#include "configs\CfgCommands.hpp"
+};
