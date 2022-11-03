@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://raw.githubusercontent.com/clustermod/CMF3/master/extras/assets/logo/cmf3_trans.png" width="480">
+    <img src="https://raw.githubusercontent.com/clustermod/CMF3/master/extras/assets/logo/black/cmf3_logo_trans.png" width="480">
 </p>
 
 <p align="center">
