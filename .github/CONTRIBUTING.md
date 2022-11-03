@@ -32,7 +32,7 @@ We welcome anyone to contribute to this repository. Issues that we are actively 
 
 ## Pull Request process
 
-When contributing to this repository, please first discuss the change you wish to make via issue or [Discord](https://discord.gg/6Sq6hDgbGF) with the Clustermod Team before making a change. This may not be necessary if you are contributing for something which has an existing issue in our repository already.
+When contributing to this repository, please first discuss the change you wish to make via issue or [Discord](https://discord.com/invite/6Sq6hDgbGF) with the Clustermod Team before making a change. This may not be necessary if you are contributing for something which has an existing issue in our repository already.
 
 1. Please make a pull request (PR) as early as possible. This lets use help you in the proces of developing it. When opening a work in progress pull request, mark your PR with a `WIP:` prefix.
 2. Describe what this pull request will do and how it solves this in the description of your PR. A clear intent and description of the way the issue is resolved will help us to review the PR more efficiently.
@@ -44,4 +44,4 @@ Please note that all contributors to this project are volunteers and do this in 
 
 ## Assistance with contributing
 
-If you require assistance with contributing, join our [Discord](https://acemod.org/discord) and ask any of the clustermod team. Additional documentation can be found on our [Wiki](https://wiki.cluster-community.com).
+If you require assistance with contributing, join our [Discord](https://discord.com/invite/6Sq6hDgbGF) and ask any of the clustermod team. Additional documentation can be found on our [Wiki](https://wiki.cluster-community.com).
