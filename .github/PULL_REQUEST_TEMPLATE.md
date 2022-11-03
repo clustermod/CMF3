@@ -3,7 +3,5 @@
 - _Each change in a separate line_
 
 ### IMPORTANT
-
-- [ ] If the contribution affects [the documentation](https://github.com/acemod/ACE3/tree/master/docs), please include your changes in this pull request so the documentation will appear on the [website](https://ace3.acemod.org/).
-- [ ] [Development Guidelines](https://ace3.acemod.org/wiki/development/) are read, understood and applied.
+- [ ] If the contribution affects [the documentation](https:wiki.cluster-community.com/index.php/Category:Eric%27s_Mission_Framework_(EMF)), please update any affected pages or add new ones.
 - [ ] Title of this PR uses our standard template `Component - Add|Fix|Improve|Change|Make|Remove {changes}`.
