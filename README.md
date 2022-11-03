@@ -47,7 +47,7 @@ Please use our [Issue Tracker](https://github.com/Tapawingo/CMF3/issues) to repo
 ### Get in touch
 <table>
   <tr>
-    <td><a href="https://acemod.org/discord">Discord</a></td>
+    <td><a href="https://discord.gg/6Sq6hDgbGF">Discord</a></td>
     <td>We have a public Discord server that anyone can join. This is where all of Cluster Community resides aswell as our developers</td>
   </tr>
 </table>
