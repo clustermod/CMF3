@@ -44,4 +44,4 @@ Please note that all contributors to this project are volunteers and do this in 
 
 ## Assistance with contributing
 
-If you require assistance with contributing, join our [Discord](https://discord.com/invite/6Sq6hDgbGF) and ask any of the clustermod team. Additional documentation can be found on our [Wiki](https://wiki.cluster-community.com).
+If you require assistance with contributing, join our [Discord](https://discord.com/invite/6Sq6hDgbGF) and ask any of the clustermod team. Additional documentation can be found on our [Wiki](https://wiki.cluster-community.com/index.php/Category:Cluster_Community_Framework_(CMF3)).
