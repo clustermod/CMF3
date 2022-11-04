@@ -28,7 +28,7 @@ All good? Then proceed and fill out the items below.
 A clear and concise description of what the bug is.
 
 **Steps to reproduce:**
-_Follow [this flowchart](https://wiki.cluster-community.com/index.php/CMF_Issue_Flowchart)!_
+_Follow [this flowchart](https://wiki.cluster-community.com/index.php/CMF3:_Issue_Flowchart)!_
 
 1. _Go to ..._
 2. _Click ..._
