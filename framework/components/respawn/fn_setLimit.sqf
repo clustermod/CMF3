@@ -12,7 +12,7 @@
  * <Boolean>
  *
  * Example:
- * [this, 5, true] call cmf_respawns_fnc_setLimit
+ * [this, 5, true] call cmf_respawn_fnc_setLimit
  *
  * public: Yes
 */
