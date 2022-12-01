@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * allows using kosherArsenal files with ai units
+ * Allows using kosherArsenal files with ai units
  *
  * Arguments:
  * 0: side <SIDE>
@@ -74,16 +74,25 @@ private _fnc_setLoadout = {
         _unit addPrimaryWeaponItem (selectRandom (_whitelist select 5));
     };
 
+    /* Only get magazines that are compatible with selected weapons */
+    private _compatibleMagazines = (compatibleMagazines primaryWeapon _unit) + (compatibleMagazines handgunWeapon _unit) + (compatibleMagazines secondaryWeapon _unit);
+
     /* Add random magazines, grenades and explosives (no way to check for explosives unfortunatly) */
     private _grenades = (_whitelist select 6) select { _x call BIS_fnc_isThrowable };
     private _magazines = (_whitelist select 6) select { !(_x call BIS_fnc_isThrowable) };
+    private _explosives = _magazines select { !(_x in _compatibleMagazines) };
+    _magazines = _magazines select { _x in _compatibleMagazines };
 
-    for "_i" from 0 to (random 5) do {
+    for "_i" from 0 to round (random 5) do {
         _unit addMagazineGlobal selectRandom _magazines;
     };
 
-    for "_i" from 0 to (random 3) do {
+    for "_i" from 0 to round (random 3) do {
         _unit addMagazineGlobal selectRandom _grenades;
+    };
+
+    for "_i" from 0 to round (random 2) do {
+        _unit addMagazineGlobal selectRandom _explosives;
     };
 
     /* Add medical equipment */
