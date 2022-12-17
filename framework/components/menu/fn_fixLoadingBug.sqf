@@ -19,7 +19,7 @@ SCRIPT(fixLoadingBug);
 /* End the loading screen for the selected player */
 private _onConfirm = {
     params["_value"];
-    [] remoteExecCall [EFUNC(utility,endLoadingScreen), _value, true];
+    [[], EFUNC(utility,endLoadingScreen)] remoteExec ["call", _value, true];
 };
 
 /* Open a menu where you can select the player to apply the fix to */
