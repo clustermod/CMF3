@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [player] call cmf_utility_fnc_endLoadingScreen
+ * [] call cmf_utility_fnc_endLoadingScreen
  *
  * Public: Yes
  */
