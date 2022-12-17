@@ -48,7 +48,7 @@ while { !(missionNamespace getVariable [QGVAR(reinforce_disable), false]) } do {
 
                     /* Delete old waypoints and add new */
                     for "_i" from count waypoints _thisGroup - 1 to 0 step -1 do {
-                    	deleteWaypoint [_group, _i];
+                    	deleteWaypoint [_thisGroup, _i];
                     };
                     private _wp = _thisGroup addWaypoint [_target, 0];
                     _wp setWaypointType "MOVE";
