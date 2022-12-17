@@ -14,7 +14,7 @@
  * None
  *
  * Example:
- * [this, _myGarageObject, 75, ["myLoadoutID", "TYPE"], 5] call cmf_kosherGarage_fnc_init
+ * [this, _myGarageObject, 75, "myLoadoutID", 5] call cmf_kosherGarage_fnc_init
  *
  * Public: Yes
  */
