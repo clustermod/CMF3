@@ -37,5 +37,3 @@ if (!_silent) then {
 
 /* Raise event */
 [QGVAR(onSetLimit), [_respawns, _silent], _obj] call CBA_fnc_targetEvent;
-
-true;
