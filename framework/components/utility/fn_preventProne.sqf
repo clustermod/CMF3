@@ -7,7 +7,7 @@
  * 0: Unit <OBJECT/ARRAY>
  *
  * Return Value:
- * <BOOL>
+ * None
  *
  * Example:
  * [[Unit1, Unit2, Unit3]] call cmf_utility_fnc_preventProne
