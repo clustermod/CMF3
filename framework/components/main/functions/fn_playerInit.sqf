@@ -51,6 +51,9 @@ RUG_DSAI_TerminalDistance = -1;
 /* Disable AI sentences */
 enableSentences false;
 
+/* Fix Loading Bug */
+[] call cmf_utility_fnc_endLoadingScreen;
+
 /* Create ACRE2 Babel handler */
 ["unit", {
     params ["_player"];
@@ -91,13 +94,27 @@ player addEventHandler ["Take", {
     if (_unit != player) exitWith { };
 
     if (_active) then {
-        player setVariable ["acre_sys_core_isDisabled", true, true];
-        player setVariable ["acre_sys_core_isDisabledRadio", true, true];
+        if (!isNil "acre_api_fnc_setGlobalVolume") then { [0] call acre_api_fnc_setGlobalVolume; };
     } else {
-        player setVariable ["acre_sys_core_isDisabled", false, true];
-        player setVariable ["acre_sys_core_isDisabledRadio", false, true];
+        if (!isNil "acre_api_fnc_setGlobalVolume") then { [0] call acre_api_fnc_setGlobalVolume; };
     };
 }] call CBA_fnc_addEventHandler;
+
+if (!isNil "acre_api_fnc_setCustomSignalFunc") then {
+    [{
+        private _coreSignal = _this call acre_sys_signal_fnc_getSignalCore;
+        _coreSignal params ["_Px", "_maxSignal"];
+
+        if (player getVariable ["ACE_isUnconscious", false]) then {
+            _Px = 0;
+        };
+
+        [_Px, _maxSignal]
+    }] call acre_api_fnc_setCustomSignalFunc;
+};
+
+/* Show changelog */
+[] call cmf_main_fnc_changelog;
 
 /* Player killed event */
 player addEventHandler ["Killed", {

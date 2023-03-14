@@ -39,7 +39,7 @@ This is a full changelog of changes since v2.1.0 as the changes have remained un
 <t color='#00aa22'>+</t> Added DHAT and ANVIL to 3DEN Unit Spawner
 <t color='#00aa22'>+</t> Added Function to display changelog on game start (inline function of cmf_main_fnc_changelog)
 <t color='#00aa22'>+</t> Added function to automate ACRE2 Babel languages (inline function of cmf_main_fnc_playerInit)
-<t color='#00aa22'>+</t> Added function to freezeTime during safestart (inline function of cmf_gameplay_fnc_safestart)<br/>
+<t color='#00aa22'>+</t> (Bugged) Added function to freezeTime during safestart (inline function of cmf_gameplay_fnc_safestart)<br/>
 
 <t size='1.05'>Changed</t>
 <t color='#009eaa'>~</t> Changed safestart to display meta information before mission start

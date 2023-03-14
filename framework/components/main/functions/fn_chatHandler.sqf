@@ -54,7 +54,7 @@ addMissionEventHandler ["HandleChatMessage", {
         private _name = (_text splitString " ");
         _name deleteAt 0;
         _name deleteAt (count _name - 1);
-        _name joinString " ";
+        _name = _name joinString " ";
         private _message = format ["%1 in lobby selection", _name];
         _return = ["", _message];
     };

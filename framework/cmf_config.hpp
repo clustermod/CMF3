@@ -21,7 +21,7 @@ class CMF {
             /* safestart settings */
             class safestart {
                 enable = 1;
-                delay = 0;
+                delay = 5;
             };
 
             /* tracers settings */
@@ -50,7 +50,7 @@ class CMF {
         /* Utility settings */
         class utility {
             clearVehicleCargo = 1;
-            freezeTime = 1;
+            freezeTime = 0;
         };
 
         /* Enhanced Vehicles Settings */

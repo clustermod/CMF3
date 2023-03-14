@@ -11,4 +11,4 @@ IPREP(missionInit);
 IPREP(addonBlacklist);
 IPREP(unifiedTime);
 IPREP(chatHandler);
-IPREP(changelog);
+PREP(changelog);

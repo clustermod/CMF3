@@ -17,7 +17,7 @@
 
 private _lastVersion = profileNamespace getVariable [QGVAR(changelog_lastVersion), "0.0.0.0"];
 private _disabled = profileNamespace getVariable [QGVAR(changelog_off), false];
-private _curVersion = cmf_main_version;
+private _curVersion = GVAR(version);
 
 /* Check if the current version is greater than the last version */
 if (([_lastVersion, _curVersion] call EFUNC(utility,versionCompare)) isEqualTo 1 && _disabled isEqualTo 0) then {

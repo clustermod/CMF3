@@ -78,6 +78,13 @@ _this spawn {
 				while {!(missionNamespace getVariable [QGVAR(safestart_disable), false])} do {
 					private _safestartHint = "<t size='1.5' color='#fcba03'>SafeStart</t><br/>";
 
+					/* Safestart Mission Title */
+					private _missionData = missionNameSpace getVariable [QEGVAR(common,missionData), []];
+					private _hash = [_missionData] call CBA_fnc_hashCreate;
+
+					private _title = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(utility,hexToASCII)] call CBA_fnc_hashGet;
+					private _safestartHint = _safestartHint + format["<t size='1' color='#fcba03'>%1</t><br/>", _title];
+
 					/* Safestart phase */
 					private _phase = missionNameSpace getVariable [QGVAR(safestart_phase), "Briefing"];
 					private _startTime = _phase select 1;
