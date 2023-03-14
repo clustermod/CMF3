@@ -3,4 +3,4 @@
  */
 
 /* DO NOT DELETE, create 3den actions for CMF */
-[] execVM "components\3den\fn_init.sqf"
+[] execVM "components\3den\XEH_PREP.sqf"

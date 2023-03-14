@@ -36,7 +36,7 @@
 #define QQEFUNC(var1,var2) QUOTE(QEFUNC(var1,var2))
 
 #ifndef PATHTO_SYS
-    #define PATHTO_SYS(var1,var2) components\var1\var2.sqf
+    #define PATHTO_SYS(var1,var2) components\var1\functions\var2.sqf
 #endif
 
 #ifndef PATHTOF_SYS
@@ -45,8 +45,8 @@
 
 #define DSTRING(var1) QUOTE(TRIPLES(STR,COMPONENT,var1))
 #define EDSTRING(var1,var2) QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
-#define LSTRING(var1) ([QUOTE(PATHTO_SYS(MODULE,stringtable)), DSTRING(var1)] call EFUNC(main,localize))
-#define ELSTRING(var1,var2) ([QUOTE(PATHTO_SYS(var1,stringtable)), EDSTRING(var1,var2)] call EFUNC(main,localize))
+#define LSTRING(var1) ([QUOTE(PATHTOF_SYS(MODULE,stringtable.sqf)), DSTRING(var1)] call EFUNC(main,localize))
+#define ELSTRING(var1,var2) ([QUOTE(PATHTOF_SYS(var1,stringtable.sqf)), EDSTRING(var1,var2)] call EFUNC(main,localize))
 
 #define ARRAY_FLATTEN(var1) (flatten var1)
 
@@ -63,8 +63,8 @@
     FUNC(var1) = {ERROR_1("%1 missing a required addon.",QFUNC(var1))}\
 }
 
-#define PREP(var1) PREP_ADDON(var1)
-#define IPREP(var1) PREP(var1); [] spawn {waitUntil { missionNamespace getVariable [QEGVAR(main,components_initialized), false] }; [] spawn FUNC(var1)}
+#define PREP(var1) if (!is3DEN) then { PREP_ADDON(var1) } else { PREP_SYS(var1) }
+#define IPREP(var1) PREP(var1); if (!is3DEN) then { [] spawn { waitUntil { missionNamespace getVariable [QEGVAR(main,components_initialized), false] }; [true] spawn FUNC(var1)} } else { [true] spawn FUNC(var1) }
 
 #define FILE_EXISTS(FILE) (fileExists (FILE))
 

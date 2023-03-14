@@ -5,4 +5,5 @@ PREP(localEffect);
 PREP(medicalHandler);
 PREP(offroading);
 PREP(getSurfaceParams);
+PREP(fire);
 IPREP(autoInit);

@@ -10,3 +10,5 @@ IPREP(toggleSpectatorModule);
 IPREP(addRallypointModule);
 IPREP(removeRallypointModule);
 IPREP(playerInfo);
+IPREP(safestartPhases);
+IPREP(safestartCutoffPhases);

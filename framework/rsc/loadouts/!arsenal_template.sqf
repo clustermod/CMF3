@@ -1,5 +1,13 @@
-/* Get the unit's role */
-private _condition = player getVariable ["cmf_common_role", "RFL"];
+/*
+ * Author: [Author]
+ * [Description]
+ *
+ * [Modpack Version]
+ */
+params ["_role", "_unit"];
+
+/* Custom additional condition */
+private _condition = true;
 private ["_availableUniforms", "_availableWeapons", "_availableMagazines", "_availableVests", "_availableItems", "_availableBackpacks", "_availableHeadgear", "_availableFacewear", "_availableAttachments", "_availableGrenades"];
 
 /* Default gear */
@@ -15,7 +23,7 @@ private _defHeadgear = [];
 private _defFacewear = [];
 
 /* Rifleman */
-if (_condition in ["RFL"]) then {
+if (_condition && _role in ["RFL"]) then {
 	_availableUniforms = [];
 	_availableWeapons = [];
 	_availableAttachments = [];
@@ -29,7 +37,7 @@ if (_condition in ["RFL"]) then {
 };
 
 /* Squad Leader and Fireteam Leader */
-if (_condition in ["SL", "FTL"]) then {
+if (_condition && _role in ["SL", "FTL"]) then {
 	_availableUniforms = [];
 	_availableWeapons = [];
 	_availableAttachments = [];
@@ -43,8 +51,8 @@ if (_condition in ["SL", "FTL"]) then {
 };
 
 /* Medic */
-if (_condition in ["MED"]) then {
-	player setVariable ["ace_medical_medicclass", 2, true];
+if (_condition && _role in ["MED"]) then {
+	_unit setVariable ["ace_medical_medicclass", 2, true];
 	_availableUniforms = [];
 	_availableWeapons = [];
 	_availableAttachments = [];
@@ -58,7 +66,7 @@ if (_condition in ["MED"]) then {
 };
 
 /* Autorifleman */
-if (_condition in ["AR"]) then {
+if (_condition && _role in ["AR"]) then {
 	_availableUniforms = [];
 	_availableWeapons = [];
 	_availableAttachments = [];
@@ -72,7 +80,7 @@ if (_condition in ["AR"]) then {
 };
 
 /* Assistant Autorifleman */
-if (_condition in ["AAR"]) then {
+if (_condition && _role in ["AAR"]) then {
 	_availableUniforms = [];
 	_availableWeapons = [];
 	_availableAttachments = [];
@@ -86,7 +94,7 @@ if (_condition in ["AAR"]) then {
 };
 
 /* Anti-Tank, Light */
-if (_condition in ["LAT"]) then {
+if (_condition && _role in ["LAT"]) then {
 	_availableUniforms = [];
 	_availableWeapons = [];
 	_availableAttachments = [];
@@ -102,7 +110,7 @@ if (_condition in ["LAT"]) then {
 /* Loadout array that's passed back to kosherArsenal */
 [
 	/* Loadoutfile version */
-	"1.2",
+	"1.3",
 
 	/* Allowed Equipment array */
 	[

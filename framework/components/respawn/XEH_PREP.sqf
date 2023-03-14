@@ -2,4 +2,6 @@
 
 PREP(limit);
 PREP(setLimit);
+PREP(getLimit);
+PREP(getRemaining);
 PREP(rallyPoint);

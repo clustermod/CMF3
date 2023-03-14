@@ -1,3 +1,10 @@
+/*
+ * Author: [Author]
+ * [Description]
+ *
+ * [Modpack Version]
+ */
+
 /* Get the unit's role */
 params ["_role"];
 private ["_availableUniforms", "_availableWeapons", "_availableMagazines", "_availableVests", "_availableItems", "_availableBackpacks", "_availableHeadgear", "_availableFacewear", "_availableAttachments", "_availableGrenades"];

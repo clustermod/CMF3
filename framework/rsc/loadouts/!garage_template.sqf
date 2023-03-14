@@ -1,4 +1,11 @@
+/*
+ * Author: [Author]
+ * [Description]
+ *
+ * [Modpack Version]
+ */
 params["_unit"];
+
 /* Get the group type */
 private _condition = (group _unit) getVariable ["cmf_common_group_type", "INF"];
 private _availableVehicles = []; private _availablePylons = []; private _availableCamos = []; private _availableComponents = [];

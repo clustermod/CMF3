@@ -1,0 +1,57 @@
++ Added CMF Info Diary
++ Added gamemode and mission name intro
++ Added Function to block looting of own body
++ Added function to load state of player before disconnect when reconnecting
++ Added function to get a unit's role
++ Added function to parse strings with hex codes to ASCII
++ Added function to parse CBA Keybinds to human-readable strings
++ Added function to get the respawn limit
++ Added function to get the remaining respawns
++ Added Player Roster Diary
++ Added Table of Organization & Equipment for Leaders
++ Added chance of fuel leak catching fire in enhancedVehicles
++ Added function to restore acre radio configuration on respawn
++ Added a variable to track if player has fully loaded
++ Added Ace interaction actions to organize team for team leaders
++ Added so ACRE audio is muted when player is down
++ Added new "player x has connected" message for safestart and re-jip
++ Added a way to override safestart
++ Added text based AAR system
++ Added button to ping rallypoint-capable units to place a rallypoint
++ Added ACE Arsenal medical and radio sub-categories to the 3den editor
++ Added Logistics component
++ Added Function to view crate names
++ Added "suicide" bug fix when stuck at [0, 0, 0]
++ Added function to set config value
++ Added 3den display to set mission data
++ Added game type icons
++ Added setCombatbehaviour "CARELESS" and setCombatMode "BLUE" during safestart, this will stop AI from engaging targets
++ Added DHAT and ANVIL to 3DEN Unit Spawner
++ Added Function to display changelog on game start
++ Added function to automate ACRE2 Babel languages
+
+~ Changed safestart to display meta information before mission start
+~ Fixed kosher arsenal force close bug
+~ Moved hydration tab into equipment tab
+~ Force Primary is no longer true by default in kosher arsenal
+~ Changed default respawns to 2
+~ Hearing no longer affects ACRE volume, only in-game volume
+~ Removed the "Remaining Respawns" message in limitedRespawns
+~ Fixed bug with "Fix Loading Screen Bug", it should now work again
+~ Fixed bug with map gesture colors
+~ Moved all functions in components into a sub directory called "functions"
+~ Respawns will not be decreased on death during safestart
+~ Added icons to the 3den CMF Menu
+~ Renamed Cluster ORBAT unit Spawner to Unit spawner
+~ Changed kosherArsenal init to use a better method of tracking respawns
+~ Enable and disable simulation in 3DEN tool has been combined to a toggle tool
+~ Moved bug fixes into a sub menu
+~ Fixed dropping while carrying / dragging in safestart phase
+~ Fixed fortify deploying in safestart phase
+~ Fixed kosherArsenal Rearm Arsenal Action being accessable from any distance
+~ Added new KAT Medical items to the medical submenu in ACE arsenal
+~ Changed getConfigParam to cache config params to a global config CBA Hash
+~ Added Bodybags to standard medic loadout.
+~ Changed loadoutfile format to allow for resupply crate generation.
+
+- Removed the "Display Roles" action from CC Menu, it's replaced by the TO&E Diary Entry

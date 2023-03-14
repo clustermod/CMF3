@@ -35,8 +35,8 @@
 
 
     [DSTRING(unitSpawner_displayName), [
-        ["English", "Cluster ORBAT unit Spawner"],
-        ["Spanish", "Cluster ORBAT unidad Spawner"]
+        ["English", "Unit Spawner"],
+        ["Spanish", "Unidad Spawner"]
     ]],
     [DSTRING(infantry_elements_displayName), [
         ["English", "Infantry Elements"],
@@ -162,9 +162,9 @@
         ["English", "Entity Tools"],
         ["Spanish", "Herramientas"]
     ]],
-    [DSTRING(enable_sim_3den_displayName), [
-        ["English", "Enable Simulation in 3den (will only be enabled in 3den)"],
-        ["Spanish", "Activar simulación en 3den (Solo se activara en el editor 3den)"]
+    [DSTRING(toggle_sim_3den_displayName), [
+        ["English", "Toggle Simulation in 3den (will only be enabled in 3den)"],
+        ["Spanish", "Alterné simulación en 3den (Solo se activara en el editor 3den)"]
     ]],
     [DSTRING(disable_sim_3den_displayName), [
         ["English", "Disable Simulation in 3den (will only be disabled in 3den)"],

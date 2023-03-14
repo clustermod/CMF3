@@ -6,10 +6,22 @@
 waitUntil{ missionNamespace getVariable ["cmf_main_player_initialized", false] };
 
 /* Set available respawns */
-[4] call cmf_respawn_fnc_limit;
+[0] call cmf_respawn_fnc_limit;
 
 /* Initialize kosherArsenal */
-[["LOADOUTNAME HERE"], true, true] call cmf_kosherArsenal_fnc_init;
+[["v3_cag_1991"], true] call cmf_kosherArsenal_fnc_init;
 
 /* Initialize rallypoints */
 [["FTL", "SL", "PL", "CO"]] call cmf_respawn_fnc_rallypoint;
+
+/* Create Warning Order */
+if (hasInterface) then { [] execVM "rsc\scripts\warno.sqf" };
+
+/* Alert all AI on map to player */
+[] spawn {
+    {
+        if (side _x isEqualTo east) then {
+            _x reveal [player, 4];
+        };
+    } forEach allUnits;
+};

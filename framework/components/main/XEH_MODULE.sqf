@@ -24,6 +24,8 @@ GVAR(components) = [
     "utility",
     "zeus",
     "ai",
+    "aar",
+    "logistics",
     "player"
 ];
 

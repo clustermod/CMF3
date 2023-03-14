@@ -7,3 +7,5 @@ IPREP(hideRespawnMarker);
 IPREP(restrictLauncher);
 IPREP(drinking);
 IPREP(spectator);
+IPREP(teamActions);
+IPREP(setRank);
