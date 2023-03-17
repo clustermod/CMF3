@@ -83,7 +83,7 @@ _this spawn {
 					private _hash = [_missionData] call CBA_fnc_hashCreate;
 
 					private _title = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(utility,hexToASCII)] call CBA_fnc_hashGet;
-					private _safestartHint = _safestartHint + format["<t size='1' color='#fcba03'>%1</t><br/>", _title];
+					private _safestartHint = _safestartHint + format["<t size='1' color='#888888'>%1</t><br/>", _title];
 
 					/* Safestart phase */
 					private _phase = missionNameSpace getVariable [QGVAR(safestart_phase), "Briefing"];
