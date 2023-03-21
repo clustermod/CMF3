@@ -171,11 +171,11 @@
         ["Spanish", "Desactivar simulación en 3den (Solo se desactivara en el editor 3den)"]
     ]],
     [DSTRING(make_obj_simple_displayName), [
-        ["English", "Make object simple"],
+        ["English", "Toggle simple objects"],
         ["Spanish", "Crear objeto simple"]
     ]],
     [DSTRING(make_ammobox_displayName), [
-        ["English", "Make kosherArsenal Ammobox"],
+        ["English", "Toggle kosherArsenal Ammobox"],
         ["Spanish", "Crear Caja de munición KosherArsenal"]
     ]],
     [DSTRING(lobby_manager_displayName), [

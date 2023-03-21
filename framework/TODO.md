@@ -47,8 +47,7 @@
  - [X] Chat message needs to handle multi word names (trim away the first and last element in splitString)
  - [X] Call loading bug fix automatically if player is in respawn menu with loading screen
  - [X] Show changelog when a newer version is available for player
- - [ ] ACRE2 down mute not working, radio works, but proximity doesn't
- - [ ] When waking up there should be a kind of fade in like in saving private ryan (maybe have breathing or something as well while down) 
+ - [X] ACRE2 down mute not working, radio works, but proximity doesn't
 
 ## aar (new category)
  - [ ] <s>Test diagAAR and see if it does what i want</s>
@@ -62,6 +61,7 @@
  - [X] disable autocombat on all AI when safestart is enabled
  - [X] Freeze time when safestart is enabled (check if freezetime is already enabled, if it isn't do)
  - [ ] <s>Craters from artillery rounds</s>
+ - [ ] Fix bug with environment times for twilight
 
 ## respawn
  - [X] Ping SL for rallypoint from respawn menu
@@ -73,9 +73,9 @@
 ## player
  - [ ] <s>Find icons for group ace actions</s>
  - [X] Group ACE actions are kinda broken for team selection, switches when hovered 
- - [ ] Make a projectreality camera shake when firing big guns from vehicles
- - [ ] Create camera shake when vehicle is hit by big round
- - [ ] When close to a ACE fire create an orange tint based on the fire intensity
+ - [X] Make a projectreality camera shake when firing big guns from vehicles
+ - [ ] <s>Create camera shake when vehicle is hit by big round</s>
+ - [ ] <s>When close to a ACE fire create an orange tint based on the fire intensity</s>
  - [X] Reset map marker scale when map is closed (to unfuck sizes on ctrlMap controls)
  - [ ] Change icon for submitting an AAR from spectator
  - [ ] Add button to view submitted AARs after closing
@@ -94,3 +94,6 @@
  - [ ] Consider changing vanilla compile with: https://cbateam.github.io/CBA_A3/docs/files/xeh/fnc_compileFunction-sqf.html
  - [ ] Performance testing (try to lower the amount of spawned scripts drastically. rn a dedicated server runs maybe 70-80 spawned scripts, not good)
  - [X] Change sound files to .wss file type (arma sound files)
+ - [ ] Code optimization<br/>https://community.bistudio.com/wiki/Code_Optimisation#Lazy_Evaluation
+https://community.bistudio.com/wiki/Code_Optimisation#if_and_switch
+https://community.bistudio.com/wiki/Code_Optimisation#objectParent_and_vehicle

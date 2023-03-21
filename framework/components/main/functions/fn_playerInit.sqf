@@ -86,21 +86,29 @@ player addEventHandler ["Take", {
 }];
 
 /* Mute ACRE when player is down */
-["ace_unconscious", { // @BUG the volume isn't set to 0, likely this isn't checked at all
+["ace_unconscious", {
     params ["_unit", "_active"];
+
     if (_unit != player) exitWith { };
 
     if (_active) then {
         if (!isNil "acre_api_fnc_setGlobalVolume") then {
-            private _globalVolume = [] call acre_api_fnc_getGlobalVolume;
-            if (isNil "_globalVolume") then { _globalVolume = 1 };
+            private _acreGlobalVolume = [] call acre_api_fnc_getGlobalVolume;
+            if (isNil "_acreGlobalVolume") then { _acreGlobalVolume = 1 };
+            private _globalVolume = soundVolume;
+            player setVariable [QGVAR(acre_globalVolume), _acreGlobalVolume, true];
             player setVariable [QGVAR(globalVolume), _globalVolume, true];
-            [0] call acre_api_fnc_setGlobalVolume;
+            [0.1] call acre_api_fnc_setGlobalVolume;
+            0 fadeSound 0.1;
+		    0 fadeRadio 0.1;
         };
     } else {
         if (!isNil "acre_api_fnc_setGlobalVolume") then {
+            private _acreGlobalVolume = player getVariable [QGVAR(acre_globalVolume), 1];
             private _globalVolume = player getVariable [QGVAR(globalVolume), 1];
-            [_globalVolume] call acre_api_fnc_setGlobalVolume;
+            [_acreGlobalVolume] call acre_api_fnc_setGlobalVolume;
+            0 fadeSound _globalVolume;
+		    0 fadeRadio _globalVolume;
         };
     };
 }] call CBA_fnc_addEventHandler;

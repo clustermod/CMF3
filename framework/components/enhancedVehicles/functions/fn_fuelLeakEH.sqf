@@ -67,7 +67,7 @@ while { alive _veh } do {
 
 				/* Light crew on fire */
 				{
-					["ace_fire_addFireSource", [_x, 1, 7, _x, { (_this select 0) > time }, [_burnEnd]]] call CBA_fnc_serverEvent;
+					["ace_fire_addFireSource", [_x, 1, 4, _x]] call CBA_fnc_serverEvent;
 				} forEach crew _veh;
 			};
 		};

@@ -10,3 +10,5 @@ PREP(restrictZeus);
 PREP(endLoadingScreen);
 PREP(stripUnit);
 PREP(versionCompare);
+PREP(sunAngle);
+PREP(getTimeOfSunAngle);

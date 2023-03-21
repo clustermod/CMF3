@@ -254,6 +254,6 @@ _this spawn {
 		    _gamemode = [_hash, "M_CTYPE", getText (getMissionConfig "Header" >> 'GameType')] call CBA_fnc_hashGet;
 		};
 
-		[format ["<t size='1.3' font='PuristaMedium'> %1: <t color='#fcba03'>%2</t> </t>", toUpper _gamemode, _title], safeZoneX, safezoneH - 0.8, 4] spawn BIS_fnc_dynamicText
+		[format ["<t size='1.3' align='left' font='PuristaMedium'> %1: <t color='#fcba03'>%2</t> </t>", toUpper _gamemode, _title], [safeZoneX, safeZoneW - safeZoneX], safezoneH - 0.8, 4] spawn BIS_fnc_dynamicText
 	}] remoteExec ["call", 0, true];
 };

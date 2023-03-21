@@ -27,23 +27,25 @@ GVAR(vehicleCache) = [] call CBA_fnc_hashCreate;
 
 /* Add the eventhandler */
 private _fnc_initEH = {
+    params ["_unit"];
+
     /* Exit if enhancedVehicles is disabled on vehicle or globally */
     if (missionNamespace getVariable [QGVAR(disable), false]) exitWith {};
-    if (_this getVariable [QGVAR(disable), false]) exitWith {};
+    if (_unit getVariable [QGVAR(disable), false]) exitWith {};
 
-    _this setVariable ["ace_cookoff_enable", false, true];
-    _this addEventHandler ["HandleDamage", FUNC(damageEH)];
+    _unit setVariable ["ace_cookoff_enable", false, true];
+    _unit addEventHandler ["HandleDamage", FUNC(damageEH)];
 
-    _this spawn FUNC(fuelLeakEH);
+    _unit spawn FUNC(fuelLeakEH);
 
-    LOG_1("Enabled EnhancedVehicles on %1", typeOf _veh);
+    LOG_1("Enabled EnhancedVehicles on %1", typeOf _unit);
 
     /* Raise event */
-    [QGVAR(enableEnhancedVehicles), [_this], _this] call CBA_fnc_targetEvent;
+    [QGVAR(enableEnhancedVehicles), [_unit], _unit] call CBA_fnc_targetEvent;
 };
 
-["Car", "init", _fnc_initEH] call CBA_fnc_addClassEventHandler;
-["Tank", "init", _fnc_initEH] call CBA_fnc_addClassEventHandler;
+["Car", "init", _fnc_initEH, true, [], true] call CBA_fnc_addClassEventHandler;
+["Tank", "init", _fnc_initEH, true, [], true] call CBA_fnc_addClassEventHandler;
 
 /* Initialize Offroading script on vehicle */
 /* if (_veh isKindOf "car") then {

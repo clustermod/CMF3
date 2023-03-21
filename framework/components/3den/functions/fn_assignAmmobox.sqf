@@ -25,16 +25,16 @@ private _action = {
         ["No Objects selected", 0, 1] call BIS_fnc_3DENNotification;
     };
 
+    private _command = toString {[this] call EFUNC(kosherArsenal,ammobox)};
     {
-        private _oldInit = (_x get3DENAttribute "Init") select 0;
-        private _newInit = toString {
-            [this] call EFUNC(kosherArsenal,ammobox);
+        if !([_x, _command] call FUNC(inInit)) then {            
+            [_x, _command] call FUNC(addToInit);
+        } else {
+            [_x, _command] call FUNC(removeFromInit);
         };
-
-        _x set3DENAttribute ["Init", _oldInit + endl + _newInit];
     } forEach get3DENSelected "object";
 
-    ["Assigned selected objects as an kosher arsenal ammobox", 0, 1] call BIS_fnc_3DENNotification;
+    ["Toggled selected objects as kosher arsenal ammoboxes", 0, 1] call BIS_fnc_3DENNotification;
 };
 
-[_path, _name, _icon, _action] call cmf_3den_fnc_addMenuItem;
+[_path, _name, _icon, _action] call FUNC(addMenuItem);

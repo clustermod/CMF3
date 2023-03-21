@@ -1,7 +1,7 @@
 "
-<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.47</t>
-This is a full changelog of changes since v2.1.0 as the changes have remained undocumented publicly. For subsequent versions the changelog will only display the new changes from the last version.<br/>
-
+<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.48</t>
+This is a full changelog of changes since v2.1.0 as the changes have remained undocumented publicly. For subsequent versions the changelog will only display the new changes from the last version.
+<br/>
 <t size='1.05'>Added</t>
 <t color='#00aa22'>+</t> Added CMF Info Diary, shows general information about the version of CMF used and individual settings
 <t color='#00aa22'>+</t> Added safestart mission intro
@@ -41,10 +41,15 @@ This is a full changelog of changes since v2.1.0 as the changes have remained un
 <t color='#00aa22'>+</t> Added DHAT and ANVIL to 3DEN Unit Spawner
 <t color='#00aa22'>+</t> Added Function to display changelog on game start (inline function of cmf_main_fnc_changelog)
 <t color='#00aa22'>+</t> Added function to automate ACRE2 Babel languages (inline function of cmf_main_fnc_playerInit)
-<t color='#00aa22'>+</t> (Bugged) Added function to freezeTime during safestart (inline function of cmf_gameplay_fnc_safestart)<br/>
-<t color='#00aa22'>+</t> Added eventhandler to put AI in panic action when on fire (cmf_ai_fnc_fireEH)<br/>
-<t color='#00aa22'>+</t> Added function to silence friendly AI for good (cmf_ai_fnc_silenceAI)<br/>
-
+<t color='#00aa22'>+</t> (Bugged) Added function to freezeTime during safestart (inline function of cmf_gameplay_fnc_safestart)
+<t color='#00aa22'>+</t> Added eventhandler to put AI in panic action when on fire (cmf_ai_fnc_fireEH)
+<t color='#00aa22'>+</t> Added function to silence friendly AI for good (cmf_ai_fnc_silenceAI)
+<t color='#00aa22'>+</t> Added functions to return angle of sun and time of angle of sun (cmf_utility_fnc_sunAngle and cmf_utility_fnc_getTimeOfSunAngle)
+<t color='#00aa22'>+</t> Added diary for environment (weather and time of twilight and sun set/rise)
+<t color='#00aa22'>+</t> Added function to create camerashake when firing from vehicles (cmf_enhancedVehicles_fnc_gunEffectEH)
+<t color='#00aa22'>+</t> Added functions to add, remove or check a line from the 3den entity init (cmf_3den_fnc_addToinit, cmf_3den_fnc_removeFromInit and cmf_3den_fnc_inInit)
+<t color='#00aa22'>+</t> Added functions to enable / disable carrying and dragging from ACE3
+<br/>
 <t size='1.05'>Changed</t>
 <t color='#009eaa'>~</t> Changed safestart to display meta information before mission start
 <t color='#009eaa'>~</t> Fixed kosher arsenal force close bug
@@ -69,15 +74,15 @@ This is a full changelog of changes since v2.1.0 as the changes have remained un
 <t color='#009eaa'>~</t> Changed cmf_common_fnc_getConfigParam to cache config params to a global CBA Hash
 <t color='#009eaa'>~</t> Moved submitAAR to aar component
 <t color='#009eaa'>~</t> Added Bodybags to standard medic loadout.
-<t color='#009eaa'>~</t> Changed loadoutfile format to allow for resupply crate generation.<br/>
-<t color='#009eaa'>~</t> Moved setRanks into unit constructor.<br/>
-<t color='#009eaa'>~</t> Reset marker size when the map is closed to fix their scale on GPS or other map controls.<br/>
-<t color='#009eaa'>~</t> Moved enhancedVehicles Damage Handler and fuel Leak handler to seperate function files (cmf_enhancedVehicles_fnc_damageEH and cmf_enhancedVehicles_fnc_fuelLeakEH).<br/>
-<t color='#009eaa'>~</t> Changed transferToServer to use CBA logic in an attempt to enhance performance.<br/>
-<t color='#009eaa'>~</t> Temporarily force disabled offroading.<br/>
-
+<t color='#009eaa'>~</t> Changed loadoutfile format to allow for resupply crate generation.
+<t color='#009eaa'>~</t> Moved setRanks into unit constructor.
+<t color='#009eaa'>~</t> Reset marker size when the map is closed to fix their scale on GPS or other map controls.
+<t color='#009eaa'>~</t> Moved enhancedVehicles Damage Handler and fuel Leak handler to seperate function files (cmf_enhancedVehicles_fnc_damageEH and cmf_enhancedVehicles_fnc_fuelLeakEH).
+<t color='#009eaa'>~</t> Changed transferToServer to use CBA logic in an attempt to enhance performance.
+<t color='#009eaa'>~</t> Temporarily force disabled offroading.
+<br/>
 <t size='1.05'>Removed</t>
-<t color='#aa0027'>-</t> Removed the ""Display Roles"" action from CC Menu, it's replaced by the Table of Organization and Equipment Diary Entry and the safestart meta info<br/>
-<t color='#aa0027'>-</t> Removed CMF_ORBAT from cmf_config.hpp<br/>
-<t color='#aa0027'>-</t> Removed autoinit from enhancedVehicles (replaced by init)<br/>
+<t color='#aa0027'>-</t> Removed the ""Display Roles"" action from CC Menu, it's replaced by the Table of Organization and Equipment Diary Entry and the safestart meta info
+<t color='#aa0027'>-</t> Removed CMF_ORBAT from cmf_config.hpp
+<t color='#aa0027'>-</t> Removed autoinit from enhancedVehicles (replaced by init)
 "

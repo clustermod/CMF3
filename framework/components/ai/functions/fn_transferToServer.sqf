@@ -23,11 +23,13 @@ if (!isServer) exitWith {};
 
 /* Transfer all new AI groups to server */
 ["CAManBase", "init", {
-  if (isPlayer _this) exitWith {};
+  params ["_unit"];
 
-  private _group = group _this;
+  if (isPlayer _unit) exitWith {};
+
+  private _group = group _unit;
   if (groupowner _group isEqualTo 2) exitWith {};
 
   _group setGroupOwner 2;
   LOG_1("Transfered %1 to server", groupId _group);
-}] call CBA_fnc_addClassEventHandler;
+}, true, [], true] call CBA_fnc_addClassEventHandler;

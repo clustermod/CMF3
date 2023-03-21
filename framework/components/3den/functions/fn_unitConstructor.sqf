@@ -202,11 +202,11 @@ switch (_unitID) do {
         ],
         [ // B1
             "1 - B1", "B1", "INF", "FT", -5, [
-                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
-                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
-                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
-                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
-                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
             ]
         ],
         [ // B2
@@ -226,11 +226,11 @@ switch (_unitID) do {
         ],
         [ // C1
             "1 - C1", "C1", "INF", "FT", -7, [
-                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
-                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
-                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
-                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
-                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
             ]
         ],
         [ // C2
@@ -257,11 +257,11 @@ switch (_unitID) do {
         ],
         [ // A1
             "2 - A1", "A1", "INF", "FT", -10, [
-                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
-                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
-                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
-                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
-                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
             ]
         ],
         [ // A2
@@ -281,11 +281,11 @@ switch (_unitID) do {
         ],
         [ // B1
             "2 - B1", "B1", "INF", "FT", -12, [
-                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
-                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
-                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
-                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
-                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
             ]
         ],
         [ // B2
@@ -305,11 +305,11 @@ switch (_unitID) do {
         ],
         [ // C1
             "2 - C1", "C1", "INF", "FT", -14, [
-                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
-                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
-                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
-                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
-                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
             ]
         ],
         [ // C2
@@ -330,9 +330,9 @@ switch (_unitID) do {
         _unitArr = [
         [ // PLT HQ
             (str _pltID + " PLT HQ"), (str _pltID + " PLT HQ"), "INF", "PLT", 0, [
-                ["B_officer_F", "Platoon Leader", "PL", "LIEUTENANT", true, 0, 0],
-                ["B_officer_F", "Platoon Sergeant", "PS", "LIEUTENANT", false, -1, 0],
-                ["B_medic_F", "Platoon Medic", "MED", "LIEUTENANT", false, -2, 0]
+                ["B_officer_F", "Platoon Leader", "PL", "LIEUTENANT", true, 1.5, 0],
+                ["B_officer_F", "Platoon Sergeant", "PS", "LIEUTENANT", false, 0.5, 0],
+                ["B_medic_F", "Platoon Medic", "MED", "LIEUTENANT", false, -0.5, 0]
             ]
         ],
             [ // ASL
@@ -352,11 +352,11 @@ switch (_unitID) do {
         ],
         [ // A2
             (str _pltID + " - A2"), "A2", "INF", "FT", -2, [
-                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
-                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
-                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
-                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
-                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
             ]
         ],
         [ // BSL
@@ -367,11 +367,11 @@ switch (_unitID) do {
         ],
         [ // B1
             (str _pltID + " - B1"), "B1", "INF", "FT", -4, [
-                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
-                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
-                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
-                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
-                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
             ]
         ],
         [ // B2
@@ -391,11 +391,11 @@ switch (_unitID) do {
         ],
         [ // C1
             (str _pltID + " - C1"), "C1", "INF", "FT", -6, [
-                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
-                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
-                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
-                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
-                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
             ]
         ],
         [ // C2
@@ -421,11 +421,11 @@ switch (_unitID) do {
         ],
         [ //Fireteam 1
             (_squadID select 1), (_squadID select 1) select [3], "INF", "FT", -1, [
-                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
-                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
-                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
-                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
-                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
             ]
         ],
         [ //Fireteam 2

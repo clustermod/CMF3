@@ -1,6 +1,7 @@
 #include "script_component.hpp"
 
 IPREP(init);
+IPREP(gunEffectEH);
 PREP(damageEH);
 PREP(fuelLeakEH);
 PREP(localEffect);

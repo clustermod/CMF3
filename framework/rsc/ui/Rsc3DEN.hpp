@@ -641,7 +641,7 @@ class cmf_3den_warno {
                 class warnoSeperator: cmf_ctrlStatic {
                     text = "";
                     x = (getResolution select 2) * 0.5 * pixelW - (165/2 - 1) * GRID_3DEN_W;
-                    y = 0.5 - (178/2 - 10 - 5 - 5) * GRID_3DEN_H;
+                    y = 0.5 - (178/2 - 10 - 5) * GRID_3DEN_H;
                     w = 87 * GRID_3DEN_W;
                     h = 0.2 * GRID_3DEN_H;
                     colorBackground[] = {1, 1, 1, 0.25};

@@ -104,6 +104,52 @@ private _generalToolsMenu = [[_indexMain, _toolsMenu], "General", "a3\3den\data\
 /* Make simple objects and disable simulation and damage */
 [[_indexMain, _toolsMenu, _generalToolsMenu], LSTRING(make_obj_simple_displayName), "z\ace\addons\zeus\ui\icon_module_zeus_editable_objects_ca.paa"] call FUNC(simplifySelectedObject);
 
+/* Create a ACE tools menu */
+private _ACEToolsMenu = [[_indexMain, _toolsMenu], "ACE3", "z\ace\addons\common\data\logo_ace3_ca.paa"] call FUNC(addMenuItem);
+
+/* Make object draggable */
+[[_indexMain, _toolsMenu, _ACEToolsMenu], "Make draggable", "z\ace\addons\dragging\ui\icons\box_drag.paa", {
+    {
+        if !([_x, "[this, true] call ace_dragging_fnc_setDraggable"] call FUNC(inInit)) then {            
+            [_x, "[this, false] call ace_dragging_fnc_setDraggable"] call FUNC(removeFromInit);
+            [_x, "[this, true] call ace_dragging_fnc_setDraggable"] call FUNC(addToInit);
+        };
+    } forEach get3DENSelected "object";
+    ["Enabled Dragging", 0, 1] call BIS_fnc_3DENNotification;
+}] call FUNC(addMenuItem);
+
+/* Make object non-draggable */
+[[_indexMain, _toolsMenu, _ACEToolsMenu], "Disable dragging", "z\ace\addons\dragging\ui\icons\box_drag.paa", {
+    {
+        if !([_x, "[this, false] call ace_dragging_fnc_setDraggable"] call FUNC(inInit)) then {            
+            [_x, "[this, true] call ace_dragging_fnc_setDraggable"] call FUNC(removeFromInit);
+            [_x, "[this, false] call ace_dragging_fnc_setDraggable"] call FUNC(addToInit);
+        };
+    } forEach get3DENSelected "object";
+    ["Disabled Dragging", 0, 1] call BIS_fnc_3DENNotification;
+}] call FUNC(addMenuItem);
+
+/* Make object carryable */
+[[_indexMain, _toolsMenu, _ACEToolsMenu], "Make carryable", "z\ace\addons\dragging\ui\icons\box_carry.paa", {
+    {
+        if !([_x, "[this, true] call ace_dragging_fnc_setCarryable"] call FUNC(inInit)) then {            
+            [_x, "[this, false] call ace_dragging_fnc_setCarryable"] call FUNC(removeFromInit);
+            [_x, "[this, true] call ace_dragging_fnc_setCarryable"] call FUNC(addToInit);
+        };
+    } forEach get3DENSelected "object";
+    ["Enabled Carrying", 0, 1] call BIS_fnc_3DENNotification;
+}] call FUNC(addMenuItem);
+
+/* Make object non-carryable */
+[[_indexMain, _toolsMenu, _ACEToolsMenu], "Disable carrying", "z\ace\addons\dragging\ui\icons\box_carry.paa", {
+    {
+        if !([_x, "[this, false] call ace_dragging_fnc_setCarryable"] call FUNC(inInit)) then {            
+            [_x, "[this, true] call ace_dragging_fnc_setCarryable"] call FUNC(removeFromInit);
+            [_x, "[this, false] call ace_dragging_fnc_setCarryable"] call FUNC(addToInit);
+        };
+    } forEach get3DENSelected "object";
+    ["Disabled Carrying", 0, 1] call BIS_fnc_3DENNotification;
+}] call FUNC(addMenuItem);
 
 /* Create a kosherArsenal tools menu */
 private _kosherArsenalToolsMenu = [[_indexMain, _toolsMenu], "Kosher Arsenal", "a3\3den\data\displays\display3den\toolbar\open_ca.paa"] call FUNC(addMenuItem);
