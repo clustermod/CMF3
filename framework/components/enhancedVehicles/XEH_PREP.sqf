@@ -1,9 +1,10 @@
 #include "script_component.hpp"
 
-PREP(init);
+IPREP(init);
+PREP(damageEH);
+PREP(fuelLeakEH);
 PREP(localEffect);
 PREP(medicalHandler);
 PREP(offroading);
 PREP(getSurfaceParams);
 PREP(fire);
-IPREP(autoInit);

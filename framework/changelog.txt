@@ -57,6 +57,8 @@
 ~ Changed loadoutfile format to allow for resupply crate generation.
 ~ Moved setRanks into unit constructor
 ~ Reset marker size when the map is closed to fix their scale on GPS or other map controls
+~ Moved enhancedVehicles Damage Handler and fuel Leak handler to seperate function files (cmf_enhancedVehicles_fnc_damageEH and cmf_enhancedVehicles_fnc_fuelLeakEH)
+~ Changed transferToServer to use CBA logic in an attempt to enhance performance.
 
 - Removed the "Display Roles" action from CC Menu, it's replaced by the TO&E Diary Entry
 - Removed CMF_ORBAT from cmf_config.hpp

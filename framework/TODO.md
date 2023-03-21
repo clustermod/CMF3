@@ -6,6 +6,7 @@
  - [X] Hard lag when entering a vehicle (issue with viewdistance, just get niggas to unfuck their settings)
  - [ ] Offroad should be made clientside for the player, stop it from running for AI aswell
  - [X] Chance of being lit on fire if engine is kill or fuel is kill
+ - [X] Move autoinit into init
 
 ## utility
  - [X] clearVehicleCargo clears ammocrates as well
@@ -20,9 +21,9 @@
 ## 3den
  - [X] Finish the mission data tool (split general mission data and warno)
  - [ ] Maybe finish the config tool (might be a bit too much work rn)
- - [ ] Add categories and icons for all 3den tools 
+ - [ ] Add categories and icons for all 3den tools
  - [ ] Add tool to assign vehicle to group (for TO&E)
- - [ ] Bug where the unitspawner infantry squads prefers to start at charlie rather than alpha
+ - [ ] Fix Bug where the unitspawner infantry squads prefers to start at charlie rather than alpha
  - [ ] Add icons for HMG, MMG, MAT and HAT and all ground and air vehicles (remove CUP dependency)
  - [X] Add icons for gametypes
  - [ ] <s>Add gametype to briefingName (3den name attribute)</s>
@@ -38,6 +39,7 @@
 ## AI
  - [X] Create an eventhandler to put ai in the panic action when on fire
  - [X] Silence AI once and for all
+ - [X] Make transferToServer apply to all AI on init (cba_fnc_addEventhandlerToClass)
 
 ## main
  - [X] hide chat messages:
@@ -45,11 +47,14 @@
  - [X] Chat message needs to handle multi word names (trim away the first and last element in splitString)
  - [X] Call loading bug fix automatically if player is in respawn menu with loading screen
  - [X] Show changelog when a newer version is available for player
- - [X] ACRE2 down mute not working
+ - [ ] ACRE2 down mute not working, radio works, but proximity doesn't
+ - [ ] When waking up there should be a kind of fade in like in saving private ryan (maybe have breathing or something as well while down) 
 
 ## aar (new category)
  - [ ] <s>Test diagAAR and see if it does what i want</s>
  - [X] AARs should be a part of the game now. submitted AARs should be saved to an array to the target. At the end of the game, everyone gets the chance to write AARs to all, zeus, leader, group or individual players
+ - [ ] Fix bug where viewing AARs counts wrongly and going left and right doesn't properly work
+ - [ ] Show notification in spectator for newly submitted AARs
 
 ## gameplay
  - [X] safestart briefing phase isn't showing up at 8pm anymore
@@ -72,6 +77,8 @@
  - [ ] Create camera shake when vehicle is hit by big round
  - [ ] When close to a ACE fire create an orange tint based on the fire intensity
  - [X] Reset map marker scale when map is closed (to unfuck sizes on ctrlMap controls)
+ - [ ] Change icon for submitting an AAR from spectator
+ - [ ] Add button to view submitted AARs after closing
 
 ## menu
  - [ ] <s>Move safestart into an admin menu</s>

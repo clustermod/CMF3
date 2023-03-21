@@ -19,24 +19,15 @@ SCRIPT(transferToServer);
 private _enabled = ( CONFIG_PARAM_3(SETTINGS,ai,transferToServer) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
-[] spawn {
-    if (isDedicated) exitWith {};
+if (!isServer) exitWith {};
 
-    waitUntil{!isnull (getAssignedCuratorLogic player)};
-    (getAssignedCuratorLogic player) addEventHandler ["CuratorObjectPlaced", {
-        private _entity = _this select 1;
+/* Transfer all new AI groups to server */
+["CAManBase", "init", {
+  if (isPlayer _this) exitWith {};
 
-        if ( count crew _entity > 0 ) then {
-			/* Call function on server */
-			[[group effectiveCommander _entity], {
-                params [["_group", grpNull]];
+  private _group = group _this;
+  if (groupowner _group isEqualTo 2) exitWith {};
 
-                if !( (owner leader _group) isEqualTo 2 ) then {
-            		/* Set group owner to server */
-            		_group setGroupOwner 2;
-                    LOG_1("Transfered %1 to server", groupId _group);
-            	};
-            }] remoteExec ["call", 2];
-		};
-    }];
-};
+  _group setGroupOwner 2;
+  LOG_1("Transfered %1 to server", groupId _group);
+}] call CBA_fnc_addClassEventHandler;

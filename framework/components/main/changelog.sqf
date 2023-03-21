@@ -1,5 +1,5 @@
 "
-<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.46</t>
+<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.47</t>
 This is a full changelog of changes since v2.1.0 as the changes have remained undocumented publicly. For subsequent versions the changelog will only display the new changes from the last version.<br/>
 
 <t size='1.05'>Added</t>
@@ -72,8 +72,12 @@ This is a full changelog of changes since v2.1.0 as the changes have remained un
 <t color='#009eaa'>~</t> Changed loadoutfile format to allow for resupply crate generation.<br/>
 <t color='#009eaa'>~</t> Moved setRanks into unit constructor.<br/>
 <t color='#009eaa'>~</t> Reset marker size when the map is closed to fix their scale on GPS or other map controls.<br/>
+<t color='#009eaa'>~</t> Moved enhancedVehicles Damage Handler and fuel Leak handler to seperate function files (cmf_enhancedVehicles_fnc_damageEH and cmf_enhancedVehicles_fnc_fuelLeakEH).<br/>
+<t color='#009eaa'>~</t> Changed transferToServer to use CBA logic in an attempt to enhance performance.<br/>
+<t color='#009eaa'>~</t> Temporarily force disabled offroading.<br/>
 
 <t size='1.05'>Removed</t>
 <t color='#aa0027'>-</t> Removed the ""Display Roles"" action from CC Menu, it's replaced by the Table of Organization and Equipment Diary Entry and the safestart meta info<br/>
 <t color='#aa0027'>-</t> Removed CMF_ORBAT from cmf_config.hpp<br/>
+<t color='#aa0027'>-</t> Removed autoinit from enhancedVehicles (replaced by init)<br/>
 "
