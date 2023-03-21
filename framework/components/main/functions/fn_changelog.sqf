@@ -21,8 +21,7 @@ private _curVersion = GVAR(version);
 
 /* Check if the current version is greater than the last version */
 if (([_lastVersion, _curVersion] call EFUNC(utility,versionCompare)) isEqualTo 1 && _disabled isEqualTo 0) then {
-    private _changelog = loadFile "components\main\changelog.ast";
-    _changelog = parseText _changelog;
+    private _changelog = call compile preprocessFileLineNumbers "components\main\changelog.sqf";
 
     /* waitUntil player is in respawn screen */
     waitUntil { !isNull findDisplay 12 };
@@ -30,7 +29,7 @@ if (([_lastVersion, _curVersion] call EFUNC(utility,versionCompare)) isEqualTo 1
     private _display = (findDisplay 12) createDisplay QGVAR(changelogDisplay);
 
     waitUntil {!isNull _display};
-    private _changelog = loadFile "components\main\changelog.ast";
+    private _changelog = call compile preprocessFileLineNumbers "components\main\changelog.sqf";
     _changelogLines = _changelog splitString toString [13,10];
     _changelog = _changelogLines joinString "<br/>";
 

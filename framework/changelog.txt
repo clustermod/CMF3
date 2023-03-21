@@ -29,6 +29,8 @@
 + Added DHAT and ANVIL to 3DEN Unit Spawner
 + Added Function to display changelog on game start
 + Added function to automate ACRE2 Babel languages
++ Added so crew gets lit on fire if vehicle is on fire
++ Added function to silence friendly AI for good (cmf_ai_fnc_silenceAI)
 
 ~ Changed safestart to display meta information before mission start
 ~ Fixed kosher arsenal force close bug
@@ -53,5 +55,8 @@
 ~ Changed getConfigParam to cache config params to a global config CBA Hash
 ~ Added Bodybags to standard medic loadout.
 ~ Changed loadoutfile format to allow for resupply crate generation.
+~ Moved setRanks into unit constructor
+~ Reset marker size when the map is closed to fix their scale on GPS or other map controls
 
 - Removed the "Display Roles" action from CC Menu, it's replaced by the TO&E Diary Entry
+- Removed CMF_ORBAT from cmf_config.hpp

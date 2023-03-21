@@ -149,6 +149,11 @@ private _fuelLeakHandler =  {
 
                     private _burnEnd = time + 300;
                     [getPosASL _fuel, _radius, 10, { (_this select 0) > time }, [_burnEnd]] call FUNC(fire);
+
+                    /* Light crew on fire */
+                    {
+                        ["ace_fire_addFireSource", [_x, 1, 7, _x, { (_this select 0) > time }, [_burnEnd]]] call CBA_fnc_serverEvent;
+                    } forEach crew _veh;
                 };
             }
         };

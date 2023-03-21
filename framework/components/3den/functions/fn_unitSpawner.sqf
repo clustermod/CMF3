@@ -37,7 +37,7 @@ private _spawnScript = {_this spawn {
         private _groupOffset = _groupPos + _groupOffset;
         private _unitGroup = grpNull;
         {
-            _x params["_class", "_roleName", "_role", "_isLeader", "_unitOffset", "_unitGroupOffset"];
+            _x params["_class", "_roleName", "_role", "_rank", "_isLeader", "_unitOffset", "_unitGroupOffset"];
             private _unitOffset = _unitPos + _unitOffset;
             private _groupOffset = _groupOffset + _unitGroupOffset;
 
@@ -55,6 +55,7 @@ private _spawnScript = {_this spawn {
             _unit set3DENAttribute ["Init", format["[this, ""%1"", 0] call cmf_common_fnc_setRole;", _role]];
             _unit set3DENAttribute ["description", format["%1@%2", _roleName, _lobbyName]];
             _unit set3DENAttribute ["ControlMP", true];
+            _unit set3DENAttribute ["Rank", _rank];
 
             // If unit is zeus add zeus module
             if (_type isEqualTo "ZEUS") then {

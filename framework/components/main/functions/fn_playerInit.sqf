@@ -48,9 +48,6 @@ player removeDiarySubject "Units";
 /* Disable Unsung vietnamese voices */
 RUG_DSAI_TerminalDistance = -1;
 
-/* Disable AI sentences */
-enableSentences false;
-
 /* Fix Loading Bug */
 [] call cmf_utility_fnc_endLoadingScreen;
 

@@ -117,12 +117,12 @@ private _fnc_customUnitControl = {
     /* Fill comboboxes with data */
     {
         _grpTypeCtrl lbAdd (configName _x);
-    } forEach ("true" configClasses (missionConfigFile >> "CMF_ORBAT" >> "TYPES"));
+    } forEach ["INF", "ARMOR", "TRANS", "CAS", "LOGI", "WEAPONS", "SUPPORT", "MECH", "MOTOR", "HQ"];
     _grpTypeCtrl lbSetSelected [1, true];
 
     {
         _grpSizeCtrl lbAdd (configName _x);
-    } forEach ("true" configClasses (missionConfigFile >> "CMF_ORBAT" >> "SIZES"));
+    } forEach ["BAT", "COY", "PLT", "SQD", "FT"];
     _grpSizeCtrl lbSetSelected [1, true];
 
     /* Handle unit spawn */
@@ -156,170 +156,170 @@ switch (_unitID) do {
     case ("COMPANY"): {
         _unitArr = [
         [ // COY HQ
-        ("COY HQ"), "COY HQ", "INF", "COY", 0, [
-        ["B_officer_F", "Company Commander", "CO", true, 0, 0],
-        ["B_officer_F", "Company Executive Officer", "CEO", false, 0, 0],
-        ["B_medic_F", "Company Medic", "MED", false, 1, 0],
-        ["B_officer_F", "Forward Air Controller (FAC)", "FAC", false, 0, 0]
-        ]
+            ("COY HQ"), "COY HQ", "INF", "COY", 0, [
+                ["B_officer_F", "Company Commander", "CO", "CAPTAIN", true, 0, 0],
+                ["B_officer_F", "Company Executive Officer", "CAPTAIN", "CEO", false, 0, 0],
+                ["B_medic_F", "Company Medic", "MED", "CAPTAIN", false, 1, 0],
+                ["B_officer_F", "Forward Air Controller (FAC)", "CAPTAIN", "FAC", false, 0, 0]
+            ]
         ],
-        [ // 1 PLT HQ
-        ("1 PLT HQ"), "1 PLT HQ", "INF", "PLT", -1, [
-        ["B_officer_F", "Platoon Leader", "PL", true, 0, 0],
-        ["B_officer_F", "Platoon Sergeant", "PS", false, -1, 0],
-        ["B_medic_F", "Platoon Medic", "MED", false, -2, 0]
-        ]
-        ],
-        [ // ASL
-        "1 - ASL", "ASL", "INF", "SQD", -2, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
-        ],
-        [ // A1
-        "1 - A1", "A1", "INF", "FT", -3, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
-        ],
-        [ // A2
-        "1 - A2", "A2", "INF", "FT", -3, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, 3, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, 4, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, 5, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, 6, -4]
-        ]
-        ],
-        [ // BSL
-        "1 - BSL", "BSL", "INF", "SQD", -4, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
-        ],
-        [ // B1
-        "1 - B1", "B1", "INF", "FT", -5, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
-        ],
-        [ // B2
-        "1 - B2", "B2", "INF", "FT", -5, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, 3, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, 4, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, 5, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, 6, -4]
-        ]
-        ],
-        [ // CSL
-        "1 - CSL", "CSL", "INF", "SQD", -6, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
-        ],
-        [ // C1
-        "1 - C1", "C1", "INF", "FT", -7, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
-        ],
-        [ // C2
-        "1 - C2", "C2", "INF", "FT", -7, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, 3, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, 4, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, 5, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, 6, -4]
-        ]
-        ],
-        [ // 2 PLT HQ
-        ("2 PLT HQ"), "2 PLT HQ", "INF", "PLT", -8, [
-        ["B_officer_F", "Platoon Leader", "PL", true, 0, 0],
-        ["B_officer_F", "Platoon Sergeant", "PS", false, -1, 0],
-        ["B_medic_F", "Platoon Medic", "MED", false, -2, 0]
-        ]
+            [ // 1 PLT HQ
+            ("1 PLT HQ"), "1 PLT HQ", "INF", "PLT", -1, [
+                ["B_officer_F", "Platoon Leader", "PL", "LIEUTENANT", true, 0, 0],
+                ["B_officer_F", "Platoon Sergeant", "PS", "LIEUTENANT", false, -1, 0],
+                ["B_medic_F", "Platoon Medic", "MED", "LIEUTENANT", false, -2, 0]
+            ]
         ],
         [ // ASL
-        "2 - ASL", "ASL", "INF", "SQD", -9, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
+            "1 - ASL", "ASL", "INF", "SQD", -2, [
+                ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+            ]
         ],
         [ // A1
-        "2 - A1", "A1", "INF", "FT", -10, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
+            "1 - A1", "A1", "INF", "FT", -3, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
+            ]
         ],
         [ // A2
-        "2 - A2", "A2", "INF", "FT", -10, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, 3, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, 4, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, 5, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, 6, -4]
-        ]
+            "1 - A2", "A2", "INF", "FT", -3, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ],
         [ // BSL
-        "2 - BSL", "BSL", "INF", "SQD", -11, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
+            "1 - BSL", "BSL", "INF", "SQD", -4, [
+                ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+            ]
         ],
         [ // B1
-        "2 - B1", "B1", "INF", "FT", -12, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
+            "1 - B1", "B1", "INF", "FT", -5, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ],
         [ // B2
-        "2 - B2", "B2", "INF", "FT", -12, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, 3, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, 4, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, 5, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, 6, -4]
-        ]
+            "1 - B2", "B2", "INF", "FT", -5, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ],
         [ // CSL
-        "2 - CSL", "CSL", "INF", "SQD", -13, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
+            "1 - CSL", "CSL", "INF", "SQD", -6, [
+                ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+            ]
         ],
         [ // C1
-        "2 - C1", "C1", "INF", "FT", -14, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
+            "1 - C1", "C1", "INF", "FT", -7, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ],
         [ // C2
-        "2 - C2", "C2", "INF", "FT", -14, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, 3, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, 4, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, 5, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, 6, -4]
-        ]
+            "1 - C2", "C2", "INF", "FT", -7, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
+        ],
+            [ // 2 PLT HQ
+            ("2 PLT HQ"), "2 PLT HQ", "INF", "PLT", -8, [
+                ["B_officer_F", "Platoon Leader", "PL", "LIEUTENANT", true, 0, 0],
+                ["B_officer_F", "Platoon Sergeant", "PS", "LIEUTENANT", false, -1, 0],
+                ["B_medic_F", "Platoon Medic", "MED", "LIEUTENANT", false, -2, 0]
+            ]
+        ],
+            [ // ASL
+            "2 - ASL", "ASL", "INF", "SQD", -9, [
+                ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+            ]
+        ],
+        [ // A1
+            "2 - A1", "A1", "INF", "FT", -10, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
+        ],
+        [ // A2
+            "2 - A2", "A2", "INF", "FT", -10, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
+        ],
+        [ // BSL
+            "2 - BSL", "BSL", "INF", "SQD", -11, [
+                ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+            ]
+        ],
+        [ // B1
+            "2 - B1", "B1", "INF", "FT", -12, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
+        ],
+        [ // B2
+            "2 - B2", "B2", "INF", "FT", -12, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
+        ],
+        [ // CSL
+            "2 - CSL", "CSL", "INF", "SQD", -13, [
+                ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+            ]
+        ],
+        [ // C1
+            "2 - C1", "C1", "INF", "FT", -14, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
+        ],
+        [ // C2
+            "2 - C2", "C2", "INF", "FT", -14, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ]
         ];
     };
@@ -329,83 +329,83 @@ switch (_unitID) do {
 
         _unitArr = [
         [ // PLT HQ
-        (str _pltID + " PLT HQ"), (str _pltID + " PLT HQ"), "INF", "PLT", 0, [
-        ["B_officer_F", "Platoon Leader", "PL", true, 0, 0],
-        ["B_officer_F", "Platoon Sergeant", "PS", false, 1, 0],
-        ["B_medic_F", "Platoon Medic", "MED", false, 2, 0]
-        ]
+            (str _pltID + " PLT HQ"), (str _pltID + " PLT HQ"), "INF", "PLT", 0, [
+                ["B_officer_F", "Platoon Leader", "PL", "LIEUTENANT", true, 0, 0],
+                ["B_officer_F", "Platoon Sergeant", "PS", "LIEUTENANT", false, -1, 0],
+                ["B_medic_F", "Platoon Medic", "MED", "LIEUTENANT", false, -2, 0]
+            ]
         ],
-        [ // ASL
-        (str _pltID + " - ASL"), "ASL", "INF", "SQD", -1, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
+            [ // ASL
+            (str _pltID + " - ASL"), "ASL", "INF", "SQD", -1, [
+                ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+            ]
         ],
         [ // A1
-        (str _pltID + " - A1"), "A1", "INF", "FT", -2, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
+            (str _pltID + " - A1"), "A1", "INF", "FT", -2, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ],
         [ // A2
-        (str _pltID + " - A2"), "A2", "INF", "FT", -2, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, 3, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, 4, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, 5, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, 6, -4]
-        ]
+            (str _pltID + " - A2"), "A2", "INF", "FT", -2, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ],
         [ // BSL
-        (str _pltID + " - BSL"), "BSL", "INF", "SQD", -3, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
+            (str _pltID + " - BSL"), "BSL", "INF", "SQD", -3, [
+                ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+            ]
         ],
         [ // B1
-        (str _pltID + " - B1"), "B1", "INF", "FT", -4, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
+            (str _pltID + " - B1"), "B1", "INF", "FT", -4, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ],
         [ // B2
-        (str _pltID + " - B2"), "B2", "INF", "FT", -4, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, 3, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, 4, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, 5, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, 6, -4]
-        ]
+            (str _pltID + " - B2"), "B2", "INF", "FT", -4, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ],
         [ // CSL
-        (str _pltID + " - CSL"), "CSL", "INF", "SQD", -5, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
+            (str _pltID + " - CSL"), "CSL", "INF", "SQD", -5, [
+                ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+            ]
         ],
         [ // C1
-        (str _pltID + " - C1"), "C1", "INF", "FT", -6, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
+            (str _pltID + " - C1"), "C1", "INF", "FT", -6, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ],
         [ // C2
-        (str _pltID + " - C2"), "C2", "INF", "FT", -6, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, 3, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, 4, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, 5, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, 6, -4]
-        ]
+            (str _pltID + " - C2"), "C2", "INF", "FT", -6, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ]
         ];
     };
@@ -414,28 +414,28 @@ switch (_unitID) do {
         private _squadID = [] call _fnc_findSquadAndFireteam;
         _unitArr = [
         [ // Squadleader
-        (_squadID select 0), (_squadID select 0) select [3], "INF", "SQD", 0, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
+            (_squadID select 0), (_squadID select 0) select [3], "INF", "SQD", 0, [
+                ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+            ]
         ],
         [ //Fireteam 1
-        (_squadID select 1), (_squadID select 1) select [3], "INF", "FT", -1, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
+            (_squadID select 1), (_squadID select 1) select [3], "INF", "FT", -1, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ],
         [ //Fireteam 2
-        (_squadID select 2), (_squadID select 2) select [3], "INF", "FT", -1, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, 3, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, 4, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, 5, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, 6, -4]
-        ]
+            (_squadID select 2), (_squadID select 2) select [3], "INF", "FT", -1, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ]
         ];
     };
@@ -445,13 +445,13 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        _ftID, _ftID select [3], "INF", "FT", -1, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
+            _ftID, _ftID select [3], "INF", "FT", -1, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, 2, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, 3, -1],
+                ["B_soldier_AAR_F", "Assistant Autorifleman", "AAR", "PRIVATE", false, 4, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, 5, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, 6, -4]
+            ]
         ]
         ];
     };
@@ -475,7 +475,7 @@ switch (_unitID) do {
 
         _unitArr = [[
             (_params select 2), (_params select 2), (_params select 3), (_params select 4), 0, [
-                ["B_Soldier_F", (_params select 1), (_params select 0), true, 0, 0]
+                ["B_Soldier_F", (_params select 1), (_params select 0), "PRIVATE", true, 0, 0]
             ]
         ]];
     };
@@ -483,9 +483,9 @@ switch (_unitID) do {
     case ("ZEUS"): {
         _unitArr = [
         [
-        "Off Game", "Off Game", "INF", "BAT", 0, [
-        ["B_Soldier_F", "Zeus", "ZEUS", true, 0, 0]
-        ]
+            "Off Game", "Off Game", "INF", "BAT", 0, [
+                ["B_Soldier_F", "Zeus", "ZEUS", "MAJOR", true, 0, 0]
+            ]
         ]
         ];
     };
@@ -495,10 +495,10 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        ("PHANTOM " + str _uID), ("PHANTOM " + str _uID), "TRANS", "PLT", 0, [
-        ["B_Helipilot_F", "Pilot", "PILOT", true, 0, 0],
-        ["B_helicrew_F", "Co-Pilot", "PILOT", false, -1, 0]
-        ]
+            ("PHANTOM " + str _uID), ("PHANTOM " + str _uID), "TRANS", "PLT", 0, [
+                ["B_Helipilot_F", "Pilot", "PILOT", "LIEUTENANT", true, 0, 0],
+                ["B_helicrew_F", "Co-Pilot", "PILOT", "LIEUTENANT", false, -1, 0]
+            ]
         ]
         ];
     };
@@ -508,10 +508,10 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        ("REAPER " + str _uID), ("REAPER " + str _uID), "CAS", "PLT", 0, [
-        ["B_Helipilot_F", "Pilot", "PILOT", true, 0, 0],
-        ["B_helicrew_F", "Co-Pilot", "PILOT", false, -1, 0]
-        ]
+            ("REAPER " + str _uID), ("REAPER " + str _uID), "CAS", "PLT", 0, [
+                ["B_Helipilot_F", "Pilot", "PILOT", "LIEUTENANT", true, 0, 0],
+                ["B_helicrew_F", "Co-Pilot", "PILOT", "LIEUTENANT", false, -1, 0]
+            ]
         ]
         ];
     };
@@ -521,10 +521,10 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        ("UGLY " + str _uID), ("UGLY " + str _uID), "CAS", "PLT", 0, [
-        ["B_Helipilot_F", "Pilot", "PILOT", true, 0, 0],
-        ["B_helicrew_F", "Gunner", "PILOT", false, -1, 0]
-        ]
+            ("UGLY " + str _uID), ("UGLY " + str _uID), "CAS", "PLT", 0, [
+                ["B_Helipilot_F", "Pilot", "PILOT", "LIEUTENANT", true, 0, 0],
+                ["B_helicrew_F", "Gunner", "PILOT", "LIEUTENANT", false, -1, 0]
+            ]
         ]
         ];
     };
@@ -534,9 +534,9 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        ("HAWG " + str _uID), ("HAWG " + str _uID), "CAS", "PLT", 0, [
-        ["B_Fighter_Pilot_F", "Pilot", "PILOT", true, 0, 0]
-        ]
+            ("HAWG " + str _uID), ("HAWG " + str _uID), "CAS", "PLT", 0, [
+                ["B_Fighter_Pilot_F", "Pilot", "PILOT", "LIEUTENANT", true, 0, 0]
+            ]
         ]
         ];
     };
@@ -546,9 +546,9 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        ("PAVEMENT " + str _uID), ("PAVEMENT " + str _uID), "CAS", "PLT", 0, [
-        ["B_Fighter_Pilot_F", "Pilot", "PILOT", true, 0, 0]
-        ]
+            ("PAVEMENT " + str _uID), ("PAVEMENT " + str _uID), "CAS", "PLT", 0, [
+                ["B_Fighter_Pilot_F", "Pilot", "PILOT", "LIEUTENANT", true, 0, 0]
+            ]
         ]
         ];
     };
@@ -558,11 +558,11 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        ("SIERRA " + str _uID), ("SIERRA " + str _uID), "ARMOR", "PLT", 0, [
-        ["B_crew_F", "Commander", "CRW", true, 0, 0],
-        ["B_crew_F", "Gunner", "CRW", false, -1, 0],
-        ["B_crew_F", "Driver", "CRW", false, -2, 0]
-        ]
+            ("SIERRA " + str _uID), ("SIERRA " + str _uID), "ARMOR", "PLT", 0, [
+                ["B_crew_F", "Commander", "CRW", "LIEUTENANT", true, 0, 0],
+                ["B_crew_F", "Gunner", "CRW", "LIEUTENANT", false, -1, 0],
+                ["B_crew_F", "Driver", "CRW", "LIEUTENANT", false, -2, 0]
+            ]
         ]
         ];
     };
@@ -572,11 +572,11 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        ("MIKE " + str _uID), ("MIKE " + str _uID), "ARMOR", "PLT", 0, [
-        ["B_crew_F", "Commander", "CRW", true, 0, 0],
-        ["B_crew_F", "Gunner", "CRW", false, -1, 0],
-        ["B_crew_F", "Driver", "CRW", false, -2, 0]
-        ]
+            ("MIKE " + str _uID), ("MIKE " + str _uID), "ARMOR", "PLT", 0, [
+                ["B_crew_F", "Commander", "CRW", "LIEUTENANT", true, 0, 0],
+                ["B_crew_F", "Gunner", "CRW", "LIEUTENANT", false, -1, 0],
+                ["B_crew_F", "Driver", "CRW", "LIEUTENANT", false, -2, 0]
+            ]
         ]
         ];
     };
@@ -586,11 +586,11 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        ("TANGO " + str _uID), ("TANGO " + str _uID), "ARMOR", "PLT", 0, [
-        ["B_crew_F", "Commander", "CRW", true, 0, 0],
-        ["B_crew_F", "Gunner", "CRW", false, -1, 0],
-        ["B_crew_F", "Driver", "CRW", false, -2, 0]
-        ]
+            ("TANGO " + str _uID), ("TANGO " + str _uID), "ARMOR", "PLT", 0, [
+                ["B_crew_F", "Commander", "CRW", "LIEUTENANT", true, 0, 0],
+                ["B_crew_F", "Gunner", "CRW", "LIEUTENANT", false, -1, 0],
+                ["B_crew_F", "Driver", "CRW", "LIEUTENANT", false, -2, 0]
+            ]
         ]
         ];
     };
@@ -600,11 +600,11 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        ("ANVIL " + str _uID), ("ANVIL " + str _uID), "ARMOR", "PLT", 0, [
-        ["B_crew_F", "Commander", "CRW", true, 0, 0],
-        ["B_crew_F", "Gunner", "CRW", false, -1, 0],
-        ["B_crew_F", "Driver", "CRW", false, -2, 0]
-        ]
+            ("ANVIL " + str _uID), ("ANVIL " + str _uID), "ARMOR", "PLT", 0, [
+                ["B_crew_F", "Commander", "CRW", "LIEUTENANT", true, 0, 0],
+                ["B_crew_F", "Gunner", "CRW", "LIEUTENANT", false, -1, 0],
+                ["B_crew_F", "Driver", "CRW", "LIEUTENANT", false, -2, 0]
+            ]
         ]
         ];
     };
@@ -614,10 +614,10 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        _uID, "MORTARS", "SUPPORT", "SQD", 0, [
-        ["B_officer_F", "Gunnery Leader", "CRW", true, 0, 0],
-        ["B_Soldier_F", "Gunnery Gunner", "CRW", false, -1, 0]
-        ]
+            _uID, "MORTARS", "SUPPORT", "SQD", 0, [
+                ["B_officer_F", "Gunnery Leader", "CRW", "SERGEANT", true, 0, 0],
+                ["B_Soldier_F", "Gunnery Gunner", "CRW", "CORPORAL", false, -1, 0]
+            ]
         ]
         ];
     };
@@ -627,10 +627,10 @@ switch (_unitID) do {
 
         _unitArr = [
         [
-        _uID, "ROMEO", "SUPPORT", "SQD", 0, [
-        ["B_officer_F", "Spotter", "SPOT", true, 0, 0],
-        ["B_Soldier_F", "Sniper", "SNPR", false, -1, 0]
-        ]
+            _uID, "ROMEO", "SUPPORT", "SQD", 0, [
+                ["B_officer_F", "Spotter", "SPOT", "SERGEANT", true, 0, 0],
+                ["B_Soldier_F", "Sniper", "SNPR", "CORPORAL", false, -1, 0]
+            ]
         ]
         ];
     };
@@ -641,8 +641,8 @@ switch (_unitID) do {
         _unitArr = [
         [
         _uID, "ENGI", "SUPPORT", "SQD", 0, [
-        ["B_officer_F", "Engineer Leader", "ENG", true, 0, 0],
-        ["B_Soldier_F", "Engineer", "ENG", false, -1, 0]
+        ["B_officer_F", "Engineer Leader", "ENG", "SERGEANT", true, 0, 0],
+        ["B_Soldier_F", "Engineer", "ENG", "CORPORAL", false, -1, 0]
         ]
         ]
         ];
@@ -654,8 +654,8 @@ switch (_unitID) do {
         _unitArr = [
         [
         _uID, "LOGI", "SUPPORT", "SQD", 0, [
-        ["B_officer_F", "Logistics Leader", "FTL", true, 0, 0],
-        ["B_Soldier_F", "Logistics Driver", "RFL", false, -1, 0]
+        ["B_officer_F", "Logistics Leader", "FTL", "SERGEANT", true, 0, 0],
+        ["B_Soldier_F", "Logistics Driver", "RFL", "CORPORAL", false, -1, 0]
         ]
         ]
         ];
@@ -667,9 +667,9 @@ switch (_unitID) do {
         _unitArr = [
         [
         _uID, "MMG", "WEAPONS", "SQD", 0, [
-        ["B_officer_F", "MMG Leader", "FTL", true, 0, 0],
-        ["B_Soldier_F", "Machinegunner, medium (MMG)", "MMG", false, -1, 0],
-        ["B_Soldier_F", "Assistant Machinegunner", "AMMG", false, -2, 0]
+        ["B_officer_F", "MMG Leader", "FTL", "SERGEANT", true, 0, 0],
+        ["B_Soldier_F", "Machinegunner, medium (MMG)", "MMG", "CORPORAL", false, -1, 0],
+        ["B_Soldier_F", "Assistant Machinegunner", "AMMG", "CORPORAL", false, -2, 0]
         ]
         ]
         ];
@@ -681,9 +681,9 @@ switch (_unitID) do {
         _unitArr = [
         [
         _uID, "HMG", "WEAPONS", "SQD", 0, [
-        ["B_officer_F", "HMG Leader", "FTL", true, 0, 0],
-        ["B_Soldier_F", "Machinegunner, heavy (HMG)", "HMG", false, -1, 0],
-        ["B_Soldier_F", "Assistant Machinegunner", "AHMG", false, -2, 0]
+        ["B_officer_F", "HMG Leader", "FTL", "SERGEANT", true, 0, 0],
+        ["B_Soldier_F", "Machinegunner, heavy (HMG)", "HMG", "CORPORAL", false, -1, 0],
+        ["B_Soldier_F", "Assistant Machinegunner", "AHMG", "CORPORAL", false, -2, 0]
         ]
         ]
         ];
@@ -695,9 +695,9 @@ switch (_unitID) do {
         _unitArr = [
         [
         _uID, "MAT", "WEAPONS", "SQD", 0, [
-        ["B_officer_F", "MAT Leader", "FTL", true, 0, 0],
-        ["B_Soldier_F", "Anti-Tank, medium (MAT)", "MAT", false, -1, 0],
-        ["B_Soldier_F", "Anti-Tank, medium (MAT)", "MAT", false, -2, 0]
+        ["B_officer_F", "MAT Leader", "FTL", "SERGEANT", true, 0, 0],
+        ["B_Soldier_F", "Anti-Tank, medium (MAT)", "MAT", "CORPORAL", false, -1, 0],
+        ["B_Soldier_F", "Anti-Tank, medium (MAT)", "MAT", "CORPORAL", false, -2, 0]
         ]
         ]
         ];
@@ -709,9 +709,9 @@ switch (_unitID) do {
         _unitArr = [
         [
         _uID, "HAT", "WEAPONS", "SQD", 0, [
-        ["B_officer_F", "HAT Leader", "FTL", true, 0, 0],
-        ["B_Soldier_F", "Anti-Tank, heavy (HAT)", "HAT", false, -1, 0],
-        ["B_Soldier_F", "Anti-Tank, heavy (HAT)", "HAT", false, -2, 0]
+        ["B_officer_F", "HAT Leader", "FTL", "SERGEANT", true, 0, 0],
+        ["B_Soldier_F", "Anti-Tank, heavy (HAT)", "HAT", "CORPORAL", false, -1, 0],
+        ["B_Soldier_F", "Anti-Tank, heavy (HAT)", "HAT", "CORPORAL", false, -2, 0]
         ]
         ]
         ];
@@ -723,9 +723,9 @@ switch (_unitID) do {
         _unitArr = [
         [
         _uID, "DHAT", "WEAPONS", "SQD", 0, [
-        ["B_officer_F", "DHAT Leader", "FTL", true, 0, 0],
-        ["B_Soldier_F", "Gunner", "DHATG", false, -1, 0],
-        ["B_Soldier_F", "Assistant Gunner", "DHATAG", false, -2, 0]
+        ["B_officer_F", "DHAT Leader", "FTL", "SERGEANT", true, 0, 0],
+        ["B_Soldier_F", "Gunner", "DHATG", "CORPORAL", false, -1, 0],
+        ["B_Soldier_F", "Assistant Gunner", "DHATAG", "CORPORAL", false, -2, 0]
         ]
         ]
         ];
@@ -735,28 +735,28 @@ switch (_unitID) do {
         private _squadID = [] call _fnc_findSquadAndFireteam;
         _unitArr = [
         [ // Squadleader
-        (_squadID select 0), (_squadID select 0) select [3], "INF", "SQD", 0, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
+            (_squadID select 0), (_squadID select 0) select [3], "INF", "SQD", 0, [
+                ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+            ]
         ],
         [ //Fireteam 1
-        (_squadID select 1), (_squadID select 1) select [3], "INF", "FT", -1, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, -2, -1],
-        ["B_Soldier_GL_F", "Grenadier", "GRD", false, -3, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, -4, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, -5, -4]
-        ]
+            (_squadID select 1), (_squadID select 1) select [3], "INF", "FT", -1, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_Soldier_GL_F", "Grenadier", "GRD", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
+            ]
         ],
         [ //Fireteam 2
-        (_squadID select 2), (_squadID select 2) select [3], "INF", "FT", -1, [
-        ["B_officer_F", "Fireteam Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Autorifleman", "AR", false, 3, -1],
-        ["B_Soldier_GL_F", "Grenadier", "GRD", false, 4, -2],
-        ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", false, 5, -3],
-        ["B_Soldier_F", "Rifleman", "RFL", false, 6, -4]
-        ]
+            (_squadID select 2), (_squadID select 2) select [3], "INF", "FT", -1, [
+                ["B_officer_F", "Fireteam Leader", "FTL", "CORPORAL", true, -1, 0],
+                ["B_soldier_AR_F", "Autorifleman", "AR", "PRIVATE", false, -2, -1],
+                ["B_Soldier_GL_F", "Grenadier", "GRD", "PRIVATE", false, -3, -2],
+                ["B_soldier_LAT2_F", "Anti-Tank, Light (LAT)", "LAT", "PRIVATE", false, -4, -3],
+                ["B_Soldier_F", "Rifleman", "RFL", "PRIVATE", false, -5, -4]
+            ]
         ]
         ];
     };
@@ -764,30 +764,30 @@ switch (_unitID) do {
     case ("RGR_MG_SQUAD"): {
         private _squadID = [] call _fnc_findSquadAndFireteam;
         _unitArr = [
-        [ // Squadleader
-        (_squadID select 0), (_squadID select 0) select [3], "INF", "SQD", 0, [
-        ["B_officer_F", "Squad Leader", "SL", true, 0, 0],
-        ["B_medic_F", "Squad Medic", "MED", false, 1, 0]
-        ]
-        ],
-        [ //Fireteam 1
-        "Gun Team 1", "Gun Team 1", "INF", "FT", -1, [
-        ["B_officer_F", "Gun Team Leader", "FTL", true, -1, 0],
-        ["B_soldier_AR_F", "Machinegunner, Medium", "MMG", false, -2, -1]
-        ]
-        ],
-        [ //Fireteam 2
-        "Gun Team 2", "Gun Team 2", "INF", "FT", -1, [
-        ["B_officer_F", "Gun Team Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Machinegunner, Medium", "MMG", false, -2, -1]
-        ]
-        ],
-        [ //Fireteam 3
-        "Gun Team 3", "Gun Team 3", "INF", "FT", -1, [
-        ["B_officer_F", "Gun Team Leader", "FTL", true, 2, 0],
-        ["B_soldier_AR_F", "Machinegunner, Medium", "MMG", false, -2, -1]
-        ]
-        ]
+            [ // Squadleader
+                (_squadID select 0), (_squadID select 0) select [3], "INF", "SQD", 0, [
+                    ["B_officer_F", "Squad Leader", "SL", "SERGEANT", true, 0, 0],
+                    ["B_medic_F", "Squad Medic", "MED", "CORPORAL", false, 1, 0]
+                ]
+            ],
+            [ //Fireteam 1
+                "Gun Team 1", "Gun Team 1", "INF", "FT", -1, [
+                    ["B_officer_F", "Gun Team Leader", "FTL", "CORPORAL", true, -1, 0],
+                    ["B_soldier_AR_F", "Machinegunner, Medium", "MMG", "PRIVATE", false, -2, -1]
+                ]
+            ],
+            [ //Fireteam 2
+                "Gun Team 2", "Gun Team 2", "INF", "FT", -1, [
+                    ["B_officer_F", "Gun Team Leader", "FTL", "CORPORAL", true, 2, 0],
+                    ["B_soldier_AR_F", "Machinegunner, Medium", "MMG", "PRIVATE", false, -2, -1]
+                ]
+            ],
+            [ //Fireteam 3
+                "Gun Team 3", "Gun Team 3", "INF", "FT", -1, [
+                    ["B_officer_F", "Gun Team Leader", "FTL", "CORPORAL", true, 2, 0],
+                    ["B_soldier_AR_F", "Machinegunner, Medium", "MMG", "PRIVATE", false, -2, -1]
+                ]
+            ]
         ];
     };
 

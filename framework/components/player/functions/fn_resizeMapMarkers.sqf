@@ -59,4 +59,17 @@ if (!hasInterface) exitWith {};
             } forEach allMapMarkers;
         };
     }];
+
+    /* Reset map marker size when map is closed */
+    addMissionEventHandler ["Map", {
+        params ["_mapIsOpened"];
+
+        if (!_mapIsOpened) then {
+            private _m = "cmf_init_resizeMapMarkers_markerSize_" + _x;
+            {
+                _markerSizeFinal = missionNamespace getVariable [_m, [1,1]];
+                _x setMarkerSizeLocal _markerSizeFinal;
+            } forEach allMapmarkers;
+        };
+    }];
 };
