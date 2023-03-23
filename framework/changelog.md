@@ -36,7 +36,9 @@
 \+ Added diary for environment (weather and time of twilight and sun set/rise)<br/>
 \+ Added function to create camerashake when firing from vehicles (cmf_enhancedVehicles_fnc_gunEffectEH)<br/>
 \+ Added functions to add, remove or check a line from the 3den entity init<br/>
-\+ Added functions to enable / disable carrying and dragging from ACE3<br/>
+\+ Added 3den tool to toggle ace carry on objects<br/>
+\+ Added 3den tool to toggle ace drag on objects<br/>
+\+ Added 3den tool to write warning orders<br/>
 
 \~ Changed safestart to display meta information before mission start<br/>
 \~ Fixed kosher arsenal force close bug<br/>
@@ -65,6 +67,9 @@
 \~ Reset marker size when the map is closed to fix their scale on GPS or other map controls<br/>
 \~ Moved enhancedVehicles Damage Handler and fuel Leak handler to seperate function files (cmf_enhancedVehicles_fnc_damageEH and cmf_enhancedVehicles_fnc_fuelLeakEH)<br/>
 \~ Changed transferToServer to use CBA logic in an attempt to enhance performance.<br/>
+\~ Renamed 3den functions for better organization.<br/>
+\~ Refactored prevent prone to use CBA XEH.<br/>
+
 
 \- Removed the "Display Roles" action from CC Menu, it's replaced by the TO&E Diary Entry<br/>
 \- Removed CMF_ORBAT from cmf_config.hpp<br/>

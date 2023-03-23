@@ -1,5 +1,5 @@
 "
-<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.48</t>
+<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.49</t>
 This is a full changelog of changes since v2.1.0 as the changes have remained undocumented publicly. For subsequent versions the changelog will only display the new changes from the last version.
 <br/>
 <t size='1.05'>Added</t>
@@ -80,6 +80,8 @@ This is a full changelog of changes since v2.1.0 as the changes have remained un
 <t color='#009eaa'>~</t> Moved enhancedVehicles Damage Handler and fuel Leak handler to seperate function files (cmf_enhancedVehicles_fnc_damageEH and cmf_enhancedVehicles_fnc_fuelLeakEH).
 <t color='#009eaa'>~</t> Changed transferToServer to use CBA logic in an attempt to enhance performance.
 <t color='#009eaa'>~</t> Temporarily force disabled offroading.
+<t color='#009eaa'>~</t> Renamed 3den functions for better organization.
+<t color='#009eaa'>~</t> Refactored Prevent Prone to use CBA XEH.
 <br/>
 <t size='1.05'>Removed</t>
 <t color='#aa0027'>-</t> Removed the ""Display Roles"" action from CC Menu, it's replaced by the Table of Organization and Equipment Diary Entry and the safestart meta info

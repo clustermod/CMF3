@@ -67,4 +67,4 @@ private _action = {
     }];
 };
 
-[_path, _name, _icon, _action] call cmf_3den_fnc_addMenuItem;
+[_path, _name, _icon, _action] call FUNC(addMenuItem);

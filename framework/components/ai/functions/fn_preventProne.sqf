@@ -21,16 +21,13 @@ private _enabled = ( CONFIG_PARAM_3(SETTINGS,ai,preventProne) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
 /* preventProne on AI units */
-[] spawn {
-    while { !(missionNamespace getVariable [QEGVAR(utility,preventProne_disable), false]) } do {
-        {
-            if ((!isPlayer _x) && !(_x getVariable [QEGVAR(utility,preventProne_initialized), false])) then {
-                [_x] call EFUNC(utility,preventProne);
-                _x setVariable [QEGVAR(utility,preventProne_initialized), true];
+["CAManBase", "init", {
+  params ["_unit"];
 
-                LOG_1("Enabled preventProne for %1", name _x);
-            };
-        } forEach allUnits;
-        sleep 5;
-    };
-};
+  if (missionNamespace getVariable [QEGVAR(utility,preventProne_disable), false]) exitWith {};
+  if (_unit getVariable [QEGVAR(utility,preventProne_disable), false]) exitWith {};
+  if (isPlayer _unit) exitWith {};
+
+  [_unit] call EFUNC(utility,preventProne);
+  LOG_1("Enabled preventProne for %1", _unit);
+}, true, [], true] call CBA_fnc_addClassEventHandler;

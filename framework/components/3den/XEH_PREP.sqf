@@ -4,17 +4,25 @@
  */
 
 IPREP(init);
-PREP(addRadioRack);
-PREP(assignAmmobox);
-PREP(iconViewer);
+
 PREP(addMenuItem);
+PREP(inInit);
 PREP(addToInit);
 PREP(removeFromInit);
-PREP(inInit);
-PREP(setConfig);
-PREP(unitConstructor);
-PREP(unitSpawner);
-PREP(simplifySelectedObject);
+
+PREP(main_iconViewer);
+PREP(main_setConfig);
+PREP(unit_constructor);
+PREP(unit_spawner);
+
+PREP(entity_acre_rack);
+PREP(entity_kosherArsenal_ammobox);
+PREP(entity_simplify);
+PREP(entity_simulation);
+PREP(entity_ace_carry);
+PREP(entity_ace_drag);
+PREP(entity_logistics_supplyCrates);
+PREP(entity_ai_preventProne);
 
 /* Localize function */
 EFUNC(main,localize) = compile preprocessFileLineNumbers QUOTE(PATHTO_SYS(main,fn_localize));
@@ -23,4 +31,4 @@ EFUNC(main,localize) = compile preprocessFileLineNumbers QUOTE(PATHTO_SYS(main,f
 EFUNC(utility,versionCompare) = compile preprocessFileLineNumbers QUOTE(PATHTO_SYS(utility,fn_versionCompare));
 
 /* Add ACE settings in 3den */
-0 = [] spawn compile preprocessFileLineNumbers QUOTE(PATHTOF_SYS(main,initAceSettings.sqf));
+[] spawn compile preprocessFileLineNumbers QUOTE(PATHTOF_SYS(main,initAceSettings.sqf));

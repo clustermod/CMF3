@@ -68,4 +68,4 @@ private _medCrate = {
 };
 
 /* Add menu actions */
-[_path, "Create Medical Crate", "", _medCrate] call cmf_3den_fnc_addMenuItem;
+[_path, "Create Medical Crate", "", _medCrate] call FUNC(addMenuItem);

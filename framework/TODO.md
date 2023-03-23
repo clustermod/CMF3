@@ -32,6 +32,9 @@
  - [ ] Create resupply crates from loadoutfile function.
  - [ ] Kosher Arsenal Loadout Tool, change out list classes for custom class inherited from: https://github.com/acemod/ACE3/blob/master/addons/arsenal/ui/RscAttributes.hpp. 
 	   (CT_LISTNBOX can take a idc on left or right side, put checkbox on right side)
+- [ ] Move 3DEN Entity Tools to it's own component called 3den_tools
+- [ ] Extend warno to include a callsign table in Command and Signal
+- [ ] Create function to display warning order in mission
 
 ## kosherArsenal
  - [ ] Loadout validity test (so when something is wrong it will throw a proper stacktrace)
@@ -93,6 +96,7 @@
  - [ ] Replace all eventhandlers with CBA eventhandlers
  - [ ] Consider changing vanilla compile with: https://cbateam.github.io/CBA_A3/docs/files/xeh/fnc_compileFunction-sqf.html
  - [ ] Performance testing (try to lower the amount of spawned scripts drastically. rn a dedicated server runs maybe 70-80 spawned scripts, not good)
+ - [ ] Clear scripts, img and loadouts directory of non-cmf files
  - [X] Change sound files to .wss file type (arma sound files)
  - [ ] Code optimization<br/>https://community.bistudio.com/wiki/Code_Optimisation#Lazy_Evaluation
 https://community.bistudio.com/wiki/Code_Optimisation#if_and_switch

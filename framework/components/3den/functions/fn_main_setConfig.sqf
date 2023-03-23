@@ -60,7 +60,7 @@ _ctrlMenuStrip menuSetAction [[_cmfMenu, _missionData], "call cmf_3den_fnc_setCo
 
 /* Handle Config */
 FUNC(setConfig_configHandler) = {
-    ['Not implemented yet', 0, 1] call BIS_fnc_3DENNotification;
+    ['Not implemented yet', 1, 1] call BIS_fnc_3DENNotification;
     private _logics = (all3DENEntities select 0) select { (_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_configLogic'] };
     private _logic = objNull;
     if (count _logics isEqualTo 0) then {
@@ -113,12 +113,12 @@ FUNC(setConfig_missionDataHandler) = {
             (_display displayCtrl 100) ctrlSetText ([_hash, "M_TITLE", ""] call CBA_fnc_hashGet);
             (_display displayCtrl 101) lbSetCurSel (([_hash, "M_TYPE", [0]] call CBA_fnc_hashGet) select 0);
             (_display displayCtrl 102) ctrlSetText ([_hash, "M_CTYPE", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 200) ctrlSetText ([_hash, "E_MAP", "None"] call CBA_fnc_hashGet);
-            (_display displayCtrl 201) ctrlSetText ([_hash, "E_GPS", "None"] call CBA_fnc_hashGet);
-            (_display displayCtrl 202) ctrlSetText ([_hash, "E_RADIO", "None"] call CBA_fnc_hashGet);
-            (_display displayCtrl 203) ctrlSetText ([_hash, "E_NVG", "None"] call CBA_fnc_hashGet);
-            (_display displayCtrl 204) ctrlSetText ([_hash, "E_FLASHLIGHT", "None"] call CBA_fnc_hashGet);
-            (_display displayCtrl 205) ctrlSetText ([_hash, "E_FLARE", "None"] call CBA_fnc_hashGet);
+            (_display displayCtrl 200) ctrlSetText ([_hash, "E_MAP", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 201) ctrlSetText ([_hash, "E_GPS", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 202) ctrlSetText ([_hash, "E_RADIO", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 203) ctrlSetText ([_hash, "E_NVG", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 204) ctrlSetText ([_hash, "E_FLASHLIGHT", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 205) ctrlSetText ([_hash, "E_FLARE", ""] call CBA_fnc_hashGet);
         };
 
         private _btnConfirm = _display displayCtrl 1;
@@ -195,7 +195,6 @@ FUNC(setConfig_missionDataHandler) = {
 
 /* Handle Warning Order */
 FUNC(setConfig_warnoHandler) = {
-    ['Not implemented yet', 0, 1] call BIS_fnc_3DENNotification;
     private _logics = (all3DENEntities select 0) select { (_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_warnoLogic'] };
     private _logic = objNull;
     if (count _logics isEqualTo 0) then {
@@ -214,7 +213,78 @@ FUNC(setConfig_warnoHandler) = {
     private _display3DEN = uiNamespace getVariable "Display3DEN";
     private _display = _display3DEN createDisplay QGVAR(warno);
 
-    _display spawn {
+    [_display, _logic] spawn {
+        params ["_display", "_logic"];
 
-    }
+        waitUntil { !isNull _display };
+
+        /* load previous data */
+        [] call compile ((_logic get3DENAttribute "Init") select 0);
+        if (!isNil QEGVAR(common,warno)) then {
+            private _hash = [EGVAR(common,warno)] call CBA_fnc_hashCreate;
+
+            (_display displayCtrl 300) ctrlSetText ([_hash, "S_SITUATION", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 301) ctrlSetText ([_hash, "S_ENEMYCOMP", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 302) ctrlSetText ([_hash, "S_ENEMYCAP", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 303) ctrlSetText ([_hash, "S_FRIENDCOMP", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 304) ctrlSetText ([_hash, "S_FRIENDCAP", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 305) ctrlSetText ([_hash, "M_MISSION", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 306) ctrlSetText ([_hash, "E_EXECUTION", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 307) ctrlSetText ([_hash, "E_INTENT", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 308) ctrlSetText ([_hash, "E_MOVEMENT", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 309) ctrlSetText ([_hash, "A_ADMINLOGI", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 310) ctrlSetText ([_hash, "C_COMMTABLE", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 311) ctrlSetText ([_hash, "C_ROE", ""] call CBA_fnc_hashGet);
+            (_display displayCtrl 312) ctrlSetText ([_hash, "C_SOP", ""] call CBA_fnc_hashGet);
+        };
+
+        private _btnConfirm = _display displayCtrl 1;
+        _btnConfirm ctrlAddEventHandler ["ButtonClick", {
+            params ["_ctrl"];
+
+            private _display = ctrlParent _ctrl;
+
+            /* Create Hash Map of values */
+            _hash = [];
+
+            /* Situation */
+            _hash pushBack ["S_SITUATION", ctrlText (_display displayCtrl 300)];
+            _hash pushBack ["S_ENEMYCOMP", ctrlText (_display displayCtrl 301)];
+            _hash pushBack ["S_ENEMYCAP", ctrlText (_display displayCtrl 302)];
+            _hash pushBack ["S_FRIENDCOMP", ctrlText (_display displayCtrl 303)];
+            _hash pushBack ["S_FRIENDCAP", ctrlText (_display displayCtrl 304)];
+
+            /* Mission */
+            _hash pushBack ["M_MISSION", ctrlText (_display displayCtrl 305)];
+            
+            /* Execution */
+            _hash pushBack ["E_EXECUTION", ctrlText (_display displayCtrl 306)];
+            _hash pushBack ["E_INTENT", ctrlText (_display displayCtrl 307)];
+            _hash pushBack ["E_MOVEMENT", ctrlText (_display displayCtrl 308)];
+
+            /* Administration and Logistics */
+            _hash pushBack ["A_ADMINLOGI", ctrlText (_display displayCtrl 309)];
+
+            /* Command and Signal */
+            _hash pushBack ["C_COMMTABLE", ctrlText (_display displayCtrl 310)];
+            _hash pushBack ["C_ROE", ctrlText (_display displayCtrl 311)];
+            _hash pushBack ["C_SOP", ctrlText (_display displayCtrl 312)];
+
+            /* Save to logic init */
+            GVAR(missionDataLogic) set3DENAttribute ["Init", format ["if (!isServer) exitWith { }; missionNamespace setVariable [""%1"", %2, true];", QEGVAR(common,warno), str _hash]];
+
+            /* Set mission attributes */
+            _hash = [_hash] call CBA_fnc_hashCreate;
+
+            private _gameSituation = [_hash, "S_SITUATION", ""] call CBA_fnc_hashGet;
+
+            set3DENMissionAttributes [
+                ["scenario", "OverviewText", _gameSituation],
+                ["scenario", "OverviewTextLocked", _gameSituation],
+                ["scenario", "OnLoadMission", _gameSituation]
+            ];
+
+            ["Saved Warning Order", 0, 4] call BIS_fnc_3DENNotification;
+        }];
+    };
 };
