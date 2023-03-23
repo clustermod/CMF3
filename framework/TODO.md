@@ -43,6 +43,8 @@
  - [X] Create an eventhandler to put ai in the panic action when on fire
  - [X] Silence AI once and for all
  - [X] Make transferToServer apply to all AI on init (cba_fnc_addEventhandlerToClass)
+ - [ ] Automatically call artillery on called out units using taskArtillery from lambs
+ - [X] Maybe use taskCreep rather than taskRush
 
 ## main
  - [X] hide chat messages:

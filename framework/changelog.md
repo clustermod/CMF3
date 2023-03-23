@@ -71,6 +71,7 @@
 - Changed transferToServer to use CBA logic in an attempt to enhance performance.
 - Renamed 3den functions for better organization.
 - Refactored prevent prone to use CBA XEH.
+- Changed reinforcing AIs tactic from rush to creep.
 
 ## Removed
 - Removed the "Display Roles" action from CC Menu, it's replaced by the TO&E Diary Entry

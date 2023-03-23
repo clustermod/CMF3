@@ -44,7 +44,7 @@ while { !(missionNamespace getVariable [QGVAR(reinforce_disable), false]) } do {
                 if ( (leader _thisGroup distance leader _group) < _range && _thisGroup != _group && !(_thisGroup getVariable [QGVAR(reinforce_targetGroup), grpNull] isEqualTo _group) && side _thisGroup isEqualTo side _group ) then {
                     LOG_2("%1 reinforcing %2(TaskRush)", groupId _thisGroup, groupId _group);
 
-                    [_thisGroup, 100, 15, [], getPos _target, false] spawn lambs_wp_fnc_taskRush;
+                    [_thisGroup, 100, 15, [], getPos _target, false] spawn lambs_wp_fnc_taskCreep;
 
                     /* Delete old waypoints and add new */
                     for "_i" from count waypoints _thisGroup - 1 to 0 step -1 do {

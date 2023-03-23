@@ -82,6 +82,7 @@ This is a full changelog of changes since v2.1.0 as the changes have remained un
 <t color='#009eaa'>~</t> Temporarily force disabled offroading.
 <t color='#009eaa'>~</t> Renamed 3den functions for better organization.
 <t color='#009eaa'>~</t> Refactored Prevent Prone to use CBA XEH.
+<t color='#009eaa'>~</t> Changed reinforcing AIs tactic from rush to creep.
 <br/>
 <t size='1.05'>Removed</t>
 <t color='#aa0027'>-</t> Removed the ""Display Roles"" action from CC Menu, it's replaced by the Table of Organization and Equipment Diary Entry and the safestart meta info
