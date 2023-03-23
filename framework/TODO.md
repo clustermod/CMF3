@@ -51,6 +51,7 @@
  - [X] Call loading bug fix automatically if player is in respawn menu with loading screen
  - [X] Show changelog when a newer version is available for player
  - [X] ACRE2 down mute not working, radio works, but proximity doesn't
+ - [ ] Make a warning order file (and look into a way of parsing it to display on a webpage)
 
 ## aar (new category)
  - [ ] <s>Test diagAAR and see if it does what i want</s>
