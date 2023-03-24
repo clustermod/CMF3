@@ -22,45 +22,43 @@ if !(_enabled) exitWith {};
 
 if (!isServer) exitWith {};
 
-/* Enable LAMBS reinforcements on unit */
-while { !(missionNamespace getVariable [QGVAR(reinforce_disable), false]) } do {
+/* Transfer all new AI groups to server */
+["CAManBase", "init", {
+    params ["_unit"];
+
+    private _group = group _unit;
+
+    if (_group getVariable [QGVAR(reinforce_initialized), false]) exitWith {};
+
     {
-        if !(_x getVariable [QGVAR(reinforce_initialized), false]) then {
-            {
-                [[_x], true] call lambs_danger_fnc_setReinforcement;
-                [[_x], true] call lambs_danger_fnc_setHasRadio;
-            } forEach units _x;
+        [[_group], true] call lambs_danger_fnc_setReinforcement;
+        [[_group], true] call lambs_danger_fnc_setHasRadio;
+    } forEach units _group;
 
-            /* Add eventhandler to make group rush to contact */
-            ["lambs_danger_OnInformationShared", {
-                _thisArgs params ["_thisGroup"];
-                params ["", "_group", "_target"];
+    /* Add eventhandler to make group rush to contact */
+    ["lambs_danger_OnInformationShared", {
+        _thisArgs params ["_reinforceGroup"];
+        params ["", "_shareGroup", "_target"];
 
-                if (_thisGroup getVariable [QGVAR(reinforce_disableGroup), false]) exitWith {};
+        if (_reinforceGroup getVariable [QGVAR(reinforce_disableGroup), false]) exitWith {};
+        if ((group _target) getVariable [QGVAR(reinforce_disableTarget), false]) exitWith {};
 
-                if ((group _target) getVariable [QGVAR(reinforce_disableTarget), false]) exitWith {};
+        private _range = CONFIG_PARAM_3(SETTINGS,ai,reinforceRange);
+        if ( (leader _reinforceGroup distance leader _shareGroup) < _range && _reinforceGroup != _shareGroup && !(_reinforceGroup getVariable [QGVAR(reinforce_targetGroup), grpNull] isEqualTo _shareGroup) && side _reinforceGroup isEqualTo side _shareGroup ) then {
+            LOG_2("%1 reinforcing %2(TaskRush)", groupId _reinforceGroup, groupId _shareGroup);
 
-                private _range = CONFIG_PARAM_3(SETTINGS,ai,reinforceRange);
-                if ( (leader _thisGroup distance leader _group) < _range && _thisGroup != _group && !(_thisGroup getVariable [QGVAR(reinforce_targetGroup), grpNull] isEqualTo _group) && side _thisGroup isEqualTo side _group ) then {
-                    LOG_2("%1 reinforcing %2(TaskRush)", groupId _thisGroup, groupId _group);
+            [_reinforceGroup, 200, 15, [], getPos _target, false] spawn lambs_wp_fnc_taskRush;
 
-                    [_thisGroup, 100, 15, [], getPos _target, false] spawn lambs_wp_fnc_taskCreep;
-
-                    /* Delete old waypoints and add new */
-                    for "_i" from count waypoints _thisGroup - 1 to 0 step -1 do {
-                    	deleteWaypoint [_thisGroup, _i];
-                    };
-                    private _wp = _thisGroup addWaypoint [_target, 0];
-                    _wp setWaypointType "MOVE";
-                    _thisGroup setVariable [QGVAR(reinforce_targetGroup), _group, true];
-                };
-
-            }, _x] call CBA_fnc_addEventHandlerArgs;
-
-            LOG_1("Enabled reinforce on %1", groupId _x);
-            _x setVariable [QGVAR(reinforce_initialized), true, true];
+            /* Delete old waypoints and add new */
+            for "_i" from count waypoints _reinforceGroup - 1 to 0 step -1 do {
+                deleteWaypoint [_reinforceGroup, _i];
+            };
+            private _wp = _reinforceGroup addWaypoint [_target, 0];
+            _wp setWaypointType "MOVE";
+            _reinforceGroup setVariable [QGVAR(reinforce_targetGroup), _shareGroup, true];
         };
-        sleep 0.03;
-    } forEach allGroups;
-    sleep 1;
-};
+    }, _group] call CBA_fnc_addEventHandlerArgs;
+
+    LOG_1("Enabled reinforce on %1", groupId _group);
+    _group setVariable [QGVAR(reinforce_initialized), true, true];
+}, true, [], true] call CBA_fnc_addClassEventHandler;

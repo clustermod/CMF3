@@ -26,7 +26,7 @@ private _spawnScript = {_this spawn {
 
     private _position = screenToWorld [0.5, 0.5];
 
-    private _unitArr = [_type] call FUNC(unitConstructor);
+    private _unitArr = [_type] call FUNC(unit_constructor);
 
     private _unitPos = (_position select 0);
     private _groupPos = (_position select 1);

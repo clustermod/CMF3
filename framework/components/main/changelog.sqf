@@ -1,5 +1,5 @@
 "
-<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.49</t>
+<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.50</t>
 This is a full changelog of changes since v2.1.0 as the changes have remained undocumented publicly. For subsequent versions the changelog will only display the new changes from the last version.
 <br/>
 <t size='1.05'>Added</t>
@@ -49,6 +49,8 @@ This is a full changelog of changes since v2.1.0 as the changes have remained un
 <t color='#00aa22'>+</t> Added function to create camerashake when firing from vehicles (cmf_enhancedVehicles_fnc_gunEffectEH)
 <t color='#00aa22'>+</t> Added functions to add, remove or check a line from the 3den entity init (cmf_3den_fnc_addToinit, cmf_3den_fnc_removeFromInit and cmf_3den_fnc_inInit)
 <t color='#00aa22'>+</t> Added functions to enable / disable carrying and dragging from ACE3
+<t color='#00aa22'>+</t> Added function to handle AI Panic (retreat or surrender)
+<t color='#00aa22'>+</t> Added function to display treatment information by remote parties
 <br/>
 <t size='1.05'>Changed</t>
 <t color='#009eaa'>~</t> Changed safestart to display meta information before mission start

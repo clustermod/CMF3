@@ -7,87 +7,82 @@
 waitUntil { !isNull player };
 
 /* SITUATION */
-private _situation = "After the failed U.S.M.C. invasion in Northern Estonia the Soviet Union has set it's sights on Finland and have started pushing forces across the border. The Finnish government is forcing the U.S. to take responibility
-as we are the reason Finland got pulled into this war in the first place. We have since set up a border-wide blocking force mainly consisting of U.S. Army units. The U.S.M.C. has been planning a counter-attack in conjunction with
-Finnish Special Forces aiming to cripple Soviet Operational Command on the Finnish side of the border and opening a corridor of attack for the main U.S. Army and Finnish Army Forces to push through. Due to your achievements during the
-failed Estonia campaign your team was marked as Special Operations Capable (SOC) and got moved under the umbrella of Force Recon, changing your standard tasking to Special Reconnaissance and Direct Action operations.<br/>
+private _situation = "After our descalation of combat operations in Angola, the South West People's Organization's (SWAPO) military wing People's Liberation Army of Namibia (PLAN) has stocked up on a substantial amount of
+weaponry supplied by the Soviet's. They have started to look more like a conventional army in terms of equipment and have even recieved MIG-21s. Brigadier Rudolf Badenhorst
+has in this context launched Operation Protea in an effort to limit enemy capabilities. The operation is split into 2 task forces, alpha and bravo. Your team is in the former as a part of
+Battle Group 20.<br/>
 <br/>
 <font color=""#fcba03"">ENEMY FORCES</font><br/>
-- 3rd Guards Motor Rifle Division<br/>
-- 6th Guards ""Vitebsko-Novgorodskaya"" Motor Rifle Division<br/>
-- 3rd Guards Tank Division<br/>
-- 12th Artillery Division<br/>
-- 7th Guards Cherkassy Airborne Division<br/>
-- 600th Military Aviation Regiment<br/>
+- PLAN, 3rd Infantry<br/>
+- PLAN, 2nd Artillery<br/>
+- PLAN, 1st Anti-Air Brigade<br/>
+- PLAN, 3rd armored brigade (unconfirmed)<br/>
+- Likely Soviet advisors<br/>
 <br/>
 <font color=""#fcba03"">ENEMY CAPABILITIES</font><br/>
 - Artillery<br/>
-- Close Air Support<br/>
 - Anti-Tank<br/>
 - Anti-Air<br/>
 <br/>
 <font color=""#fcba03"">FRIENDLY FORCES</font><br/>
-- U.S. Marines, 101st Reconnaissance Battalion<br/>
-- U.S. Marines, Combat Logistics Battalion 2<br/>
-- U.S. Marines, 6th Engineer Support Battalion<br/>
-- U.S. Air Force, 14th Air Division<br/>
-- U.S. Navy, Carrier Strike Group 11, U.S.S. Freedom<br/>
-- U.S. Navy, Carrier Strike Group 11, U.S.S. Cowpens (CG-63)<br/>
-- Finnish Utin Jääkärirykmentti, kaukopartio-osastot (Finnish Jeager Regiment,
-  Long Range Reconnaissance battalion)<br/>
+- S.A.D.F., 2nd Infantry Regiment<br/>
+- S.A.D.F., 3rd Artillery Troop<br/>
+- S.A.D.F., 1st Field Engineer Platoon<br/>
+- S.A.A.F., 2 Squadron<br/>
 <br/>
 <font color=""#fcba03"">FRIENDLY CAPABILITIES</font><br/>
-- Naval Artillery<br/>
-- Emergency Close Air Support<br/>
-- Anti-Tank, Light<br/>
-- Anti-Air<br/>";
+- Artillery<br/>
+- Emergency Close Air Support
+";
 
 /* MISSION */
-private _mission = "- Punch a hole in the north-eastern soviet defensive line<br/>
-- Locate the finnish special forces squad (callsign ROMEO 1) and receive
-  location of Soviet regional field HQ.<br/>
-- Neutralize the Soviet regional field HQ.";
+private _mission = "Recently the enemy has set up anti-air installations close to the angolan border, this is greatly limiting our air capabilities.
+Your battle Group is tasked with neutralizing these installations. More specifically, your platoon is tasked with clearing the installations East of Obupala and 
+South of Elsaville. Your sister platoons will be responsible for the sectors to your east and west.
+";
 
 /* EXECUTION */
 private _execution = "<font color=""#fcba03"">COMMANDER'S INTENT</font><br/>
-- An open assault corridor for our mainline forces to push through and outflank
-  Soviet defences.<br/>
-- Crippled Soviet Command on the Finnish side of the border.<br/>
+- The desired end state would be for all anti-air installations in your sector to be completly cleared out.<br/>
 <br/>
 <font color=""#fcba03"">MOVEMENT PLAN.</font><br/>
-1. Perform an Amphibious Landing at LZ Crown with the LAV-25A1.<br/>
-2. Secure the LZ and await the LCU to land with your remaining vehicles.<br/>
-... At task force leader's discretion.
+At task force leader's discretion.
 ";
 
 /* ADMINISTRATION / LOGISTICS */
-private _administration = "- Combat Logistics battalion 2 will conduct resupply and any reinforcement.<br/><br />
-- Carrier Strike Group 11, U.S.S. Cowpens (CG-63) will conduct naval artillery.<br/><br />
-- U.S. Air Force, 14th Air Division will conduct ECAS operations.<br/><br/>
-- 6th Engineer Support Battalion will conduct repair and refuel operations.<br/><br />
-- Battalion Surgeon will provide advanced medical aid and is reachable through command.<br/><br />
-Your task-force has a LAV-25A1 for support and an MTVR for transport. The MTVR will be brought to shore by an LCU operated by the Navy personnel from U.S.S. Freedom.";
+private _administration = "- 3rd Artillery Troop will conduct artillery operations with a battery of 3 105mm Howitzers .<br/><br/>
+- S.A.A.F., 2 Squadron will provide Close Aire Support in cases of emergency.<br/><br/>
+Your platoon has 4 land rovers at your disposal.";
 
 /* COMMAND / SIGNAL */
-private _command = "There is a low civilian presence due to Finnish Evacuations of the border.<br/>
-<br/>
+private _command = "
 <font color=""#fcba03"">RADIO COMMUNICATION TABLE</font><br/>
-COMMAND NET - AN/PRC-77 - 30MHz<br/>
+COMMAND NET - SEM-52SL - 46MHz<br/>
 <br/>
 <font color=""#fcba03"">CALLSIGN TABLE</font><br/>
 COMMAND NET<br/>
-    COMMAND - Company Commander<br/>
-    LOGI - Logistics<br/>
-    ENGI - Engineers<br/>
-    STEEL RAIN - Naval Artillery<br/>
+    ARDVAARK - Company Commander<br/>
+    KING FISH 1 - Emergency Close Air Support <br/>
+    STEEL RAIN - Artillery<br/>
+    VULTURE 1 - 1st Platoon Squad<br/>
+    VULTURE 2 - 1st Platoon Squad<br/>
+    VULTURE 3 - 1st Platoon Squad<br/>
+    VULTURE 4 - 1st Platoon Squad<br/>
+    LEOPARD 1 - 2nd Platoon Squad<br/>
+    LEOPARD 2 - 2nd Platoon Squad<br/>
+    LEOPARD 3 - 2nd Platoon Squad<br/>
+    LEOPARD 4 - 2nd Platoon Squad<br/>
 <br/>
 <font color=""#fcba03"">RULES OF ENGAGEMENT</font><br/>
 You are free to engage targets at will after a positive identification has been met.<br/>
 <br/>
 <font color=""#fcba03"">STANDARD OPERATING PROCEDURES</font><br/>
 - Limit damage done to civilian infrastructure.<br/>
-- Red Smoke signals Enemy Position for ECAS.<br/>
-- Blue Smoke signals Friendly Position for ECAS";
+- Limit damage done to civilian infrastructure.<br/>
+- STEEL RAIN accepts simplified call for fire protocol.<br/>
+- KING FISH 1 accepts simplified close air support protocol.<br/>
+- Red Smoke signals Enemy Position.<br/>
+";
 
 /* Create diaries */
 player createDiaryRecord ["Diary", ["Command / Signal", _command]];

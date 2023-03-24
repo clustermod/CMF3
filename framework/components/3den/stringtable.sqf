@@ -34,7 +34,7 @@
     ]],
 
 
-    [DSTRING(unitSpawner_displayName), [
+    [DSTRING(unit_spawner_displayName), [
         ["English", "Unit Spawner"],
         ["Spanish", "Unidad Spawner"]
     ]],

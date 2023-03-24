@@ -9,7 +9,7 @@ waitUntil{ missionNamespace getVariable ["cmf_main_player_initialized", false] }
 [3] call cmf_respawn_fnc_limit;
 
 /* Initialize kosherArsenal */
-[["v3_cag_1991"], true] call cmf_kosherArsenal_fnc_init;
+[["v3_sadf_1979"], true] call cmf_kosherArsenal_fnc_init;
 
 /* Initialize rallypoints */
 [["FTL", "SL", "PL", "CO"]] call cmf_respawn_fnc_rallypoint;

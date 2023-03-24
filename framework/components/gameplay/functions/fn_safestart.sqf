@@ -31,22 +31,6 @@ LOG("Enabled safestart");
 	missionNameSpace setVariable [QGVAR(safestart_phase), ["Briefing", EGVAR(main,unifiedTime)], true];
 };
 
-/* disable autocombat on AI */
-["CAManBase", "init", {
-	params ["_unit"];
-
-	/* Exit if safestart is disabled */
-	if ((missionNamespace getVariable [QGVAR(safestart_disable), false]) || isPlayer _unit) exitWith { };
-
-	/* Save AUTOCOMBAT state and disable it */
-	_unit setVariable [QGVAR(safestart_autocombat), [CombatMode group _unit, combatBehaviour group _unit], true];
-	/* (group _unit) setCombatMode "BLUE";
-	(group _unit) setCombatBehaviour "CARELESS"; */
-}, true, [], true] call CBA_fnc_addClassEventHandler;
-
-/* Freeze Time until start */
-//missionNamespace setVariable [QGVAR(safestart_freezeTime), ([] call EFUNC(utility,freezeTime)), true];
-
 _this spawn {
 	missionNamespace setVariable [QGVAR(safestart_disable), false, true];
 
@@ -225,18 +209,6 @@ _this spawn {
 
 	/* Renable damage */
 	{ [_x, true] remoteExec ["allowDamage", 0, true] } forEach allPlayers;
-
-	/* Unfreeze time */
-	//terminate (missionNamespace getVariable [QGVAR(safestart_freezeTime), scriptNull]);
-
-	/* Enable TARGET on units */
-	{
-		if (!isPlayer _x) then {
-			private _state = _x getVariable [QGVAR(safestart_autocombat), true];
-			(group _x) setCombatMode (_state select 0);
-			(group _x) setCombatBehaviour (_state select 1);
-		}
-	} forEach allUnits;
 
 	/* Raise event */
 	[QGVAR(safestart_onDisable), []] call CBA_fnc_globalEvent;

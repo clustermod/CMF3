@@ -40,6 +40,8 @@
 - Added 3den tool to toggle ace carry on objects
 - Added 3den tool to toggle ace drag on objects
 - Added 3den tool to write warning orders
+- Added function to handle AI Panic (retreat or surrender)
+- Added function to display treatment information by remote parties
 
 ## Changed
 - Changed safestart to display meta information before mission start

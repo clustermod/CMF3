@@ -42,7 +42,7 @@ class CMF {
         class ai {
             transferToServer = 1;
             reinforce = 1;
-            reinforceRange = 300;
+            reinforceRange = 600;
             preventProne = 1;
             forceSkill = 1;
         };

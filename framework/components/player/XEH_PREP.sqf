@@ -9,3 +9,4 @@ IPREP(drinking);
 IPREP(spectator);
 IPREP(teamActions);
 IPREP(setRank);
+IPREP(treatment);
