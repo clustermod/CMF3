@@ -8,4 +8,4 @@ waitUntil{ missionNamespace getVariable ["cmf_main_server_initialized", false] }
 /* Set the radio theme */
 klpq_musicRadio_radioThemes = ["t_american"];
 
-[east, "v3_zanla"] call cmf_kosherArsenal_fnc_kosherAI;
+//[east, "v3_egypt_1973"] call cmf_kosherArsenal_fnc_kosherAI;

@@ -42,7 +42,7 @@ class CMF {
         class ai {
             transferToServer = 1;
             reinforce = 1;
-            reinforceRange = 600;
+            reinforceRange = 300;
             preventProne = 1;
             forceSkill = 1;
         };
@@ -50,7 +50,7 @@ class CMF {
         /* Utility settings */
         class utility {
             clearVehicleCargo = 1;
-            freezeTime = 0;
+            freezeTime = 1;
         };
 
         /* Enhanced Vehicles Settings */
@@ -62,7 +62,7 @@ class CMF {
             offroadDamage = 0;
         };
 
-        blacklistedAddons[] = {};
+        blacklistedAddons[] = {"TF21_ChemlightDrop"};
     };
 };
 

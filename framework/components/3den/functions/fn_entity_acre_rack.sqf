@@ -58,7 +58,7 @@ private _action = {
 
         {
             private _oldInit = (_x get3DENAttribute "Init") select 0;
-            private _newInit = format["[][this, [""%1"", ""Rack"", ""Rack"", false, [""crew""], [], ""%2"", [], []], true, {}], acre_api_fnc_addRackToVehicle] remoteExec [""call"", 0, true];", (_radio select 0), (_radio select 1)];
+            private _newInit = format["[this, {[_this, [""%1"", ""Rack"", ""Rack"", false, [""crew""], [], ""%2"", [], []], true, {}], acre_api_fnc_addRackToVehicle}] remoteExec [""call"", 0, true];", (_radio select 0), (_radio select 1)];
 
             _x set3DENAttribute ["Init", _oldInit + _newInit];
         } forEach _vehicles;

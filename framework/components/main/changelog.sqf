@@ -1,5 +1,5 @@
 "
-<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.50</t>
+<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.49</t>
 This is a full changelog of changes since v2.1.0 as the changes have remained undocumented publicly. For subsequent versions the changelog will only display the new changes from the last version.
 <br/>
 <t size='1.05'>Added</t>

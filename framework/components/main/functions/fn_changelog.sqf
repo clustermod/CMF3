@@ -22,14 +22,14 @@ addMissionEventHandler ["Map", {
     private _disabled = profileNamespace getVariable [QGVAR(changelog_off), false];
     private _curVersion = GVAR(version);
 
-        /* Show warning if server version is older than the latest CMF version */
-    if ([_lastVersion, _curVersion] call EFUNC(utility,versionCompare) isEqualTo -1) then {
-        [format ["Version Mismatch! (Machine: %1 (%4) version: %3, serverVersion: %2)", player, _curVersion, _lastVersion, name player], "CMF", [CBA_display_ingame_warnings, true, true]] call CBA_fnc_debug;
-    };
-
     if !(([_lastVersion, _curVersion] call EFUNC(utility,versionCompare)) isEqualTo 1 && _disabled isEqualTo 0) exitWith {};
 
     if (_mapIsOpened && !isNull ((findDisplay 12) displayCtrl 88800)) then {
+        /* Show warning if server version is older than the latest CMF version */
+        if ([_lastVersion, _curVersion] call EFUNC(utility,versionCompare) isEqualTo -1) then {
+            [format ["Version Mismatch! (Machine: %1 (%4) version: %3, serverVersion: %2)", player, _curVersion, _lastVersion, name player], "CMF", [CBA_display_ingame_warnings, true, true]] call CBA_fnc_debug;
+        };
+        
         private _display = (findDisplay 12) createDisplay QGVAR(changelogDisplay);
 
         waitUntil {!isNull _display};
