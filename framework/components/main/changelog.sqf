@@ -1,5 +1,5 @@
 "
-<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.49</t>
+<t size='1.1'>CMFv2.1.0.0 > CMFv2.1.1.52</t>
 This is a full changelog of changes since v2.1.0 as the changes have remained undocumented publicly. For subsequent versions the changelog will only display the new changes from the last version.
 <br/>
 <t size='1.05'>Added</t>
@@ -51,6 +51,7 @@ This is a full changelog of changes since v2.1.0 as the changes have remained un
 <t color='#00aa22'>+</t> Added functions to enable / disable carrying and dragging from ACE3
 <t color='#00aa22'>+</t> Added function to handle AI Panic (retreat or surrender)
 <t color='#00aa22'>+</t> Added function to display treatment information by remote parties
+<t color='#00aa22'>+</t> Added ability to ignore classes or factions in kosherAI
 <br/>
 <t size='1.05'>Changed</t>
 <t color='#009eaa'>~</t> Changed safestart to display meta information before mission start
@@ -85,6 +86,7 @@ This is a full changelog of changes since v2.1.0 as the changes have remained un
 <t color='#009eaa'>~</t> Renamed 3den functions for better organization.
 <t color='#009eaa'>~</t> Refactored Prevent Prone to use CBA XEH.
 <t color='#009eaa'>~</t> Changed reinforcing AIs tactic from rush to creep.
+<t color='#009eaa'>~</t> Moved kosherAI to it's own component
 <br/>
 <t size='1.05'>Removed</t>
 <t color='#aa0027'>-</t> Removed the ""Display Roles"" action from CC Menu, it's replaced by the Table of Organization and Equipment Diary Entry and the safestart meta info

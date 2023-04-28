@@ -42,6 +42,7 @@
 - Added 3den tool to write warning orders
 - Added function to handle AI Panic (retreat or surrender)
 - Added function to display treatment information by remote parties
+- Added ability to ignore classes and factions in kosherAI
 
 ## Changed
 - Changed safestart to display meta information before mission start
@@ -74,6 +75,7 @@
 - Renamed 3den functions for better organization.
 - Refactored prevent prone to use CBA XEH.
 - Changed reinforcing AIs tactic from rush to creep.
+- Moved kosherAI into it's own component
 
 ## Removed
 - Removed the "Display Roles" action from CC Menu, it's replaced by the TO&E Diary Entry

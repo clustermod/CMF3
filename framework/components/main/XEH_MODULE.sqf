@@ -19,6 +19,7 @@ GVAR(components) = [
     "gameplay",
     "enhancedVehicles",
     "kosherArsenal",
+    "kosherAI",
     "kosherGarage",
     "respawn",
     "utility",
