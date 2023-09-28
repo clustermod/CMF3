@@ -17,6 +17,7 @@
 SCRIPT(playerInfo);
 
 if (!hasInterface) exitwith {};
+// @TODO repalce spawn
 [] spawn {
    while { true } do {
         player setVariable [QGVAR(fps), floor diag_fps, true];
@@ -24,6 +25,7 @@ if (!hasInterface) exitwith {};
     };
 };
 
+// @TODO replace spawn
 [] spawn {
   waitUntil{(!isnull (getAssignedCuratorLogic player))};
   if (player in (call bis_fnc_listcuratorplayers)) then {

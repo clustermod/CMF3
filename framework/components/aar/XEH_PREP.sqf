@@ -3,5 +3,5 @@
 PREP(record);
 PREP(playback);
 PREP(submitAAR);
-IPREP(stats);
-IPREP(endMission);
+PREP(stats);
+PREP(endMission);

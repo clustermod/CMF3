@@ -19,57 +19,64 @@ params ["_input", ["_diary", false], "_style"];
 
 /* Set default style if no style is specified */ // style array: [structured text replacement, string modifier]
 if (isNil "_style") then {
-	_style = [] call CBA_fnc_hashCreate;
-	_style = [_style, "HEADER1", [["color", "#fcba03"]]] call CBA_fnc_hashSet;
-	_style = [_style, "HEADER2", [["color", "#fcba03"], { toUpper _this }]] call CBA_fnc_hashSet;
-	_style = [_style, "HEADER3", ["color", "#fcba03"]] call CBA_fnc_hashSet;
-	_style = [_style, "HEADER4", []] call CBA_fnc_hashSet;
+	_style = [
+		["H1", [["color", "#fcba03"], ["size", "20"]]],
+		["H2", [["color", "#fcba03"], ["size", "17"]]],
+		["H3", [["color", "#fcba03"], ["size", "15"]]],
+		["Bold", [["face", "PuristaSemiBold"]]],
+		["Italic", [["face", "PuristaLight"]]]
+	];
 };
 
-private _styleParse = {
-	params ["_string", "_styleHash", "_modifier"];
-
-	private _styleTags = [
-		["color", ["t", "font"]]
-	] call CBA_fnc_hashCreate;
-
-	{
-		private _key = _x;
-		private _val = _y;
-
-		private _tag = [_styleTags, _x, ""] call CBA_fnc_hashGet;
-
-		if (_tag != "") then {
-
-		};
-
-	} forEach createHashMapFromArray _styleHash;
-};
-
-private _isheader = {
-	private _index = 0;
-	while { (_this select _index ) isEqualTo "#" } do {
-		_index = _index + 1;
-	};
-
-	private _return = "";
-	switch (_index) do {
-		case 1: { _return = "HEADER1" };
-		case 2: { _return = "HEADER2" };
-		case 3: { _return = "HEADER3" };
-		case 4: { _return = "HEADER4" };
-	};
-
-	_return;
-};
-
-_parsedText = _input splitString toString [13,10];
+_style = createHashMapFromArray _style;
+private _parsedStyles = createHashMap;
 {
-	private _line = _x;
-	if ((_x call _isHeader) != "") then {
-		
-	};
-} forEach _parsedText;
+	private _key = _x;
+	private _value = _y;
 
-_parsedText joinString "<br/>";
-parseText _parsedText;
+	private _parsed = "";
+	if (_diary) then {
+		_parsed = "<font";
+		{
+			_parsed = _parsed + format [" %1=""%2""", _x, _y];
+		} forEach createHashMapFromArray _y;
+		_parsed = _parsed + ">$1</font>";
+	} else {
+		_parsed = "<t";
+		{
+			_parsed = _parsed + format [" %1=""%2""", _x, _y];
+		} forEach createHashMapFromArray _y;
+		_parsed = _parsed + ">$1</t>";
+	};
+
+	_parsedStyles set [_key, _parsed];
+} forEach _style;
+
+/* Remove Comments */
+_input = _input regexReplace ["[\s|.](<!--[^>]*-->)", ""];
+
+/* Bold */
+_input = _input regexReplace ["\*\*([\S\s]*?)\*\*", _parsedStyles getOrDefault ["Bold", "$1"]];
+
+/* Italic */
+_input = _input regexReplace ["\*([\S\s]*?)\*", _parsedStyles getOrDefault ["Italic", "$1"]];
+
+/* H1 */
+_input = _input regexReplace ["\n# (.*?)\n", "\n"+(_parsedStyles getOrDefault ["H1", "$1"])+"\n"];
+
+/* H2 */
+_input = _input regexReplace ["\n## (.*?)\n", "\n"+(_parsedStyles getOrDefault ["H2", "$1"])+"\n"];
+
+/* H3 */
+_input = _input regexReplace ["\n### (.*?)\n", "\n"+(_parsedStyles getOrDefault ["H3", "$1"])+"\n"];
+
+/* List */
+_input = _input regexReplace ["\n- ", "\n• "];
+
+/* Hide ignore characters */
+_input = _input regexReplace ["\\(.)", "$1"];
+
+/* Breaks */
+_input = _input regexReplace ["(\r\n|\r|\n)", "<br/>"];
+
+_input

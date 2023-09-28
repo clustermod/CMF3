@@ -11,7 +11,7 @@
  * Is role <BOOLEAN>
  *
  * Example:
- * [player, "RFL"] call cmf_common_fnc_isRole
+ * [player, "RFL"] call cmf_organization_fnc_isRole
  *
  * Public: Yes
  */

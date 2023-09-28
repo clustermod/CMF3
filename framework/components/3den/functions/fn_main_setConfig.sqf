@@ -29,11 +29,6 @@ private _missionData = _ctrlMenuStrip menuAdd [[_cmfMenu], "Mission Data"];
 _ctrlMenuStrip menuSetPicture [[_cmfMenu, _missionData], "a3\ui_f\data\gui\rsc\rscdisplayarsenal\map_ca.paa"];
 _ctrlMenuStrip menuSetAction [[_cmfMenu, _missionData], "call cmf_3den_fnc_setConfig_missionDataHandler"];
 
-/* Create warning order action */
-private _missionData = _ctrlMenuStrip menuAdd [[_cmfMenu], "Warning order"];
-_ctrlMenuStrip menuSetPicture [[_cmfMenu, _missionData], "a3\ui_f\data\igui\cfg\simpletasks\types\documents_ca.paa"];
-_ctrlMenuStrip menuSetAction [[_cmfMenu, _missionData], "call cmf_3den_fnc_setConfig_warnoHandler"];
-
 /* Handle player attempting to delete logic */
 {
     if ((_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_configLogic']) then {
@@ -189,102 +184,6 @@ FUNC(setConfig_missionDataHandler) = {
             ];
 
             ["Saved Mission Data", 0, 4] call BIS_fnc_3DENNotification;
-        }];
-    };
-};
-
-/* Handle Warning Order */
-FUNC(setConfig_warnoHandler) = {
-    private _logics = (all3DENEntities select 0) select { (_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_warnoLogic'] };
-    private _logic = objNull;
-    if (count _logics isEqualTo 0) then {
-        _logic = create3DENEntity ['Object', 'Logic', [0,0,0], true];
-        _logic set3DENAttribute ['Name', 'cmf_3den_warnoLogic'];
-    } else {
-        _logic = _logics select 0;
-    };
-
-    _logic addEventHandler ['UnregisteredFromWorld3DEN', {
-        params ['_entity'];
-        ['Deleted CMF Warning Order', 1, 1] call BIS_fnc_3DENNotification;
-    }];
-
-    /* Open mission data display */
-    private _display3DEN = uiNamespace getVariable "Display3DEN";
-    private _display = _display3DEN createDisplay QGVAR(warno);
-
-    [_display, _logic] spawn {
-        params ["_display", "_logic"];
-
-        waitUntil { !isNull _display };
-
-        /* load previous data */
-        [] call compile ((_logic get3DENAttribute "Init") select 0);
-        if (!isNil QEGVAR(common,warno)) then {
-            private _hash = [EGVAR(common,warno)] call CBA_fnc_hashCreate;
-
-            (_display displayCtrl 300) ctrlSetText ([_hash, "S_SITUATION", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 301) ctrlSetText ([_hash, "S_ENEMYCOMP", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 302) ctrlSetText ([_hash, "S_ENEMYCAP", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 303) ctrlSetText ([_hash, "S_FRIENDCOMP", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 304) ctrlSetText ([_hash, "S_FRIENDCAP", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 305) ctrlSetText ([_hash, "M_MISSION", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 306) ctrlSetText ([_hash, "E_EXECUTION", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 307) ctrlSetText ([_hash, "E_INTENT", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 308) ctrlSetText ([_hash, "E_MOVEMENT", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 309) ctrlSetText ([_hash, "A_ADMINLOGI", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 310) ctrlSetText ([_hash, "C_COMMTABLE", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 311) ctrlSetText ([_hash, "C_ROE", ""] call CBA_fnc_hashGet);
-            (_display displayCtrl 312) ctrlSetText ([_hash, "C_SOP", ""] call CBA_fnc_hashGet);
-        };
-
-        private _btnConfirm = _display displayCtrl 1;
-        _btnConfirm ctrlAddEventHandler ["ButtonClick", {
-            params ["_ctrl"];
-
-            private _display = ctrlParent _ctrl;
-
-            /* Create Hash Map of values */
-            _hash = [];
-
-            /* Situation */
-            _hash pushBack ["S_SITUATION", ctrlText (_display displayCtrl 300)];
-            _hash pushBack ["S_ENEMYCOMP", ctrlText (_display displayCtrl 301)];
-            _hash pushBack ["S_ENEMYCAP", ctrlText (_display displayCtrl 302)];
-            _hash pushBack ["S_FRIENDCOMP", ctrlText (_display displayCtrl 303)];
-            _hash pushBack ["S_FRIENDCAP", ctrlText (_display displayCtrl 304)];
-
-            /* Mission */
-            _hash pushBack ["M_MISSION", ctrlText (_display displayCtrl 305)];
-            
-            /* Execution */
-            _hash pushBack ["E_EXECUTION", ctrlText (_display displayCtrl 306)];
-            _hash pushBack ["E_INTENT", ctrlText (_display displayCtrl 307)];
-            _hash pushBack ["E_MOVEMENT", ctrlText (_display displayCtrl 308)];
-
-            /* Administration and Logistics */
-            _hash pushBack ["A_ADMINLOGI", ctrlText (_display displayCtrl 309)];
-
-            /* Command and Signal */
-            _hash pushBack ["C_COMMTABLE", ctrlText (_display displayCtrl 310)];
-            _hash pushBack ["C_ROE", ctrlText (_display displayCtrl 311)];
-            _hash pushBack ["C_SOP", ctrlText (_display displayCtrl 312)];
-
-            /* Save to logic init */
-            GVAR(missionDataLogic) set3DENAttribute ["Init", format ["if (!isServer) exitWith { }; missionNamespace setVariable [""%1"", %2, true];", QEGVAR(common,warno), str _hash]];
-
-            /* Set mission attributes */
-            _hash = [_hash] call CBA_fnc_hashCreate;
-
-            private _gameSituation = [_hash, "S_SITUATION", ""] call CBA_fnc_hashGet;
-
-            set3DENMissionAttributes [
-                ["scenario", "OverviewText", _gameSituation],
-                ["scenario", "OverviewTextLocked", _gameSituation],
-                ["scenario", "OnLoadMission", _gameSituation]
-            ];
-
-            ["Saved Warning Order", 0, 4] call BIS_fnc_3DENNotification;
         }];
     };
 };

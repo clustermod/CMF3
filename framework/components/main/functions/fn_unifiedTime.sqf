@@ -19,7 +19,10 @@ SCRIPT(unifiedTime);
 
 if (!isServer) exitWith { };
 
-while { true } do {
-    missionNamespace setVariable ["cmf_main_unifiedTime", time, true];
-    sleep 0.5;
-};
+// @TODO replace spawn
+0 spawn {
+    while { true } do {
+        missionNamespace setVariable ["cmf_main_unifiedTime", time, true];
+        sleep 0.5;
+    };
+}

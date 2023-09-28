@@ -22,9 +22,7 @@ if !(_enabled) exitWith {};
 
 if (!hasInterface) exitWith {};
 
-[] spawn {
-    waitUntil {!isNull findDisplay 12};
-
+[{ !isNull findDisplay 12 }, {
     findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
         if (visibleMap) then {
             private _scale = 0.05 / ctrlMapScale (_this select 0);
@@ -72,4 +70,4 @@ if (!hasInterface) exitWith {};
             } forEach allMapmarkers;
         };
     }];
-};
+}] call CBA_fnc_waitUntilAndExecute;

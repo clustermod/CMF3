@@ -20,7 +20,7 @@ SCRIPT(tracers);
 
 if (!isServer) exitWith {};
 
-private _fnc_applyTracers = {
+FUNC(tracers_apply) = {
 	params ["_unit", ["_flash", true], ["_randomModel", false]];
 
 	if ( !(_unit getVariable [QGVAR(tracers_initialized), false]) ) then {
@@ -104,48 +104,53 @@ params [["_unit", nil], ["_flash", true], ["_randomModel", false]];
 LOG_1("tracers called with params %1", str _this);
 
 /* Assumed autoinit */
+// @TODO replace spawn
 if (isNil "_unit") then {
-	[_fnc_applyTracers] spawn {
-		params ["_fnc_applyTracers"];
+	_this spawn {
 
 		/* Check if it's enabled */
 		private _enabled = ( CONFIG_PARAM_4(SETTINGS,gameplay,tracers,enable) ) isEqualTo 1;
 		if !(_enabled) exitWith {};
 
-		private _sides = CONFIG_PARAM_4(SETTINGS,gameplay,tracers,side);
 
-		while { !(missionNamespace getVariable [QGVAR(tracers_disable), false]) } do {
-			{
+		["CAManBase", "init", {
+			_this spawn {
+				params ["_unit"];
 
-				{
-					if (!isPlayer _x) then {
-						[_x, false, false] spawn _fnc_applyTracers;
-						sleep 0.03;
-					};
-				} forEach units call compile _x;
-				sleep 0.03;
-			} forEach _sides;
-			sleep 1;
-		};
+				if (isPlayer _unit) exitWith { };
+
+				if (_unit getVariable [QGVAR(tracers_disable), false]) exitWith { };
+				if (missionNamespace getVariable [QGVAR(tracers_disable), false]) exitWith { };
+
+				private _sides = CONFIG_PARAM_4(SETTINGS,gameplay,tracers,side);
+				private _flashlight = CONFIG_PARAM_4(SETTINGS,gameplay,tracers,flashlight);
+
+				sleep 0.4; // Wait for kosherAI if enabled
+
+				if (_unit in _sides) then {
+					[_x, _flashlight, false] spawn FUNC(tracers_apply);
+				};
+			};
+		}, true, [], true] call CBA_fnc_addClassEventHandler;
 	};
 };
 
 /* For unit */
 if (IS_OBJECT(_unit)) exitWith {
 	if (!isPlayer _unit) then {
-		[_unit, _flash, _randomModel] call _fnc_applyTracers;
+		[_unit, _flash, _randomModel] call FUNC(tracers_apply);
 	};
 };
 
 /* For side */
 if (IS_SIDE(_unit)) exitWith {
-	[_unit, _flash, _randomModel, _fnc_applyTracers] spawn {
-		params ["_unit", "_flash", "_randomModel", "_fnc_applyTracers"];
+	[_unit, _flash, _randomModel] spawn {
+		params ["_unit", "_flash", "_randomModel"];
 
 		while { !(missionNamespace getVariable [QGVAR(tracers_disable), false]) } do {
 			{
 				if (!isPlayer _x) then {
-					[_x, _flash, _randomModel] spawn _fnc_applyTracers;
+					[_x, _flash, _randomModel] spawn FUNC(tracers_apply);
 					sleep 0.03;
 				};
 			} forEach units _unit;

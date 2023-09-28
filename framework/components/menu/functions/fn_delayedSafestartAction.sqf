@@ -17,8 +17,8 @@
 SCRIPT(delayedSafestartAction);
 
 /* Start the game after x seconds */
+// @TODO replace spawn
 [] spawn {
-
     missionNameSpace setVariable [QEGVAR(gameplay,safestart_Countdown), true, true];
 
     [[], {

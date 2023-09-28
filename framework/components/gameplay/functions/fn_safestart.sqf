@@ -25,12 +25,12 @@ if !(_enabled) exitWith {};
 LOG("Enabled safestart");
 
 /* Automatic phases */
-[] spawn {
-	missionNameSpace setVariable [QGVAR(safestart_phase), ["Pre-Start", 0], true];
-	waitUntil { (systemTimeUTC select 3) >= 19 };
+missionNameSpace setVariable [QGVAR(safestart_phase), ["Pre-Start", 0], true];
+[{ (systemTimeUTC select 3) >= 19 }, {
 	missionNameSpace setVariable [QGVAR(safestart_phase), ["Briefing", EGVAR(main,unifiedTime)], true];
-};
+}] call CBA_fnc_waitUntilAndExecute;
 
+// @TODO repalce spawn
 _this spawn {
 	missionNamespace setVariable [QGVAR(safestart_disable), false, true];
 
@@ -137,7 +137,7 @@ _this spawn {
 						_safestartHint = _safestartHint + format[
 							"<t align='left'><t color='#fcba03' size='1'>%1</t>  <t color='#888888' size='0.9'>%2, %3kg</t></t> <t align='right' size='1' color='#fcba03'>%4</t><br/>",
 							name _x,
-							[_x] call EFUNC(common,getRole),
+							[_x] call EFUNC(organization,getRole),
 							((loadAbs _x / 10) / 2.205) toFixed 2,
 							switch (rank _x) do {
 								case 'PRIVATE': { "Pvt" };

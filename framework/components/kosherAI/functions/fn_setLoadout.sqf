@@ -113,3 +113,8 @@ if (_role == "MED") then {
 _unit linkItem "ItemMap";
 _unit linkItem "ItemCompass";
 _unit linkItem "ItemWatch";
+
+/* Force Ai to use primary after loadout has been set */
+if (primaryweapon _unit != "") then {
+	_unit selectweapon primaryWeapon _unit;
+};

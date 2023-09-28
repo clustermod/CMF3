@@ -10,7 +10,7 @@
  * Role <STRING>
  *
  * Example:
- * [player] call cmf_common_fnc_getRole
+ * [player] call cmf_organization_fnc_getRole
  *
  * Public: Yes
  */

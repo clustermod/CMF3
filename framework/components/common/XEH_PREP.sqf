@@ -2,8 +2,6 @@
 
 PREP(getConfigParam);
 PREP(setConfigParam);
-PREP(setRole);
-PREP(getRole);
-PREP(isRole);
 PREP(setCallsign);
 PREP(getCallsign);
+PREP(addSetting);

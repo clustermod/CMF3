@@ -169,7 +169,7 @@ _this spawn {
     {
         /* If the unit is a string check player role against it */
         if (IS_STRING(_x)) then {
-            if (([player, _x] call EFUNC(common,isRole)) && !(player getVariable [QGVAR(rallypoint), false])) then {
+            if (([player, _x] call EFUNC(organization,isRole)) && !(player getVariable [QGVAR(rallypoint), false])) then {
                 waitUntil { alive player && !isNull player };
                 [typeOf player, 1, ["ACE_SelfActions"], _rallypointPlaceAction] call ace_interact_menu_fnc_addActionToClass;
                 [typeOf player, 1, ["ACE_SelfActions"], _rallypointFailedAction] call ace_interact_menu_fnc_addActionToClass;
@@ -195,6 +195,7 @@ _this spawn {
 };
 
 /* Add button to ping SL to create rallypoint */
+// @TODO replace spawn
 _this spawn {
     waitUntil { !isNull findDisplay 12 };
     waitUntil { !isNull ((findDisplay 12) displayCtrl 88800) };

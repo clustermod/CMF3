@@ -22,12 +22,12 @@ if !(_enabled) exitWith {};
 
 /* preventProne on AI units */
 ["CAManBase", "init", {
-  params ["_unit"];
+    params ["_unit"];
 
-  if (missionNamespace getVariable [QEGVAR(utility,preventProne_disable), false]) exitWith {};
-  if (_unit getVariable [QEGVAR(utility,preventProne_disable), false]) exitWith {};
-  if (isPlayer _unit) exitWith {};
+    if (missionNamespace getVariable [QEGVAR(utility,preventProne_disable), false]) exitWith {};
+    if (_unit getVariable [QEGVAR(utility,preventProne_disable), false]) exitWith {};
+    if (isPlayer _unit) exitWith {};
 
-  [_unit] call EFUNC(utility,preventProne);
-  LOG_1("Enabled preventProne for %1", _unit);
+    [_unit] call EFUNC(utility,preventProne);
+    LOG_1("Enabled preventProne for %1", _unit);
 }, true, [], true] call CBA_fnc_addClassEventHandler;

@@ -22,6 +22,10 @@
 #define QQGVAR(var1) QUOTE(QGVAR(var1))
 #define QQEGVAR(var1,var2) QUOTE(QEGVAR(var1,var2))
 
+// @TODO: replace ACE a CBA functions
+#define ACEFUNC(var1,var2) TRIPLES(DOUBLES(ace,var1),fnc,var2)
+#define CBAFUNC(var1) TRIPLES(CBA,fnc,var2)
+
 #define FUNC(var1) TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1)
 #define FUNCMAIN(var1) TRIPLES(PREFIX,fnc,var1)
 #define FUNC_INNER(var1,var2) TRIPLES(DOUBLES(PREFIX,var1),fnc,var2)

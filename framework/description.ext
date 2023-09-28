@@ -53,21 +53,18 @@ class CfgCommands {
 
 /* ACE Fortify Preset */
 class ACEX_Fortify_Presets {
-    class TAG_MyPreset {
-        displayName = "SLA Preset";
+    class CMF_FOXHOLE {
+        displayName = "Foxhole Preset";
         objects[] = {
             {"Land_Tyres_F", 2},
+            {"Land_BagFence_01_end_green_F", 3},
             {"Land_fort_bagfence_long", 5},
 			{"Land_BagFence_01_short_green_F", 5},
 			{"Land_Plank_01_4m_F", 8},
-            {"Land_fort_bagfence_corner", 10},
+            {"Land_ShellCrater_02_small_F", 10},
 			{"Land_fort_rampart", 10},
 			{"Land_fort_bagfence_round", 15},
-			{"Land_Plank_01_8m_F", 16},
-			{"LAND_tower_1", 20},
-			{"Land_fort_artillery_nest", 40},
-            {"Land_BagBunker_01_small_green_F", 30},
-            {"Land_bis_fortified_nest_big_01", 50}
+			{"Land_Plank_01_8m_F", 16}
         };
     };
 };

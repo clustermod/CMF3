@@ -27,7 +27,7 @@
 
 		private _text = "<t size='0.5' align='center'>Somebody is treating you</t>";
 		if !(player getVariable ["ACE_isUnconscious", false]) then {
-            _text = format ["<t size='0.5' align='center'>%1 is giving you a %2</t>", name _caller, [(configFile >> "CfgVehicles" >> _usedItem)] call BIS_fnc_displayName];
+            _text = format ["<t size='0.5' align='center'>%1 is giving you a %2</t>", name _caller, [(configFile >> "CfgVehicles" >> _usedItem + "Item")] call BIS_fnc_displayName];
         };
 
 		private _handler = [_text, [safeZoneX - 0.35, safeZoneW - safeZoneX], safezoneH - 0.7, 9999, 1, 0, ([QGVAR(treatment_notification)] call BIS_fnc_rscLayer)] spawn BIS_fnc_dynamicText;
@@ -72,5 +72,4 @@
 			_target setVariable [QGVAR(treatment_notifHandler), nil, true];
 		};
 	}] remoteExec ["call", _target];
-
 }] call CBA_fnc_addEventHandler;

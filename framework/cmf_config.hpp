@@ -1,32 +1,42 @@
+// @TODO: replace cmf_config with some ingame config thing (copy how cba does it, each of the modules define themselves the possible settings and then you set them ingame)
+#define TRUE 1
+#define FALSE 0
+
 class CMF {
     class SETTINGS {
         class player {
-            switchMapTextures = 1;
-            hideRespawnMarkers = 1;
-            consistentMarkers = 1;
-            restrictLauncher = 1;
+            switchMapTextures = TRUE;
+            hideRespawnMarkers = TRUE;
+            consistentMarkers = TRUE;
+            restrictLauncher = TRUE;
 
             /* Hearing settings */
             class hearing {
-                enable = 1;
-                attenuateHeadgear = 1;
+                enable = TRUE;
+                attenuateHeadgear = TRUE;
                 earplugsVolume = 0.5;
             };
         };
 
+        /* Respawn settings */
+        class respawn {
+            unconciousTimer = 300; 
+        }
+
         /* Gameplay settings */
         class gameplay {
-            overrideFlashbangs = 1;
+            overrideFlashbangs = TRUE;
 
             /* safestart settings */
             class safestart {
-                enable = 1;
+                enable = TRUE;
                 delay = 5;
             };
 
             /* tracers settings */
             class tracers {
-                enable = 1;
+                enable = FALSE;
+                flashlight = TRUE;
                 side[] = {"east"};
             };
         };
@@ -40,26 +50,26 @@ class CMF {
 
         /* ai settings */
         class ai {
-            transferToServer = 1;
-            reinforce = 1;
+            transferToServer = TRUE;
+            reinforce = FALSE;
             reinforceRange = 300;
-            preventProne = 1;
-            forceSkill = 1;
+            preventProne = TRUE;
+            forceSkill = TRUE;
         };
 
         /* Utility settings */
         class utility {
-            clearVehicleCargo = 1;
-            freezeTime = 1;
+            clearVehicleCargo = TRUE;
+            freezeTime = TRUE;
         };
 
         /* Enhanced Vehicles Settings */
         class enhancedVehicles {
-            enable = 1;
-            visualEffects = 1;
-            soundEffects = 1;
-            offroadBumpy = 0;
-            offroadDamage = 0;
+            enable = TRUE;
+            visualEffects = TRUE;
+            soundEffects = TRUE;
+            offroadBumpy = FALSE;
+            offroadDamage = FALSE;
         };
 
         blacklistedAddons[] = {"TF21_ChemlightDrop"};

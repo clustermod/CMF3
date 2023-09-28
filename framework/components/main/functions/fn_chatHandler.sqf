@@ -17,6 +17,7 @@
 
 /* Own join message */
 if (hasInterface) then {
+    // @TODO replace spawn
     _this spawn {
         private _sideLUT = ["OPFOR", "BLUFOR", "INDEPENDENT", "CIVILIAN", "UNKNOWN", "ENEMY", "FRIENDLY", "LOGIC", "EMPTY", "AMBIENT"];
 

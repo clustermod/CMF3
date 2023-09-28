@@ -22,6 +22,7 @@ if !(_enabled) exitWith {};
 
 if (!isServer) exitWith {};
 
+// @TODO replace spawn
 _this spawn {
     while {!(missionNamespace getVariable [QGVAR(clearCargo_disable), false])} do {
         {

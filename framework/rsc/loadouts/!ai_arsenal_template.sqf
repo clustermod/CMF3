@@ -120,6 +120,48 @@ if (_role in ["MAR"]) then {
 	_availableFacewear = [];
 };
 
+/* Crewman */
+if (_role in ["CRW"]) then {
+	_availableUniforms = [];
+	_availableWeapons = [];
+	_availableAttachments = [];
+	_availableMagazines = [];
+	_availableVests = [];
+	_availableItems = [];
+	_availableGrenades = [];
+	_availableBackpacks = [];
+	_availableHeadgear = [];
+	_availableFacewear = [];
+};
+
+/* Rotary Pilot */
+if (_role in ["RPIL"]) then {
+	_availableUniforms = [];
+	_availableWeapons = [];
+	_availableAttachments = [];
+	_availableMagazines = [];
+	_availableVests = [];
+	_availableItems = [];
+	_availableGrenades = [];
+	_availableBackpacks = [];
+	_availableHeadgear = [];
+	_availableFacewear = [];
+};
+
+/* Fixed-Wing Pilot */
+if (_role in ["WPIL"]) then {
+	_availableUniforms = [];
+	_availableWeapons = [];
+	_availableAttachments = [];
+	_availableMagazines = [];
+	_availableVests = [];
+	_availableItems = [];
+	_availableGrenades = [];
+	_availableBackpacks = [];
+	_availableHeadgear = [];
+	_availableFacewear = [];
+};
+
 /* Loadout array that's passed back to kosherArsenal */
 [
 	/* Loadoutfile version */

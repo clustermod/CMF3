@@ -23,6 +23,7 @@ if !(_enabled && (_this select 0)) exitWith {};
 LOG("Enabled freezeTime");
 
 /* Spawn the process so it can be terminated at a later date */
+// @TODO replace spawn
 private _scriptHandle = [] spawn {
 	/* Get current date and time */
 	private _initdate = date;

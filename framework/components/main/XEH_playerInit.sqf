@@ -1,16 +1,11 @@
 #include "script_component.hpp"
-/*
- * Author: Eric
- * Initializes players for CMF (executed when new player connects).
- *
- * Public: No
- */
-SCRIPT(playerInit);
 
 if (!hasInterface) exitWith {};
 
 LOG_1("Initializing player %1...", (name player));
 missionNamespace setVariable [QGVAR(player_initialized), false];
+
+cmf_player = player;
 
 /* Disable removing grass */
 tawvd_disablenone = true;
@@ -22,7 +17,7 @@ call compile preprocessFileLineNumbers "components\main\initAceSettings.sqf";
 call compile preprocessFileLineNumbers "components\main\initSTUISettings.sqf";
 
 /* Create CMF Info Diary */
-[] spawn cmf_main_fnc_diary;
+[] spawn FUNC(diary);
 
 /* Remove statistics diary */
 player removeDiarySubject "Statistics";
@@ -31,8 +26,9 @@ player removeDiarySubject "Statistics";
 player removeDiarySubject "Units";
 
 /* Remove KP ranks ace interactions */
+// @TODO replace spawn
 [] spawn {
-    while {true} do {
+    while { true } do {
         waitUntil{ !isNil{([(ace_interact_menu_ActSelfNamespace getVariable (typeOf player)), ["ACE_SelfActions","KPR_Admin"]] call ace_interact_menu_fnc_findActionNode)} };
         [(typeOf player), 1, ["ACE_SelfActions", "KPR_Admin"]] call ace_interact_menu_fnc_removeActionFromClass;
         [(typeOf player), 1, ["ACE_SelfActions", "ACE_Equipment", "KPR_Check"]] call ace_interact_menu_fnc_removeActionFromClass;
@@ -42,14 +38,8 @@ player removeDiarySubject "Units";
     };
 };
 
-/* Load ace interaction menu */
-[] spawn EFUNC(menu,init);
-
 /* Disable Unsung vietnamese voices */
 RUG_DSAI_TerminalDistance = -1;
-
-/* Fix Loading Bug */
-[] call cmf_utility_fnc_endLoadingScreen;
 
 /* Create ACRE2 Babel handler */
 ["unit", {
@@ -60,7 +50,7 @@ RUG_DSAI_TerminalDistance = -1;
 }, true] call CBA_fnc_addPlayerEventHandler;
 
 /* Modify ACEX fortify */
-[] call cmf_main_fnc_fortify;
+[] call FUNC(fortify);
 
 /* Block looting own corpse */
 player addEventHandler ["InventoryOpened", {
@@ -98,7 +88,7 @@ player addEventHandler ["Take", {
             private _globalVolume = soundVolume;
             player setVariable [QGVAR(acre_globalVolume), _acreGlobalVolume, true];
             player setVariable [QGVAR(globalVolume), _globalVolume, true];
-            [0.1] call acre_api_fnc_setGlobalVolume;
+            [0] call acre_api_fnc_setGlobalVolume;
             0 fadeSound 0.1;
 		    0 fadeRadio 0.1;
         };
@@ -127,7 +117,7 @@ if (!isNil "acre_api_fnc_setCustomSignalFunc") then {
 };
 
 /* Show changelog */
-[] call cmf_main_fnc_changelog;
+[] call FUNC(changelog);
 
 /* Player killed event */
 player addEventHandler ["Killed", {
@@ -176,6 +166,7 @@ player addEventHandler ["Respawn", {
 }];
 
 /* Bring disconnected player back */
+// @TODO replace spawn
 [] spawn {
     private _disconUnits = missionNameSpace getVariable [QGVAR(disconUnits), createHashMap];
     private _disconUnit = _disconUnits get (getPlayerUID player);

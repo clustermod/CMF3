@@ -16,6 +16,7 @@
  */
 SCRIPT(hearing);
 
+// @TODO replace spawn
 _this spawn {
 
 	/* Check if it is enabled */

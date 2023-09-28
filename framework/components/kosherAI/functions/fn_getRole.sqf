@@ -17,6 +17,24 @@
 
 params["_unit"];
 
+/* Function to check if unit is in a vehicle's operator position */
+private _fnc_isOperator = {
+	private _unit = _this;
+
+	_unit isEqualTo (commander (vehicle _unit)) || 
+	{ _unit isEqualTo (driver (vehicle _unit)) || 
+	{ _unit isEqualTo  (gunner (vehicle _unit)) }};
+};
+
+/* Crewman */
+if ((vehicle _unit) isKindOf "Tank" && (_unit call _fnc_isOperator)) exitWith {_unit setVariable[QGVAR(kosherai_role), "CRW"]; "CRW"};
+
+/* Rotary Pilot */
+if ((vehicle _unit) isKindOf "Helicopter" && (_unit call _fnc_isOperator)) exitWith {_unit setVariable[QGVAR(kosherai_role), "RPIL"]; "RPIL"};
+
+/* Fixed Wing Pilot */
+if ((vehicle _unit) isKindOf "Plane" && (_unit call _fnc_isOperator)) exitWith {_unit setVariable[QGVAR(kosherai_role), "WPIL"]; "WPIL"};
+
 /* Medic */
 if (getNumber (configFile >> "CfgVehicles" >> typeOf _unit >> "attendant") isEqualTo 1) exitWith {_unit setVariable[QGVAR(kosherai_role), "MED"]; "MED"};
 

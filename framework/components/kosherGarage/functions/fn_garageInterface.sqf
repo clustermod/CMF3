@@ -17,6 +17,7 @@
 SCRIPT(garageInterface);
 
 /* Spawn the interface script handle */
+// @TODO replace spawn
 private _handle = _this spawn {
     private _display = _this;
     private _veh = objNull;

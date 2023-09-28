@@ -21,6 +21,7 @@
 SCRIPT(init);
 if (!isServer) exitWith {};
 
+// @TODO replace spawn
 _this spawn {
 	params["_actionObject"];
 

@@ -20,6 +20,7 @@ SCRIPT(repairRearmStation);
 
 if (!isServer) exitWith {};
 
+// @TODO replace spawn
 _this spawn {
 	private _fnc_repairRearm = {
 		params ["_veh"];

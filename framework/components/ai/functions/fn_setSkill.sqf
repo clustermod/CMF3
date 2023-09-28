@@ -21,25 +21,21 @@ private _enabled = ( CONFIG_PARAM_3(SETTINGS,ai,forceSkill) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
 /* Set skill on all units */
-_this spawn {
-    while { !(missionNamespace getVariable [QGVAR(setSkill_disable), false]) } do {
-        {
-            if (!isPlayer _x && !(_x getVariable [QGVAR(setSkill_initialized), false])) then {
-                _x setSkill ["aimingAccuracy", 	0.3 ];
-                _x setSkill ["aimingShake", 	0.5 ];
-                _x setSkill ["aimingSpeed", 	0.3 ];
-                _x setSkill ["spotDistance", 	0.5 ];
-                _x setSkill ["spotTime", 	    0.5 ];
-                _x setSkill ["courage", 	    0.5 ];
-                _x setSkill ["commanding", 	    0.5 ];
-                _x setSkill ["general", 	    0.4 ];
-                _x setSkill ["reloadSpeed", 	0.5 ];
-                _x setSkill ["endurance", 	    0.5 ];
+// @TODO replace spawn
 
-                _x setVariable [QGVAR(setSkill_initialized), true, true];
-            }
-        } forEach allUnits;
+["CAManBase", "init", {
+    params ["_unit"];
 
-        sleep 1;
-    };
-};
+    if (missionNamespace getVariable [QGVAR(setSkill_disable), false]) exitWith {};
+
+    _unit setSkill ["aimingAccuracy", 	0.3 ];
+    _unit setSkill ["aimingShake", 	    0.5 ];
+    _unit setSkill ["aimingSpeed", 	    0.3 ];
+    _unit setSkill ["spotDistance", 	0.5 ];
+    _unit setSkill ["spotTime", 	    0.5 ];
+    _unit setSkill ["courage", 	        0.5 ];
+    _unit setSkill ["commanding", 	    0.5 ];
+    _unit setSkill ["general", 	        0.4 ];
+    _unit setSkill ["reloadSpeed", 	    0.5 ];
+    _unit setSkill ["endurance", 	    0.5 ];
+}, true, [], true] call CBA_fnc_addClassEventHandler;

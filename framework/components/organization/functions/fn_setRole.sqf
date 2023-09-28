@@ -12,7 +12,7 @@
  * None
  *
  * Example:
- * [_myUnit, "SL", 0] call cmf_common_fnc_setRole
+ * [_myUnit, "SL", 0] call cmf_organization_fnc_setRole
  *
  * public: Yes
 */

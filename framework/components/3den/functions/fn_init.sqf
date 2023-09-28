@@ -108,8 +108,8 @@ private _generalToolsMenu = [[_indexMain, _toolsMenu], "General",
 /* ACE */
 private _ACEToolsMenu = [[_indexMain, _toolsMenu], "ACE3", 
     "z\ace\addons\common\data\logo_ace3_ca.paa"] call FUNC(addMenuItem);
-[[_indexMain, _toolsMenu, _ACEToolsMenu], "Toggle ACE Carryable"] call FUNC(entity_ace_carry);
-[[_indexMain, _toolsMenu, _ACEToolsMenu], "Toggle ACE Draggable"] call FUNC(entity_ace_drag);
+[[_indexMain, _toolsMenu, _ACEToolsMenu], "Toggle ACE Carryable", "z\ace\addons\dragging\ui\icons\box_carry.paa"] call FUNC(entity_ace_carry);
+[[_indexMain, _toolsMenu, _ACEToolsMenu], "Toggle ACE Draggable", "z\ace\addons\dragging\ui\icons\box_drag.paa"] call FUNC(entity_ace_drag);
 
 
 /* Kosher Arsenal */
@@ -128,7 +128,7 @@ private _logisticsToolsMenu = [[_indexMain, _toolsMenu], "Logistics",
 /* AI */
 private _aiToolsMenu = [[_indexMain, _toolsMenu], "AI", 
     "a3\3den\data\displays\display3den\toolbar\open_ca.paa"] call FUNC(addMenuItem);
-[[_indexMain, _toolsMenu, _aiToolsMenu], "Toggle preventProne"] call FUNC(entity_ai_preventProne);
+[[_indexMain, _toolsMenu, _aiToolsMenu], "Toggle preventProne", "a3\ui_f\data\igui\rscingameui\rscunitinfo\si_rest_prone_ca.paa"] call FUNC(entity_ai_preventProne);
 
 
 /* Shortcut to lobby manager */

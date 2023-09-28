@@ -51,12 +51,10 @@ if (call _condition) then {
 	}];
 };
 
-/* Show an indicator of player lives for zeuses */
-[] spawn {
-	if (!hasInterface) exitwith {};
-	waitUntil{!isnull (getAssignedCuratorLogic player)};
+if (!hasInterface) exitwith {};
 
-	/* Get the respawns left for all players in mission and create 3D widget displaying the remaining respawns */
+/* Get the respawns left for all players in mission and create 3D widget displaying the remaining respawns for zeuses */
+[{!isnull (getAssignedCuratorLogic player)}, {
 	if (player in (call bis_fnc_listcuratorplayers)) then {
 		addMissionEventHandler ["Draw3D", {
 			if (isNull curatorCamera) exitWith {};
@@ -77,4 +75,4 @@ if (call _condition) then {
 			} forEach allPlayers;
 		}];
 	};
-};
+}] call CBA_fnc_waitUntilAndExecute;

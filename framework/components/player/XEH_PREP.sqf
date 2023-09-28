@@ -1,12 +1,12 @@
 #include "script_component.hpp"
 
-IPREP(mapSwitchTextures);
-IPREP(resizeMapMarkers);
-IPREP(hearing);
-IPREP(hideRespawnMarker);
-IPREP(restrictLauncher);
-IPREP(drinking);
-IPREP(spectator);
-IPREP(teamActions);
-IPREP(setRank);
-IPREP(treatment);
+PREP(mapSwitchTextures);
+PREP(resizeMapMarkers);
+PREP(hearing);
+PREP(hideRespawnMarker);
+PREP(restrictLauncher);
+PREP(drinking);
+PREP(spectator);
+PREP(teamActions);
+PREP(setRank);
+PREP(treatment);

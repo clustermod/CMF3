@@ -16,21 +16,23 @@
  */
 
 if (!hasInterface) exitWith { };
-waitUntil { !isNull player };
 
-/* If player rank is different from default disregard */
-if ((rank player) != "PRIVATE") exitWith { };
+[{ !isNull player }, {
+    /* If player rank is different from default disregard */
+    if ((rank player) != "PRIVATE") exitWith { };
 
-/* Get group data */
-private _groupData = [group player] call EFUNC(common,getCallsign);
-private _level = _groupData select 2;
+    /* Get group data */
+    private _groupData = [group player] call EFUNC(common,getCallsign);
+    private _level = _groupData select 2;
 
-/* Set rank */
-if (isClass (missionConfigFile >> "CMF_ORBAT" >> "SIZES" >> _level)) then {
-    private _rank = getText (missionConfigFile >> "CMF_ORBAT" >> "SIZES" >> toUpper _level >> "leadRank");
-    if ((player isEqualTo leader group player)) then {
-        _rank = getText (missionConfigFile >> "CMF_ORBAT" >> "SIZES" >> toUpper _level >> "leadRank");
+    /* Set rank */
+    if (isClass (missionConfigFile >> "CMF_ORBAT" >> "SIZES" >> _level)) then {
+        private _rank = getText (missionConfigFile >> "CMF_ORBAT" >> "SIZES" >> toUpper _level >> "leadRank");
+        if ((player isEqualTo leader group player)) then {
+            _rank = getText (missionConfigFile >> "CMF_ORBAT" >> "SIZES" >> toUpper _level >> "leadRank");
+        };
+
+        [player, _rank] remoteExec ["setUnitRank", 0, true];
     };
+}] call CBA_fnc_waitUntilAndExecute;
 
-    [player, _rank] remoteExec ["setUnitRank", 0, true];
-};

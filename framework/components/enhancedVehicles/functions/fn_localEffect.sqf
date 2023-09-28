@@ -16,6 +16,7 @@
  */
 SCRIPT(localEffect);
 
+// @TODO replace spawn
 _this spawn {
     private _enableSoundEffects = ( CONFIG_PARAM_3(SETTINGS,enhancedVehicles,soundEffects) ) isEqualTo 1;
     private _enableVisualEffects = ( CONFIG_PARAM_3(SETTINGS,enhancedVehicles,visualEffects) ) isEqualTo 1;

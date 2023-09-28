@@ -16,6 +16,7 @@
  */
 SCRIPT(endLoadingScreen);
 
+// @TODO replace spawn
 [] spawn {
     for "_x" from 1 to 4 do {
         endLoadingScreen;

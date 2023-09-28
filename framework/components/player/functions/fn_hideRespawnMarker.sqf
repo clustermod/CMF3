@@ -20,9 +20,7 @@ SCRIPT(hideRespawnMarker);
 private _enabled = ( CONFIG_PARAM_3(SETTINGS,player,hideRespawnMarkers) ) isEqualTo 1;
 if !(_enabled) exitWith {};
 
-[] spawn {
-    waitUntil {!isNull findDisplay 12};
-
+[{ !isNull findDisplay 12 }, {
     findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
         if (visibleMap) then {
             {
@@ -32,4 +30,4 @@ if !(_enabled) exitWith {};
             } forEach allMapMarkers;
         };
     }];
-};
+}] call CBA_fnc_waitUntilAndExecute;

@@ -42,7 +42,12 @@
 - Added 3den tool to write warning orders
 - Added function to handle AI Panic (retreat or surrender)
 - Added function to display treatment information by remote parties
-- Added ability to ignore classes and factions in kosherAI
+- Added ability to whitelist/blacklist classes and factions in kosherAI
+- Added Config entry for adding flashlights in cmf tracers config
+- Added logistical crate definers and spawners
+- Added Warning Order Function
+- Added unconcious timer
+- Added hostage follow script
 
 ## Changed
 - Changed safestart to display meta information before mission start
@@ -76,6 +81,8 @@
 - Refactored prevent prone to use CBA XEH.
 - Changed reinforcing AIs tactic from rush to creep.
 - Moved kosherAI into it's own component
+- Added crewman, rotary pilot and fixed-wing pilot to possible kosherAI roles
+- Majot code cleanup
 
 ## Removed
 - Removed the "Display Roles" action from CC Menu, it's replaced by the TO&E Diary Entry

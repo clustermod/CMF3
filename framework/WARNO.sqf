@@ -1,71 +1,115 @@
 /* 
- * Warning order formatting Glossary:
- * Similar to markdown
+ * Warning order explanation, markdown glossary general information:
+ * https://wiki.cluster-community.com/index.php?title=CMF3:_Warno#Editing
  * 
  */
 
-_warno = "
-# Situation
-My situation description.
+/* SITUATION */
+["
+## Situation
+<!-- Description of the current situation -->
 
-## Enemy Composition
-- Infantry
-- Motorized
+## Enemy Forces
+### Composition
+<!-- List of enemy forces or type of forces -->
 
-## Enemy Capabilities
-- Artillery
-- Anti-Tank, Medium
+### Capabilities / Limitations
+<!-- List of enemy capabilities -->
 
-## Friendly Composition
-- Infantry
-- Air
+### Most Likely Course of Action
+<!-- Enemy's most likely course of action -->
 
-## Friendly Capabilities
-- Close Air Support
-- Anti-Tank, Light
+### Most Dangerous Course of Action
+<!-- Enemy's most dangerous course of action -->
 
-# Mission
-- Objective 1
-- Objective 2
+## Friendly Forces
+### Adjacent Units
+<!-- List of friendly forces or type of forces -->
 
-# Execution
+### Supporting
+<!-- List of friendly capabilities -->
+
+## Civilian Considerations
+<!-- Civilian presence and considerations -->
+
+## Terrain Considerations
+<!-- Terrain considerations -->
+",
+
+/* MISSION */
+"
+## Description
+<!-- Who, What, Where, When, and Why? -->
+
+## Situation Overview
+<!-- Mission Situation -->
+
+## Objectives
+<!-- Objectives -->
+",
+
+/* EXECUTION */
+"
 ## Commander's Intent
-The overall intent of this operation is to complete Objectives 1 and 2.
+### Center of Gravity
+<!-- Identification of the enemy's strongest characteristic or capability -->
 
-## Movement plan
-At the task-force leader's discretion
+### Critical Vulnerability
+<!-- Identification of the enemy's most critical vulnerability -->
 
-# Administration and Logistics
-- No resupply available
-Your task-force is supplied with one bus for transport.
+### Desired Endstate
+<!-- Description of the desired end state for a completed operation -->
 
-# Command and Signal
-## Communications table
-COMMAND NET - AN/PRC-152 - Chn 1
-ALPHA - AN/PRC-152 - Chn 2
+## Concept of Operations
+<!-- Special execution instructions -->
 
-## Callsign Table
-### COMMAND NET
-- Command
-- ANVIL
-- LOGI
-- ENGI
-- Alpha
+## Scheme of Maneuver
+<!-- Movement plan  -->
+",
 
-## Rules of Engagement
-Do not fire unless fired upon.
+/* ADMINISTRATION AND LOGISTICS */
+"
+## Administration
+### Enemy Prisoners of War (EPW) Plan
+<!-- Rules regarding handling of EPWs, their collection and storage -->
 
-## Standard operating procedures
-- Red smoke signals enemy
-";
+### Casualty Evacuation (CASEVAC) Plan
+<!-- Plan for evacuation of casualties -->
 
-/* Formatting data before passing it back */
-[
-	/* warno file version */
-	"1.0",
+### Support
+<!-- Available support assets and who controls them -->
 
-	/* Data Array */
-	[
-		_warno
-	]
+## Logistics
+### Supply
+<!-- Available supply -->
+
+### Assets
+<!-- Available assets -->
+
+### Equipment
+<!-- Required Equipment -->
+",
+
+/* COMMAND AND SIGNAL */
+"
+## Command
+### Rules of Engagement
+<!-- Operational RoE -->
+
+### Standard operating procedures
+<!-- Operational SoPs -->
+
+### Succession of Command
+<!-- Succession of Command -->
+
+## Signal
+### Table of Communications
+<!-- Table of Communications in format: [Net Name] - [Radio] - [Chn/Freq] -->
+
+### Callsign Table 
+<!-- callsigns available on the above radio networks -->
+",
+
+/* WARNO Version (DO NOT CHANGE) */
+"1.0"
 ];

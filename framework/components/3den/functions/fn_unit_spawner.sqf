@@ -52,7 +52,7 @@ private _spawnScript = {_this spawn {
             _unit setUnitLoadout [[],[],[],[],[],[],"","",[],["ItemMap","","","ItemCompass","ItemWatch",""]];
             save3DENInventory [_unit];
             _unit switchMove "amovpercmstpsnonwnondnon";
-            _unit set3DENAttribute ["Init", format["[this, ""%1"", 0] call cmf_common_fnc_setRole;", _role]];
+            _unit set3DENAttribute ["Init", format["[this, ""%1"", 0] call cmf_organization_fnc_setRole;", _role]];
             _unit set3DENAttribute ["description", format["%1@%2", _roleName, _lobbyName]];
             _unit set3DENAttribute ["ControlMP", true];
             _unit set3DENAttribute ["Rank", _rank];

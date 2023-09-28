@@ -7,6 +7,7 @@
  - [ ] Offroad should be made clientside for the player, stop it from running for AI aswell
  - [X] Chance of being lit on fire if engine is kill or fuel is kill
  - [X] Move autoinit into init
+ - [ ] Disable engineOn when vehicle gets disabled
 
 ## utility
  - [X] clearVehicleCargo clears ammocrates as well
@@ -16,7 +17,9 @@
  - [ ] Make a virtual arsenal crate filling tool (just use kosher arsenal but set the target to the crate rather than the player's inventory containers) 
 	   (due to the inherent way kosher arsenal works, the arsenal would be locked to your role)
  - [ ] Set default names for certain crates (fireteam crate, medical crate)
- - [ ] Create resupply crates from loadoutfile function.
+ - [X] Create resupply crates from loadoutfile function.
+ - [X] Create a crate spawner
+ - [ ] Look into overriding vehicle cargo crate naming
 
 ## 3den
  - [X] Finish the mission data tool (split general mission data and warno)
@@ -35,6 +38,8 @@
 - [ ] Move 3DEN Entity Tools to it's own component called 3den_tools
 - [ ] Extend warno to include a callsign table in Command and Signal
 - [ ] Create function to display warning order in mission
+- [ ] Enable consistent marker in 3den
+- [ ] Checklist and validation when mission gets exported (e.g. warning if no repsawn was added)
 
 ## kosherArsenal
  - [ ] Loadout validity test (so when something is wrong it will throw a proper stacktrace)
@@ -46,6 +51,12 @@
  - [ ] Automatically call artillery on called out units using taskArtillery from lambs
  - [X] Maybe use taskCreep rather than taskRush
 
+## kosherAI
+ - [ ] Update kosherAI to hash the config data it grabs
+ - [ ] Sometimes spawns without magazines on dedicated server
+ - [ ] Sometimes failes to remove handguns and facewear on dedicated server
+ - [X] Switches to binoculars or secondary instead of primary after loadout has ben set
+
 ## main
  - [X] hide chat messages:
         replace join messages with: "X joined SIDE in GROUP" before game start and "X re-jipped" after game start. After game on: everything else should only be shown to zeus
@@ -53,7 +64,8 @@
  - [X] Call loading bug fix automatically if player is in respawn menu with loading screen
  - [X] Show changelog when a newer version is available for player
  - [X] ACRE2 down mute not working, radio works, but proximity doesn't
- - [ ] Make a warning order file (and look into a way of parsing it to display on a webpage)
+ - [X] Make a warning order file (and look into a way of parsing it to display on a webpage)
+ - [ ] Add https://community.bistudio.com/wiki/BIS_fnc_functionsDebug to debugging
 
 ## aar (new category)
  - [ ] <s>Test diagAAR and see if it does what i want</s>
@@ -68,6 +80,7 @@
  - [X] Freeze time when safestart is enabled (check if freezetime is already enabled, if it isn't do)
  - [ ] <s>Craters from artillery rounds</s>
  - [ ] Fix bug with environment times for twilight
+ - [ ] Fix timezone for safestart
 
 ## respawn
  - [X] Ping SL for rallypoint from respawn menu
@@ -83,8 +96,10 @@
  - [ ] <s>Create camera shake when vehicle is hit by big round</s>
  - [ ] <s>When close to a ACE fire create an orange tint based on the fire intensity</s>
  - [X] Reset map marker scale when map is closed (to unfuck sizes on ctrlMap controls)
+ - [x] Treatment messages for patient (fixed in `KAT - Advanced Medical` in next update)
  - [ ] Change icon for submitting an AAR from spectator
  - [ ] Add button to view submitted AARs after closing
+ - [ ] markerSize does not get size of zeus markers (wtf BI?)
 
 ## menu
  - [ ] <s>Move safestart into an admin menu</s>
@@ -93,6 +108,8 @@
 	For server also add info from monitor (players lobby, players role selection, players briefing, players in-game and players debriefing)
 
 ## cleanup
+ - [ ] Add Readme to each module
+ - [ ] Follow ACE Code rules and remove sleeps, spawns etc. Get everything unscheduled: https://ace3.acemod.org/wiki/development/arma-3-scheduler-and-our-practices.html
  - [ ] Make sure every string is localized
  - [ ] Make sure debug is disabled on everything and that there are no unwanted systemchats
  - [ ] Replace custom eventhandlers with CBA ones. (basically remove the spawned waitUntils where i can) holy fuck, "retroactivly": https://cbateam.github.io/CBA_A3/docs/files/xeh/fnc_addClassEventHandler-sqf.html#CBA_fnc_addClassEventHandler

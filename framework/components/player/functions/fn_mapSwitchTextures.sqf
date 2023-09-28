@@ -22,10 +22,7 @@ if !(_enabled) exitWith {};
 
 if ( isDedicated ) exitWith {};
 
-[] spawn {
-	/* waitUntil the map exists */
-	waitUntil { !isNull findDisplay 12 };
-
+[{ !isNull findDisplay 12 }, {
 	/* Press the switch textures button */
 	ctrlActivate ( ( findDisplay 12 ) displayCtrl 107 );
-};
+}] call CBA_fnc_waitUntilAndExecute;

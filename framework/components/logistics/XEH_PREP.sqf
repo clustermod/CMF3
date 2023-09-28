@@ -1,5 +1,8 @@
 #include "script_component.hpp"
 
-IPREP(cratePFH);
-IPREP(crateInit);
-IPREP(crateActions);
+PREP(cratePFH);
+PREP(crateInit);
+PREP(crateActions);
+PREP(cratePreset);
+PREP(presetCompile);
+PREP(crateSpawner);

@@ -1,13 +1,4 @@
 #include "script_component.hpp"
-/*
- * Author: Eric
- * Initializes Server for CMF (executed preInit).
- *
- * Public: No
- */
-SCRIPT(serverInit);
-
-if (!isServer) exitWith {};
 
 LOG_1("Initializing CMF v%1...", VERSION_STR);
 missionNamespace setVariable [QGVAR(server_initialized), false, true];
@@ -25,6 +16,10 @@ if (is3DENPreview && !is3DENMultiplayer) then {
 
 /* Store CMF Version Number in variable */
 missionNamespace setVariable [QGVAR(version), VERSION_STR, true];
+
+/* Change ACE carrying / draggin max carry weight */
+ACE_maxWeightCarry = 1500;
+ACE_maxWeightDrag = 1500;
 
 /* Disable removing grass */
 tawvd_disablenone = true;
@@ -49,8 +44,6 @@ addMissionEventHandler ["PlayerConnected", {
 
     /* Raise event */
     [QGVAR(server_onPlayerConnected), _this] call CBA_fnc_globalEvent;
-
-    [_this, FUNC(playerInit)] remoteExec ["call", _owner];
 }];
 
 /* Handle disconnects */
@@ -72,6 +65,17 @@ addMissionEventHandler ["HandleDisconnect", {
         missionNameSpace setVariable [QGVAR(serverFPS), diag_fps, true];
         missionNameSpace setVariable [QGVAR(serverScripts), diag_activeScripts, true];
         sleep 2;
+    };
+};
+
+/* Report performance when it drops below 15 FPS */
+0 spawn {
+    while { true } do {
+        waitUntil { diag_fps < 15 };
+
+        WARNING_1("Low Server FPS detected: %1", str diag_activeScripts);
+
+        sleep 30;
     };
 };
 

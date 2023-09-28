@@ -11,4 +11,6 @@ PREP(onSliderChange);
 PREP(openDialog);
 PREP(updateSettings);
 PREP(updateVehType);
-IPREP(init);
+PREP(init);
+
+// @TODO replace viewdistance with one that works

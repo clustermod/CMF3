@@ -20,6 +20,7 @@
  */
 SCRIPT(init);
 
+// @TODO replace spawn
 _this spawn {
     params[["_loadouts", nil, [[]]], ["_light", false], ["_forcePrimary", false], ["_randomPos", false]];
 
@@ -36,8 +37,8 @@ _this spawn {
     };
 
     /* Get the unit's loadout */
-    private _team = player getVariable [QEGVAR(common,team), 0];
-    private _role = player getVariable [QEGVAR(common,role), "RFL"];
+    private _team = player getVariable [QEGVAR(organization,team), 0];
+    private _role = player getVariable [QEGVAR(organization,role), "RFL"];
     if (((count _loadouts) - 1) < _team) then {
         _team = (count _loadouts) - 1;
     };
