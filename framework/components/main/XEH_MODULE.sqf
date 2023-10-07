@@ -12,6 +12,7 @@ missionNamespace setVariable [QGVAR(components_initialized), false];
 
 /* CMF Modules to define */
 GVAR(components) = [
+    "3den",
     "main",
     "common",
     "viewdistance",
@@ -45,6 +46,7 @@ private _loadPrep = {
 };
 
 private _loadPreInit = {
+    if (is3DEN) exitWith {};
     params ["_module"];
 
     private _path = format ["components\%1\XEH_preInit.sqf", _module];
@@ -55,6 +57,7 @@ private _loadPreInit = {
 };
 
 private _loadPostInit = {
+    if (is3DEN) exitWith {};
     params ["_module"];
 
     private _path = format ["components\%1\XEH_postInit.sqf", _module];
@@ -69,6 +72,7 @@ private _loadPostInit = {
 };
 
 private _loadServerInit = {
+    if (is3DEN) exitWith {};
     params ["_module"];
 
     if (!isServer) exitWith {};
@@ -81,6 +85,7 @@ private _loadServerInit = {
 };
 
 private _loadPlayerInit = {
+    if (is3DEN) exitWith {};
     params ["_module"];
     
     private _path = format ["components\%1\XEH_playerInit.sqf", _module];
@@ -96,6 +101,18 @@ private _loadPlayerInit = {
     };
 };
 
+private _load3denInit = {
+    if (!is3DEN) exitWith {};
+    params ["_module"];
+
+    private _path = format ["components\%1\XEH_3denInit.sqf", _module];
+
+    if (fileExists _path) then {
+        waitUntil { missionNamespace getVariable [QGVAR(components_initialized), false] };
+        [] spawn compile preprocessFileLineNumbers _path;
+    };
+};
+
 /* Compile module */
 {
     /* Compile modules */
@@ -106,6 +123,7 @@ private _loadPlayerInit = {
     [_x] call _loadPostInit;
     [_x] call _loadServerInit;
     [_x] call _loadPlayerInit;
+    [_x] spawn _load3denInit;
 } forEach GVAR(components);
 
 INFO("Initialized components");

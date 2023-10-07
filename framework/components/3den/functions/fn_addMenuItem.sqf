@@ -9,6 +9,7 @@
  * 2: Icon (Default: "") <STRING>
  * 3: Action (Default: {}) <CODE>
  * 4: Action Params (Default: []) <ARRAY>
+ * 5: Children
  *
  * Return Value:
  * Item index <NUMBER>
@@ -20,11 +21,11 @@
  */
 SCRIPT(addMenuItem);
 
-params ["_path", "_name", ["_icon", ""], ["_action", nil], ["_actionParams", []]];
+params ["_path", "_name", ["_icon", ""], ["_action", nil], ["_actionParams", []], "_children"];
 
 private _ctrlMenuStrip = findDisplay 313 displayCtrl 120;
 private _index = _ctrlMenuStrip menuAdd [_path, _name];
-_path pushBack _index;
+private _path = _path + [_index];
 
 if (_icon != "") then {
     _ctrlMenuStrip menuSetPicture [_path, _icon];
@@ -34,6 +35,12 @@ if (!isNil "_action") then {
     private _stringAction = toString _action;
     private _stringActionParams = str _actionParams;
     _ctrlMenuStrip menuSetAction [_path, format ["%1 spawn {%2}", _stringActionParams, _stringAction]];
+};
+
+if (!isNil "_children") then {
+    {
+        ([_path] + _x) call FUNC(addMenuItem);
+    } forEach _children;
 };
 
 _index;

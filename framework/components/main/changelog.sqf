@@ -4,6 +4,7 @@
 <t size='1.05'>Added</t>
 <t color='#00aa22'>+</t> Added unconcious timer
 <t color='#00aa22'>+</t> Added hostage follow script
+<t color='#00aa22'>+</t> Added Macros for ACE, CBA and BIS functions
 
 <t size='1.05'>Changed</t>
 <t color='#009eaa'>~</t> Nothing in this update

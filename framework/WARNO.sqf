@@ -61,10 +61,10 @@
 <!-- Description of the desired end state for a completed operation -->
 
 ## Concept of Operations
-<!-- Special execution instructions -->
+<!-- Tasks specific for a group or person -->
 
 ## Scheme of Maneuver
-<!-- Movement plan  -->
+<!-- Movement plan -->
 ",
 
 /* ADMINISTRATION AND LOGISTICS */
@@ -86,8 +86,8 @@
 ### Assets
 <!-- Available assets -->
 
-### Equipment
-<!-- Required Equipment -->
+### Required Equipment
+<!-- List of required equipment -->
 ",
 
 /* COMMAND AND SIGNAL */

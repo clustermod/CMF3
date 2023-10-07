@@ -2,8 +2,6 @@
 
 PREP(repairRearmStation);
 PREP(restrictedVehicle);
-PREP(roster);
-PREP(ToE);
 PREP(environment);
 PREP(tracers);
 PREP(safestart);

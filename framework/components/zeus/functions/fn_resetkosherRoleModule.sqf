@@ -33,7 +33,7 @@ private _dialogFunction = {
         _dialogValues params[["_role", _defaultRole], ["_team", _defaultTeam], ["_loadout", _defaultLoadout]];
 
         /* Set the unit's role and team */
-        [_unit, _role, _team] call EFUNC(common,setRole);
+        [_unit, _role, _team] call EFUNC(organization,setRole);
 
         /* Set the unit's loadoutfile */
         private _loadout = format["rsc\loadouts\%1.sqf", _loadout];

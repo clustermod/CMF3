@@ -3,7 +3,6 @@
 [] call FUNC(serverInit);
 [] call FUNC(missionInit);
 [] call FUNC(addonBlacklist);
-[] call FUNC(unifiedTime);
 [] call FUNC(chatHandler);
 
 [{ time > 0 }, {

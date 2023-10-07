@@ -26,9 +26,3 @@ class cmf_impact_drive_2 {
     sound[] = {"rsc\sounds\impact_drive_2.wss", db+30, 1.0};
     titles[] = {0, ""};
 };
-
-class cmf_shot_inside {
-    name = "cmf_shot_inside";
-    sound[] = {"rsc\sounds\shot_inside.ogg", db+50, 1, 150};
-    titles[] = {1, ""};
-};
