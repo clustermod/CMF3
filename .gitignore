@@ -1,0 +1,20 @@
+# Editor
+.vscode
+!tools/.vscode
+
+# Releases
+release
+
+# Tool cache
+__pycache__
+
+# Arma
+mission.sqm
+
+# Todos and changelogs
+TODO.md
+CHANGELOG.md
+
+# template files
+framework/components/_blank
+framework/components/*/functions/fn_empty.sqf

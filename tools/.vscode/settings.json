@@ -1,0 +1,6 @@
+{
+	"files.exclude": {
+		"**/release": true
+	},
+  "python.pythonPath": "C:\\Users\\Eirik\\AppData\\Local\\Programs\\Python\\Python310-32\\python.exe"
+}
