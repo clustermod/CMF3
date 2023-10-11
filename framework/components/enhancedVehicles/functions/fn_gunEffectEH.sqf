@@ -16,15 +16,15 @@
  */
 
 private _fnc_initEH = {
-	params ["_veh"];
+    params ["_veh"];
 
-	_veh addEventHandler ["Fired", { 
-	params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
+    _veh addEventHandler ["Fired", { 
+    params ["_unit", "_weapon", "_muzzle", "_mode", "_ammo", "_magazine", "_projectile", "_gunner"];
 
-		if (_gunner isEqualTo player) then {
-			addCamShake [2, 0.2, 25];
-		};
-	}];
+        if (_gunner isEqualTo player) then {
+            addCamShake [2, 0.2, 25];
+        };
+    }];
 };
 
 ["Car", "init", _fnc_initEH, true, [], true] call CBA_fnc_addClassEventHandler;

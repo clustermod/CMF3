@@ -10,6 +10,9 @@ __pycache__
 
 # Arma
 mission.sqm
+!framework/rsc/loadouts/!*.sqf
+framework/rsc/loadouts/*.sqf
+framework/rsc/scripts/*.sqf
 
 # Todos and changelogs
 TODO.md

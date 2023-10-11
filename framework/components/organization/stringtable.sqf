@@ -4,7 +4,7 @@
  * 3den_stringtable
  */
 [
-	[DSTRING(infantry_elements_displayName), [
+    [DSTRING(infantry_elements_displayName), [
         ["English", "Infantry Elements"],
         ["Spanish", "Elementos De Infantería"]
     ]],

@@ -15,15 +15,13 @@
  */
 SCRIPT(transferToServer);
 
-/* Check if it's enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,ai,transferToServer) ) isEqualTo 1;
-if !(_enabled) exitWith {};
-
 if (!isServer) exitWith {};
 
 /* Transfer all new AI groups to server */
 ["CAManBase", "init", {
     params ["_unit"];
+
+    if (!GVAR(setting_serverTransfer)) exitWith {};
 
     if (isPlayer _unit) exitWith {};
 

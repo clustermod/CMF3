@@ -19,11 +19,11 @@ params["_unit"];
 
 /* Function to check if unit is in a vehicle's operator position */
 private _fnc_isOperator = {
-	private _unit = _this;
+    private _unit = _this;
 
-	_unit isEqualTo (commander (vehicle _unit)) || 
-	{ _unit isEqualTo (driver (vehicle _unit)) || 
-	{ _unit isEqualTo  (gunner (vehicle _unit)) }};
+    _unit isEqualTo (commander (vehicle _unit)) || 
+    { _unit isEqualTo (driver (vehicle _unit)) || 
+    { _unit isEqualTo  (gunner (vehicle _unit)) }};
 };
 
 /* Crewman */

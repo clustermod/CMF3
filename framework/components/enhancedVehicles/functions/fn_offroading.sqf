@@ -20,15 +20,11 @@ SCRIPT(offroading);
 if (!isServer) exitWith {};
 
 /* Spawn code to handle offroad feature */
-// @TODO replace spawn
+// @TODO: replace spawn
 _this spawn {
     params["_veh"];
 
-    /* Get which parts are enabled */
-    private _offroadBumpEnabled = ( CONFIG_PARAM_3(SETTINGS,enhancedVehicles,offroadBumpy) ) isEqualTo 1;
-    private _offroadDamageEnabled = ( CONFIG_PARAM_3(SETTINGS,enhancedVehicles,offroadDamage) ) isEqualTo 1;
-
-    if (!_offroadBumpEnabled && !_offroadDamageEnabled) exitWith {};
+    if (!GVAR(setting_offroadBumps) && !GVAR(setting_offroadDamage)) exitWith {};
 
     /* Get the configSettings */
     private _bumpSpeed = getNumber (missionConfigFile >> "CfgEnhancedVehicles" >> "bumpSpeed");
@@ -62,6 +58,7 @@ _this spawn {
     private _wheelmass = call compile (format['getNumber (%1)', ([_cfgbin,"",true] call BIS_fnc_configPath)]);
 
     /* check if vehicle is offroad */
+    // @TODO: replace spawn
     [_veh] spawn {
         params ["_veh"];
 
@@ -76,7 +73,8 @@ _this spawn {
     };
 
     /* Script that handles bumps */
-    if (_offroadBumpEnabled) then {
+    if (GVAR(setting_offroadBumps)) then {
+        // @TODO: replace spawn
         [_veh, _bumpSpeed, _i3, _i2] spawn {
             params["_veh", "_bumpSpeed", "_ix", "_iy"];
 
@@ -109,7 +107,8 @@ _this spawn {
     };
 
     /* Script that handles damage */
-    if (_offroadDamageEnabled) then {
+    if (GVAR(setting_offroadDamage)) then {
+        // @TODO: replace spawn
         [_veh, _damageModifier, _damagespeed, _wheelmass, _wheelIndex] spawn {
             params["_veh", "_damageModifier", "_damageSpeed", "_wheelmass", "_index"];
 

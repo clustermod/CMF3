@@ -32,24 +32,24 @@ private _listboxCtrl = (finddisplay 2900) displayCtrl _listbox;
 /* remove EH not to cause huge lag */
 _listboxCtrl ctrlRemoveAllEventHandlers "LBSelChanged";
 private _sel = switch (true) do {
-	case (_textValue >= 49): {0};
-	case (_textValue >= 48.99): {1};
-	case (_textValue >= 25): {2};
-	case (_textValue >= 12.5): {3};
-	case (_textValue >= 3.125): {4};
-	default {1};
+    case (_textValue >= 49): {0};
+    case (_textValue >= 48.99): {1};
+    case (_textValue >= 25): {2};
+    case (_textValue >= 12.5): {3};
+    case (_textValue >= 3.125): {4};
+    default {1};
 };
 _listboxCtrl lbSetCurSel (_sel - 1);
 /* add EH again */
 _listboxCtrl ctrlSetEventHandler ["LBSelChanged",
-	format ["[_this select 1, '%1', %2] call cmf_viewdistance_fnc_onLBSelChanged", _varType, _textCtrl]
+    format ["[_this select 1, '%1', %2] call cmf_viewdistance_fnc_onLBSelChanged", _varType, _textCtrl]
 ];
 
 call compile format ["%1 = %2",_varType, _textValue];
 call compile format ["profileNamespace setVariable ['%1',%1]", _varType];
 
 switch (GVAR(vehType)) do {
-	case 0: {setTerrainGrid GVAR(footTerrain)};
-	case 1: {setTerrainGrid GVAR(carTerrain)};
-	case 2: {setTerrainGrid GVAR(airTerrain)};
+    case 0: {setTerrainGrid GVAR(footTerrain)};
+    case 1: {setTerrainGrid GVAR(carTerrain)};
+    case 2: {setTerrainGrid GVAR(airTerrain)};
 };

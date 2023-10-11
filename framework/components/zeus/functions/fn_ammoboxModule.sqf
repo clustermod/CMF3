@@ -25,7 +25,7 @@ private _dialogFunction = {
         [LSTRING(ammobox_success_message)] call zen_common_fnc_showMessage;
 
         /* Raise event */
-    	[QGVAR(ammobox_added), [_this select 1]] call CBA_fnc_globalEvent;
+        [QGVAR(ammobox_added), [_this select 1]] call CBA_fnc_globalEvent;
     } else {
         [LSTRING(ammobox_fail_message)] call zen_common_fnc_showMessage;
     };

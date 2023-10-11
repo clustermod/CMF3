@@ -15,8 +15,8 @@
  * Public: Yes
  */
 SCRIPT(endLoadingScreen);
-
-// @TODO replace spawn
+// @TODO: Move to common
+// @TODO: replace spawn
 [] spawn {
     for "_x" from 1 to 4 do {
         endLoadingScreen;

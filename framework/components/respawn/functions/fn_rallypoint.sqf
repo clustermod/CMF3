@@ -16,17 +16,14 @@
 */
 SCRIPT(rallypoint);
 
+// @TODO: Replace Spawn
 _this spawn {
     params [["_units", []]];
 
     /* Code to place rallypoint */
     private _rallypointPlaceCode = {
+        // @TODO: Replace Spawn
         _this spawn {
-            /* Get config settings */
-            private _objectClass = CONFIG_PARAM_3(SETTINGS,rallypoint,rallyObjectClass);
-            private _enemyKillRadius = CONFIG_PARAM_3(SETTINGS,rallypoint,enemyKillRadius);
-            private _cooldown = CONFIG_PARAM_3(SETTINGS,rallypoint,cooldown);
-
             /* Create placement UI */
             [LSTRING(place_displayName), LSTRING(cancel_displayName)] call ace_interaction_fnc_showMouseHint;
 
@@ -46,7 +43,7 @@ _this spawn {
             player addAction ["", { player removeAction (_this select 2)}, "", 0, false, true, "DefaultAction"];
 
             /* Placement loop */
-            private _obj = _objectClass createVehicleLocal (getPos player);
+            private _obj = GVAR(setting_rallypointObject) createVehicleLocal (getPos player);
             _obj setPosASL (getPosASL player);
             while { GVAR(rallypoint_placeLoop) } do {
                 /* Get X and Y Coordinate */
@@ -81,7 +78,7 @@ _this spawn {
             private _rallyPos = getPosASL _obj;
             private _rallyDir = getDir _obj;
             deleteVehicle _obj;
-            _obj = _objectClass createVehicle [0,0,0];
+            _obj = GVAR(setting_rallypointObject) createVehicle [0,0,0];
             _obj setPosASL _rallyPos;
             _obj setDir _rallyDir;
 
@@ -95,9 +92,9 @@ _this spawn {
                 _oldRallyParams params ["_oldObject", "_oldRespawn", "_oldKillSCript"];
 
                 /* Check if enemies are close to rally */
-                private _units = (nearestObjects [_obj, ["Man"], _enemyKillRadius]) apply { [side _x, side player] call BIS_fnc_sideIsFriendly };
+                private _units = (nearestObjects [_obj, ["Man"], GVAR(setting_rallypointKillRadius)]) apply { [side _x, side player] call BIS_fnc_sideIsFriendly };
                 if (false in _units) exitWith {
-                    hint format[LSTRING(rally_too_close_message), _enemyKillRadius];
+                    hint format[LSTRING(rally_too_close_message), GVAR(setting_rallypointKillRadius)];
                     deleteVehicle _obj;
                 };
 
@@ -111,11 +108,12 @@ _this spawn {
                 private _marker = "";
 
                 /* Spawn script to Kill rally point if enemy units get too close */
-                private _killScript = [player, _obj, _enemyKillRadius, side player, _respawn, _marker] spawn {
-                    params ["_unit", "_obj", "_enemyKillRadius", "_side", "_respawn", "_marker"];
+                // @TODO: replace spawn
+                private _killScript = [player, _obj, side player, _respawn, _marker] spawn {
+                    params ["_unit", "_obj", "_side", "_respawn", "_marker"];
 
                     /* Check if enemies are within kill radius of rallypoint */
-                    waitUntil { false in ((nearestObjects [_obj, ["Man"], _enemyKillRadius]) apply { [side _x, _side] call BIS_fnc_sideIsFriendly }) };
+                    waitUntil { false in ((nearestObjects [_obj, ["Man"], GVAR(setting_rallypointKillRadius)]) apply { [side _x, _side] call BIS_fnc_sideIsFriendly }) };
 
                     _respawn call BIS_fnc_RemoveRespawnPosition;
                     deleteMarker _marker;
@@ -127,8 +125,9 @@ _this spawn {
                 player setVariable [QGVAR(rallypoint_lastRally), [_obj, _respawn, _killScript], true];
 
                 /* Spawn cooldown timer */
-                _cooldown spawn {
-                    private _cooldownTime = diag_tickTime + _this;
+                // @TODO: Replace spawn
+                0 spawn {
+                    private _cooldownTime = diag_tickTime + GVAR(setting_rallypointCooldown);
                     player setVariable [QGVAR(rallypoint_canCreate), false, true];
 
                     waitUntil {diag_tickTime > _cooldownTime};
@@ -142,8 +141,7 @@ _this spawn {
 
     /* Code to run when rallypoint is unavailable */
     private _rallypointFailedCode = {
-        private _cooldown = CONFIG_PARAM_3(SETTINGS,rallypoint,cooldown);
-        hint format[LSTRING(time_restriction_message), (_cooldown / 60)];
+        hint format[LSTRING(time_restriction_message), (GVAR(setting_rallypointCooldown) / 60)];
     };
 
     /* Create Place action */
@@ -195,7 +193,7 @@ _this spawn {
 };
 
 /* Add button to ping SL to create rallypoint */
-// @TODO replace spawn
+// @TODO: replace spawn
 _this spawn {
     waitUntil { !isNull findDisplay 12 };
     waitUntil { !isNull ((findDisplay 12) displayCtrl 88800) };
@@ -237,7 +235,7 @@ _this spawn {
 
     /* Update availability of pinging */
     addMissionEventHandler ["Map", {
-    	params ["_mapIsOpened", "_mapIsForced"];
+        params ["_mapIsOpened", "_mapIsForced"];
 
         if (_mapIsOpened && !isNull ((findDisplay 12) displayCtrl 88800)) then {
             GVAR(rallypoint_PFH) = [{

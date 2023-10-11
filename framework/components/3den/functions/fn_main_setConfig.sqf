@@ -17,61 +17,15 @@
 
 params ["_cmfMenu"];
 
-private _ctrlMenuStrip = findDisplay 313 displayCtrl 120;
-
-/* Create config action */
-private _config = _ctrlMenuStrip menuAdd [[_cmfMenu], "CMF Config"];
-_ctrlMenuStrip menuSetPicture [[_cmfMenu, _config], "a3\3den\data\displays\display3den\entitymenu\findconfig_ca.paa"];
-_ctrlMenuStrip menuSetAction [[_cmfMenu, _config], "call cmf_3den_fnc_setConfig_configHandler"];
-
-/* Create mission data action */
-private _missionData = _ctrlMenuStrip menuAdd [[_cmfMenu], "Mission Data"];
-_ctrlMenuStrip menuSetPicture [[_cmfMenu, _missionData], "a3\ui_f\data\gui\rsc\rscdisplayarsenal\map_ca.paa"];
-_ctrlMenuStrip menuSetAction [[_cmfMenu, _missionData], "call cmf_3den_fnc_setConfig_missionDataHandler"];
-
 /* Handle player attempting to delete logic */
 {
-    if ((_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_configLogic']) then {
-        _x addEventHandler ['UnregisteredFromWorld3DEN', {
-            params ['_entity'];
-            ['Deleted CMF Config', 1, 1] call BIS_fnc_3DENNotification;
-        }];
-    };
-
     if ((_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_missionDataLogic']) then {
         _x addEventHandler ['UnregisteredFromWorld3DEN', {
             params ['_entity'];
             ['Deleted CMF Mission Data', 1, 1] call BIS_fnc_3DENNotification;
         }];
     };
-
-    if ((_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_warnoLogic']) then {
-        _x addEventHandler ['UnregisteredFromWorld3DEN', {
-            params ['_entity'];
-            ['Deleted CMF Warning Order', 1, 1] call BIS_fnc_3DENNotification;
-        }];
-    };
 } forEach (all3DENEntities select 0);
-
-/* Handle Config */
-FUNC(setConfig_configHandler) = {
-    ['Not implemented yet', 1, 1] call BIS_fnc_3DENNotification;
-    private _logics = (all3DENEntities select 0) select { (_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_configLogic'] };
-    private _logic = objNull;
-    if (count _logics isEqualTo 0) then {
-        _logic = create3DENEntity ['Object', 'Logic', [0,0,0], true];
-        _logic set3DENAttribute ['Name', 'cmf_3den_configLogic'];
-    } else {
-        _logic = _logics select 0;
-    };
-
-    _logic addEventHandler ['UnregisteredFromWorld3DEN', {
-        params ['_entity'];
-        ['Deleted CMF Config', 1, 1] call BIS_fnc_3DENNotification;
-    }];
-
-    /* Open config display */
-};
 
 /* Handle Mission Data */
 FUNC(setConfig_missionDataHandler) = {

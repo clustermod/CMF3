@@ -17,7 +17,7 @@
  */
 
 params ["_ver1", "_ver2"];
-
+// @TODO: Move to common or main
 private _ver1Arr = (_ver1 splitString ".") apply { call compile _x };
 private _ver2Arr = (_ver2 splitString ".") apply { call compile _x };
 

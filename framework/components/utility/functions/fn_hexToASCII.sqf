@@ -14,13 +14,13 @@
  * Public: Yes
  */
 params ["_string"];
-
+// @TODO: Move to common
 _ifnc_stringReplace = {
-	params ["_string", "_substring", "_replaceWith"];
+    params ["_string", "_substring", "_replaceWith"];
 
-	_pos = _string find _substring;
-	if (_pos isEqualTo -1) exitWith { _string };
-	[[(_string select [0, _pos]), _replaceWith, _string select [_pos + count _substring,count _string]] joinString "", _substring, _replaceWith] call _ifnc_stringReplace;
+    _pos = _string find _substring;
+    if (_pos isEqualTo -1) exitWith { _string };
+    [[(_string select [0, _pos]), _replaceWith, _string select [_pos + count _substring,count _string]] joinString "", _substring, _replaceWith] call _ifnc_stringReplace;
 };
 
 {

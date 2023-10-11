@@ -13,4 +13,4 @@ PREP(updateSettings);
 PREP(updateVehType);
 PREP(init);
 
-// @TODO replace viewdistance with one that works
+// @TODO: replace viewdistance scripts with ones that works

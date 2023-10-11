@@ -12,9 +12,9 @@ missionNamespace setVariable [QGVAR(components_initialized), false];
 
 /* CMF Modules to define */
 GVAR(components) = [
-    "3den",
     "main",
     "common",
+    "3den",
     "viewdistance",
     "menu",
     "gameplay",
@@ -32,16 +32,26 @@ GVAR(components) = [
     "player"
 ];
 
-// @TODO cleanup file loading
+// @TODO: cleanup file loading
 private _loadPrep = {
     params ["_module"];
 
     private _path = format ["components\%1\XEH_PREP.sqf", _module];
 
     if (fileExists _path) then {
-        [_module] call compile preprocessFileLineNumbers _path;
+        [] call compile preprocessFileLineNumbers _path;
     } else {
-        WARNING_1("Failed to find module %1", _modulePrepPath);
+        WARNING_1("Failed to find module %1", _path);
+    };
+};
+
+private _loadSettings = {
+    params ["_module"];
+
+    private _path = format ["components\%1\initSettings.sqf", _module];
+
+    if (fileExists _path) then {
+        [] call compile preprocessFileLineNumbers _path;
     };
 };
 
@@ -117,6 +127,9 @@ private _load3denInit = {
 {
     /* Compile modules */
     [_x] call _loadPrep;
+
+    /* Compile settings */
+    [_x] call _loadSettings;
 
     /* Compile xeh events */
     [_x] call _loadPreInit;

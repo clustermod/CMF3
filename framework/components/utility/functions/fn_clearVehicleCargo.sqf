@@ -22,22 +22,20 @@ if !(_enabled) exitWith {};
 
 if (!isServer) exitWith {};
 
-// @TODO replace spawn
-_this spawn {
-    while {!(missionNamespace getVariable [QGVAR(clearCargo_disable), false])} do {
-        {
-            if (_x isKindof "Car" || _x isKindof "Plane" || _x isKindof "Helicopter" || _x isKindof "Ship" || _x isKindOf "Motorcycle") then {                
-                if (!(_x getVariable [QGVAR(clearCargo_vehicleDisable), false]) && !(_x getVariable [QGVAR(clearCargo_initialized), false])) then {
-                    clearItemCargoGlobal _x;
-                    clearMagazineCargoGlobal _x;
-                    clearWeaponCargoGlobal _x;
-                    clearBackpackCargoGlobal _x;
-                    _x setVariable [QGVAR(clearCargo_initialized), true, true];
+["AllVehicles", "init", {
+    params ["_vehicle"];
 
-                    /* Raise event */
-                    [QGVAR(clearCargo_onClearCargo), [_x], _x] call CBA_fnc_targetEvent;
-                };
-            };
-        } forEach vehicles;
-    };
-};
+    if (_vehicle isKindOf "CAManBase") exitWith {};
+
+    if (_x getVariable [QGVAR(clearCargo_vehicleDisable), false]) exitWith {};
+
+    // @TODO: whitelist ropes
+    clearItemCargoGlobal _x;
+    clearMagazineCargoGlobal _x;
+    clearWeaponCargoGlobal _x;
+    clearBackpackCargoGlobal _x;
+    _x setVariable [QGVAR(clearCargo_initialized), true, true];
+
+    /* Raise event */
+    [QGVAR(clearCargo_onClearCargo), [_x], _x] call CBA_fnc_targetEvent;
+}, true, [], true] call CBA_fnc_addClassEventHandler;

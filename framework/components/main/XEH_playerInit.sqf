@@ -11,37 +11,27 @@ cmf_player = player;
 tawvd_disablenone = true;
 
 /* Load ace settings */
-call compile preprocessFileLineNumbers "components\main\initAceSettings.sqf";
+call compile preprocessFileLineNumbers "components\main\initAceSettings.sqf"; // @TODO: Move to common and load preInit
 
 /* Load Shacktack UI changes */
-call compile preprocessFileLineNumbers "components\main\initSTUISettings.sqf";
-
-/* Create CMF Info Diary */
-[] spawn FUNC(diary);
-
-/* Remove statistics diary */
-player removeDiarySubject "Statistics";
-
-/* Remove team diary */
-player removeDiarySubject "Units";
+call compile preprocessFileLineNumbers "components\main\initSTUISettings.sqf"; // @TODO: Move to common and load preInit
 
 /* Remove KP ranks ace interactions */
-// @TODO replace spawn
-[] spawn {
-    while { true } do {
-        waitUntil{ !isNil{([(ace_interact_menu_ActSelfNamespace getVariable (typeOf player)), ["ACE_SelfActions","KPR_Admin"]] call ace_interact_menu_fnc_findActionNode)} };
-        [(typeOf player), 1, ["ACE_SelfActions", "KPR_Admin"]] call ace_interact_menu_fnc_removeActionFromClass;
-        [(typeOf player), 1, ["ACE_SelfActions", "ACE_Equipment", "KPR_Check"]] call ace_interact_menu_fnc_removeActionFromClass;
-        [(typeOf player), 1, ["ACE_SelfActions", "KPR_Admin", "KPR_UniformManage"]] call ace_interact_menu_fnc_removeActionFromClass;
-        [(typeOf player), 1, ["ACE_SelfActions", "KPR_Admin", "KPR_PlayerManage"]] call ace_interact_menu_fnc_removeActionFromClass;
-        sleep 10;
-    };
-};
+// @TODO: Move to common
+[{
+    if (isNil { ([(ace_interact_menu_ActSelfNamespace getVariable (typeOf player)), ["ACE_SelfActions","KPR_Admin"]] call ace_interact_menu_fnc_findActionNode) }) exitWith {};
+
+    [(typeOf player), 1, ["ACE_SelfActions", "KPR_Admin"]] call ace_interact_menu_fnc_removeActionFromClass;
+    [(typeOf player), 1, ["ACE_SelfActions", "ACE_Equipment", "KPR_Check"]] call ace_interact_menu_fnc_removeActionFromClass;
+    [(typeOf player), 1, ["ACE_SelfActions", "KPR_Admin", "KPR_UniformManage"]] call ace_interact_menu_fnc_removeActionFromClass;
+    [(typeOf player), 1, ["ACE_SelfActions", "KPR_Admin", "KPR_PlayerManage"]] call ace_interact_menu_fnc_removeActionFromClass;
+}, 10] call CBA_fnc_addPerFrameHandler;
 
 /* Disable Unsung vietnamese voices */
-RUG_DSAI_TerminalDistance = -1;
+RUG_DSAI_TerminalDistance = -1; // @TODO: Move to AI
 
 /* Create ACRE2 Babel handler */
+// @TODO: Move to common
 ["unit", {
     params ["_player"];
 
@@ -50,9 +40,9 @@ RUG_DSAI_TerminalDistance = -1;
 }, true] call CBA_fnc_addPlayerEventHandler;
 
 /* Modify ACEX fortify */
-[] call FUNC(fortify);
+[] call FUNC(fortify); // @TODO: Delete function and make part of safestart
 
-/* Block looting own corpse */
+/* Block looting own corpse */ // @TODO: Move to respawn
 player addEventHandler ["InventoryOpened", {
     params ["_unit", "_container"];
     _override = false;
@@ -64,7 +54,7 @@ player addEventHandler ["InventoryOpened", {
 }];
 
 player addEventHandler ["Take", {
-	params ["_unit", "_container", "_item"];
+    params ["_unit", "_container", "_item"];
 
     if (name player isEqualTo name _container && !alive _container) then {
         ["<t size='0.5' color='#ff6347'>You can't loot your own corpse<t>", -1, safezoneY + 0.1] spawn bis_fnc_dynamicText;
@@ -75,7 +65,7 @@ player addEventHandler ["Take", {
     _override;
 }];
 
-/* Mute ACRE when player is down */
+/* Mute ACRE when player is down */ // @TODO: Move to player
 ["ace_unconscious", {
     params ["_unit", "_active"];
 
@@ -90,7 +80,7 @@ player addEventHandler ["Take", {
             player setVariable [QGVAR(globalVolume), _globalVolume, true];
             [0] call acre_api_fnc_setGlobalVolume;
             0 fadeSound 0.1;
-		    0 fadeRadio 0.1;
+            0 fadeRadio 0.1;
         };
     } else {
         if (!isNil "acre_api_fnc_setGlobalVolume") then {
@@ -98,7 +88,7 @@ player addEventHandler ["Take", {
             private _globalVolume = player getVariable [QGVAR(globalVolume), 1];
             [_acreGlobalVolume] call acre_api_fnc_setGlobalVolume;
             0 fadeSound _globalVolume;
-		    0 fadeRadio _globalVolume;
+            0 fadeRadio _globalVolume;
         };
     };
 }] call CBA_fnc_addEventHandler;
@@ -119,7 +109,7 @@ if (!isNil "acre_api_fnc_setCustomSignalFunc") then {
 /* Show changelog */
 [] call FUNC(changelog);
 
-/* Player killed event */
+/* Player killed event */ // @TODO: Move Some of this to common
 player addEventHandler ["Killed", {
     params ["_unit"];
     /* Save loadout */
@@ -138,7 +128,7 @@ player addEventHandler ["Killed", {
     _this execVM "events\onPlayerKilled.sqf"
 }];
 
-/* Player respawn event */
+/* Player respawn event */ // @TODO: Move some of this to common
 player addEventHandler ["Respawn", {
     params ["_unit", "_corpse"];
 
@@ -166,15 +156,14 @@ player addEventHandler ["Respawn", {
 }];
 
 /* Bring disconnected player back */
-// @TODO replace spawn
+// @TODO: replace spawn and move to respawn
 [] spawn {
     private _disconUnits = missionNameSpace getVariable [QGVAR(disconUnits), createHashMap];
     private _disconUnit = _disconUnits get (getPlayerUID player);
-    private _safestartEnabled = ( CONFIG_PARAM_4(SETTINGS,gameplay,safestart,enable) ) isEqualTo 1;
     missionNameSpace setVariable [QGVAR(player_rejip), true, false];
 
     if (!isNil "_disconUnit") then {
-        if ( !_safestartEnabled || missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] ) then {
+        if ( !EGVAR(gameplay,setting_safestart) || missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] ) then {
             waitUntil { player getVariable [QGVAR(player_loaded), false] && alive player };
             sleep 0.1;
 

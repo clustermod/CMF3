@@ -32,8 +32,8 @@ class cmf_3den_customUnitMenu {
             h = 5 * GRID_3DEN_H;
         };
 
-		class roleLabel: cmf_ctrlStatic {
-			text = "Role";
+        class roleLabel: cmf_ctrlStatic {
+            text = "Role";
             tooltip = "The unit's assigned kosherArsenal role, e.g. RFL";
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1) * GRID_3DEN_W;
             y = 0.5 - (80/2 - 10 - 5) * GRID_3DEN_H;
@@ -41,19 +41,19 @@ class cmf_3den_customUnitMenu {
             h = 5 * GRID_3DEN_H;
         };
 
-		class role: cmf_ctrlEdit {
-			idc = 100;
-			text = "RFL";
+        class role: cmf_ctrlEdit {
+            idc = 100;
+            text = "RFL";
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1 - 20) * GRID_3DEN_W;
             y = 0.5 - (80/2 - 10 - 5) * GRID_3DEN_H;
             w = 65 * GRID_3DEN_W;
             h = 5 * GRID_3DEN_H;
-			colorDisabled[] = {1, 1, 1, 1};
+            colorDisabled[] = {1, 1, 1, 1};
             colorBackground[] = {0, 0, 0, 0.25};
         };
 
-		class lobbyRoleLabel: cmf_ctrlStatic {
-			text = "Lobby Role";
+        class lobbyRoleLabel: cmf_ctrlStatic {
+            text = "Lobby Role";
             tooltip = "The unit's role name in the multiplayer lobby, e.g. Rifleman";
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1) * GRID_3DEN_W;
             y = 0.5 - (80/2 - 10 - 5 - 10) * GRID_3DEN_H;
@@ -61,19 +61,19 @@ class cmf_3den_customUnitMenu {
             h = 5 * GRID_3DEN_H;
         };
 
-		class lobbyRole: cmf_ctrlEdit {
-			idc = 101;
-			text = "Rifleman";
+        class lobbyRole: cmf_ctrlEdit {
+            idc = 101;
+            text = "Rifleman";
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1 - 20) * GRID_3DEN_W;
             y = 0.5 - (80/2 - 10 - 5 - 10) * GRID_3DEN_H;
             w = 65 * GRID_3DEN_W;
             h = 5 * GRID_3DEN_H;
-			colorDisabled[] = {1, 1, 1, 1};
+            colorDisabled[] = {1, 1, 1, 1};
             colorBackground[] = {0, 0, 0, 0.25};
         };
 
-		class groupNameLabel: cmf_ctrlStatic {
-			text = "Group Name";
+        class groupNameLabel: cmf_ctrlStatic {
+            text = "Group Name";
             tooltip = "The group name for the unit's group, e.g. ASL";
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1) * GRID_3DEN_W;
             y = 0.5 - (80/2 - 10 - 5 - 10 - 10) * GRID_3DEN_H;
@@ -81,19 +81,19 @@ class cmf_3den_customUnitMenu {
             h = 5 * GRID_3DEN_H;
         };
 
-		class groupName: cmf_ctrlEdit {
-			idc = 102;
-			text = "A1";
+        class groupName: cmf_ctrlEdit {
+            idc = 102;
+            text = "A1";
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1 - 20) * GRID_3DEN_W;
             y = 0.5 - (80/2 - 10 - 5 - 10 - 10) * GRID_3DEN_H;
             w = 65 * GRID_3DEN_W;
             h = 5 * GRID_3DEN_H;
-			colorDisabled[] = {1, 1, 1, 1};
+            colorDisabled[] = {1, 1, 1, 1};
             colorBackground[] = {0, 0, 0, 0.25};
         };
 
-		class groupTypeLabel: cmf_ctrlStatic {
-			text = "Group Type";
+        class groupTypeLabel: cmf_ctrlStatic {
+            text = "Group Type";
             tooltip = "The group type for the unit's group, e.g. INF";
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1) * GRID_3DEN_W;
             y = 0.5 - (80/2 - 10 - 5 - 10 - 10 - 10) * GRID_3DEN_H;
@@ -101,18 +101,18 @@ class cmf_3den_customUnitMenu {
             h = 5 * GRID_3DEN_H;
         };
 
-		class groupType: cmf_ctrlCombo {
-			idc = 103;
+        class groupType: cmf_ctrlCombo {
+            idc = 103;
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1 - 20) * GRID_3DEN_W;
             y = 0.5 - (80/2 - 10 - 5 - 10 - 10 - 10) * GRID_3DEN_H;
             w = 65 * GRID_3DEN_W;
             h = 5 * GRID_3DEN_H;
-			colorDisabled[] = {1, 1, 1, 1};
+            colorDisabled[] = {1, 1, 1, 1};
             colorBackground[] = {0, 0, 0, 1};
         };
 
-		class groupSizeLabel: cmf_ctrlStatic {
-			text = "Group Size";
+        class groupSizeLabel: cmf_ctrlStatic {
+            text = "Group Size";
             tooltip = "The group size for the unit's group, e.g. SQD";
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1) * GRID_3DEN_W;
             y = 0.5 - (80/2 - 10 - 5 - 10 - 10 - 10 - 10) * GRID_3DEN_H;
@@ -120,18 +120,18 @@ class cmf_3den_customUnitMenu {
             h = 5 * GRID_3DEN_H;
         };
 
-		class groupSize: cmf_ctrlCombo {
-			idc = 104;
+        class groupSize: cmf_ctrlCombo {
+            idc = 104;
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1 - 20) * GRID_3DEN_W;
             y = 0.5 - (80/2 - 10 - 5 - 10 - 10 - 10 - 10) * GRID_3DEN_H;
             w = 65 * GRID_3DEN_W;
             h = 5 * GRID_3DEN_H;
-			colorDisabled[] = {1, 1, 1, 1};
+            colorDisabled[] = {1, 1, 1, 1};
             colorBackground[] = {0, 0, 0, 1};
         };
 
         class ButtonOK: cmf_ctrlButtonOK {
-			text = "Spawn";
+            text = "Spawn";
             x = (getResolution select 2) * 0.5 * pixelW + (90/2 - 50 - 2) * GRID_3DEN_W;
             y = 0.5 + (80/2 - 10 - 1) * GRID_3DEN_H;
             w = 25 * GRID_3DEN_W;
@@ -181,8 +181,8 @@ class cmf_3den_addRack {
             h = 5 * GRID_3DEN_H;
         };
 
-		class radioLabel: cmf_ctrlStatic {
-			text = "Radio";
+        class radioLabel: cmf_ctrlStatic {
+            text = "Radio";
             tooltip = "Radio to add to vehicle";
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1) * GRID_3DEN_W;
             y = 0.5 - (40/2 - 10 - 5) * GRID_3DEN_H;
@@ -190,18 +190,18 @@ class cmf_3den_addRack {
             h = 5 * GRID_3DEN_H;
         };
 
-		class radio: cmf_ctrlCombo {
-			idc = 100;
+        class radio: cmf_ctrlCombo {
+            idc = 100;
             x = (getResolution select 2) * 0.5 * pixelW - (90/2 - 1 - 20) * GRID_3DEN_W;
             y = 0.5 - (40/2 - 10 - 5) * GRID_3DEN_H;
             w = 65 * GRID_3DEN_W;
             h = 5 * GRID_3DEN_H;
-			colorDisabled[] = {1, 1, 1, 1};
+            colorDisabled[] = {1, 1, 1, 1};
             colorBackground[] = {0, 0, 0, 0.25};
         };
 
         class ButtonOK: cmf_ctrlButtonOK {
-			text = "Add";
+            text = "Add";
             x = (getResolution select 2) * 0.5 * pixelW + (90/2 - 50 - 2) * GRID_3DEN_W;
             y = 0.5 + (40/2 - 10 - 2) * GRID_3DEN_H;
             w = 25 * GRID_3DEN_W;

@@ -23,10 +23,12 @@ if !(_enabled) exitWith {};
 if (!hasInterface) exitWith {};
 
 player addEventHandler ["Respawn", {
-	params ["_unit"];
+    params ["_unit"];
 
     /* Create function to check if user has any launchers in loadout */
     private _allowedLauncher = "
+        if !("+QGVAR(setting_restrictLauncher)+") exitWith { false };
+
         private _ret = true;
         private _loadoutFile = player getVariable ["QEGVAR(kosherArsenal,loadout)", """"];
         private _role = player getVariable ["QEGVAR(common,role)", ""RFL""];

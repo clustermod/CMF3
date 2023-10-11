@@ -24,7 +24,7 @@ params ["_unit", ["_forcePrimary", true]];
 {
     /* Get unit loadout */
     private _loadout = player getVariable [QGVAR(loadout), ""];
-    private _role = player getVariable [QEGVAR(common,role), "RFL"];
+    private _role = player getVariable [QEGVAR(organization,role), "RFL"];
 
     /* Create arsenal object and initilize ace arsenal */
     private _arsenal = "HeliHEmpty" createVehicleLocal [0,0,0];
@@ -38,9 +38,9 @@ params ["_unit", ["_forcePrimary", true]];
     private _permittedGear = [];
     if (isNil "_whitelist") then {
         /* Backwards compatability with old loadoutfiles */
-        _permittedGear 	= player getVariable ["EMF_KA_permittedGear", 0];
+        _permittedGear = player getVariable ["EMF_KA_permittedGear", 0];
     } else {
-        _permittedGear 	= (_whitelist select 1);
+        _permittedGear = (_whitelist select 1);
     };
 
     /* Add the allowed gear to the arsenal */
@@ -84,12 +84,12 @@ params ["_unit", ["_forcePrimary", true]];
         player setVariable [QGVAR(close), false, true];
 
         /* Raise event */
-    	[QGVAR(onClose), [(player getVariable [QGVAR(close), false])]] call CBA_fnc_localEvent;
+        [QGVAR(onClose), [(player getVariable [QGVAR(close), false])]] call CBA_fnc_localEvent;
     };
 
     /* Add closed eventhandler */
     ["ace_arsenal_displayClosed", _onClose, [_forcePrimary, _arsenal]] call CBA_fnc_addEventHandlerArgs;
 
     /* Raise event */
-	[QGVAR(onOpen), [true]] call CBA_fnc_localEvent;
+    [QGVAR(onOpen), [true]] call CBA_fnc_localEvent;
 } remoteExec ["call", _unit, true];

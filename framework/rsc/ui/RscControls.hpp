@@ -49,90 +49,90 @@ class cmf_player_spectatorAAR: cmf_RscButton {
  * kosherArsenalTool module controls
  */
 class cmf_kosherArsenalTool_selectRole: cmf_RscCombo {
-	x = safeZoneX + safeZoneW * 0.56625;
-	y = safeZoneY + safeZoneH * 0.00444445;
-	w = safeZoneW * 0.103125;
-	h = safeZoneH * 0.02777778;
+    x = safeZoneX + safeZoneW * 0.56625;
+    y = safeZoneY + safeZoneH * 0.00444445;
+    w = safeZoneW * 0.103125;
+    h = safeZoneH * 0.02777778;
     style = ST_NO_RECT;
-	colorBackground[] = {0,0,0,0.5};
-	colorDisabled[] = {0,0,0,0.4};
-	colorSelect[] = {1,0,0,1};
-	colorSelectBackground[] = {0,0,0,1};
-	colorText[] = {1,1,1,1};
-	sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8);
+    colorBackground[] = {0,0,0,0.5};
+    colorDisabled[] = {0,0,0,0.4};
+    colorSelect[] = {1,0,0,1};
+    colorSelectBackground[] = {0,0,0,1};
+    colorText[] = {1,1,1,1};
+    sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8);
 
     class Items {
-    	class Default {
-    		text = "DEFAULT";
+        class Default {
+            text = "DEFAULT";
             data = 0;
-    		default = 1;
-    	};
+            default = 1;
+        };
         class Rifleman {
-    		text = "RFL";
+            text = "RFL";
             data = 1;
-    		default = 0;
-    	};
+            default = 0;
+        };
         class Squadleader {
-    		text = "SL";
+            text = "SL";
             data = 2;
-    		default = 0;
-    	};
+            default = 0;
+        };
         class Medic {
-    		text = "MED";
+            text = "MED";
             data = 3;
-    		default = 0;
-    	};
+            default = 0;
+        };
     };
 };
 
 class cmf_kosherArsenalTool_deleteRole: cmf_RscButton {
-	x = safeZoneX + safeZoneW * 0.669375;
-	y = safeZoneY + safeZoneH * 0.00444445;
-	w = safeZoneW * 0.061875;
-	h = safeZoneH * 0.02777778;
-	style = ST_CENTER;
-	text = "Delete Role";
-	colorBackground[] = {0,0,0,0.5};
-	colorBackgroundActive[] = {0.668,0.1396,0.1396,1};
-	colorBackgroundDisabled[] = {0.2,0.2,0.2,1};
-	colorBorder[] = {0,0,0,0};
-	colorDisabled[] = {0.2,0.2,0.2,1};
-	colorFocused[] = {0.2,0.2,0.2,1};
-	colorShadow[] = {0,0,0,0};
-	colorText[] = {1,1,1,1};
-	sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8);
+    x = safeZoneX + safeZoneW * 0.669375;
+    y = safeZoneY + safeZoneH * 0.00444445;
+    w = safeZoneW * 0.061875;
+    h = safeZoneH * 0.02777778;
+    style = ST_CENTER;
+    text = "Delete Role";
+    colorBackground[] = {0,0,0,0.5};
+    colorBackgroundActive[] = {0.668,0.1396,0.1396,1};
+    colorBackgroundDisabled[] = {0.2,0.2,0.2,1};
+    colorBorder[] = {0,0,0,0};
+    colorDisabled[] = {0.2,0.2,0.2,1};
+    colorFocused[] = {0.2,0.2,0.2,1};
+    colorShadow[] = {0,0,0,0};
+    colorText[] = {1,1,1,1};
+    sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8);
 };
 
 class cmf_kosherArsenalTool_textRole: cmf_RscEdit {
-	x = safeZoneX + safeZoneW * 0.30875;
-	y = safeZoneY + safeZoneH * 0.00444445;
-	w = safeZoneW * 0.134375;
-	h = safeZoneH * 0.02777778;
-	style = ST_CENTER + ST_NO_RECT;
-	text = "Role name...";
-	autocomplete = "";
-	colorBackground[] = {0,0,0,0.5};
-	colorDisabled[] = {0.2,0.2,0.2,1};
-	colorSelection[] = {1,0,0,1};
-	colorText[] = {1,1,1,1};
-	sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8);
+    x = safeZoneX + safeZoneW * 0.30875;
+    y = safeZoneY + safeZoneH * 0.00444445;
+    w = safeZoneW * 0.134375;
+    h = safeZoneH * 0.02777778;
+    style = ST_CENTER + ST_NO_RECT;
+    text = "Role name...";
+    autocomplete = "";
+    colorBackground[] = {0,0,0,0.5};
+    colorDisabled[] = {0.2,0.2,0.2,1};
+    colorSelection[] = {1,0,0,1};
+    colorText[] = {1,1,1,1};
+    sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8);
 };
 
 class cmf_kosherArsenalTool_addRole: cmf_RscButton {
-	x = safeZoneX + safeZoneW * 0.4425;
-	y = safeZoneY + safeZoneH * 0.00444445;
-	w = safeZoneW * 0.061875;
-	h = safeZoneH * 0.02777778;
-	style = ST_CENTER;
-	text = "Add Role";
-	borderSize = 0;
-	colorBackground[] = {0,0,0,0.5};
-	colorBackgroundActive[] = {0.702,0.702,0.702,1};
-	colorBackgroundDisabled[] = {0.949,0.949,0.949,1};
-	colorBorder[] = {0,0,0,0};
-	colorDisabled[] = {0.2,0.2,0.2,1};
-	colorFocused[] = {0.2,0.2,0.2,1};
-	colorShadow[] = {0,0,0,0};
-	colorText[] = {1,1,1,1};
-	sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8);
+    x = safeZoneX + safeZoneW * 0.4425;
+    y = safeZoneY + safeZoneH * 0.00444445;
+    w = safeZoneW * 0.061875;
+    h = safeZoneH * 0.02777778;
+    style = ST_CENTER;
+    text = "Add Role";
+    borderSize = 0;
+    colorBackground[] = {0,0,0,0.5};
+    colorBackgroundActive[] = {0.702,0.702,0.702,1};
+    colorBackgroundDisabled[] = {0.949,0.949,0.949,1};
+    colorBorder[] = {0,0,0,0};
+    colorDisabled[] = {0.2,0.2,0.2,1};
+    colorFocused[] = {0.2,0.2,0.2,1};
+    colorShadow[] = {0,0,0,0};
+    colorText[] = {1,1,1,1};
+    sizeEx = (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.8);
 };

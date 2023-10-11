@@ -15,7 +15,7 @@
  * Public: Yes
 */
 SCRIPT(restrictZeus);
-
+// @TODO: Move to common
 params ["_allowedUIDs"];
 
 if (isNil "_allowedUIDs") exitWith {
@@ -31,6 +31,6 @@ _allowedUIDs spawn {
         [QGVAR(notZeus), false, 0.01, false] call BIS_fnc_endMission;
 
         /* Raise event */
-    	[QGVAR(restrictZeus_onKick), [player]] call CBA_fnc_globalEvent;
+        [QGVAR(restrictZeus_onKick), [player]] call CBA_fnc_globalEvent;
     };
 };

@@ -5,15 +5,15 @@
 
 class CfgORBAT {
     class cluster {
-    	id = 1;
-    	idType = 0;
-    	side = "West";
-    	colorInisgnia[] = {1, 0, 0, 1};
-    	commander = "";
-    	commanderRank = "";
-    	text = "Cluster community";
-    	textShort = "Cluster";
-    	description = "The cluster community ORBAT";
+        id = 1;
+        idType = 0;
+        side = "West";
+        colorInisgnia[] = {1, 0, 0, 1};
+        commander = "";
+        commanderRank = "";
+        text = "Cluster community";
+        textShort = "Cluster";
+        description = "The cluster community ORBAT";
 
         class phantom {
             side = "West";

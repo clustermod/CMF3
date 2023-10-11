@@ -24,14 +24,14 @@ if (_object getVariable [QGVAR(ammobox_initialized), false]) exitWith { false };
 
 /* ammobox function */
 private _onOpen = {
-    // @TODO replace spawn
+    // @TODO: replace spawn
     _this spawn {
         /* Create the arsenal object and initialize ace arsenal on it */
         private _arsenal = "HeliHEmpty" createVehicleLocal [0,0,0];
         [_arsenal, []] call ace_arsenal_fnc_initBox;
 
         /* Get player's role and loadout */
-        private _role = player getVariable [QEGVAR(common,role), "RFL"];
+        private _role = player getVariable [QEGVAR(organization,role), "RFL"];
         private _loadout = player getVariable [QGVAR(loadout), ""];
 
         /* Check if the file exists and load the whitelist */
@@ -42,9 +42,9 @@ private _onOpen = {
         private _permittedGear = [];
         if (isNil "_whitelist") then {
             /* Backwards compatability with old loadoutfiles */
-            _permittedGear 	= player getVariable ["EMF_KA_permittedGear", 0];
+            _permittedGear = player getVariable ["EMF_KA_permittedGear", 0];
         } else {
-            _permittedGear 	= (_whitelist select 1);
+            _permittedGear = (_whitelist select 1);
         };
 
         /* Add the allowed gear to the arsenal */

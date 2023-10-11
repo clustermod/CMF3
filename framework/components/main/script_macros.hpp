@@ -75,15 +75,6 @@
 
 #define MISSION_PATH(FILE) (getMissionPath (FILE))
 
-#define CONFIG_PARAM_1(ARG1) ([[QUOTE(ARG1)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_2(ARG1, ARG2) ([[QUOTE(ARG1), QUOTE(ARG2)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_3(ARG1, ARG2, ARG3) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_4(ARG1, ARG2, ARG3, ARG4) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3), QUOTE(ARG4)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_5(ARG1, ARG2, ARG3, ARG4, ARG5) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3), QUOTE(ARG4), QUOTE(ARG5)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_6(ARG1, ARG2, ARG3, ARG4, ARG5, ARG6) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3), QUOTE(ARG4), QUOTE(ARG5), QUOTE(ARG6)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_7(ARG1, ARG2, ARG3, ARG4, ARG5, ARG6, ARG7) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3), QUOTE(ARG4), QUOTE(ARG5), QUOTE(ARG6), QUOTE(ARG7)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_8(ARG1, ARG2, ARG3, ARG4, ARG5, ARG6, ARG7, ARG8) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3), QUOTE(ARG4), QUOTE(ARG5), QUOTE(ARG6), QUOTE(ARG7), QUOTE(ARG8)]] call EFUNC(common,getConfigParam))
-
 #define CREATE_HASH_FROM_ARRAY(var1) (createHashMapFromArray var1)
 
 #define SCRIPT(NAME) scriptName 'components\MODULE\NAME'

@@ -19,7 +19,6 @@
  * Public: Yes
  */
 
-// @TODO replace spawn
 [_this, {
     params ["_source", "_radius", "_intensity", ["_condition", { true }], ["_params", []]];
 
@@ -71,9 +70,16 @@
 
     ["ace_fire_addFireSource", [_source, _radius, _intensity, _source, _condition, _params]] call CBA_fnc_serverEvent;
 
-    waitUntil { !(_params call _condition) };
-    deleteVehicle _fireEmitter;
-    deleteVehicle _light;
-    sleep 10;
-    deleteVehicle _smokeEmitter;
-}] remoteExec ["spawn", 0, false]
+    [
+        { !(((_this select 0) select 4) call ((_this select 0) select 3)) },
+        {
+            params ["", "_fireEmitter", "_light", "_smokeEmitter"];
+
+            deleteVehicle _fireEmitter;
+            deleteVehicle _light;
+            sleep 10;
+            deleteVehicle _smokeEmitter;
+        },
+        [_this, _fireEmitter, _light, _smokeEmitter]
+    ] call CBA_fnc_waitUntilAndExecute;
+}] remoteExec ["call", 0, false]

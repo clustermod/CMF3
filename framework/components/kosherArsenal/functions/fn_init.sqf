@@ -20,7 +20,7 @@
  */
 SCRIPT(init);
 
-// @TODO replace spawn
+// @TODO: replace spawn
 _this spawn {
     params[["_loadouts", nil, [[]]], ["_light", false], ["_forcePrimary", false], ["_randomPos", false]];
 
@@ -54,10 +54,9 @@ _this spawn {
     /* If player is Re-Jip in same role exit */
     private _reJip = false;
     private _disconUnits = missionNameSpace getVariable [QEGVAR(main,disconUnits), createHashMap];
-    private _safestartEnabled = ( CONFIG_PARAM_4(SETTINGS,gameplay,safestart,enable) ) isEqualTo 1;
     if (!isNil { _disconUnits get (getPlayerUID player) }) then { _reJip = true; };
 
-    if (_reJip && ( _safestartEnabled && missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] )) exitWith { };
+    if (_reJip && ( EGVAR(gameplay,setting_safestart) && missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] )) exitWith { };
 
     /* Create the arsenal object and initialize ace arsenal */
     private _arsenal = "HeliHEmpty" createVehicleLocal [0,0,0];
@@ -79,7 +78,7 @@ _this spawn {
             }
         } forEach (actionIDs player)
     } else {
-        _permittedGear 	= (_whitelist select 1);
+        _permittedGear = (_whitelist select 1);
 
         /* Strip the unit */
         [player] call EFUNC(utility,stripUnit);
@@ -114,6 +113,7 @@ _this spawn {
     [_arsenal, player, false] call ace_arsenal_fnc_openBox;
 
     /* add the force close button and disable voices and insignias */
+    // @TODO: replace spawn
     [] spawn {
         waitUntil{!isNull (findDisplay IDD_ace_arsenal)};
         ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
@@ -135,9 +135,11 @@ _this spawn {
         /* if force primary is enabled and the player doesn't have a primary selected kick him back into the arsenal */
         if (_forcedprimary && (primaryWeapon player == "") && !(player getVariable [QGVAR(close), false])) exitWith {
             ["<t color='#ff0000'>"+LSTRING(required_primary)+"</t>", -1, -1, 5, 1, 0, 9459] spawn bis_fnc_dynamicText;
+            // @TODO: replace spawn
             _arsenal spawn {
                 sleep 0.1;
                 [_this, player, false] call ace_arsenal_fnc_openBox;
+                // @TODO: replace spawn
                 [] spawn {
                     waitUntil{!isNull (findDisplay IDD_ace_arsenal)};
                     ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
@@ -163,6 +165,7 @@ _this spawn {
     };
 
     /* Handle force closing the arsenal */
+    // @TODO: replace spawn
     [] spawn {
         waitUntil{(player getVariable [QGVAR(close), false])};
         (findDisplay IDD_ace_arsenal) closeDisplay 1;

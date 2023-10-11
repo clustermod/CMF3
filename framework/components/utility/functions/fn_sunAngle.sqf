@@ -25,31 +25,31 @@
 
 /* ARMA 3 seems to have its equinox off by a few days */
 #define EQUINOX_ERROR 2
-
+// @TODO: Move to new module environment
 /* Equinox - 360 is the number of orbital degrees per year, 365 the number of days per year. 81 accounts for march equinox */
 #define EQUINOX_MAR	((360 * dateToNumber _date) - (360 * (81 + EQUINOX_ERROR) / 365))
 
 /* verify and cleanup input parameters */
 _date = [];
 if (isnil "_this") then {
-	_date = date;
+    _date = date;
 } else {
-	if (typeName _this != "ARRAY") then {
-		_date = date;
-	} else {
-		if (count _this == 0) then {
-			_date = date;
-		} else {
-			_date = _this;
-		};
-	};
+    if (typeName _this != "ARRAY") then {
+        _date = date;
+    } else {
+        if (count _this == 0) then {
+            _date = date;
+        } else {
+            _date = _this;
+        };
+    };
 };
 
 /* lookup and calculate input variables */
 private _latitude = missionNamespace getVariable [QGVAR(sunAngle_cache_latitude), -1 * getNumber(configFile >> "CfgWorlds" >> worldName >> "latitude")];
 missionNamespace setVariable [QGVAR(sunAngle_cache_latitude), _latitude];
-private _declination = (asin (sin 23.45 * sin EQUINOX_MAR));				// current earth tilt irl to the sun in degrees
-private _hra = (360 * ((_date select 3) + (_date select 4) / 60 - 12) / 24);	// solar hour angle in degrees; 360 degrees per 24 hours, times the current hour
+private _declination = (asin (sin 23.45 * sin EQUINOX_MAR));                    // current earth tilt irl to the sun in degrees
+private _hra = (360 * ((_date select 3) + (_date select 4) / 60 - 12) / 24);    // solar hour angle in degrees; 360 degrees per 24 hours, times the current hour
 private _return = [];
 
 /* calculate solar elevation angle */
@@ -57,13 +57,13 @@ _return pushBack asin( sin _declination * sin _latitude + cos _declination * cos
 
 /* calculate solar zentih angle */
 if ( sin (90 - (_return select 0)) != 0) then {
-	if (dayTime <= 12) then {
-		_return pushBack (acos ( ((sin _declination) * (cos _latitude) - (cos _hra) * (cos _declination) * (sin _latitude)) / sin (90 - (_return select 0)) ));
-	} else {
-		_return pushBack (360 - acos ( ((sin _declination) * (cos _latitude) - (cos _hra) * (cos _declination) * (sin _latitude)) / sin (90 - (_return select 0)) ));
-	};
+    if (dayTime <= 12) then {
+        _return pushBack (acos ( ((sin _declination) * (cos _latitude) - (cos _hra) * (cos _declination) * (sin _latitude)) / sin (90 - (_return select 0)) ));
+    } else {
+        _return pushBack (360 - acos ( ((sin _declination) * (cos _latitude) - (cos _hra) * (cos _declination) * (sin _latitude)) / sin (90 - (_return select 0)) ));
+    };
 } else {
-	_return pushBack 90;
+    _return pushBack 90;
 };
 
 _return pushBack _latitude;

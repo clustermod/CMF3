@@ -1,3 +1,5 @@
+#define FRAMEWORK CMF3
+#define FRAMEWORK_BEAUTIFIED Cluster Mission Framework (CMF3)
 #define PREFIX cmf
 
 #include "script_version.hpp"

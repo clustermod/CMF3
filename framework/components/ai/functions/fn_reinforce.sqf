@@ -16,15 +16,13 @@
 */
 SCRIPT(reinforce);
 
-/* Check if it's enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,ai,reinforce) ) isEqualTo 1;
-if !(_enabled) exitWith {};
-
 if (!isServer) exitWith {};
 
 /* Transfer all new AI groups to server */
 ["CAManBase", "init", {
     params ["_unit"];
+
+    if (!GVAR(setting_reinforce)) exitWith {};
 
     private _group = group _unit;
 
@@ -43,8 +41,7 @@ if (!isServer) exitWith {};
         if (_reinforceGroup getVariable [QGVAR(reinforce_disableGroup), false]) exitWith {};
         if ((group _target) getVariable [QGVAR(reinforce_disableTarget), false]) exitWith {};
 
-        private _range = CONFIG_PARAM_3(SETTINGS,ai,reinforceRange);
-        if ( (leader _reinforceGroup distance leader _shareGroup) < _range && _reinforceGroup != _shareGroup && !(_reinforceGroup getVariable [QGVAR(reinforce_targetGroup), grpNull] isEqualTo _shareGroup) && side _reinforceGroup isEqualTo side _shareGroup ) then {
+        if ( (leader _reinforceGroup distance leader _shareGroup) < GVAR(setting_reinforceRange) && _reinforceGroup != _shareGroup && !(_reinforceGroup getVariable [QGVAR(reinforce_targetGroup), grpNull] isEqualTo _shareGroup) && side _reinforceGroup isEqualTo side _shareGroup ) then {
             LOG_2("%1 reinforcing %2(TaskRush)", groupId _reinforceGroup, groupId _shareGroup);
 
             [_reinforceGroup, 200, 15, [], getPos _target, false] spawn lambs_wp_fnc_taskRush;

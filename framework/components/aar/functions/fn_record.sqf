@@ -20,11 +20,11 @@ if (!isServer) exitWith { };
 
 /* handle new entities */
 addMissionEventHandler ["EntityCreated", {
-	params ["_entity"];
+    params ["_entity"];
 
     if ((_entity in allUnits || _entity in allMapMarkers || _entity in vehicles) && !isNull _entity) then {
         _entity addEventHandler ["Fired", {
-        	params ["_unit", "_weapon", "", "", "", "", "_projectile"];
+            params ["_unit", "_weapon", "", "", "", "", "_projectile"];
 
             [_unit, _projectile, _weapon] spawn {
                 params ["_unit", "_projectile", "_weapon"];

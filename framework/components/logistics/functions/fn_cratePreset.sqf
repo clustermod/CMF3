@@ -24,46 +24,46 @@ private _presets = [call compile preprocessFileLineNumbers _path] call CBA_fnc_h
 missionNamespace setVariable [QGVAR(crateConfig), _presets, true];
 
 {
-	private _key = _x;
-	private _preset = [_presets, _x] call CBA_fnc_hashGet;
+    private _key = _x;
+    private _preset = [_presets, _x] call CBA_fnc_hashGet;
 
-	private _presetData = [_preset] call FUNC(presetCompile);
+    private _presetData = [_preset] call FUNC(presetCompile);
 
-	/* Create amount tracker */
-	private _crateHash = missionNamespace getVariable [QGVAR(crateHash), [] call CBA_fnc_hashCreate];
-	private _newAmount = [_crateHash, _key, 0] call CBA_fnc_hashSet;
-	missionNamespace setVariable [QGVAR(crateHash), _newAmount, true];
+    /* Create amount tracker */
+    private _crateHash = missionNamespace getVariable [QGVAR(crateHash), [] call CBA_fnc_hashCreate];
+    private _newAmount = [_crateHash, _key, 0] call CBA_fnc_hashSet;
+    missionNamespace setVariable [QGVAR(crateHash), _newAmount, true];
 
-	/* Using this method won't allow for using the same crate for different crates */
-	[(_presetData select 1), "init", compile ("
-		params ['_crate'];
-		if (_crate getVariable ['ace_cargo_customName', ''] isEqualTo '') then {
-			_crate setVariable ['ace_cargo_customName', '" + _key + " Crate | ', true];
-		};
-		[_crate, true] call ace_dragging_fnc_setCarryable;
-		[_crate, true] call ace_dragging_fnc_setDraggable;
+    /* Using this method won't allow for using the same crate for different crates */
+    [(_presetData select 1), "init", compile ("
+        params ['_crate'];
+        if (_crate getVariable ['ace_cargo_customName', ''] isEqualTo '') then {
+            _crate setVariable ['ace_cargo_customName', '" + _key + " Crate | ', true];
+        };
+        [_crate, true] call ace_dragging_fnc_setCarryable;
+        [_crate, true] call ace_dragging_fnc_setDraggable;
 
-		clearItemCargoGlobal _crate;
-		clearMagazineCargoGlobal _crate;
-		clearWeaponCargoGlobal _crate;
-		clearBackpackCargoGlobal _crate;
-		
-		{_crate addWeaponCargoGlobal _x} forEach "+str(_presetData select 2)+";
-		{_crate addMagazineCargoGlobal _x} forEach "+str(_presetData select 3)+";
-		{_crate addItemCargoGlobal _x} forEach "+str(_presetData select 4)+";
+        clearItemCargoGlobal _crate;
+        clearMagazineCargoGlobal _crate;
+        clearWeaponCargoGlobal _crate;
+        clearBackpackCargoGlobal _crate;
+        
+        {_crate addWeaponCargoGlobal _x} forEach "+str(_presetData select 2)+";
+        {_crate addMagazineCargoGlobal _x} forEach "+str(_presetData select 3)+";
+        {_crate addItemCargoGlobal _x} forEach "+str(_presetData select 4)+";
 
-		if (count "+str(_presetData select 5)+" > 0) then {
-			private _cargoSpace = 0;
-			{
-				_cargoSpace = _cargoSpace + _x;
-			} forEach ("+str(_presetData select 5)+" apply { ([_x select 0] call ace_cargo_fnc_getSizeItem) * (_x select 1) });
-			[_crate, _cargoSpace] call ace_cargo_fnc_setSpace;
-			{
-				private _cargo = _x;
-				for '_i' from 0 to (_cargo select 1) do {
-					[(_cargo select 0), _crate] call ace_cargo_fnc_loadItem;
-				};
-			} forEach "+str(_presetData select 5)+";
-		};
-	"), true, [], true] call CBA_fnc_addClassEventHandler;
+        if (count "+str(_presetData select 5)+" > 0) then {
+            private _cargoSpace = 0;
+            {
+                _cargoSpace = _cargoSpace + _x;
+            } forEach ("+str(_presetData select 5)+" apply { ([_x select 0] call ace_cargo_fnc_getSizeItem) * (_x select 1) });
+            [_crate, _cargoSpace] call ace_cargo_fnc_setSpace;
+            {
+                private _cargo = _x;
+                for '_i' from 0 to (_cargo select 1) do {
+                    [(_cargo select 0), _crate] call ace_cargo_fnc_loadItem;
+                };
+            } forEach "+str(_presetData select 5)+";
+        };
+    "), true, [], true] call CBA_fnc_addClassEventHandler;
 } forEach ([_presets] call CBA_fnc_hashKeys);

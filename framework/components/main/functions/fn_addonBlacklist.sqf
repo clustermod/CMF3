@@ -18,6 +18,8 @@ SCRIPT(addonBlacklist);
 
 if (!isServer) exitWith {};
 
+// @TODO: Move to common
+
 /* Save server addons to a variable */
 private _serverAddons = ("true" configClasses (configFile >> "CfgPatches")) apply { configname _x };
 missionNamespace setVariable [QGVAR(serverAddons), _serverAddons, true];
@@ -37,9 +39,8 @@ addMissionEventHandler ["PlayerConnected", {
         player setVariable [QGVAR(addonDifference), _addonDifference, true];
 
         /* Check if any addons are blacklisted */
-        private _addonBlacklist = CONFIG_PARAM_2(SETTINGS,blacklistedAddons);
-        private _illegalAddons = _clientAddons select { _x in _addonBlacklist };
-        if (_clientAddons findIf { _x in _addonBlacklist } != -1) then {
+        private _illegalAddons = _clientAddons select { _x in EGVAR(common,setting_blacklistedAddons) };
+        if (_clientAddons findIf { _x in EGVAR(common,setting_blacklistedAddons) } != -1) then {
             [format ["%1 has been blacklisted! Please remove it from your modset to join the server", (_illegalAddons joinString ", ")], "Blacklisted Addon", true, false] call BIS_fnc_guiMessage;
             QGVAR(blacklistedAddon) call BIS_fnc_endMission;
         };

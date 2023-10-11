@@ -1,6 +1,5 @@
 #include "script_component.hpp"
 
-PREP(init);
 PREP(gunEffectEH);
 PREP(damageEH);
 PREP(fuelLeakEH);

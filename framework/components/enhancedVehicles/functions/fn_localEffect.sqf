@@ -16,46 +16,49 @@
  */
 SCRIPT(localEffect);
 
-// @TODO replace spawn
-_this spawn {
-    private _enableSoundEffects = ( CONFIG_PARAM_3(SETTINGS,enhancedVehicles,soundEffects) ) isEqualTo 1;
-    private _enableVisualEffects = ( CONFIG_PARAM_3(SETTINGS,enhancedVehicles,visualEffects) ) isEqualTo 1;
+/* Play sound effects */
+if (GVAR(setting_audiable)) then {
+        player setVariable ["defaultVolume", soundVolume];
+        0 fadeSound 0.2;
+        playsound "ACE_Combat_Deafness_Medium_NoRing";
+        playsound "ACE_Ring_Backblast";
 
-    /* Play sound effects */
-    if (_enableSoundEffects) then {
-        [] spawn {
-            player setVariable ["defaultVolume", soundVolume];
-            0 fadeSound 0.2;
-            playsound "ACE_Combat_Deafness_Medium_NoRing";
-            playsound "ACE_Ring_Backblast";
-
-            sleep 15;
+        [{
             private _defaultVolume = player getVariable ["defaultVolume", soundVolume];
             60 fadesound _defaultVolume;
-        };
-    };
+        }, 0, 15] call CBA_fnc_waitAndExecute;
+};
 
-    /* Show visual effects */
-    if (_enableVisualEffects) then {
-        addCamShake [5,2,9];
-        private _visualEffect = ppEffectCreate ["RadialBlur", 10000];
-        cutText ["", "BLACK OUT", 0.001];
-        sleep 1;
+/* Show visual effects */
+if (GVAR(setting_visual)) then {
+    addCamShake [5,2,9];
+    private _visualEffect = ppEffectCreate ["RadialBlur", 10000];
+    cutText ["", "BLACK OUT", 0.001];
+
+    [{
         titleCut ["", "BLACK IN", 10];
-        _visualEffect ppEffectEnable true;
-        _visualEffect ppEffectAdjust[0.1,0,0,0];
-        _visualEffect ppEffectCommit 2;
-        sleep 2;
-        _visualEffect ppEffectAdjust[0,0.1,0,0];
-        _visualEffect ppEffectCommit 2;
-        sleep 2;
-        _visualEffect ppEffectAdjust[0.1,0,0,0];
-        _visualEffect ppEffectCommit 2;
-        sleep 7;
-        _visualEffect ppEffectAdjust[0,0,0,0];
-        _visualEffect ppEffectCommit 2;
-        sleep 3;
-        _visualEffect ppEffectEnable false;
-        ppEffectDestroy _visualEffect;
-    };
+        _this ppEffectEnable true;
+        _this ppEffectAdjust[0.1,0,0,0];
+        _this ppEffectCommit 2;
+    }, _visualEffect, 1] call CBA_fnc_waitAndExecute;
+
+    [{
+        _this ppEffectAdjust[0,0.1,0,0];
+        _this ppEffectCommit 2;
+    }, _visualEffect, 3] call CBA_fnc_waitAndExecute;
+
+    [{
+        _this ppEffectAdjust[0.1,0,0,0];
+        _this ppEffectCommit 2;
+    }, _visualEffect, 5] call CBA_fnc_waitAndExecute;
+
+    [{
+        _this ppEffectAdjust[0,0,0,0];
+        _this ppEffectCommit 2;
+    }, _visualEffect, 12] call CBA_fnc_waitAndExecute;
+
+    [{
+    _this ppEffectEnable false;
+    ppEffectDestroy _this;
+    }, _visualEffect, 15] call CBA_fnc_waitAndExecute;
 };

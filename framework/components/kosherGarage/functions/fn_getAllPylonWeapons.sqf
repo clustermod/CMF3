@@ -15,7 +15,7 @@
  * Public: No
  */
 
-// @TODO replace spawn
+// @TODO: replace spawn
 _this spawn {
     if(isNil QGVAR(pylonWeapons)) then {
         GVAR(pylonWeapons) = [];

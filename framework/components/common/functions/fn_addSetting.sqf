@@ -17,6 +17,29 @@
  * 
  * Public: Yes
  */
-params["_variable", "_type", "_title", "_category"];
+params["_uniqueName", "_type", "_title", "_category", "_valueInfo", ["_isGlobal", 0], ["_script", {}]];
 
-// @TODO: Show settings on zeus display start if there is no config
+if (isNil QGVAR(missionSettings)) then {
+	GVAR(missionSettings) = [] call CBA_fnc_hashCreate;
+};
+
+if (isNil QGVAR(clientSettings)) then {
+	GVAR(clientSettings) = [] call CBA_fnc_hashCreate;
+};
+
+if (_isGlobal isEqualTo 0) then {
+	[_uniqueName, _type, _title, [QUOTE(FRAMEWORK - Client), _category], _valueInfo, _isGlobal] call CBA_fnc_addSetting;
+
+	/* Update settings hash */
+	private _settingCategory = [GVAR(clientSettings), _category, []] call CBA_fnc_hashGet;
+	_settingCategory pushBack [_uniqueName, _title, _isGlobal];
+	GVAR(clientSettings) = [GVAR(clientSettings), _category, _settingCategory] call CBA_fnc_hashSet;
+} else {
+	[_uniqueName, _type, _title, [QUOTE(FRAMEWORK - Mission), _category], _valueInfo, _isGlobal] call CBA_fnc_addSetting;
+
+	/* Update settings hash */
+	private _settingCategory = [GVAR(missionSettings), _category, []] call CBA_fnc_hashGet;
+	_settingCategory pushBack [_uniqueName, _title, _isGlobal];
+	GVAR(missionSettings) = [GVAR(missionSettings), _category, _settingCategory] call CBA_fnc_hashSet;
+};
+

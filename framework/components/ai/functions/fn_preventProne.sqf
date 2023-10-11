@@ -16,13 +16,11 @@
  */
 SCRIPT(preventProne);
 
-/* Check if it's enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,ai,preventProne) ) isEqualTo 1;
-if !(_enabled) exitWith {};
-
 /* preventProne on AI units */
 ["CAManBase", "init", {
     params ["_unit"];
+
+    if (!GVAR(setting_preventProne)) exitWith {};
 
     if (missionNamespace getVariable [QEGVAR(utility,preventProne_disable), false]) exitWith {};
     if (_unit getVariable [QEGVAR(utility,preventProne_disable), false]) exitWith {};

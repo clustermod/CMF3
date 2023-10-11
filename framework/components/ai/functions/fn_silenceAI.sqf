@@ -19,10 +19,10 @@
 enableSentences false;
 
 ["CAManBase", "init", {
-	params ["_unit"];
+    params ["_unit"];
 
-	if ([side player, side _unit] call BIS_fnc_sideIsFriendly) then {
-		_unit setVariable ["BIS_noCoreConversations", true, false];
-		while {!conversationDisabled _unit} do {_unit disableConversation true};
-	}
+    if ([side player, side _unit] call BIS_fnc_sideIsFriendly) then {
+        _unit setVariable ["BIS_noCoreConversations", true, false];
+        while {!conversationDisabled _unit} do {_unit disableConversation true};
+    }
 }] call CBA_fnc_addClassEventHandler;

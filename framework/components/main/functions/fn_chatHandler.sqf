@@ -15,9 +15,9 @@
  * Public: No
  */
 
-/* Own join message */
+/* Own join message */ // @TODO: Move to common
 if (hasInterface) then {
-    // @TODO replace spawn
+    // @TODO: replace spawn
     _this spawn {
         private _sideLUT = ["OPFOR", "BLUFOR", "INDEPENDENT", "CIVILIAN", "UNKNOWN", "ENEMY", "FRIENDLY", "LOGIC", "EMPTY", "AMBIENT"];
 
@@ -30,10 +30,9 @@ if (hasInterface) then {
 
         private _disconUnits = missionNameSpace getVariable [QGVAR(disconUnits), createHashMap];
         private _disconUnit = _disconUnits get (getPlayerUID player);
-        private _safestartEnabled = ( CONFIG_PARAM_4(SETTINGS,gameplay,safestart,enable) ) isEqualTo 1;
 
         if (!isNil "_disconUnit") then {
-            if ( !_safestartEnabled || missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] ) then {
+            if ( !EGVAR(gameplay,setting_safestart) || missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] ) then {
                 [format ["%1 Re-jipped", name player]] remoteExec ["systemChat", 0, false];
             } else {
                 [format ["%1 Joined %2 in ""%3"" as a ""%4""", name player, _sideLUT select ((side player) call BIS_fnc_sideID), groupID group player, _roleDescription]] remoteExec ["systemChat", 0, false];

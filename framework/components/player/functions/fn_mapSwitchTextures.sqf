@@ -17,12 +17,11 @@
 SCRIPT(mapSwitchTextures);
 
 /* Check if it's enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,player,switchMapTextures) ) isEqualTo 1;
-if !(_enabled) exitWith {};
+if !(GVAR(setting_switchMapTextures)) exitWith {};
 
 if ( isDedicated ) exitWith {};
 
 [{ !isNull findDisplay 12 }, {
-	/* Press the switch textures button */
-	ctrlActivate ( ( findDisplay 12 ) displayCtrl 107 );
+    /* Press the switch textures button */
+    ctrlActivate ( ( findDisplay 12 ) displayCtrl 107 );
 }] call CBA_fnc_waitUntilAndExecute;

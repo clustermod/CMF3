@@ -16,7 +16,7 @@
  */
 SCRIPT(stripUnit);
 params["_unit"];
-
+// @TODO: Move to common
 /* Strip the unit of all gear and weapons */
 [_unit, (primaryWeapon _unit)] remoteExecCall ["CBA_fnc_removeWeapon", _unit];
 [_unit, (handgunWeapon _unit)] remoteExecCall ["CBA_fnc_removeWeapon", _unit];

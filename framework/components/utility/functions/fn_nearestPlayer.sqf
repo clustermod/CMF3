@@ -16,7 +16,7 @@
  */
 SCRIPT(nearestPlayer);
 params["_unit"];
-
+// @TODO: Move to common
 /* Get all players and their distances from the unit */
 private _PlayerDistances = allPlayers apply {[_x distance _unit,_x]};
 _PlayerDistances sort true;

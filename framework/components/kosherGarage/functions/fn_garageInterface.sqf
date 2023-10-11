@@ -17,7 +17,7 @@
 SCRIPT(garageInterface);
 
 /* Spawn the interface script handle */
-// @TODO replace spawn
+// @TODO: replace spawn
 private _handle = _this spawn {
     private _display = _this;
     private _veh = objNull;
@@ -80,20 +80,20 @@ private _handle = _this spawn {
 
             /* Add the pylon magazines to the selection if they are whitelisted */
             private _whitelist = missionNameSpace getVariable [QGVAR(whitelist), nil];
-			private _pylonOptions = [];
-			if (!isNil "_whitelist") then {
-				if (count (_whitelist select 3) > 0) then {
+            private _pylonOptions = [];
+            if (!isNil "_whitelist") then {
+                if (count (_whitelist select 3) > 0) then {
                     if (((_whitelist select 3) select 0) != "ALL") then {
                         _pylonOptions = [];
                         {
                             private _pylon = _x;
-                        	if (_whitelist select 2) then {
-                        		if (_pylon in (_veh getCompatiblePylonMagazines _pylonName)) then {
-                        			_pylonOptions pushBack ((GVAR(pylonWeapons) select {(_x select 1) isEqualTo _pylon}) select 0);
-                        		};
-                        	} else {
-                        		_pylonOptions pushBack ((GVAR(pylonWeapons) select {(_x select 1) isEqualTo _pylon}) select 0);
-                        	};
+                            if (_whitelist select 2) then {
+                                if (_pylon in (_veh getCompatiblePylonMagazines _pylonName)) then {
+                                    _pylonOptions pushBack ((GVAR(pylonWeapons) select {(_x select 1) isEqualTo _pylon}) select 0);
+                                };
+                            } else {
+                                _pylonOptions pushBack ((GVAR(pylonWeapons) select {(_x select 1) isEqualTo _pylon}) select 0);
+                            };
                         } forEach (_whitelist select 3);
                     } else {
                         if (_whitelist select 2) then {
@@ -106,8 +106,8 @@ private _handle = _this spawn {
                             _pylonOptions = GVAR(pylonWeapons);
                         };
                     };
-				};
-			} else {
+                };
+            } else {
                 _pylonOptions = GVAR(pylonWeapons);
             };
 

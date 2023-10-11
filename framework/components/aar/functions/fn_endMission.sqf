@@ -31,8 +31,8 @@ EFUNC(inline_aar,endMission) = {
 
             /* Generate the seperate sections */
             private _missionData = missionNameSpace getVariable [QEGVAR(common,missionData), []];
-    		private _hash = [_missionData] call CBA_fnc_hashCreate;
-    		private _operationName = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(utility,hexToASCII)] call CBA_fnc_hashGet;
+            private _hash = [_missionData] call CBA_fnc_hashCreate;
+            private _operationName = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(utility,hexToASCII)] call CBA_fnc_hashGet;
             private _op = format ["<t color='#%3'>%1 was an operational %2</t>", _operationName, (["Success", "Failure"] select !(_opSuccess)), (["fcba03", "fc3d03"] select !(_opSuccess))];
             private _tac = format ["<t>%1 was a tactical %2</t>", _operationName, (["Success", "Failure"] select !(_tacSuccess))];
             private _message = _message splitString toString [13,10] joinString "<br/>";
@@ -65,7 +65,7 @@ EFUNC(inline_aar,endMission) = {
             ];
 
             private _text = format [
-            	"<t>%1</t><br/><t size='0.8'>%2</t><t size='0.6'>%3</t><t size='0.5'>%4</t><br/><br/>%5", _op, _tac, _message, _objectives, _stats
+                "<t>%1</t><br/><t size='0.8'>%2</t><t size='0.6'>%3</t><t size='0.5'>%4</t><br/><br/>%5", _op, _tac, _message, _objectives, _stats
             ];
 
             sleep 1;

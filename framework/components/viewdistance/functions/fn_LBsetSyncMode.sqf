@@ -27,34 +27,34 @@ private _sliderCtrl = [_this, 3, controlNull, [0, controlNull]] call BIS_fnc_par
 private _sliderTextboxCtrl = [_this, 4, controlNull, [0, controlNull]] call BIS_fnc_param;
 
 switch (_mode) do {
-	case 1: {
-		ctrlEnable [_textBoxCtrl, true];
-		private _percentageVar = "cmf_viewdistance_" + _varString + "SyncPercentage";
-		private _percentage = call compile _percentageVar;
-		ctrlSetText [_textBoxCtrl, format ["%1",_percentage * 100] + "%"];
+    case 1: {
+        ctrlEnable [_textBoxCtrl, true];
+        private _percentageVar = "cmf_viewdistance_" + _varString + "SyncPercentage";
+        private _percentage = call compile _percentageVar;
+        ctrlSetText [_textBoxCtrl, format ["%1",_percentage * 100] + "%"];
 
-		private _viewDistVar = "cmf_viewdistance_" + _varString;
-		private _viewDist = call compile _viewDistVar;
-		private _objVDVar = "cmf_viewdistance_" + _varString + "Obj";
-		private _objVD = _viewDist * _percentage min GVAR(maxObj);
+        private _viewDistVar = "cmf_viewdistance_" + _varString;
+        private _viewDist = call compile _viewDistVar;
+        private _objVDVar = "cmf_viewdistance_" + _varString + "Obj";
+        private _objVD = _viewDist * _percentage min GVAR(maxObj);
 
-		//disable VD slider and textbox because they are not in use
-		ctrlEnable [_sliderCtrl, false];
-		sliderSetPosition [_sliderCtrl, _objVD];
-		ctrlEnable [_sliderTextboxCtrl, false];
-		ctrlSetText [_sliderTextboxCtrl, str round _objVD];
+        //disable VD slider and textbox because they are not in use
+        ctrlEnable [_sliderCtrl, false];
+        sliderSetPosition [_sliderCtrl, _objVD];
+        ctrlEnable [_sliderTextboxCtrl, false];
+        ctrlSetText [_sliderTextboxCtrl, str round _objVD];
 
-		call compile format ["%1 = %2", _objVDVar, _objVD];
-		call compile format ["profileNamespace setVariable ['%1',%1]", _objVDVar];
-	};
-	default {
-		ctrlEnable [_textBoxCtrl, false];
-		ctrlSetText [_textBoxCtrl, ""];
+        call compile format ["%1 = %2", _objVDVar, _objVD];
+        call compile format ["profileNamespace setVariable ['%1',%1]", _objVDVar];
+    };
+    default {
+        ctrlEnable [_textBoxCtrl, false];
+        ctrlSetText [_textBoxCtrl, ""];
 
-		/* enable VD slider and textbox in case they are disabled */
-		ctrlEnable [_sliderCtrl, true];
-		ctrlEnable [_sliderTextboxCtrl, true];
-	};
+        /* enable VD slider and textbox in case they are disabled */
+        ctrlEnable [_sliderCtrl, true];
+        ctrlEnable [_sliderTextboxCtrl, true];
+    };
 };
 
 private _modeVar = "cmf_viewdistance_" + _varString + "SyncMode";

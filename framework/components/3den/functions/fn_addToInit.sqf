@@ -22,11 +22,11 @@ private _init = (_entity get3DENAttribute "Init") select 0;
 _init = _init splitString toString [13, 10];
 
 if (_line isEqualType {}) then {
-	_line = toString _line;
+    _line = toString _line;
 };
 
 if ((_line select [(count _line - 1), 1]) != ";") then {
-	_line = [_line, ";"] joinString "";
+    _line = [_line, ";"] joinString "";
 };
 
 _init pushBack _line;

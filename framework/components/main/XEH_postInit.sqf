@@ -1,7 +1,5 @@
 #include "script_component.hpp"
 
-[] call FUNC(serverInit);
-[] call FUNC(missionInit);
 [] call FUNC(addonBlacklist);
 [] call FUNC(chatHandler);
 

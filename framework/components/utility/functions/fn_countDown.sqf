@@ -16,8 +16,6 @@
  *
  * public: Yes
 */
-SCRIPT(countdown);
-
 params ["_time", "_text", ["_blocking", false]];
 
 private _fnc_CD_CountDown = {

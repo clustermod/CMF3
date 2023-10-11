@@ -7,7 +7,7 @@
  * None
  *
  * Return Value:
- * scriptHandle <HANDLE>
+ * Framehandler ID <NUMBER>
  *
  * Example:
  * call cmf_utility_fnc_freezeTime
@@ -16,27 +16,19 @@
 */
 SCRIPT(freezeTime);
 
-/* Check if it's enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,utility,freezeTime) ) isEqualTo 1;
-if !(_enabled && (_this select 0)) exitWith {};
+GVAR(freezeTime_initDate) = date;
+// @TODO: Move to new module environment
+private _handle = [{
+    if !(GVAR(setting_freezeTime)) exitWith {};
 
-LOG("Enabled freezeTime");
+    if (GVAR(freezeTime_disable)) exitWith {
+        [(_this select 1)] call CBA_fnc_removePerFrameHandler;
+    };
 
-/* Spawn the process so it can be terminated at a later date */
-// @TODO replace spawn
-private _scriptHandle = [] spawn {
-	/* Get current date and time */
-	private _initdate = date;
-	while {!(missionNamespace getVariable [QGVAR(freezeTime_disable), false])} do {
-		setdate _initdate;
-		sleep 0.5;
-	};
-
-	/* Raise event */
-	[QGVAR(freezeTime_onDisabled), []] call CBA_fnc_globalEvent;
-};
+    setdate GVAR(freezeTime_initDate);
+}] call CBA_fnc_addPerFrameHandler;
 
 /* Save the script handle to a global variable */
-missionNamespace setVariable [QGVAR(freezeTime_handle), _scriptHandle];
+missionNamespace setVariable [QGVAR(freezeTime_handle), _handle];
 
-_scriptHandle;
+_handle;

@@ -34,61 +34,70 @@ if (missionNamespace getVariable [QGVAR(disable), false]) exitWith {};
 /* Get the projectile type the vehicle was hit with */
 private _projectileType = [GVAR(projectileCache), _selection, nil] call CBA_fnc_hashGet;
 if (isNil "_projectileType") then {
-	_projectileType = getNumber (configfile >> "CfgAmmo" >> _projectile >> "explosive");
+    _projectileType = getNumber (configfile >> "CfgAmmo" >> _projectile >> "explosive");
 
-	if (isNil "_projectileType") then {
-		_projectileType = 0;
-	};
+    if (isNil "_projectileType") then {
+        _projectileType = 0;
+    };
 
-	GVAR(projectileCache) = [GVAR(projectileCache), typeOf _veh, _projectileType] call CBA_fnc_hashSet;
+    GVAR(projectileCache) = [GVAR(projectileCache), typeOf _veh, _projectileType] call CBA_fnc_hashSet;
 };
 
 /* Get the vehicle selectionNames */
 private _vehicleSelections = [GVAR(vehicleCache), typeOf _veh, []] call CBA_fnc_hashGet;
 if (_vehicleSelections isEqualTo []) then {
-	private _engineName = getText (configFile >> "cfgVehicles" >> (typeOf _veh) >> "HitPoints" >> "HitEngine" >> "name");
-	private _fuelName = getText (configFile >> "cfgVehicles" >> (typeOf _veh) >> "HitPoints" >> "HitFuel" >> "name");
+    private _engineName = getText (configFile >> "cfgVehicles" >> (typeOf _veh) >> "HitPoints" >> "HitEngine" >> "name");
+    private _fuelName = getText (configFile >> "cfgVehicles" >> (typeOf _veh) >> "HitPoints" >> "HitFuel" >> "name");
 
-	_vehicleSelections = [_engineName, _fuelName];
+    _vehicleSelections = [_engineName, _fuelName];
 
-	GVAR(vehicleCache) = [GVAR(vehicleCache), typeOf _veh, _vehicleSelections] call CBA_fnc_hashSet;
+    GVAR(vehicleCache) = [GVAR(vehicleCache), typeOf _veh, _vehicleSelections] call CBA_fnc_hashSet;
 };
 
 
 /* Check if the damage is enough to kill the vehicle, and if it is take over the damage handling */
 //LOG_2("%1 in %2 || %1 == """"", _selection, str _vehicleSelections);
 if (_damage > 0.8 && ((_selection in _vehicleSelections) || _selection isEqualTo "")) then {
-	LOG_2("Registered damage on selection: %1 = %2", _selection, str _damage);
+    LOG_2("Registered damage on selection: %1 = %2", _selection, str _damage);
 
-	/* If the projectile type was explosive play cool visual and audiable effects */
-	if ((_projectileType isEqualTo 1)) then {
-		[_veh, _projectile, _hitPoint] spawn {
-			params["_veh", "_projectile", "_hitPoint"];
-			{
-				/* Handle medical for units in hit vehicle */
-				[[_veh, _projectile, _hitPoint], FUNC(medicalHandler)] remoteExec ["call", _x];
+    /* If the projectile type was explosive play cool visual and audiable effects */
+    if ((_projectileType isEqualTo 1)) then {
+        [_veh, _projectile, _hitPoint] spawn {
+            params["_veh", "_projectile", "_hitPoint"];
+            {
+                /* Handle medical for units in hit vehicle */
+                [[_veh, _projectile, _hitPoint], FUNC(medicalHandler)] remoteExec ["call", _x];
 
-				/* Handle local sound and visual effects for players in vehicle */
-				if (isPlayer _x) then {
-					[[], FUNC(localEffect)] remoteExec ["call", _x];
-				};
-			} forEach crew _veh;
-		};
-	};
+                /* Handle local sound and visual effects for players in vehicle */
+                if (isPlayer _x) then {
+                    [[], FUNC(localEffect)] remoteExec ["call", _x];
+                };
+            } forEach crew _veh;
+        };
+    };
 
-	/* Disable engine */
-	if (_veh getHit "motor" != 1) then {
-		LOG_2("Vehicled disabled: %1 = %2", _selection, str _damage);
-		_veh setHit ["motor", 1];
-	};
+    /* Disable engine */
+    if (_veh getHit "engine" != 1) then {
+        LOG_2("Vehicled disabled: %1 = %2", _selection, str _damage);
+        _veh setHit ["engine", 1];
+        _veh engineOn false;
+    };
 
-	/* Allow fueltank to start leaking */
-	if (_selection != "fuel") then {
-		_damage = 0.8;
-	};
+    /* Allow fueltank to start leaking */
+    if (_selection != "fuel") then {
+        _damage = 0.8;
+    };
 
-	/* Raise event */
-	[QGVAR(onDisabled), [_veh, _projectile, _hitPoint], _veh] call CBA_fnc_targetEvent;
+    /* Dissembark ai crew */
+    {
+        if (!isPlayer _x) then {
+            unassignVehicle _x;
+            doGetOut _x;
+        }
+    } forEach crew _veh;
+
+    /* Raise event */
+    [QGVAR(onDisabled), [_veh, _projectile, _hitPoint], _veh] call CBA_fnc_targetEvent;
 };
 
 /* Set the damage amount on the vehicle */

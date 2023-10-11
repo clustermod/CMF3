@@ -16,13 +16,13 @@
  * Public: Yes
  */
 params ["_hint", ["_silent", false]];
-
+// @TODO: Move to common
 {
-	private _target = getAssignedCuratorUnit _x;
+    private _target = getAssignedCuratorUnit _x;
 
-	if (_silent) then {
-		[_hint] remoteExec ["hintSilent", _target, false];
-	} else {
-		[_hint] remoteExec ["hint", _target, false];
-	};
+    if (_silent) then {
+        [_hint] remoteExec ["hintSilent", _target, false];
+    } else {
+        [_hint] remoteExec ["hint", _target, false];
+    };
 } forEach allCurators;

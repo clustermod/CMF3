@@ -30,6 +30,27 @@ for "_i" from 0 to (_ctrlMenuStrip menuSize []) -1 step 1 do {
 
 /* Create CMF menu */
 private _indexMain = [[], "CMF"] call FUNC(addMenuItem);
+
+private _indexConfig = [
+    [_indexMain], 
+    "CMF Settings", 
+    "a3\3den\data\displays\display3den\entitymenu\findconfig_ca.paa", 
+    {
+        // @TODO: Figure out how to open it on the page for CMF
+        [findDisplay 313] execVM "x\cba\addons\settings\fnc_openSettingsMenu.sqf";
+        [findDisplay 151 displayCtrl 9002] execVM "x\cba\addons\settings\fnc_gui_sourceChanged.sqf";
+    }
+] call FUNC(addMenuItem);
+
+private _indexMission = [
+    [_indexMain], 
+    "CMF Mission Data",
+    "a3\ui_f\data\gui\rsc\rscdisplayarsenal\map_ca.paa", 
+    {
+        call cmf_3den_fnc_setConfig_missionDataHandler;
+    }
+] call FUNC(addMenuItem);
+
 [_indexMain] call FUNC(main_setConfig);
 private _indexUnits = [[_indexMain], LSTRING(unit_spawner_displayName), "a3\ui_f\data\igui\rscingameui\rscunitinfo\si_stand_ca.paa"] call FUNC(addMenuItem);
 private _indexTools = [[_indexMain], LSTRING(tools_displayName), "a3\ui_f\data\gui\rsc\rscdisplayarcademap\icon_functions_ca.paa"] call FUNC(addMenuItem);

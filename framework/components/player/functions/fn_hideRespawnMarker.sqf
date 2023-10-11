@@ -16,12 +16,10 @@
  */
 SCRIPT(hideRespawnMarker);
 
-/* Check if it is enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,player,hideRespawnMarkers) ) isEqualTo 1;
-if !(_enabled) exitWith {};
-
 [{ !isNull findDisplay 12 }, {
     findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
+        if !(GVAR(setting_hideRespawnMarkers)) exitWith {};
+        
         if (visibleMap) then {
             {
                 if (markerShape _x == "ICON" && markerType _x == "respawn_inf") then {

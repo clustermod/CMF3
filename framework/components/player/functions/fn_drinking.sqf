@@ -16,7 +16,7 @@
  */
 SCRIPT(drinking);
 
-// @TODO Move function declerations outside and pass them as args
+// @TODO: Move function declerations outside and pass them as args
 [{ alive player && !isNull player }, {
     GVAR(drinking_hydrationItems) = [
         ["ACE_Canteen", ["Land_Canteen_F", 0.2, 15]], ["ACE_Canteen_Half", ["Land_Canteen_F", 0.2, 15]], ["ACE_WaterBottle", ["Land_BottlePlastic_V2_F", 0.2, 15]], ["ACE_WaterBottle_Half", ["Land_BottlePlastic_V2_F", 0.2, 15]],

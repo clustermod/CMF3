@@ -16,13 +16,13 @@
 */
 SCRIPT(preventProne);
 params["_unit"];
-
+// @TODO: Combine with Prevent Prone in AI
 _unit addEventHandler ["AnimChanged", {
-	private _proneAnimArray = ["AmovPercMstpSlowWrflDnon_AmovPpneMstpSrasWrflDnon", "AmovPercMstpSrasWrflDnon_AmovPpneMstpSrasWrflDnon", "amovppnemstpsraswrfldnon", "AmovPknlMstpSrasWrflDnon_AmovPpneMstpSrasWrflDnon"];
-	params ["_unit", "_anim"];
+    private _proneAnimArray = ["AmovPercMstpSlowWrflDnon_AmovPpneMstpSrasWrflDnon", "AmovPercMstpSrasWrflDnon_AmovPpneMstpSrasWrflDnon", "amovppnemstpsraswrfldnon", "AmovPknlMstpSrasWrflDnon_AmovPpneMstpSrasWrflDnon"];
+    params ["_unit", "_anim"];
 
-	/* Check if animation is a state chagne animation to prone */
-	if ((_anim in _proneAnimArray) OR (unitPos _unit == "down")) then {
-		_unit setunitPos "middle"
-	};
+    /* Check if animation is a state chagne animation to prone */
+    if ((_anim in _proneAnimArray) OR (unitPos _unit == "down")) then {
+        _unit setunitPos "middle"
+    };
 }];
