@@ -51,7 +51,8 @@ private _loadSettings = {
     private _path = format ["components\%1\initSettings.sqf", _module];
 
     if (fileExists _path) then {
-        [] call compile preprocessFileLineNumbers _path;
+        waitUntil { !isNil "CBA_fnc_addSetting" };
+        [compile preprocessFileLineNumbers _path] call CBA_fnc_directCall; // Make sure it's run unscheduled
     };
 };
 
@@ -129,7 +130,7 @@ private _load3denInit = {
     [_x] call _loadPrep;
 
     /* Compile settings */
-    [_x] call _loadSettings;
+    [_x] spawn _loadSettings;
 
     /* Compile xeh events */
     [_x] call _loadPreInit;

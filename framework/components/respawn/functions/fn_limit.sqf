@@ -30,9 +30,7 @@ if (call _condition) then {
     player addEventHandler ["Respawn", {
         _respawns = player getVariable[QGVAR(respawns), 1];
 
-        /* Don't decrement a player's life during safestart */
-        private _safestartEnabled = ( CONFIG_PARAM_4(SETTINGS,gameplay,safestart,enable) ) isEqualTo 1;
-        if ( _safestartEnabled && !(missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false]) ) exitWith {};
+        if ( EGVAR(gameplay,setting_safestart) && !(missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false]) ) exitWith {};
 
         if ((player getVariable[QGVAR(deaths), 0]) == _respawns) then {
             if ((vehicle player) != player) then {

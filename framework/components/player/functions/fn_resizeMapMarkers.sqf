@@ -16,10 +16,6 @@
 */
 SCRIPT(resizeMapMarkers);
 
-/* Check if it's enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,player,consistentMarkers) ) isEqualTo 1;
-if !(_enabled) exitWith {};
-
 if (!hasInterface) exitWith {};
 
 [{ !isNull findDisplay 12 }, {

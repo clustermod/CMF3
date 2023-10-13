@@ -16,10 +16,6 @@
  */
 SCRIPT(restrictLauncher);
 
-/* Check if it's enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,player,restrictLauncher) ) isEqualTo 1;
-if !(_enabled) exitWith {};
-
 if (!hasInterface) exitWith {};
 
 player addEventHandler ["Respawn", {

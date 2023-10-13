@@ -880,87 +880,87 @@ class  cmf_viewDistance_rscEdit {
 
 //////////////////////////////// SETTINGS MENU DEFINES //////////////////////////////////////////
 class CMF_Settings_RscButtonMenu {
-	idc = -1;
-	type = CT_SHORTCUTBUTTON;
-	style = ST_CENTER + ST_FRAME + ST_HUD_BACKGROUND;
-	default = 0;
-	shadow = 0;
-	x = 0;
-	y = 0;
-	w = 0.095589;
-	h = 0.039216;
+    idc = -1;
+    type = CT_SHORTCUTBUTTON;
+    style = ST_CENTER + ST_FRAME + ST_HUD_BACKGROUND;
+    default = 0;
+    shadow = 0;
+    x = 0;
+    y = 0;
+    w = 0.095589;
+    h = 0.039216;
     textureNoShortcut = "";
-	animTextureNormal = "#(argb,8,8,3)color(1,1,1,1)";
-	animTextureDisabled = "#(argb,8,8,3)color(1,1,1,1)";
-	animTextureOver = "#(argb,8,8,3)color(1,1,1,1)";
-	animTextureFocused = "#(argb,8,8,3)color(1,1,1,1)";
-	animTexturePressed = "#(argb,8,8,3)color(1,1,1,1)";
-	animTextureDefault = "#(argb,8,8,3)color(1,1,1,1)";
-	colorBackground[] = {0,0,0,0.8};
-	colorBackgroundFocused[] = {1,1,1,1};
-	colorBackground2[] = {0.75,0.75,0.75,1};
-	color[] = {1,1,1,1};
-	colorFocused[] = {0,0,0,1};
-	color2[] = {0,0,0,1};
-	colorText[] = {1,1,1,1};
-	colorDisabled[] = {1,1,1,0.25};
-	textSecondary = "";
-	colorSecondary[] = {1,1,1,1};
-	colorFocusedSecondary[] = {0,0,0,1};
-	color2Secondary[] = {0,0,0,1};
-	colorDisabledSecondary[] = {1,1,1,0.25};
-	sizeExSecondary = GUI_TEXT_SIZE_MEDIUM;
-	fontSecondary = "PuristaLight";
-	period = 1.2;
-	periodFocus = 1.2;
-	periodOver = 1.2;
-	size = GUI_TEXT_SIZE_MEDIUM;
-	sizeEx = GUI_TEXT_SIZE_MEDIUM;
-	tooltipColorText[] = {1,1,1,1};
-	tooltipColorBox[] = {1,1,1,1};
-	tooltipColorShade[] = {0,0,0,0.65};
-	class TextPos {
-		left = 0.25 * GUI_GRID_W;
-		top = (GUI_GRID_H - GUI_TEXT_SIZE_MEDIUM) / 2;
-		right = 0.005;
-		bottom = 0;
-	};
+    animTextureNormal = "#(argb,8,8,3)color(1,1,1,1)";
+    animTextureDisabled = "#(argb,8,8,3)color(1,1,1,1)";
+    animTextureOver = "#(argb,8,8,3)color(1,1,1,1)";
+    animTextureFocused = "#(argb,8,8,3)color(1,1,1,1)";
+    animTexturePressed = "#(argb,8,8,3)color(1,1,1,1)";
+    animTextureDefault = "#(argb,8,8,3)color(1,1,1,1)";
+    colorBackground[] = {0,0,0,0.8};
+    colorBackgroundFocused[] = {1,1,1,1};
+    colorBackground2[] = {0.75,0.75,0.75,1};
+    color[] = {1,1,1,1};
+    colorFocused[] = {0,0,0,1};
+    color2[] = {0,0,0,1};
+    colorText[] = {1,1,1,1};
+    colorDisabled[] = {1,1,1,0.25};
+    textSecondary = "";
+    colorSecondary[] = {1,1,1,1};
+    colorFocusedSecondary[] = {0,0,0,1};
+    color2Secondary[] = {0,0,0,1};
+    colorDisabledSecondary[] = {1,1,1,0.25};
+    sizeExSecondary = GUI_TEXT_SIZE_MEDIUM;
+    fontSecondary = "PuristaLight";
+    period = 1.2;
+    periodFocus = 1.2;
+    periodOver = 1.2;
+    size = GUI_TEXT_SIZE_MEDIUM;
+    sizeEx = GUI_TEXT_SIZE_MEDIUM;
+    tooltipColorText[] = {1,1,1,1};
+    tooltipColorBox[] = {1,1,1,1};
+    tooltipColorShade[] = {0,0,0,0.65};
+    class TextPos {
+        left = 0.25 * GUI_GRID_W;
+        top = (GUI_GRID_H - GUI_TEXT_SIZE_MEDIUM) / 2;
+        right = 0.005;
+        bottom = 0;
+    };
     class HitZone {
         left = 0;
         top = 0;
         right = 0;
         bottom = 0;
     };
-	class Attributes {
-		font = "PuristaLight";
-		color = "#E5E5E5";
-		align = "left";
-		shadow = "false";
-	};
-	class ShortcutPos {
-		left = 5.25 * GUI_GRID_W;
-		top = 0;
-		w = 1 * GUI_GRID_W;
-		h = 1 * GUI_GRID_H;
-	};
-	soundEnter[] = {
-		"\A3\ui_f\data\sound\RscButtonMenu\soundEnter",
-		0.09,
-		1
-	};
-	soundPush[] = {
-		"\A3\ui_f\data\sound\RscButtonMenu\soundPush",
-		0.09,
-		1
-	};
-	soundClick[] = {
-		"\A3\ui_f\data\sound\RscButtonMenu\soundClick",
-		0.09,
-		1
-	};
-	soundEscape[] = {
-		"\A3\ui_f\data\sound\RscButtonMenu\soundEscape",
-		0.09,
-		1
-	};
+    class Attributes {
+        font = "PuristaLight";
+        color = "#E5E5E5";
+        align = "left";
+        shadow = "false";
+    };
+    class ShortcutPos {
+        left = 5.25 * GUI_GRID_W;
+        top = 0;
+        w = 1 * GUI_GRID_W;
+        h = 1 * GUI_GRID_H;
+    };
+    soundEnter[] = {
+        "\A3\ui_f\data\sound\RscButtonMenu\soundEnter",
+        0.09,
+        1
+    };
+    soundPush[] = {
+        "\A3\ui_f\data\sound\RscButtonMenu\soundPush",
+        0.09,
+        1
+    };
+    soundClick[] = {
+        "\A3\ui_f\data\sound\RscButtonMenu\soundClick",
+        0.09,
+        1
+    };
+    soundEscape[] = {
+        "\A3\ui_f\data\sound\RscButtonMenu\soundEscape",
+        0.09,
+        1
+    };
 };

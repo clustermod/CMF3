@@ -27,7 +27,7 @@ if (!isServer) exitWith {};
 
     if (_vehicle isKindOf "CAManBase") exitWith {};
 
-    if (_x getVariable [QGVAR(clearCargo_vehicleDisable), false]) exitWith {};
+    if (_vehicle getVariable [QGVAR(clearCargo_vehicleDisable), false]) exitWith {};
 
     // @TODO: whitelist ropes
     clearItemCargoGlobal _x;
