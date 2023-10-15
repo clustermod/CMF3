@@ -18,6 +18,7 @@
                 "cwd": "${workspaceFolder}/tools"
             },
             "args": [
+                "sqf_validator.py",
                 "config_style_checker.py"
             ]
         },
