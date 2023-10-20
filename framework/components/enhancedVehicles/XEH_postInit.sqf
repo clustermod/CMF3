@@ -24,11 +24,11 @@ private _fnc_initEH = {
         _vehicle engineOn false;
     }];
 
-	/* Fual leak */
+    /* Fual leak */
     _vehicle spawn FUNC(fuelLeakEH);
 
-	/* Offroading */
-	[_vehicle] call FUNC(offroading);
+    /* Offroading */
+    [_vehicle] call FUNC(offroading);
 
     LOG_1("Enabled EnhancedVehicles on %1", typeOf _vehicle);
 };

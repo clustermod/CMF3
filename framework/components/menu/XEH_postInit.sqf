@@ -1,6 +1,6 @@
 #include "script_component.hpp"
 
-["CMF: Common", QGVAR(toggleHUD), [LSTRING(toggle_hud_displayname), LSTRING(toggle_hud_tooltip)], {}, FUNC(toggleHUDAction), [15, [false, true, false]]] call CBA_fnc_addKeybind;
+["CMF: Common", QGVAR(toggleHUD), [LSTRING(toggle_hud_displayname), LSTRING(toggle_hud_tooltip)], {}, FUNC(hideHUD), [15, [false, true, false]]] call CBA_fnc_addKeybind;
 
 /* Add zeus actions */
 private _children = {

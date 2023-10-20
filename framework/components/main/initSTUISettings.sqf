@@ -7,6 +7,9 @@
  */
 SCRIPT(initSTUISettings);
 
+// @TODO: Change so invisible units don't show on the stui
+// @TODO: Change so fireteam level teams (XSL, X1 and X2) show on the list of grouped players
+
 /* Order the name list based on color team */
 STHud_Namelist = {
     params ["_canvas"];

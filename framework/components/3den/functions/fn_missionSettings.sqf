@@ -22,15 +22,15 @@ params ["_varName", "_varValue", ["_namespace", { missionNameSpace }]];
 private _logics = (all3DENEntities select 0) select { (_x get3DENAttribute 'Name') isEqualTo [QGVAR(data)] };
 private _logic = objNull;
 if (count _logics isEqualTo 0) then {
-	_logic = create3DENEntity ['Object', 'Logic', [0,0,0], true];
-	_logic set3DENAttribute ['Name', QGVAR(data)];
+    _logic = create3DENEntity ['Object', 'Logic', [0,0,0], true];
+    _logic set3DENAttribute ['Name', QGVAR(data)];
 
-	_logic addEventHandler ['UnregisteredFromWorld3DEN', {
-		params ['_entity'];
-		['Deleted CMF Data! It is recommended to undo deletion!', 1, 5] call BIS_fnc_3DENNotification;
-	}];
+    _logic addEventHandler ['UnregisteredFromWorld3DEN', {
+        params ['_entity'];
+        ['Deleted CMF Data! It is recommended to undo deletion!', 1, 5] call BIS_fnc_3DENNotification;
+    }];
 } else {
-	_logic = _logics select 0;
+    _logic = _logics select 0;
 };
 
 private _logicInit = (_logic get3DENAttribute "Init") select 0;
@@ -40,13 +40,13 @@ private _commands = _logicInit regexReplace [format ["([^;]*?%1.*?);", _varname]
 
 /* Set data */
 GVAR(missionDataLogic) set3DENAttribute [
-	"Init", 
-	format [
-		"if (!isServer) exitWith { }; %1 setVariable [""%2"", %3, true];",
-		_namespace,
-		QEGVAR(common,missionData),
-		str _hash
-	]
+    "Init", 
+    format [
+        "if (!isServer) exitWith { }; %1 setVariable [""%2"", %3, true];",
+        _namespace,
+        QEGVAR(common,missionData),
+        str _hash
+    ]
 ];
 
 // @TODO: Finish this function

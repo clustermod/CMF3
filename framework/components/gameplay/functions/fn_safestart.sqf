@@ -146,7 +146,7 @@ addMissionEventHandler ["EntityRespawned", {
 
             /* Show hint if hud isn't disabled */
             if (missionNameSpace getVariable [QEGVAR(menu,hud_show), true]) then {
-                hintSilent parseText _safestartHint;
+                hintSilent parseText _safestartHint; // @TODO: create a control instead and attach it to display 46
             } else {
                 hintSilent "";
             };

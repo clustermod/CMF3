@@ -32,7 +32,7 @@ GVAR(components) = [
     "player"
 ];
 
-// @TODO: cleanup file loading
+// @TODO: cleanup file loading (Create function that takes path/name, and condition)
 private _loadPrep = {
     params ["_module"];
 
@@ -45,7 +45,7 @@ private _loadPrep = {
     };
 };
 
-private _loadSettings = {
+private _loadSettings = { // @TODO: Add for initKeybinds aswell
     params ["_module"];
 
     private _path = format ["components\%1\initSettings.sqf", _module];

@@ -16,14 +16,12 @@
  */
 SCRIPT(clearVehicleCargo);
 
-/* Check if the function is enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,utility,clearVehicleCargo) ) isEqualTo 1;
-if !(_enabled) exitWith {};
-
 if (!isServer) exitWith {};
 
 ["AllVehicles", "init", {
     params ["_vehicle"];
+
+    if (!GVAR(setting_clearCargo)) exitWith {};
 
     if (_vehicle isKindOf "CAManBase") exitWith {};
 

@@ -21,7 +21,7 @@
 SCRIPT(init);
 
 // @TODO: replace spawn
-_this spawn {
+_this spawn { // @BUG: Sometimes fails to init for players (?)
     params[["_loadouts", nil, [[]]], ["_light", false], ["_forcePrimary", false], ["_randomPos", false]];
 
     if (!hasInterface) exitWith {};

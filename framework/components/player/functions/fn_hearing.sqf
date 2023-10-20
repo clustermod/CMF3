@@ -41,12 +41,12 @@ GVAR(hearing_fnc_codeout) = {
     if (!(_type isKindOf "Man")) exitWith {};
 
     private _actionIn = [QGVAR(hearing_insertEarplugs), "Insert earplugs", "", GVAR(hearing_fnc_codein), 
-        { "ACE_EarPlugs" in (items player) && !(player getVariable [QGVAR(hearing_earplugsIn), false]) }] call ace_interact_menu_fnc_createAction;
+        { "ACE_EarPlugs" in (items _player) && !(_player getVariable [QGVAR(hearing_earplugsIn), false]) }] call ace_interact_menu_fnc_createAction;
 
     private _actionOut = [QGVAR(hearing_takeOutEarplugs), "Take out earplugs", "", GVAR(hearing_fnc_codeout), 
-        { (player getVariable [QGVAR(hearing_earplugsIn), false]) }] call ace_interact_menu_fnc_createAction;
+        { (_player getVariable [QGVAR(hearing_earplugsIn), false]) }] call ace_interact_menu_fnc_createAction;
 
-    [_type, 1, ["ACE_SelfActions", "ACE_Equipment"], _actionIn] call ace_interact_menu_fnc_addActionToClass;
+    [_type, 1, ["ACE_SelfActions", "ACE_Equipment"], _actionIn] call ace_interact_menu_fnc_addActionToClass; // @BUG: Action not shown
     [_type, 1, ["ACE_SelfActions", "ACE_Equipment"], _actionOut] call ace_interact_menu_fnc_addActionToClass;
 }] call CBAFUNC(addEventHandler);
 
