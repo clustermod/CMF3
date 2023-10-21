@@ -8,7 +8,8 @@
  - [X] Chance of being lit on fire if engine is kill or fuel is kill
  - [X] Move autoinit into init
  - [X] Disable engineOn when vehicle gets disabled
- - [ ] Add Portable fual canisters (and spawn them in vehicles)
+ - [ ] Add Portable fuel canisters (and spawn them in vehicles, should add the space i takes to not make vehicle cargo small) <!-- @LIST_TODO: Add fuel canisters to vehicles -->
+ - [ ] Add function to rename vehicle, auto assign name if vehicle is assigned squad <!-- @LIST_TODO:  -->
 
 ## utility
  - [X] clearVehicleCargo clears ammocrates as well
@@ -77,7 +78,12 @@
  - [ ] Show a count of how many players have submitted an AAR over the amount of players in mission <!-- @LIST_TODO: Show Submitted AAR count / players -->
 
 ## Organization (new category)
-- [ ] Add dynamic orbat system (assign squad, platoon and company automatically)
+- [ ] Add dynamic orbat system (assign squad, platoon and company automatically) <!-- @LIST_TODO: Create dynamic ORBAT system -->
+- [ ] Remove roster and only have TO&E <!-- @LIST_TODO: Remove roster in favor of TO&E -->
+- [ ] Make TO&E static and only update it on JIP <!-- @LIST_TODO: TO&E should be static -->
+- [ ] Weather diary should be static, never update. Only get how it was at mission start <!-- @LIST_TODO: Weather diary should be static -->
+- [ ] ORBAT Command & Signal should link to TO&E Diary <!-- @LIST_TODO: Link to TO&E -->
+- [ ] Comms plan diary, should auto generate based on player teams, link in Command & Signal <!-- @LIST_TODO: Comms Plan Diary subject -->
 
 ## gameplay
  - [X] safestart briefing phase isn't showing up at 8pm anymore
@@ -115,6 +121,8 @@
  - [X] Add FPS counter and scripts counters for server and client. https://community.bistudio.com/wiki/diag_activeScripts / https://community.bistudio.com/wiki/diag_fps, https://community.bistudio.com/wiki/getClientState
 	For server also add info from monitor (players lobby, players role selection, players briefing, players in-game and players debriefing)
  - [ ] Add shortest, average and longest frame time using diag_deltaTime <!-- @LIST_TODO: Add shortest, average and longest frame time using diag_deltaTime -->
+ - [ ] Add a AFK function that attaches the player to the closest player (within a max distance), make player invisible, muted and deaf. 
+       If the person attached to dies; player dies <!-- @LIST_TODO: Add AFK Function -->
 
 ## cleanup
  - [ ] Add Readme to each module <!-- @LIST_TODO: Add a README to each of the modules -->

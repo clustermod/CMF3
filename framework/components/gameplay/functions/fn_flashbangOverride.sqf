@@ -16,10 +16,6 @@
  */
 SCRIPT(flashbangOverride);
 
-/* Check if it is enabled */
-private _enabled = ( CONFIG_PARAM_3(SETTINGS,gameplay,overrideFlashbangs) ) isEqualTo 1;
-if !(_enabled) exitWith {};
-
 /* Define a variable to configure grenades */
 GVAR(flashbang_grenades) = [["rhs_mag_mk84", [1.2]], ["ACE_M84", [1.2]], ["rhs_mag_fakel", [1.2]],  ["rhs_mag_plamyam", [1.2]], ["rhs_mag_fakels", [1.2]], ["rhs_mag_zarya2", [1.2]], ["rhssaf_mag_rshb_p98", [1.2]], ["ACE_CTS9", [1.2, 9, {0.5}]]];
 

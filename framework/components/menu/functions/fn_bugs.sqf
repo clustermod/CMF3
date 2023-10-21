@@ -45,7 +45,7 @@ private _action = ([QGVAR(bug_menu), "Bug Fixes", "rsc\data\icon_ace_bug_ca.paa"
     }, { alive player }] call ace_interact_menu_fnc_createAction);
     _actions pushBack [_action, [], _target];
 
-    private _action = ([
+    private _action = ([ // @BUG: Ironically, bug report is bugged, dialog is not created
         QGVAR(reportBug), 
         ELSTRING(3den,report_bug), 
         "\a3\3DEN\Data\Controls\ctrlMenu\link_ca.paa", 

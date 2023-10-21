@@ -14,3 +14,4 @@ PREP(updateVehType);
 PREP(init);
 
 // @TODO: replace viewdistance scripts with ones that works
+// Look in spam chat on discord for plan

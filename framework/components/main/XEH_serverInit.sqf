@@ -74,8 +74,12 @@ addMissionEventHandler ["HandleDisconnect", {
     while { true } do {
         waitUntil { diag_fps < 15 };
 
-        // @TODO: Show message to admins and zeuses
-        WARNING_1("Low Server FPS detected: %1", str diag_activeScripts);
+        // @TODO: Show message to admins
+        private _activeScripts = diag_activeScripts;
+        private _warningMessage = format ["Low Server FPS detected: %1 | Spawn: %2 | ExecVM: %3 | Exec: %4 | execFSM: %5", 
+            str diag_fps, str (_activeScripts select 0), str (_activeScripts select 1), str (_activeScripts select 2), str (_activeScripts select 3)];
+
+        WARNING(_warningMessage);
 
         sleep 30;
     };
