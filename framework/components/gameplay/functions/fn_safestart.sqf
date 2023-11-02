@@ -23,10 +23,25 @@ if !(GVAR(setting_safestart)) exitWith {};
 LOG("Enabled safestart");
 
 /* Automatic phases */
-missionNameSpace setVariable [QGVAR(safestart_phase), ["Pre-Start", 0], true];
+missionNameSpace setVariable [QGVAR(safestart_phase), ["Setup", 0], true];
+
 [{ (systemTime select 3) >= 19 }, {
+    missionNameSpace setVariable [QGVAR(safestart_phase), ["Pre-Start", time], true];
+}] call CBA_fnc_waitUntilAndExecute;
+
+[{ (systemTime select 3) >= 20 }, {
     missionNameSpace setVariable [QGVAR(safestart_phase), ["Briefing", time], true];
 }] call CBA_fnc_waitUntilAndExecute;
+
+[{ (systemTime select 3) >= 20 && { (systemTime select 4) >= 30 } }, {
+    missionNameSpace setVariable [QGVAR(safestart_phase), ["Overtime", time], true];
+}] call CBA_fnc_waitUntilAndExecute;
+
+/* Freeze Time */
+GVAR(safestart_freezeTimeState) = EGVAR(utility,setting_freezeTime);
+if (!EGVAR(utility,setting_freezeTime)) then {
+    missionNamespace setVariable [QEGVAR(utility,setting_freezeTime), true, true];
+};
 
 addMissionEventHandler ["EntityRespawned", {
     params ["_unit", "_body"];
@@ -191,6 +206,9 @@ addMissionEventHandler ["EntityRespawned", {
     missionNamespace getVariable [QGVAR(safestart_disable), false]
 }, {
     [[], { titleText ["Game on!", "PLAIN", 0.2] }] remoteExec ["call", 0];
+
+    /* Restate freezeTime */
+    missionNamespace setVariable [QEGVAR(utility,setting_freezeTime), GVAR(safestart_freezeTimeState), true];
 
     /* Renable damage */
     { [_x, true] remoteExec ["allowDamage", 0, true] } forEach allPlayers;

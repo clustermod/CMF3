@@ -1,3 +1,29 @@
+# Changelog v2.1.1.56 => v2.1.1.57
+## Added
+- New diagnostics module
+- New settings system
+- Notification function
+- New viewdistance system (to fix lag with old one)
+- Added a RscImports file for UI to keep all imported classes collected
+- Added new logging functions
+- Added function to get closest match from a array of numbers
+- Added function to add keybinds
+
+## Changed
+- Many minor things i no longer remember
+- Freezetime is now toggleable
+- Safestart will have time frozen until game start
+- Changed how keybinds are listed in CMF diary
+
+## Fixed
+- Bug where hideHud wouldn't work with hotkey
+- Bug with whitelisted URIs
+
+## Removed
+- Removed old ACE Medical sub category in favor of ace's own category
+
+
+<!-- Kept for posterity -->
 # Changelog v2.1.0 => v2.1.1
 ## Added
 - Added CMF Info Diary

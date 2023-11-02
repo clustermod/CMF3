@@ -9,16 +9,17 @@
  - [X] Move autoinit into init
  - [X] Disable engineOn when vehicle gets disabled
  - [ ] Add Portable fuel canisters (and spawn them in vehicles, should add the space i takes to not make vehicle cargo small) <!-- @LIST_TODO: Add fuel canisters to vehicles -->
- - [ ] Add function to rename vehicle, auto assign name if vehicle is assigned squad <!-- @LIST_TODO:  -->
+ - [ ] Add function to rename vehicle, auto assign name if vehicle is assigned squad <!-- @LIST_TODO: FAdd function to rename vehicle -->
 
 ## utility
  - [X] clearVehicleCargo clears ammocrates as well
+ - [ ] Remove in favor of common or other categories <!-- @LIST_TODO: Remove utility category in favor of common or etc. -->
  
 ## logistics (new category)
  - [X] Make crate names show when looking at crate (update name in ACE cargo aswell)
  - [ ] Make a virtual arsenal crate filling tool (just use kosher arsenal but set the target to the crate rather than the player's inventory containers) <!-- @LIST_TODO: Make virtual arsenal crate filling tool -->
 	   (due to the inherent way kosher arsenal works, the arsenal would be locked to your role)
- - [ ] Set default names for certain crates (fireteam crate, medical crate)
+ - [ ] <s>Set default names for certain crates (fireteam crate, medical crate)</s>
  - [X] Create resupply crates from loadoutfile function.
  - [X] Create a crate spawner
  - [ ] Look into overriding vehicle cargo crate naming <!-- @LIST_TODO: Override cargo names in vehicles to use custom name only -->
@@ -68,7 +69,8 @@
  - [X] Show changelog when a newer version is available for player
  - [X] ACRE2 down mute not working, radio works, but proximity doesn't
  - [X] Make a warning order file (and look into a way of parsing it to display on a webpage)
- - [ ] Add https://community.bistudio.com/wiki/BIS_fnc_functionsDebug to debugging <!-- @LIST_TODO: Use functionsDebug when debugging -->
+ - [ ] <s>Add https://community.bistudio.com/wiki/BIS_fnc_functionsDebug to debugging</s>
+ - [X] Add ScriptError event handler to track script errors in CMF
 
 ## aar (new category)
  - [ ] <s>Test diagAAR and see if it does what i want</s>
@@ -89,10 +91,11 @@
  - [X] safestart briefing phase isn't showing up at 8pm anymore
  - [ ] <s>Replace custom mission name decode function with this: https://cbateam.github.io/CBA_A3/docs/files/strings/fnc_decodeURL-sqf.html#CBA_fnc_decodeURL </s>
  - [X] disable autocombat on all AI when safestart is enabled
- - [X] Freeze time when safestart is enabled (check if freezetime is already enabled, if it isn't do)
  - [ ] <s>Craters from artillery rounds</s>
  - [ ] Fix bug with environment times for twilight <!-- @LIST_TODO: Calculate twilight times and add to environment tab -->
  - [X] Fix timezone for safestart
+ - [X] Freeze time when safestart is enabled (check if freezetime is already enabled, if it isn't do)
+ - [X] Add automatic safestart phases: Setup Phase (before 7), Overtime Phase (after 8:30)
 
 ## respawn
  - [X] Ping SL for rallypoint from respawn menu
@@ -101,7 +104,7 @@
 ## common
  - [ ] <s>setCallsign ranks don't work since the playerObject doesn't exist at serverinit, maybe move ranking to player init and just check what ranks should be given based on the group</s>
  - [X] Move ranks to the unit spawner in 3den and remove the CMF_ORBAT section from cmf_config
- - [ ] Also add function to set keybinds similar to addSetting <!-- @LIST_TODO: Also add function to set keybinds similar to addSetting -->
+ - [X] Also add function to set keybinds similar to addSetting
 
 ## player
  - [ ] <s>Find icons for group ace actions</s>

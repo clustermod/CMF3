@@ -5,11 +5,6 @@ if (!hasInterface) exitWith {};
 LOG_1("Initializing player %1...", (name player));
 missionNamespace setVariable [QGVAR(player_initialized), false];
 
-cmf_player = player;
-
-/* Disable removing grass */
-tawvd_disablenone = true;
-
 /* Load ace settings */
 call compile preprocessFileLineNumbers "components\main\initAceSettings.sqf"; // @TODO: Move to common and load preInit
 

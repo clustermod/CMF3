@@ -14,6 +14,7 @@ missionNamespace setVariable [QGVAR(components_initialized), false];
 GVAR(components) = [
     "main",
     "common",
+    "diagnostic",
     "3den",
     "viewdistance",
     "menu",
@@ -52,6 +53,17 @@ private _loadSettings = { // @TODO: Add for initKeybinds aswell
 
     if (fileExists _path) then {
         waitUntil { !isNil "CBA_fnc_addSetting" };
+        [compile preprocessFileLineNumbers _path] call CBA_fnc_directCall; // Make sure it's run unscheduled
+    };
+};
+
+private _loadKeybinds = {
+    params ["_module"];
+
+    private _path = format ["components\%1\initKeybinds.sqf", _module];
+
+    if (fileExists _path) then {
+        waitUntil { !isNil "CBA_fnc_addKeybind" };
         [compile preprocessFileLineNumbers _path] call CBA_fnc_directCall; // Make sure it's run unscheduled
     };
 };
@@ -131,6 +143,9 @@ private _load3denInit = {
 
     /* Compile settings */
     [_x] spawn _loadSettings;
+
+    /* Compile Keybinds */
+    [_x] spawn _loadKeybinds;
 
     /* Compile xeh events */
     [_x] call _loadPreInit;

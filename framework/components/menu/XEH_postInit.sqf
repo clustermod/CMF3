@@ -1,7 +1,5 @@
 #include "script_component.hpp"
 
-["CMF: Common", QGVAR(toggleHUD), [LSTRING(toggle_hud_displayname), LSTRING(toggle_hud_tooltip)], {}, FUNC(hideHUD), [15, [false, true, false]]] call CBA_fnc_addKeybind;
-
 /* Add zeus actions */
 private _children = {
     params ["_target"];
@@ -15,7 +13,7 @@ private _children = {
     private _action = ([QGVAR(submitAAR), LSTRING(aar_displayname), "rsc\data\icon_ace_debrief_ca.paa", { _this call EFUNC(aar,submitAAR) }, { true }] call ace_interact_menu_fnc_createAction);
     _actions pushBack [_action, [], _target];
 
-    private _action = ([QGVAR(viewDistance), LSTRING(viewdistance_displayname), "rsc\data\icon_ace_viewDistance_ca.paa", { _this call EFUNC(viewdistance,openDialog); }, { true }] call ACEFUNC(interact_menu,createAction));
+    private _action = ([QGVAR(viewDistance), LSTRING(viewdistance_displayname), "rsc\data\icon_ace_viewDistance_ca.paa", { createDialog QEGVAR(viewdistance,menu); }, { true }] call ACEFUNC(interact_menu,createAction));
     _actions pushBack [_action, [], _target];
 
     _actions;

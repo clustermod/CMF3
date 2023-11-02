@@ -19,11 +19,7 @@ SCRIPT(freezeTime);
 GVAR(freezeTime_initDate) = date;
 // @TODO: Move to new module environment
 private _handle = [{
-    if !(GVAR(setting_freezeTime)) exitWith {};
-
-    if (GVAR(freezeTime_disable)) exitWith {
-        [(_this select 1)] call CBA_fnc_removePerFrameHandler;
-    };
+    if !(GVAR(setting_freezeTime)) exitWith { GVAR(freezeTime_initDate) = date };
 
     setdate GVAR(freezeTime_initDate);
 }] call CBA_fnc_addPerFrameHandler;

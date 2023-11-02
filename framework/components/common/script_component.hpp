@@ -13,3 +13,7 @@
 #endif
 
 #include "..\main\script_component.hpp"
+
+#define NOTIFICATION_M 0.01
+#define NOTIFICATION_W 300 * pixelW
+#define NOTIFICATION_BORDER_W 10 * pixelW

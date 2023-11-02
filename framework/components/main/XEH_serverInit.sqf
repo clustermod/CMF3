@@ -21,9 +21,6 @@ missionNamespace setVariable [QGVAR(version), VERSION_STR, true];
 ACE_maxWeightCarry = 1500;
 ACE_maxWeightDrag = 1500;
 
-/* Disable removing grass */ // @TODO: Move to viewdistance
-tawvd_disablenone = true;
-
 /* Disable Shacktac UI groupBar */ // @TODO: Move to common together with STUI settings
 STHud_NoSquadBarMode = true;
 

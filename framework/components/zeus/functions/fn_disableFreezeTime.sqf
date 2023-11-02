@@ -17,6 +17,11 @@
 SCRIPT(disableFreezeTime);
 
 [LSTRING(common_module_category_displayname), LSTRING(dis_freezeTime_module_displayname), {
-    missionNamespace setVariable [QEGVAR(utility,freezetime_disable), true, true];
-    [LSTRING(dis_freezeTime_success_message)] call zen_common_fnc_showMessage
+    missionNamespace setVariable [QEGVAR(utility,setting_freezeTime), !EGVAR(utility,setting_freezeTime), true];
+    if (EGVAR(utility,setting_freezeTime)) then {
+        [LSTRING(en_freezeTime_success_message)] call zen_common_fnc_showMessage;
+    } else {
+        [LSTRING(dis_freezeTime_success_message)] call zen_common_fnc_showMessage;
+    }
+
 }, "rsc\data\icon_module_disableSetDate_ca.paa"] call zen_custom_modules_fnc_register;

@@ -51,16 +51,17 @@
     ]],
 
     [DSTRING(common_module_category_displayname), [
-        ["English", "CMF: Common"],
-        ["Spanish", "CMF: Common"]
+        ["English", QUOTE(FRAMEWORK: Common)],
+        ["Spanish", QUOTE(FRAMEWORK: Common)]
     ]],
     [DSTRING(dis_freezeTime_module_displayname), [
-        ["English", "Disable frozen time"],
-        ["Spanish", "Desactivar congelar el tiempo"]
+        ["English", "Toggle frozen time"]
+    ]],
+    [DSTRING(en_freezeTime_success_message), [
+        ["English", "Froze time"]
     ]],
     [DSTRING(dis_freezeTime_success_message), [
-        ["English", "Unfroze time"],
-        ["Spanish", "Descongelar el tiempo"]
+        ["English", "Unfroze time"]
     ]],
 
     [DSTRING(forceopen_kosherArsenal_success_message), [

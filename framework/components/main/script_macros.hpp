@@ -69,7 +69,6 @@
 }
 
 #define PREP(var1) if (!is3DEN) then { PREP_ADDON(var1) } else { PREP_SYS(var1) }
-#define IPREP(var1) PREP(var1); if (!is3DEN) then { [] spawn { waitUntil { missionNamespace getVariable [QEGVAR(main,components_initialized), false] }; [true] spawn FUNC(var1)} } else { [true] spawn FUNC(var1) }
 
 #define FILE_EXISTS(FILE) (fileExists (FILE))
 
@@ -136,7 +135,7 @@ Macros: DEBUG_MODE_x
 #ifdef DEBUG_SYNCHRONOUS
     #define LOG_RPT(LEVEL,MESSAGE) diag_log text LOG_SYS_FORMAT(LEVEL,MESSAGE)
 #else
-    #define LOG_RPT(LEVEL,MESSAGE) LOG_SYS_FORMAT(LEVEL,MESSAGE) call CBA_fnc_log
+    #define LOG_RPT(LEVEL,MESSAGE) LOG_SYS_FORMAT(LEVEL,MESSAGE) call EFUNC(diagnostic,log)
 #endif
 
 // if defined should log to systemChat aswell
@@ -245,7 +244,7 @@ Macro: ERROR_MSG()
 Parameters:
     MESSAGE -  Message to record <STRING>
 ------------------------------------------- */
-#define ERROR_MSG(MESSAGE) ['PREFIX', 'COMPONENT', nil, MESSAGE, __FILE__, __LINE__ + 1] call CBA_fnc_error
+#define ERROR_MSG(MESSAGE) ['PREFIX', 'COMPONENT', nil, MESSAGE, __FILE__, __LINE__ + 1] call EFUNC(diagnostic,error)
 #define ERROR_MSG_1(MESSAGE,ARG1) ERROR_MSG(FORMAT_1(MESSAGE,ARG1))
 #define ERROR_MSG_2(MESSAGE,ARG1,ARG2) ERROR_MSG(FORMAT_2(MESSAGE,ARG1,ARG2))
 #define ERROR_MSG_3(MESSAGE,ARG1,ARG2,ARG3) ERROR_MSG(FORMAT_3(MESSAGE,ARG1,ARG2,ARG3))
@@ -264,7 +263,7 @@ Parameters:
     TITLE - Title of error message <STRING>
     MESSAGE -  Body of error message <STRING>
 ------------------------------------------- */
-#define ERROR_WITH_TITLE(TITLE,MESSAGE) ['PREFIX', 'COMPONENT', TITLE, MESSAGE, __FILE__, __LINE__ + 1] call CBA_fnc_error
+#define ERROR_WITH_TITLE(TITLE,MESSAGE) ['PREFIX', 'COMPONENT', TITLE, MESSAGE, __FILE__, __LINE__ + 1] call EFUNC(diagnostic,error)
 #define ERROR_WITH_TITLE_1(TITLE,MESSAGE,ARG1) ERROR_WITH_TITLE(TITLE,FORMAT_1(MESSAGE,ARG1))
 #define ERROR_WITH_TITLE_2(TITLE,MESSAGE,ARG1,ARG2) ERROR_WITH_TITLE(TITLE,FORMAT_2(MESSAGE,ARG1,ARG2))
 #define ERROR_WITH_TITLE_3(TITLE,MESSAGE,ARG1,ARG2,ARG3) ERROR_WITH_TITLE(TITLE,FORMAT_3(MESSAGE,ARG1,ARG2,ARG3))

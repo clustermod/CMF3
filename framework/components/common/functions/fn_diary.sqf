@@ -32,35 +32,23 @@
             player createDiaryRecord [QGVAR(diary), ["Credits", "<br/><font size='13'>Cluster Mod Team:<br/>  - </font><font size='13' color='#fcba03'>Eric</font>"]];
 
             /* List CMF Keybinds */
-            // @TODO: Make more modular
-            private _keybindString = "<br/><font size='13'>";
+            private _clientKeybinds = "<br/><font size='13'>";
             {
-                private _category = _x select 0;
-                _keybindString = _keybindString + format ["%1:<br/>", _category];
+                private _category = _x;
+                _clientKeybinds = _clientKeybinds + format ["%1:<br/>", _category];
+
+                private _keybindsArr = [GVAR(clientKeybinds), _category] call CBA_fnc_hashGet;
                 {
-                    private _keybindTitle = "";
-                    private _keybindKeys = "Failed to get keybind";
-                    private _keybind = [_category, _x] call CBA_fnc_getKeybind;
-                    if (!isNil "_keybind") then {
-                        _keybindTitle = (_keybind select 2);
-                        _keybindKeys = [(_keybind select 5)] call FUNC(keybindToString);
-                    };
-                    _keybindString = _keybindString + format ["<font size='13'>  %1: <font color='#fcba03'>%2</font><br/>", _keybindTitle, _keybindKeys];
-                } forEach (_x select 1);
-                _keybindString = _keybindString + "<br/>";
-            } forEach [
-                ["CMF: Common", [
-                    "cmf_menu_toggleHUD"
-                ]],
-                ["CMF: Viewdistance", [
-                    "cmf_viewdistance_open_settings",
-                    "cmf_viewdistance_dec_viewdistance",
-                    "cmf_viewdistance_inc_viewdistance",
-                    "cmf_viewdistance_dec_terrain_quality",
-                    "cmf_viewdistance_inc_terrain_quality"
-                ]]
-            ];
-            player createDiaryRecord [QGVAR(diary), ["Keybinds", _keybindString]];
+                    private _title = [_x select 1, (_x select 1) select 0] select ((_x select 1) isEqualType []);
+                    _clientKeybinds = _clientKeybinds + format [ 
+                        "<font size='13'>  %1: <font color='#fcba03'>%2</font><br/>", 
+                        _title, 
+                        [([_category, _x select 0] call CBA_fnc_getKeybind) select 5] call cmf_common_fnc_keybindToString
+                    ];
+                } forEach _keybindsArr;
+                _clientKeybinds = _clientKeybinds + "<br/>";
+            } forEach ([GVAR(clientKeybinds)] call CBA_fnc_hashKeys);
+            player createDiaryRecord [QGVAR(diary), ["Keybinds", _clientKeybinds]];
 
             /* List CMF Settings */
             private _clientSettings = "<br/><font size='13'>";

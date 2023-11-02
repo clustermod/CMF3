@@ -12,6 +12,9 @@ enableDebugConsole[] = {"76561198065818848"};
 /* Force rotor lib */
 forceRotorLibSimulation = 0;
 
+/* Include imported UI elements */
+#include "rsc\ui\RscImports.hpp"
+
 /* Include custom defines */
 #include "rsc\ui\RscDefines.hpp"
 

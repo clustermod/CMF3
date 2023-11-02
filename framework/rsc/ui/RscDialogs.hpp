@@ -650,3 +650,6 @@ class cmf_viewdistance_dialog {
         };
     };
 };
+
+//#include "common_notification.hpp"
+#include "viewdistance_menu.hpp"

@@ -5,7 +5,6 @@
 
 [] call FUNC(mapSwitchTextures);
 [] call FUNC(resizeMapMarkers);
-[] call FUNC(hearing);
 [] call FUNC(hideRespawnMarker);
 [] call FUNC(restrictLauncher);
 [] call FUNC(drinking);

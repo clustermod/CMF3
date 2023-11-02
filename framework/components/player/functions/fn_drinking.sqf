@@ -131,5 +131,5 @@ SCRIPT(drinking);
     };
 
     private _action = [QGVAR(drinking_menu), LSTRING(hydration), "rsc\data\icon_ace_hydration_ca.paa", {}, _condition, _children] call ace_interact_menu_fnc_createAction;
-    [typeOf player, 1, ["ACE_SelfActions", "ACE_Equipment"], _action] call ace_interact_menu_fnc_addActionToClass;
+    [typeOf player, 1, ["ACE_SelfActions", "ACE_Equipment"], _action] call ace_interact_menu_fnc_addActionToClass; // @TODO: Change how action is added
 }] call CBA_fnc_waitUntilAndExecute;

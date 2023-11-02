@@ -15,6 +15,8 @@
  * Public: No
  */
 
+if (is3DEN) exitWith {};
+
 private _action = [
     QGVAR(toggleHUD), 
     LSTRING(hide_hud_displayname), 

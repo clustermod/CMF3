@@ -6,6 +6,17 @@ import re
 from config_style_checker import main as check_config_style
 from sqf_validator import main as check_sqf_syntax
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def remove_dir(path, dir):
     path = path.split(os.path.sep)
     path.remove(dir)
@@ -41,17 +52,19 @@ def check_scripts(src):
     errorCount = 0
     path = os.path.join(src, 'rsc', 'scripts')
 
-    print("\nChecking Scripts")
+    print(bcolors.WARNING + "\nChecking Scripts" + bcolors.ENDC)
 
     for file in os.listdir(path):
-        print("Script detected:   {0}".format(remove_dir(os.path.join(path, file), '..')))
+        if file.upper() in ["SCRIPT_COMPONENT.HPP"]: continue
+        
+        print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " Script detected:   {0}".format(remove_dir(os.path.join(path, file), '..')))
         errorCount += 1
     
     print("------\nErrors detected: {0}".format(errorCount))
     if (errorCount == 0):
-        print("Script Check PASSED")
+        print(bcolors.OKGREEN + "Script Check PASSED" + bcolors.ENDC)
     else:
-        print("Script Check FAILED")
+        print(bcolors.FAIL + "Script Check FAILED" + bcolors.ENDC)
     
     return errorCount
 
@@ -59,18 +72,18 @@ def check_loadouts(src):
     errorCount = 0
     path = os.path.join(src, 'rsc', 'loadouts')
 
-    print("\nChecking Loadouts")
+    print(bcolors.WARNING + "\nChecking Loadouts" + bcolors.ENDC)
 
     for file in os.listdir(path):
         if file[0] != '!':
-            print("Loadout detected:   {0}".format(remove_dir(os.path.join(path, file), '..')))
+            print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " Loadout detected:   {0}".format(remove_dir(os.path.join(path, file), '..')))
             errorCount += 1
 
     print("------\nErrors detected: {0}".format(errorCount))
     if (errorCount == 0):
-        print("Loadout Check PASSED")
+        print(bcolors.OKGREEN + "Loadout Check PASSED" + bcolors.ENDC)
     else:
-        print("Loadout Check FAILED")
+        print(bcolors.FAIL + "Loadout Check FAILED" + bcolors.ENDC)
     
     return errorCount
 
@@ -82,7 +95,7 @@ def release_build(rootPath, src):
     errorcount += check_scripts(src)
     errorcount += check_loadouts(src)
 
-    print("\nBuilding Release")
+    print(bcolors.WARNING + "\nBuilding Release" + bcolors.ENDC)
 
     if (errorcount == 0):
         releaseDir = os.path.join(rootPath, 'release')
@@ -90,7 +103,7 @@ def release_build(rootPath, src):
             os.makedirs(releaseDir)
 
         versionArr = get_version(src);
-        releaseName = os.path.join(releaseDir, '{0}-{1}.{2}.{3}.{4}.zip'.format(get_name(src), versionArr[0], versionArr[1], versionArr[2], versionArr[3])) # @TODO: Get release name from script_mod
+        releaseName = os.path.join(releaseDir, '{0}-{1}.{2}.{3}.{4}.zip'.format(get_name(src), versionArr[0], versionArr[1], versionArr[2], versionArr[3]))
 
         fileCount = 0
         with zipfile.ZipFile(releaseName, 'w', zipfile.ZIP_DEFLATED) as archive:
@@ -99,17 +112,16 @@ def release_build(rootPath, src):
                     if file.upper() in ['README.MD', 'TODO.MD', 'CHANGELOG.MD']: continue
                     
                     targetRoot = remove_dir(root, 'framework')
-                    print("Zipping: {0}".format(remove_dir(os.path.join(root, file), '..')))
+                    print(bcolors.OKCYAN + "ZIP" + bcolors.ENDC + " Adding File: {0}".format(remove_dir(os.path.join(root, file), '..')))
                     archive.write(os.path.join(root, file), os.path.relpath(os.path.join(targetRoot, file), os.path.join(src, '..')))
                     fileCount += 1
-        #shutil.make_archive(releaseName, 'zip', src)
     
     print("------\nErrors detected: {0}".format(errorcount))
     if (errorcount == 0):
-        print("Release Build PASSED")
+        print(bcolors.OKGREEN + "Release Build PASSED" + bcolors.ENDC)
         print('{1} ({0} files)'.format(fileCount, remove_dir(releaseName, '..')))
     else:
-        print("Release Build FAILED")
+        print(bcolors.FAIL + "Release Build FAILED" + bcolors.ENDC)
     
     return errorcount
 
