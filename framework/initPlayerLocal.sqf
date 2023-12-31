@@ -6,10 +6,11 @@
 waitUntil{ missionNamespace getVariable ["cmf_main_player_initialized", false] };
 
 /* Set available respawns */
-[4] call cmf_respawn_fnc_limit;
+[3] call cmf_respawn_fnc_limit;
 
 /* Initialize kosherArsenal */
-[["LOADOUTNAME HERE"], true, true] call cmf_kosherArsenal_fnc_init;
+[["!arsenal_template"], false] call cmf_kosherArsenal_fnc_init;
+[ "!logistics_template"] call cmf_logistics_fnc_cratepreset;
 
 /* Initialize rallypoints */
 [["FTL", "SL", "PL", "CO"]] call cmf_respawn_fnc_rallypoint;

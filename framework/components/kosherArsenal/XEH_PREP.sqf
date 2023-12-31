@@ -2,5 +2,5 @@
 
 PREP(init);
 PREP(ammobox);
+PREP(forceClose);
 PREP(forceArsenal);
-PREP(kosherAI);

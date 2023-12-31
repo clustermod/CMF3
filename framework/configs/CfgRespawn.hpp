@@ -10,5 +10,7 @@ respawnonStart = 1;
 respawnTemplates[] = {"MenuPosition"};
 DisabledAI = 1;
 
+respawnDelay = 3;
+
 /* Remove the goggles players can choose in their profile */
 allowProfileGlasses = 0;

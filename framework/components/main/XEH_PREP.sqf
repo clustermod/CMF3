@@ -1,7 +1,8 @@
 #include "script_component.hpp"
 
 PREP(localize);
-PREP(playerInit);
-IPREP(serverInit);
-IPREP(missionInit);
-IPREP(addonBlacklist);
+PREP(acreRestore);
+PREP(fortify);
+PREP(addonBlacklist);
+PREP(chatHandler);
+PREP(changelog);

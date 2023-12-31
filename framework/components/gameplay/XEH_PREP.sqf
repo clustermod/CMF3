@@ -2,6 +2,7 @@
 
 PREP(repairRearmStation);
 PREP(restrictedVehicle);
-IPREP(tracers);
-IPREP(safestart);
-IPREP(flashbangOverride);
+PREP(environment);
+PREP(tracers);
+PREP(safestart);
+PREP(flashbangOverride);

@@ -1,5 +1,6 @@
 #ifndef MODULE
     #define MODULE main
+    #define MODULE_BEAUTIFIED Main
 #endif
 
 #define REQUIRED_ADDONS []
@@ -7,8 +8,12 @@
 
 #include "script_mod.hpp"
 
-/* Define Debug mode */
-// #define DEBUG_MODE_FULL
-// #define DEBUG_SYSTEMCHAT
+#ifdef DEBUG_ENABLED_MAIN
+    #define DEBUG_MODE_FULL
+#endif
+
+#ifdef DEBUG_SETTINGS_MAIN
+    #define DEBUG_SETTINGS DEBUG_SETTINGS_MAIN
+#endif
 
 #include "script_macros.hpp"

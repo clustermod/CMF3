@@ -1,4 +1,4 @@
 allowedHTMLLoadURIs[] = {
     "*.cluster-community.com",
-    "*.github.com/clustermod/CMF3*"
+    "*github.com/*/CMF3*"
 };

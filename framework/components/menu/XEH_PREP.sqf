@@ -1,9 +1,6 @@
 #include "script_component.hpp"
 
-PREP(delayedSafestartAction);
-PREP(displayRolesAction);
-PREP(fixLoadingBug);
-PREP(fixMapAction);
-PREP(toggleHUDAction);
-PREP(viewDistanceAction);
-PREP(init);
+PREP(bugs);
+PREP(safestart);
+PREP(hideHUD);
+PREP(diagnostics);

@@ -22,6 +22,11 @@
 #define QQGVAR(var1) QUOTE(QGVAR(var1))
 #define QQEGVAR(var1,var2) QUOTE(QEGVAR(var1,var2))
 
+// @TODO: replace ACE, CBA and BIS functions with these macros
+#define ACEFUNC(var1,var2) TRIPLES(DOUBLES(ace,var1),fnc,var2)
+#define CBAFUNC(var1) TRIPLES(CBA,fnc,var1)
+#define BISFUNC(var1) TRIPLES(BIS,fnc,var1)
+
 #define FUNC(var1) TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1)
 #define FUNCMAIN(var1) TRIPLES(PREFIX,fnc,var1)
 #define FUNC_INNER(var1,var2) TRIPLES(DOUBLES(PREFIX,var1),fnc,var2)
@@ -36,7 +41,7 @@
 #define QQEFUNC(var1,var2) QUOTE(QEFUNC(var1,var2))
 
 #ifndef PATHTO_SYS
-    #define PATHTO_SYS(var1,var2) components\var1\var2.sqf
+    #define PATHTO_SYS(var1,var2) components\var1\functions\var2.sqf
 #endif
 
 #ifndef PATHTOF_SYS
@@ -45,8 +50,8 @@
 
 #define DSTRING(var1) QUOTE(TRIPLES(STR,COMPONENT,var1))
 #define EDSTRING(var1,var2) QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
-#define LSTRING(var1) ([QUOTE(PATHTO_SYS(MODULE,stringtable)), DSTRING(var1)] call EFUNC(main,localize))
-#define ELSTRING(var1,var2) ([QUOTE(PATHTO_SYS(var1,stringtable)), EDSTRING(var1,var2)] call EFUNC(main,localize))
+#define LSTRING(var1) ([QUOTE(PATHTOF_SYS(MODULE,stringtable.sqf)), DSTRING(var1)] call EFUNC(main,localize))
+#define ELSTRING(var1,var2) ([QUOTE(PATHTOF_SYS(var1,stringtable.sqf)), EDSTRING(var1,var2)] call EFUNC(main,localize))
 
 #define ARRAY_FLATTEN(var1) (flatten var1)
 
@@ -63,21 +68,11 @@
     FUNC(var1) = {ERROR_1("%1 missing a required addon.",QFUNC(var1))}\
 }
 
-#define PREP(var1) PREP_ADDON(var1)
-#define IPREP(var1) PREP(var1); [] spawn {waitUntil { missionNamespace getVariable [QEGVAR(main,components_initialized), false] }; [] spawn FUNC(var1)}
+#define PREP(var1) if (!is3DEN) then { PREP_ADDON(var1) } else { PREP_SYS(var1) }
 
 #define FILE_EXISTS(FILE) (fileExists (FILE))
 
 #define MISSION_PATH(FILE) (getMissionPath (FILE))
-
-#define CONFIG_PARAM_1(ARG1) ([[QUOTE(ARG1)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_2(ARG1, ARG2) ([[QUOTE(ARG1), QUOTE(ARG2)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_3(ARG1, ARG2, ARG3) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_4(ARG1, ARG2, ARG3, ARG4) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3), QUOTE(ARG4)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_5(ARG1, ARG2, ARG3, ARG4, ARG5) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3), QUOTE(ARG4), QUOTE(ARG5)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_6(ARG1, ARG2, ARG3, ARG4, ARG5, ARG6) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3), QUOTE(ARG4), QUOTE(ARG5), QUOTE(ARG6)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_7(ARG1, ARG2, ARG3, ARG4, ARG5, ARG6, ARG7) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3), QUOTE(ARG4), QUOTE(ARG5), QUOTE(ARG6), QUOTE(ARG7)]] call EFUNC(common,getConfigParam))
-#define CONFIG_PARAM_8(ARG1, ARG2, ARG3, ARG4, ARG5, ARG6, ARG7, ARG8) ([[QUOTE(ARG1), QUOTE(ARG2), QUOTE(ARG3), QUOTE(ARG4), QUOTE(ARG5), QUOTE(ARG6), QUOTE(ARG7), QUOTE(ARG8)]] call EFUNC(common,getConfigParam))
 
 #define CREATE_HASH_FROM_ARRAY(var1) (createHashMapFromArray var1)
 
@@ -140,7 +135,7 @@ Macros: DEBUG_MODE_x
 #ifdef DEBUG_SYNCHRONOUS
     #define LOG_RPT(LEVEL,MESSAGE) diag_log text LOG_SYS_FORMAT(LEVEL,MESSAGE)
 #else
-    #define LOG_RPT(LEVEL,MESSAGE) LOG_SYS_FORMAT(LEVEL,MESSAGE) call CBA_fnc_log
+    #define LOG_RPT(LEVEL,MESSAGE) LOG_SYS_FORMAT(LEVEL,MESSAGE) call EFUNC(diagnostic,log)
 #endif
 
 // if defined should log to systemChat aswell
@@ -249,7 +244,7 @@ Macro: ERROR_MSG()
 Parameters:
     MESSAGE -  Message to record <STRING>
 ------------------------------------------- */
-#define ERROR_MSG(MESSAGE) ['PREFIX', 'COMPONENT', nil, MESSAGE, __FILE__, __LINE__ + 1] call CBA_fnc_error
+#define ERROR_MSG(MESSAGE) ['PREFIX', 'COMPONENT', nil, MESSAGE, __FILE__, __LINE__ + 1] call EFUNC(diagnostic,error)
 #define ERROR_MSG_1(MESSAGE,ARG1) ERROR_MSG(FORMAT_1(MESSAGE,ARG1))
 #define ERROR_MSG_2(MESSAGE,ARG1,ARG2) ERROR_MSG(FORMAT_2(MESSAGE,ARG1,ARG2))
 #define ERROR_MSG_3(MESSAGE,ARG1,ARG2,ARG3) ERROR_MSG(FORMAT_3(MESSAGE,ARG1,ARG2,ARG3))
@@ -268,7 +263,7 @@ Parameters:
     TITLE - Title of error message <STRING>
     MESSAGE -  Body of error message <STRING>
 ------------------------------------------- */
-#define ERROR_WITH_TITLE(TITLE,MESSAGE) ['PREFIX', 'COMPONENT', TITLE, MESSAGE, __FILE__, __LINE__ + 1] call CBA_fnc_error
+#define ERROR_WITH_TITLE(TITLE,MESSAGE) ['PREFIX', 'COMPONENT', TITLE, MESSAGE, __FILE__, __LINE__ + 1] call EFUNC(diagnostic,error)
 #define ERROR_WITH_TITLE_1(TITLE,MESSAGE,ARG1) ERROR_WITH_TITLE(TITLE,FORMAT_1(MESSAGE,ARG1))
 #define ERROR_WITH_TITLE_2(TITLE,MESSAGE,ARG1,ARG2) ERROR_WITH_TITLE(TITLE,FORMAT_2(MESSAGE,ARG1,ARG2))
 #define ERROR_WITH_TITLE_3(TITLE,MESSAGE,ARG1,ARG2,ARG3) ERROR_WITH_TITLE(TITLE,FORMAT_3(MESSAGE,ARG1,ARG2,ARG3))

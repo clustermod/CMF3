@@ -1,11 +1,17 @@
 #include "script_component.hpp"
 
-IPREP(clearVehicleCargo);
+PREP(clearVehicleCargo);
+PREP(freezeTime);
 PREP(countDown);
 PREP(nearestPlayer);
 PREP(preventProne);
-IPREP(freezeTime);
+PREP(hexToASCII);
 PREP(restrictZeus);
 PREP(endLoadingScreen);
 PREP(stripUnit);
-PREP(submitAAR);
+PREP(versionCompare);
+PREP(sunAngle);
+PREP(getTimeOfSunAngle);
+PREP(parseMarkdown);
+PREP(getWeatherDescriptors);
+PREP(zeusHint);

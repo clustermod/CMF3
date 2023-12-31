@@ -1,5 +1,9 @@
 #include "script_component.hpp"
 
-IPREP(preventProne);
-IPREP(reinforce);
-IPREP(setSkill);
+PREP(preventProne);
+PREP(reinforce);
+PREP(setSkill);
+PREP(fireEH);
+PREP(silenceAI);
+PREP(panic);
+PREP(hostage);

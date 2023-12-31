@@ -4,7 +4,16 @@
  */
 
 /* Enable function logging */
-allowFunctionsLog=1;
+allowFunctionsLog = 1;
+
+/* Enable Debug for Eric */
+enableDebugConsole[] = {"76561198065818848"};
+
+/* Force rotor lib */
+forceRotorLibSimulation = 0;
+
+/* Include imported UI elements */
+#include "rsc\ui\RscImports.hpp"
 
 /* Include custom defines */
 #include "rsc\ui\RscDefines.hpp"
@@ -14,9 +23,6 @@ allowFunctionsLog=1;
 
 /* Include Controls */
 #include "rsc\ui\RscControls.hpp"
-
-/* include CMF config */
-#include "cmf_config.hpp"
 
 /* include Enhanced Vehicles config */
 #include "configs\CfgEnhancedVehicles.hpp"
@@ -49,4 +55,22 @@ class CfgSounds {
 
 class CfgCommands {
 	#include "configs\CfgCommands.hpp"
+};
+
+/* ACE Fortify Preset */
+class ACEX_Fortify_Presets {
+    class CMF_FOXHOLE {
+        displayName = "Foxhole Preset";
+        objects[] = {
+            {"Land_Tyres_F", 2},
+            {"Land_BagFence_01_end_green_F", 3},
+            {"Land_fort_bagfence_long", 5},
+			{"Land_BagFence_01_short_green_F", 5},
+			{"Land_Plank_01_4m_F", 8},
+            {"Land_ShellCrater_02_small_F", 10},
+			{"Land_fort_rampart", 10},
+			{"Land_fort_bagfence_round", 15},
+			{"Land_Plank_01_8m_F", 16}
+        };
+    };
 };

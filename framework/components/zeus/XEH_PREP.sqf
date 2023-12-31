@@ -1,12 +1,14 @@
 #include "script_component.hpp"
 
-IPREP(setLivesModule);
-IPREP(forceArsenalModule);
-IPREP(ammoboxModule);
-IPREP(resetKosherRoleModule);
-IPREP(kosherForceCloseModule);
-IPREP(disableFreezeTime);
-IPREP(toggleSpectatorModule);
-IPREP(addRallypointModule);
-IPREP(removeRallypointModule);
-IPREP(playerInfo);
+PREP(setLivesModule);
+PREP(forceArsenalModule);
+PREP(ammoboxModule);
+PREP(resetKosherRoleModule);
+PREP(kosherForceCloseModule);
+PREP(disableFreezeTime);
+PREP(toggleSpectatorModule);
+PREP(addRallypointModule);
+PREP(removeRallypointModule);
+PREP(playerInfo);
+PREP(safestartPhases);
+PREP(safestartCutoffPhases);
