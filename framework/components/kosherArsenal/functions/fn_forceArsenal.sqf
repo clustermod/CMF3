@@ -52,28 +52,26 @@ params ["_unit", ["_forcePrimary", true]];
     [_arsenal, player, false] call ace_arsenal_fnc_openBox;
 
     /* Create the force close button in the arsenal */
-    [] spawn {
-        waitUntil{!isNull (findDisplay IDD_ace_arsenal)};
+    [{ !isNull findDisplay IDD_ace_arsenal }, {
         ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
         (findDisplay IDD_ace_arsenal) ctrlCreate [QGVAR(forceClose), 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
-    };
+    }] call CBA_fnc_waitUntilAndExecute;
 
     /* handle closing the arsenal */
     private _onClose = {
         _thisArgs params["_forcedprimary", "_arsenal"];
 
         /* if force primary is enabled and the player doesn't have a primary selected kick him back into the arsenal */
-        if (_forcedprimary && (primaryWeapon player == "") && !(player getVariable [QGVAR(close), false])) exitWith {
+        if (_forcedprimary && { primaryWeapon player isEqualTo "" && { !(player getVariable [QGVAR(close), false]) } }) exitWith {
             ["<t color='#ff0000'>"+LSTRING(required_primary)+"</t>", -1, -1, 5, 1, 0, 9459] spawn bis_fnc_dynamicText;
-            _arsenal spawn {
-                sleep 0.1;
-                [_this, player, false] call ace_arsenal_fnc_openBox;
-                [] spawn {
-                    waitUntil{!isNull (findDisplay IDD_ace_arsenal)};
-                    ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
-                    (findDisplay IDD_ace_arsenal) ctrlCreate [QGVAR(forceClose), 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
-                };
-            };
+            [{
+                [_this, cmf_player, false] call ace_arsenal_fnc_openBox;
+            }, _arsenal, 0.1] call CBA_fnc_waitAndExecute;
+
+            [{ !isNull findDisplay IDD_ace_arsenal }, {
+                ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
+                (findDisplay IDD_ace_arsenal) ctrlCreate [QGVAR(forceClose), 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
+            }, _arsenal, 0.1] call CBA_fnc_waitUntilAndExecute;
         };
 
         /* Delete the arsenal object */
@@ -81,7 +79,7 @@ params ["_unit", ["_forcePrimary", true]];
 
         /* Remove the closed eventHandler */
         ["ace_arsenal_displayClosed", _thisId] call CBA_fnc_removeEventHandler;
-        player setVariable [QGVAR(close), false, true];
+        [cmf_player, QGVAR(close), false] call CBA_fnc_setVarNet;
 
         /* Raise event */
         [QGVAR(onClose), [(player getVariable [QGVAR(close), false])]] call CBA_fnc_localEvent;

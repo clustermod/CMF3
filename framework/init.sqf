@@ -4,3 +4,5 @@
 
 /* Wait until CMF is initialized */
 waitUntil{ missionNamespace getVariable ["cmf_main_server_initialized", false] };
+
+0 execVM "markers.sqf";

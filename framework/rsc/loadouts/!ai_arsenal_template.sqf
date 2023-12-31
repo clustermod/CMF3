@@ -51,7 +51,6 @@ if (_role in ["SL"]) then {
 
 /* Medic */
 if (_role in ["MED"]) then {
-    player setVariable ["ace_medical_medicclass", 2, true];
     _availableUniforms = [];
     _availableWeapons = [];
     _availableAttachments = [];

@@ -21,15 +21,15 @@ private _dikCode = _keybind select 0;
 
 _keyString = call compile keyName _dikCode;
 
-if (_shift && {_dikCode != 42}) then {
+if (_shift && { _dikCode != 42 }) then {
     _keyString = format ["Shift + %1", _keyString];
 };
 
-if (_alt && {_dikCode != 56}) then {
+if (_alt && { _dikCode != 56 }) then {
     _keyString = format ["Alt + %1", _keyString];
 };
 
-if (_ctrl && {_dikCode != 29}) then {
+if (_ctrl && { _dikCode != 29 }) then {
     _keyString = format ["Ctrl + %1", _keyString];
 };
 

@@ -4,3 +4,5 @@
 
 /* Run CMF */
 [] execVM "components\main\XEH_MODULE.sqf";
+
+0 call compile preprocessFileLineNumbers "markers.sqf";

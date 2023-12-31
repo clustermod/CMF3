@@ -16,32 +16,51 @@
 */
 SCRIPT(safestart);
 
-if (!isServer) exitWith {};
-
 if !(GVAR(setting_safestart)) exitWith {};
+
+/* Freeze Time */
+EGVAR(environment,freezeTime_override) = true;
+
+if (!isServer) exitWith {};
 
 LOG("Enabled safestart");
 
 /* Automatic phases */
-missionNameSpace setVariable [QGVAR(safestart_phase), ["Setup", 0], true];
+GVAR(safestart_phase) = ["Setup", 0];
+publicVariable QGVAR(safestart_phase);
 
 [{ (systemTime select 3) >= 19 }, {
-    missionNameSpace setVariable [QGVAR(safestart_phase), ["Pre-Start", time], true];
+    GVAR(safestart_phase) = ["Pre-Start", serverTime];
+    publicVariable QGVAR(safestart_phase);
 }] call CBA_fnc_waitUntilAndExecute;
 
 [{ (systemTime select 3) >= 20 }, {
-    missionNameSpace setVariable [QGVAR(safestart_phase), ["Briefing", time], true];
+    GVAR(safestart_phase) = ["Briefing", serverTime];
+    publicVariable QGVAR(safestart_phase);
 }] call CBA_fnc_waitUntilAndExecute;
 
 [{ (systemTime select 3) >= 20 && { (systemTime select 4) >= 30 } }, {
-    missionNameSpace setVariable [QGVAR(safestart_phase), ["Overtime", time], true];
+    GVAR(safestart_phase) = ["<font color='#FF0000'>Overtime</font>", serverTime];
+    publicVariable QGVAR(safestart_phase);
 }] call CBA_fnc_waitUntilAndExecute;
 
-/* Freeze Time */
-GVAR(safestart_freezeTimeState) = EGVAR(utility,setting_freezeTime);
-if (!EGVAR(utility,setting_freezeTime)) then {
-    missionNamespace setVariable [QEGVAR(utility,setting_freezeTime), true, true];
-};
+/* On deployment start */
+["acex_fortify_onDeployStart", {
+    params ["_unit", "_object", "_cost"];
+    GVAR(safestart_override) = true;
+}] call CBA_fnc_addEventHandler;
+
+/* On deployment object placed */
+["ace_fortify_deployFinished", {
+    params ["_unit", "_side", "_objectClass", "_pos", "_vectorDir", "_vectorUp"];
+    GVAR(safestart_override) = false;
+}] call CBA_fnc_addEventHandler;
+
+/* On deployment cancelled */
+["ace_fortify_deployCanceled", {
+    params ["_unit", "_side", "_objectClass", "_pos", "_vectorDir", "_vectorUp"];
+    GVAR(safestart_override) = false;
+}] call CBA_fnc_addEventHandler;
 
 addMissionEventHandler ["EntityRespawned", {
     params ["_unit", "_body"];
@@ -70,7 +89,7 @@ addMissionEventHandler ["EntityRespawned", {
             private _missionData = missionNameSpace getVariable [QEGVAR(common,missionData), []];
             private _hash = [_missionData] call CBA_fnc_hashCreate;
 
-            private _title = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(utility,hexToASCII)] call CBA_fnc_hashGet;
+            private _title = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(common,hexToASCII)] call CBA_fnc_hashGet;
             private _safestartHint = _safestartHint + format["<t size='1' color='#888888'>%1</t><br/>", _title];
 
             /* Safestart phase */
@@ -80,24 +99,24 @@ addMissionEventHandler ["EntityRespawned", {
             _safestartHint = _safestartHint + format [
                 "<t align='left'>%1</t> <t align='right' font='PuristaBold'>%2</t><br/>",
                 (_phase select 0),
-                [(time - _startTime), 'MM:SS'] call BIS_fnc_secondsToString
+                [(serverTime - _startTime), 'MM:SS'] call BIS_fnc_secondsToString
             ];
 
             /* Cutoffs */
             private _cutoffPhases = missionNameSpace getVariable [QGVAR(safestart_phaseCutOffs), []];
             {
-                if ((_x select 1) > ((time - _startTime))) then {
+                if ((_x select 1) > ((serverTime - _startTime))) then {
                     _safestartHint = _safestartHint + format [
                         "<t align='left' color='#888888' size='0.95'>%1 Cut-off</t> <t align='right' color='#888888' size='0.95'>%2</t><br/>",
                         (_x select 0),
-                        [(_x select 1) - (time), 'MM:SS'] call BIS_fnc_secondsToString
+                        [(_x select 1) - (serverTime), 'MM:SS'] call BIS_fnc_secondsToString
                     ];
                 } else {
                     [] spawn compile (_x select 2);
                     _cutoffPhases deleteAt (_cutoffPhases find _x);
                 };
             } forEach _cutoffPhases;
-            missionNameSpace setVariable [QGVAR(safestart_phaseCutOffs), _cutoffPhases, true];
+            [QGVAR(safestart_phaseCutOffs), _cutoffPhases] call CBA_fnc_publicVariable;
 
             _safestartHint = _safestartHint + "<br/><br/>";
 
@@ -123,7 +142,7 @@ addMissionEventHandler ["EntityRespawned", {
             _safestartHint = _safestartHint + "<br/>";
 
             /* Get radio info */
-            private _pttAssign = [] call acre_api_fnc_getMultiPushToTalkAssignment;
+            private _pttAssign = call acre_api_fnc_getMultiPushToTalkAssignment;
             {
                 _safestartHint = _safestartHint + format[
                     "<t align='left' color='#888888'>%1 Chan %2</t> <t align='right'><t>PTT %3, %4</t></t><br/>",
@@ -179,7 +198,7 @@ addMissionEventHandler ["EntityRespawned", {
 
             /* show message in sidechat */
             ["<t size='0.5' color='#ff6347'>Safestart is active<t>", -1, safezoneY + 0.1] spawn bis_fnc_dynamicText;
-        }, "", 0, false, true, "DefaultAction", "!(missionNameSpace getVariable ['"+QGVAR(safestart_disable)+"', false]) && !(missionNamespace getVariable ["QGVAR(safestart_override)", false]) && !(_this getVariable ['ace_dragging_isCarrying', false])"];
+        }, "", 0, false, true, "DefaultAction", "!(missionNameSpace getVariable ['"+QGVAR(safestart_disable)+"', false]) && { !(missionNamespace getVariable ["QGVAR(safestart_override)", false]) && { !(_this getVariable ['ace_dragging_isCarrying', false]) } }"];
 
         /* Add event to block throwing grenades the vanilla way */
         ["ace_firedPlayer", {
@@ -205,10 +224,10 @@ addMissionEventHandler ["EntityRespawned", {
 [{
     missionNamespace getVariable [QGVAR(safestart_disable), false]
 }, {
-    [[], { titleText ["Game on!", "PLAIN", 0.2] }] remoteExec ["call", 0];
-
-    /* Restate freezeTime */
-    missionNamespace setVariable [QEGVAR(utility,setting_freezeTime), GVAR(safestart_freezeTimeState), true];
+    [[], { 
+        titleText ["Game on!", "PLAIN", 0.2];
+        EGVAR(environment,freezeTime_override) = false;
+    }] remoteExec ["call", 0];
 
     /* Renable damage */
     { [_x, true] remoteExec ["allowDamage", 0, true] } forEach allPlayers;
@@ -220,7 +239,7 @@ addMissionEventHandler ["EntityRespawned", {
         private _missionData = missionNameSpace getVariable [QEGVAR(common,missionData), []];
         private _hash = [_missionData] call CBA_fnc_hashCreate;
 
-        private _title = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(utility,hexToASCII)] call CBA_fnc_hashGet;
+        private _title = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(common,hexToASCII)] call CBA_fnc_hashGet;
         private _gamemode = ([_hash, "M_TYPE", [-1, getText (getMissionConfig "Header" >> 'GameType')]] call CBA_fnc_hashGet) select 1;
 
         if (_gamemode isEqualTo "custom") then {

@@ -5,7 +5,7 @@ class GVAR(menu) {
     access = 1;
     movingEnable = 0;
     enableSimulation = 1;
-    onLoad = QUOTE(_this call FUNC(dialogInit));
+    onLoad = QUOTE(call FUNC(dialogInit));
     onUnload = "";
     class controlsBackground {};
 
@@ -31,8 +31,8 @@ class GVAR(menu) {
             color[] = {1, 1, 1, 0.5};
             colorActive[] = {1, 1, 1, 0.5};
             tooltip = "View Distance";
-            onSliderPosChanged = QUOTE(_this call FUNC(updateSlider));
-            onMouseButtonUp = QUOTE(_this call FUNC(updateViewDistance));
+            onSliderPosChanged = QUOTE(call FUNC(updateSlider));
+            onMouseButtonUp = QUOTE(call FUNC(updateViewDistance));
         };
 
         class viewdistanceLabel: RscText {
@@ -95,7 +95,7 @@ class GVAR(menu) {
             color[] = {1, 1, 1, 0.5};
             colorActive[] = {1, 1, 1, 0.5};
             tooltip = "Terrain Grid (lower means higher detail)";
-            onSliderPosChanged = QUOTE(_this call FUNC(updateSlider));
+            onSliderPosChanged = QUOTE(call FUNC(updateSlider));
         };
 
         class terrainGridLabel: viewdistanceLabel {
@@ -117,7 +117,7 @@ class GVAR(menu) {
             color[] = {1, 1, 1, 1};
             colorActive[] = {1, 1, 1, 0.5};
             tooltip = "Infantry View Distance";
-            onButtonClick = QUOTE(_this call FUNC(updateCategory));
+            onButtonClick = QUOTE(call FUNC(updateCategory));
             class Attributes {
                 font = "PuristaLight";
                 color = "#E5E5E5";

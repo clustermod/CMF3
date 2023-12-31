@@ -37,12 +37,12 @@
 
         /* Hide ACRE PAX */ // This code needs refactoring
         [] spawn {
-            while { !GVAR(hud_show) && !(vehicle player isEqualTo player) } do {
+            while { !GVAR(hud_show) && { !isnull objectParent player } } do {
                 ("acre_sys_gui_vehicleInfo" call BIS_fnc_rscLayer) cutText ["", "PLAIN"];
                 sleep 0.01;
             };
 
-            if !(vehicle player isEqualTo player) then {
+            if (!isNull objectParent player) then {
                 [true] call acre_sys_gui_fnc_showVehicleInfo;
             };
         };

@@ -36,7 +36,7 @@ private _height = 0.01;
 private _posX = 0;
 private _posY = 0;
 
-if(_displaySide == "left") then {
+if(_displaySide isEqualTo "left") then {
     _posX = NOTIFICATION_M + safeZoneX;
 } else {
     _posX = safeZoneW + safeZoneX - NOTIFICATION_M - NOTIFICATION_W;
@@ -79,7 +79,7 @@ _textCtrl ctrlCommit 0.4;
     } forEach _this;
 }, [_textCtrl, _borderCtrl], _speed + 0.3] call CBA_fnc_waitAndExecute;
 
-GVAR(notifications) = ([[_borderCtrl, _textCtrl]] + GVAR(notifications)) select {!isNull (_x select 0) && !isNull (_x select 1)};
+GVAR(notifications) = ([[_borderCtrl, _textCtrl]] + GVAR(notifications)) select {!isNull (_x select 0) && { !isNull (_x select 1) }};
 
 private _offsetY = 0;
 if (count GVAR(notifications) > 0) then {

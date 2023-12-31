@@ -1,8 +1,60 @@
 #include "script_component.hpp"
 
-waitUntil { !isNil { missionNameSpace getVariable QEGVAR(3den,menu_unit) } };
+/* NATO Phonetic alphabet */
+GVAR(phoneticAlphabet) = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot", "Golf", "Hotel", "India", "Juliet", 
+    "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whisky", "Xray", "Yankee", "Zulu"];
 
-private _path = missionNameSpace getVariable QEGVAR(3den,menu_unit);
+/* Create groups hash for dynamic group system */
+if (isNil QGVAR(groups)) then {
+    GVAR(groups) = [[
+        [west, [] call CBA_fnc_hashCreate],
+        [east, [] call CBA_fnc_hashCreate],
+        [independent, [] call CBA_fnc_hashCreate],
+        [civilian, [] call CBA_fnc_hashCreate]
+    ]] call CBA_fnc_hashCreate;
+};
+
+/* Parse Orbat */
+if (isNil QGVAR(orbat)) then {
+    private _orbat = call compile preprocessFileLineNumbers "rsc\organization\orbat.sqf";
+    _orbat = [_orbat] call FUNC(parseOrbat);
+    GVAR(orbat) = _orbat;
+};
+
+/* Register old groups */
+{
+    _group = _x;
+    _init = (_group get3DENAttribute "Init") select 0;
+
+    _groupDataString = _init regexFind [";*(\[.*?\][^,]).*?cmf_organization_fnc_groupRegister;*"];
+    _groupDataString = (((_groupDataString select 0) select 1) select 0);
+
+    if (!isNil "_groupDataString") then {
+        _groupDataString = _groupDataString regexReplace ["this", "grpNull"];
+        _groupData = call compile _groupDataString;
+        if (!isNil "_groupData") then {
+            _groupData set [0, _x];
+            _groupData call FUNC(groupRegister);
+        };
+    };
+} forEach (all3DENEntities select 1);
+
+/* Unregister deleted groups */
+addMissionEventHandler ["GroupDeleted", {
+    params ["_group"];
+
+    if ([_group] call FUNC(groupIsRegistered)) then {
+        [_group] call FUNC(groupUnregister);
+        call FUNC(groupReorganize);
+    };
+}];
+
+/* Reorganize groups */
+call FUNC(groupReorganize);
+
+waitUntil { !isNil QEGVAR(3den,menu_unit) };
+
+private _path = EGVAR(3den,menu_unit);
 
 /* Unit sizes (fireteam, squad, platoon, Company) */
 private _infantryMenu = [_path, LSTRING(infantry_elements_displayName), "a3\ui_f\data\gui\cfg\hints\icon_text\b_inf_ca.paa"] call EFUNC(3den,addMenuItem);

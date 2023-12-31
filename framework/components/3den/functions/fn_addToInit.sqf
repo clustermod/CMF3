@@ -11,7 +11,7 @@
  * None
  *
  * Example:
- * [] call cmf_3den_fnc_addToInit
+ * [_entity, "this allowDamage false"] call cmf_3den_fnc_addToInit
  *
  * Public: No
  */

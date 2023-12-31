@@ -15,6 +15,13 @@
 #define FORMAT_7(STR,ARG1,ARG2,ARG3,ARG4,ARG5,ARG6,ARG7) format[STR, ARG1, ARG2, ARG3, ARG4, ARG5, ARG6, ARG7]
 #define FORMAT_8(STR,ARG1,ARG2,ARG3,ARG4,ARG5,ARG6,ARG7,ARG8) format[STR, ARG1, ARG2, ARG3, ARG4, ARG5, ARG6, ARG7, ARG8]
 
+#define SETTING(var1) TRIPLES(DOUBLES(PREFIX,MODULE),setting,var1)
+#define ESETTING(var1,var2) TRIPLES(DOUBLES(PREFIX,var1),setting,var2)
+#define QSETTING(var1) QUOTE(SETTING(var1))
+#define QESETTING(var1,var2) QUOTE(ESETTING(var1,var2))
+#define QQSETTING(var1) QUOTE(QSETTING(var1))
+#define QQESETTING(var1,var2) QUOTE(QESETTING(var1,var2))
+
 #define GVAR(var1) TRIPLES(PREFIX,MODULE,var1)
 #define EGVAR(var1,var2) TRIPLES(PREFIX,var1,var2)
 #define QGVAR(var1) QUOTE(GVAR(var1))
@@ -22,7 +29,6 @@
 #define QQGVAR(var1) QUOTE(QGVAR(var1))
 #define QQEGVAR(var1,var2) QUOTE(QEGVAR(var1,var2))
 
-// @TODO: replace ACE, CBA and BIS functions with these macros
 #define ACEFUNC(var1,var2) TRIPLES(DOUBLES(ace,var1),fnc,var2)
 #define CBAFUNC(var1) TRIPLES(CBA,fnc,var1)
 #define BISFUNC(var1) TRIPLES(BIS,fnc,var1)
@@ -50,19 +56,19 @@
 
 #define DSTRING(var1) QUOTE(TRIPLES(STR,COMPONENT,var1))
 #define EDSTRING(var1,var2) QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
-#define LSTRING(var1) ([QUOTE(PATHTOF_SYS(MODULE,stringtable.sqf)), DSTRING(var1)] call EFUNC(main,localize))
-#define ELSTRING(var1,var2) ([QUOTE(PATHTOF_SYS(var1,stringtable.sqf)), EDSTRING(var1,var2)] call EFUNC(main,localize))
+#define LSTRING(var1) ([QUOTE(PATHTOF_SYS(MODULE,stringtable.sqf)), DSTRING(var1)] call compile preProcessFileLineNumbers QUOTE(PATHTOF_SYS(main,localize.sqf)))
+#define ELSTRING(var1,var2) ([QUOTE(PATHTOF_SYS(var1,stringtable.sqf)), EDSTRING(var1,var2)] call compile preProcessFileLineNumbers QUOTE(PATHTOF_SYS(main,localize.sqf)))
 
 #define ARRAY_FLATTEN(var1) (flatten var1)
 
-#define PREP_SYS(var1) TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1) = compile preProcessFileLineNumbers 'PATHTO_SYS(MODULE,DOUBLES(fn,var1))'
+#define PREP_SYS(var1) TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1) = compile preProcessFileLineNumbers QUOTE(PATHTO_SYS(MODULE,DOUBLES(fn,var1)))
 
-#define PREP_MODULE(var1) if (((count REQUIRED_MODULES) == 0) || count (REQUIRED_MODULES - EGVAR(main,components)) == 0) then {\
+#define PREP_MODULE(var1) if (((count REQUIRED_MODULES) isEqualTo 0) || count (REQUIRED_MODULES - EGVAR(main,components)) isEqualTo 0) then {\
     PREP_SYS(var1)\
 } else {\
     FUNC(var1) = { ERROR_2("%1 missing required modules: %2.", QFUNC(var1), REQUIRED_MODULES - EGVAR(main,components)) }\
 }
-#define PREP_ADDON(var1) if (((count REQUIRED_ADDONS) == 0) || REQUIRED_ADDONS findIf {!isClass(configFile >> "CfgPatches" >> _x)} == -1) then {\
+#define PREP_ADDON(var1) if (((count REQUIRED_ADDONS) isEqualTo 0) || REQUIRED_ADDONS findIf {!isClass(configFile >> "CfgPatches" >> _x)} isEqualTo -1) then {\
     PREP_MODULE(var1)\
 } else {\
     FUNC(var1) = {ERROR_1("%1 missing a required addon.",QFUNC(var1))}\
@@ -98,7 +104,7 @@
 
 #define IS_BOOLEAN(VAR)  IS_BOOL(VAR)
 #define IS_FUNCTION(VAR) IS_CODE(VAR)
-#define IS_INTEGER(VAR)  (if (IS_SCALAR(VAR)) then {floor (VAR) == (VAR)} else {false})
+#define IS_INTEGER(VAR)  (if (IS_SCALAR(VAR)) then {floor (VAR) isEqualTo (VAR)} else {false})
 #define IS_NUMBER(VAR)   IS_SCALAR(VAR)
 
 ///////////////////////////////////////// DEBUGGING ////////////////////////////////////////

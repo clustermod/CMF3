@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_gameplay_fnc_flashbangOverride
+ * call cmf_gameplay_fnc_flashbangOverride
  *
  * Public: No
  */
@@ -141,10 +141,10 @@ private _fired_event = {
             /* Disable ACE Pickup on grenades */
             private _acePickup = "Land_Can_V2_F" createVehicle getPos _grenadeObject;
             _acePickup setPosASL getPosASL _grenadeObject;
-            _acePickup hideObjectGlobal true;
-            _acePickup setVectorUp [(random(selectRandom[1,-1])),(random(selectRandom[1,-1])),0];
+            [_acePickup, true] remoteExec ["hideObjectGlobal", 2];
+            _acePickup setVectorUp [(random(selectRandom[1, -1])), (random(selectRandom[1, -1])), 0];
             [_grenadeObject, _acePickup] call BIS_fnc_attachToRelative;
-            _acePickup setVariable ["ace_advanced_throwing_disablePickUp", true, true];
+            [_acePickup, "ace_advanced_throwing_disablePickUp", true] call CBA_fnc_setVarNet;
             _acePickup enableSimulation false;
 
             _grenade setPos [0,0,0];
@@ -171,13 +171,13 @@ private _fired_event = {
                     private _units = _pos nearEntities 10;
                     {
                         private _inRoom = [_x, "VIEW"] checkVisibility [eyePos _x, _posASL];
-                        if (!isplayer _x && _inRoom > 0.6 && lifeState _x != "INCAPACITATED") then {
+                        if (!isplayer _x && { _inRoom > 0.6 && { lifeState _x != "INCAPACITATED" } }) then {
                             _x spawn {
                                 [_this, "Acts_CrouchingCoveringRifle01"] remoteExec ["switchMove"];
                                 [_this, "all"] remoteExec ["disableAI"];
                                 sleep 5;
                                 [_this, "all"] remoteExec ["enableAI"];
-                                if (animationState _this == "Acts_CrouchingCoveringRifle01") then {
+                                if (animationState _this isEqualTo "Acts_CrouchingCoveringRifle01") then {
                                 [_this, ""] remoteExec ["switchMove"];
                                 };
                             };
@@ -199,13 +199,13 @@ private _fired_event = {
                 private _units = _pos nearEntities 10;
                 {
                     private _inRoom = [_x, "VIEW"] checkVisibility [eyePos _x, _posASL];
-                    if (!isplayer _x && _inRoom > 0.6 && lifeState _x != "INCAPACITATED") then {
+                    if (!isplayer _x && { _inRoom > 0.6 && { lifeState _x != "INCAPACITATED" } }) then {
                         _x spawn {
                             [_this, "Acts_CrouchingCoveringRifle01"] remoteExec ["switchMove"];
                             [_this, "all"] remoteExec ["disableAI"];
                             sleep 5;
                             [_this, "all"] remoteExec ["enableAI"];
-                            if (animationState _this == "Acts_CrouchingCoveringRifle01") then {
+                            if (animationState _this isEqualTo "Acts_CrouchingCoveringRifle01") then {
                             [_this, ""] remoteExec ["switchMove"];
                             };
                         };

@@ -53,12 +53,14 @@ def check_scripts(src):
     path = os.path.join(src, 'rsc', 'scripts')
 
     print(bcolors.WARNING + "\nChecking Scripts" + bcolors.ENDC)
-
-    for file in os.listdir(path):
-        if file.upper() in ["SCRIPT_COMPONENT.HPP"]: continue
-        
-        print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " Script detected:   {0}".format(remove_dir(os.path.join(path, file), '..')))
-        errorCount += 1
+    if os.path.exists(path):
+        for file in os.listdir(path):
+            if file.upper() in ["SCRIPT_COMPONENT.HPP"]: continue
+            
+            print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " Script detected:   {0}".format(remove_dir(os.path.join(path, file), '..')))
+            errorCount += 1
+    else:
+        print(bcolors.OKCYAN + "DIR" + bcolors.ENDC + " Not found:   {0}".format(remove_dir(path, '..')))
     
     print("------\nErrors detected: {0}".format(errorCount))
     if (errorCount == 0):
@@ -74,10 +76,13 @@ def check_loadouts(src):
 
     print(bcolors.WARNING + "\nChecking Loadouts" + bcolors.ENDC)
 
-    for file in os.listdir(path):
-        if file[0] != '!':
-            print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " Loadout detected:   {0}".format(remove_dir(os.path.join(path, file), '..')))
-            errorCount += 1
+    if os.path.exists(path):
+        for file in os.listdir(path):
+            if file[0] != '!':
+                print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " Loadout detected:   {0}".format(remove_dir(os.path.join(path, file), '..')))
+                errorCount += 1
+    else:
+        print(bcolors.OKCYAN + "DIR" + bcolors.ENDC + " Not found:   {0}".format(remove_dir(path, '..')))
 
     print("------\nErrors detected: {0}".format(errorCount))
     if (errorCount == 0):
@@ -91,6 +96,7 @@ def release_build(rootPath, src):
     errorcount = 0
 
     errorcount += check_config_style()
+    print("\n")
     errorcount += check_sqf_syntax()
     errorcount += check_scripts(src)
     errorcount += check_loadouts(src)
@@ -128,7 +134,7 @@ def release_build(rootPath, src):
 def main():
     errorcount = 0
     rootDir = '..'
-    for folder in ['framework', 'optionals']:
+    for folder in ['framework']:
         src = os.path.join(rootDir, folder)
         if (os.path.exists(src)):
             errorcount += release_build(rootDir, src)

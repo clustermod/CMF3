@@ -241,7 +241,7 @@ switch _mode do {
             ((3) call _fnc_GRID_Y)
         ];
         _ctrlSearchCheckbox ctrlAddEventHandler ["CheckedChanged", {
-            private _checked = (_this select 1) == 1;
+            private _checked = (_this select 1) isEqualTo 1;
 
             (_this select 0) ctrlSetTooltip ([LSTRING(case_insensitive), LSTRING(case_sensitive)] select _checked);
             localNamespace setVariable [QGVAR(icons_caseSensitive), _checked];
@@ -369,7 +369,7 @@ switch _mode do {
         private _iconsPerPage = (localNamespace getVariable [QGVAR(icons_boxesX), 5]) * (localNamespace getVariable [QGVAR(icons_boxesY), 5]);
         private _maxPages = ceil (_maxIcons / _iconsPerPage);
 
-        if (_maxPages == 0) exitWith {
+        if (_maxPages isEqualTo 0) exitWith {
             localNamespace setVariable [QGVAR(icons_page), 0];
             ["update", []] call FUNC(main_iconViewer);
         };

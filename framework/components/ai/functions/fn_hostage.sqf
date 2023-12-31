@@ -21,7 +21,7 @@ _unit disableAI "AUTOCOMBAT";
 [_unit] joinSilent createGroup civilian;
 _unit setBehaviour "CARELESS";
 _unit setUnloadInCombat [false, false];
-_unit setVariable ["lambs_danger_disableAI", true, true];
+[_unit, "lambs_danger_disableAI", true] call CBA_fnc_setVarNet;
 
 GVAR(hostage_translateStance) = {
     params ["_stance"];
@@ -36,7 +36,7 @@ GVAR(hostage_translateStance) = {
 GVAR(hostage_releaseFNC) = {
     params ["_hostage", "_target"];
 
-    _hostage setVariable [QGVAR(hostage_owner), objNull, true];
+    [_hostage, QGVAR(hostage_owner), objNull] call CBA_fnc_setVarNet;
     [_hostage] joinSilent createGroup civilian;
     [_hostage getVariable QGVAR(hostage_handler)] call CBA_fnc_removePerFrameHandler;
 };
@@ -44,14 +44,14 @@ GVAR(hostage_releaseFNC) = {
 GVAR(hostage_followPlayerFNC) = {
     params ["_hostage", "_target"];
 
-    _hostage setVariable [QGVAR(hostage_owner), _target, true];
+    [_hostage, QGVAR(hostage_owner), _target] call CBA_fnc_setVarNet;
     [_hostage] joinSilent createGroup side _target;
     
     private _handle = [{
         (_this select 0) params ["_hostage", "_target"];
 
         if (!alive _target) exitWith {
-            _target setVariable [QGVAR(hostage_owner), objNull, true];
+            [_target, QGVAR(hostage_owner), objNull] call CBA_fnc_setVarNet;
             [_hostage] joinSilent createGroup civilian;
             [_hostage getVariable QGVAR(hostage_handler)] call CBA_fnc_removePerFrameHandler;
         };
@@ -70,14 +70,14 @@ GVAR(hostage_followPlayerFNC) = {
 
             private _getSeat = [vehicle _target] call ace_captives_fnc_findEmptyNonFFVCargoSeat;
             _getSeat params ["_cargoIndex"];
-            if (_cargoIndex == -1) exitWith {};
+            if (_cargoIndex isEqualTo -1) exitWith {};
 
             _hostage assignAsCargoIndex [vehicle _target, _cargoIndex];
             [_hostage] orderGetIn true;
         }
     }, 0.3, [_hostage, _target]] call CBA_fnc_addPerFrameHandler;
 
-    _hostage setVariable [QGVAR(hostage_handler), _handle, true];
+    [_hostage, QGVAR(hostage_handler), _handle] call CBA_fnc_setVarNet;
 };
 
 if (_captive) then {
@@ -89,7 +89,7 @@ private _followAction = [QGVAR(hostageFollow), "Follow Me!", "",
     GVAR(hostage_followPlayerFNC), 
     { 
         isNull ((_this select 0) getVariable [QGVAR(hostage_owner), objNull]) &&
-        !((_this select 0) getVariable ["ace_captives_isHandcuffed", false])
+        { !((_this select 0) getVariable ["ace_captives_isHandcuffed", false]) }
     }
 ] call ace_interact_menu_fnc_createAction;
 

@@ -10,7 +10,7 @@
  * None
  * 
  * Example:
- * [] call cmf_ai_fnc_panic
+ * call cmf_ai_fnc_panic
  * 
  * Public: No
  */
@@ -19,6 +19,7 @@
     params ["_unit", "_group"];
 
      LOG_1("%1 Entered Panic Mode", _unit);
+     [_unit] call lambs_wp_fnc_taskReset;
 
     if (isPlayer _unit) exitWith {};
     if (_unit getVariable [QGVAR(disablePanic), false]) exitWith {};
@@ -26,13 +27,13 @@
     private _groupUnits = units _group;
 
         /* 5% chance of surrendering */ 
-    if (5 > random 100) exitWith { // @TODO: Consider making it a configurable parameter
+    if (SETTING(panicSurrenderChance) > random 1) exitWith {
         LOG_1("%1 is surrendering", _unit);
         _unit playAction "Surrender";
     };
 
     /* 50% Chance of group retreating when paniced */
-    if (50 > random 100) then { // @TODO: Consider making it a configurable parameter
+    if (SETTING(panicRetreatChance) > random 1) then {
         LOG_1("%1 is Retreating", _unit);
         private _attackDir = _unit getDir (getAttackTarget _unit);
         private _retreatDir = (_attackDir + 180) % 360;
@@ -40,11 +41,8 @@
 
         /* Reset AI after retreat is successful */
         [_unit, _retreatPos, true] spawn lambs_wp_fnc_taskAssault;
-        [_unit, _retreatPos] spawn {
-            params ["_unit", "_pos"];
-
-            waitUntil { _unit distance2D _pos < 30 };
-            [_unit] call lambs_wp_fnc_taskReset;
-        };
+        [{ (_this select 0) distance2D (_this select 1) < 30 }, {
+            [(_this select 0)] call lambs_wp_fnc_taskReset;
+        }, [_unit, _retreatPos]] call CBA_fnc_waitUntilAndExecute;
     };
 }] call CBA_fnc_addEventHandler;

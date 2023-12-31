@@ -1,18 +1,18 @@
 #include "script_component.hpp"
 /*
- * Author: [Authors]
- * [Description]
+ * Author: Eric
+ * Updates viewdistance
  * 
  * Arguments:
- * 0: Argument <TYPE>
+ * None
  * 
  * Return Value:
- * Value <TYPE>
+ * None
  * 
  * Example:
- * [] call cmf_[module]_fnc_[functionName]
+ * call cmf_[module]_fnc_[functionName]
  * 
- * Public: [yes/no]
+ * Public: No
  */
 
 private _vehicle = missionNamespace getVariable [QGVAR(vehicleType), "INFANTRY"];

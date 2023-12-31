@@ -24,17 +24,17 @@ if (isNil "_respawns") exitWith { ERROR_MSG("respawns cannot be nil"); false };
 
 if (call _condition) then {
     /* Set the amount of allowed respawns */
-    player setVariable[QGVAR(respawns), _respawns, true];
+    [cmf_player, QGVAR(respawns), _respawns] call CBA_fnc_setVarNet;
 
     /* Check if player is out of lives on respawn */
     player addEventHandler ["Respawn", {
         _respawns = player getVariable[QGVAR(respawns), 1];
 
-        if ( EGVAR(gameplay,setting_safestart) && !(missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false]) ) exitWith {};
+        if ( EGVAR(gameplay,setting_safestart) && { !(missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false]) } ) exitWith {};
 
-        if ((player getVariable[QGVAR(deaths), 0]) == _respawns) then {
-            if ((vehicle player) != player) then {
-                player action ["getOut", (vehicle player)];
+        if ((player getVariable[QGVAR(deaths), 0]) isEqualTo _respawns) then {
+            if (!isNull objectParent player) then {
+                player action ["getOut", (objectParent player)];
             };
 
             /* Put player in a new group and initialize spectator for him */
@@ -44,7 +44,7 @@ if (call _condition) then {
             /* Decrement the respawn counter */
             private _pCount = player getVariable[QGVAR(deaths), 0];
             private _pCount = _pCount + 1;
-            player setVariable[QGVAR(deaths), _pCount, true];
+            [cmf_player, QGVAR(deaths), _pCount] call CBA_fnc_setVarNet;
         };
     }];
 };
@@ -55,7 +55,7 @@ if (!hasInterface) exitwith {};
 [{!isnull (getAssignedCuratorLogic player)}, {
     if (player in (call bis_fnc_listcuratorplayers)) then {
         addMissionEventHandler ["Draw3D", {
-            if (isNull curatorCamera) exitWith {};
+            if (isNull curatorCamera || !EGVAR(curator,zeusInfoShow)) exitWith {};
             {
                 private _distance = position curatorCamera distance _x;
                 if (_distance < 1200) then {

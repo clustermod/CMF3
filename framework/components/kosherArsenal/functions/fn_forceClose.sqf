@@ -19,4 +19,4 @@ SCRIPT(forceClose);
 params ["_unit"];
 
 /* Forcefully close the units kosherArsenal */
-_unit setVariable [QGVAR(close), true, true];
+[_unit, QGVAR(close), true] call CBA_fnc_setVarNet;

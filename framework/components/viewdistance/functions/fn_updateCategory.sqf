@@ -1,18 +1,18 @@
 #include "script_component.hpp"
 /*
- * Author: [Authors]
- * [Description]
+ * Author: Eric
+ * Changes viewdistance setting category
  * 
  * Arguments:
- * 0: Argument <TYPE>
+ * 0: Control <CONTROL>
  * 
  * Return Value:
- * Value <TYPE>
+ * None
  * 
  * Example:
- * [] call cmf_[module]_fnc_[functionName]
+ * call cmf_viewdistance_fnc_updateCategory
  * 
- * Public: [yes/no]
+ * Public: No
  */
 
 params ["_control"];
@@ -22,7 +22,7 @@ private _buttonIndex = ["INFANTRY", "VEHICLE", "AIR"];
 private _oldCategory = _dialog getVariable [QGVAR(category), ""];
 private _newCategory = _buttonIndex select ((ctrlIDC _control) - 600);
 
-if (_oldCategory == _newCategory) exitWith {};
+if (_oldCategory isEqualTo _newCategory) exitWith {};
 
 _dialog setVariable [QGVAR(category), _newCategory];
 

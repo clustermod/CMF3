@@ -47,7 +47,7 @@ private _indexMission = [
     "CMF Mission Data",
     "a3\ui_f\data\gui\rsc\rscdisplayarsenal\map_ca.paa", 
     {
-        call cmf_3den_fnc_setConfig_missionDataHandler;
+        call FUNC(setConfig_missionDataHandler);
     }
 ] call FUNC(addMenuItem);
 
@@ -67,6 +67,6 @@ private _indexBug = [[_indexMain], LSTRING(report_bug), "a3\3DEN\Data\Controls\c
     createDialog "cmf_utility_reportBug";
 }] call FUNC(addMenuItem);
 
-missionNameSpace setVariable [QGVAR(menu_main), [_indexMain]];
-missionNameSpace setVariable [QGVAR(menu_unit), [_indexMain, _indexUnits]];
-missionNameSpace setVariable [QGVAR(menu_entity), [_indexMain, _indexTools]];
+GVAR(menu_main) = [_indexMain];
+GVAR(menu_unit) = [_indexMain, _indexUnits];
+GVAR(menu_entity) = [_indexMain, _indexTools];

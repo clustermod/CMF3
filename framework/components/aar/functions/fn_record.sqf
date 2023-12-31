@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_aar_fnc_record
+ * call cmf_aar_fnc_record
  *
  * Public: No
  */
@@ -22,7 +22,7 @@ if (!isServer) exitWith { };
 addMissionEventHandler ["EntityCreated", {
     params ["_entity"];
 
-    if ((_entity in allUnits || _entity in allMapMarkers || _entity in vehicles) && !isNull _entity) then {
+    if ((_entity in allUnits || _entity in allMapMarkers || _entity in vehicles) && { !isNull _entity }) then {
         _entity addEventHandler ["Fired", {
             params ["_unit", "_weapon", "", "", "", "", "_projectile"];
 
@@ -36,7 +36,7 @@ addMissionEventHandler ["EntityCreated", {
                     private _projectilePos2 = getPosASL _projectile;
 
                     _fireData pushBack [_weapon, [_projectilePos1, _projectilePos2]];
-                    _unit setVariable [QGVAR(fire_data), _fireData, true];
+                    [_unit, QGVAR(fire_data), _fireData] call CBA_fnc_setVarNet;
                 };
             };
         }];
@@ -45,10 +45,10 @@ addMissionEventHandler ["EntityCreated", {
 
 _this spawn {
     /* Get title of mission */
-    private _missionTitle = if (!isNil { missionNameSpace getVariable QGVAR(safestart_title) }) then {
-        missionNameSpace getVariable QGVAR(safestart_title)
+    private _missionTitle = if (!isNil QGVAR(safestart_title)) then {
+        GVAR(safestart_title)
     } else {
-        [getMissionConfigValue ['IntelBriefingName', briefingName]] call cmf_utility_fnc_hexToASCII;
+        [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(common,hexToASCII);
     };
 
     /* Set base AAR data (and overwrite any old data) */
@@ -66,7 +66,7 @@ _this spawn {
             private _fireData = _x getVariable [QGVAR(fire_data), []];
             _objects pushBack [_x, typeof _x, side _x, lifeState _x, getPosASL _x, getDir _x, crew _x, _fireData];
 
-            _x setVariable [QGVAR(fire_data), [], true];
+            [_x, QGVAR(fire_data), []] call CBA_fnc_setVarNet;
         } forEach (allUnits + allDead);
         private _objectArray = [_time, _objects];
 

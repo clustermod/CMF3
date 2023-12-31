@@ -10,14 +10,13 @@
  * None
  *
  * Example:
- * [] call cmf_player_fnc_drinking
+ * call cmf_player_fnc_drinking
  *
  * Public: No
  */
 SCRIPT(drinking);
 
-// @TODO: Move function declerations outside and pass them as args
-[{ alive player && !isNull player }, {
+[{ alive player && { !isNull player } }, {
     GVAR(drinking_hydrationItems) = [
         ["ACE_Canteen", ["Land_Canteen_F", 0.2, 15]], ["ACE_Canteen_Half", ["Land_Canteen_F", 0.2, 15]], ["ACE_WaterBottle", ["Land_BottlePlastic_V2_F", 0.2, 15]], ["ACE_WaterBottle_Half", ["Land_BottlePlastic_V2_F", 0.2, 15]],
         ["ACE_Can_Franta", ["Land_Can_V2_F", 0.1, 5]], ["ACE_Can_RedGull", ["Land_Can_V3_F", 0.1, 8]], ["ACE_Can_Spirit", ["Land_Can_V1_F", 0.1, 5]]
@@ -46,7 +45,7 @@ SCRIPT(drinking);
         } else {
             /* Create physical objects */
             _baseObj = "Land_Can_V2_F" createVehicle getPos player;
-            _baseObj hideObjectGlobal true;
+            [_baseObj, true] remoteExec ["hideObjectGlobal", 2];
             _drinkObj = _objClass createVehicle getPos player;
 
             _drinkObj attachTo [_baseObj, [0, 0, 0]];
@@ -108,8 +107,8 @@ SCRIPT(drinking);
 
     private _condition = {
         (((items player) findIf {_x in ([[GVAR(drinking_hydrationItems)] call CBA_fnc_hashCreate] call CBA_fnc_hashKeys)}) != -1)
-        && vehicle player isEqualTo player
-        && !visibleMap
+        && { isNull objectParent player
+        && { !visibleMap } }
     };
 
     private _children = {
@@ -118,7 +117,7 @@ SCRIPT(drinking);
         private _actions = [];
         private _hydrationItems = [];
         {
-            if ((_x in ([[GVAR(drinking_hydrationItems)] call CBA_fnc_hashCreate] call CBA_fnc_hashKeys)) && !(_x in _hydrationItems)) then {
+            if ((_x in ([[GVAR(drinking_hydrationItems)] call CBA_fnc_hashCreate] call CBA_fnc_hashKeys)) && { !(_x in _hydrationItems) }) then {
                 private _displayName = getText (configFile >> "CfgWeapons" >> _x >> "displayName");
                 private _icon = getText (configFile >> "CfgWeapons" >> _x >> "picture");
                 private _action = [format [QGVAR(drinking_)+"%1", _x], format[LSTRING(drink_from), _displayName], _icon, { _this spawn GVAR(drinking_fnc_consume) }, { true }, {}, _x] call ace_interact_menu_fnc_createAction;
@@ -130,6 +129,6 @@ SCRIPT(drinking);
         _actions;
     };
 
-    private _action = [QGVAR(drinking_menu), LSTRING(hydration), "rsc\data\icon_ace_hydration_ca.paa", {}, _condition, _children] call ace_interact_menu_fnc_createAction;
-    [typeOf player, 1, ["ACE_SelfActions", "ACE_Equipment"], _action] call ace_interact_menu_fnc_addActionToClass; // @TODO: Change how action is added
+    private _action = [QGVAR(drinking_menu), LSTRING(hydration), "components\player\data\icon_ace_hydration_ca.paa", {}, _condition, _children] call ace_interact_menu_fnc_createAction;
+    ["CAManBase", 1, ["ACE_SelfActions", "ACE_Equipment"], _action, true] call ACE_interact_menu_fnc_addActionToClass;
 }] call CBA_fnc_waitUntilAndExecute;

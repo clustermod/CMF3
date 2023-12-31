@@ -10,7 +10,7 @@
  * No
  *
  * Example:
- * [] call cmf_logistics_fnc_crateActions
+ * call cmf_logistics_fnc_crateActions
  *
  * Public: No
  */

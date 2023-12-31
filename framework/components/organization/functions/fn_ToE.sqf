@@ -10,12 +10,12 @@
  * None
  *
  * Example:
- * [] call cmf_gameplay_fnc_ToE
+ * call cmf_gameplay_fnc_ToE
  *
  * Public: No
  */
 
-[{ !isNull player && alive player }, {
+[{ !isNull player && { alive player } }, {
     player createDiarySubject ["cmf_toe", "TO&E"];
 
     addMissionEventHandler ["Map", {
@@ -27,56 +27,106 @@
                 player removeDiaryRecord ["cmf_toe", _x select 8]
             } forEach (player allDiaryRecords "cmf_toe");
         } else {
-            /* Display nothing if unit isn't a team leader */
-            if (player != leader group player) exitWith {};
+            /* Add Each of the highest level groups */
+            private _groupHash = [GVAR(groups), side cmf_player, []] call CBA_fnc_hashGet;
+            private _levels = [_groupHash] call CBA_fnc_hashKeys;
+            if (count _levels isEqualTo 0) exitWith { cmf_player createDiaryRecord ["cmf_toe", ["No Registered Groups.", ""]] };
 
-            /* Get all player groups */
-            private _allPlayerGroups = allPlayers apply { group _x };
-            _allPlayerGroups = _allPlayerGroups arrayIntersect _allPlayerGroups;
-            _allPlayerGroups sort true;
-
-            private _rosterString = "<br/><font size='12'>";
             {
-                private _group = _x;
-                _rosterString = _rosterString + format ["<font face='PuristaBold'>%1</font><br/>", groupId _group];
+                cmf_player removeDiaryRecord ["cmf_toe", _x select 8];
+            } forEach (cmf_player allDiaryRecords "cmf_toe");
 
-                /* Get Group Vehicles */
-                private _vehicles = [_group, true] call BIS_fnc_groupVehicles;
-                {
-                    _rosterString = _rosterString + format ["<font size='13' color='#fcba03'>    %1</font><br/>", [configFile >> "CfgVehicles" >> (typeof _x)] call BIS_fnc_displayName];
-                } forEach _vehicles;
+            _levels sort false;
+            private _topLevelGroups = [_groupHash, _levels select 0, []] call CBA_fnc_hashGet;
+            reverse _topLevelGroups;
 
-                {
-                    private _unit = _x;
+            FUNC(ToE_recursiveCheck) = {
+                params ["_group", ["_indent", ""], ["_vehicle", objNull]];
 
-                    private _roleDescription = "None";
-                    if (roleDescription _unit != "") then {
-                        _roleDescription = ((roleDescription _unit) splitString "@") select 0;
+                private _formattedString = "";
+
+                private _formatGroupHeader = { format ["<font face='PuristaBold'>%1</font><br/>", _this] };
+
+                private _groupNames = _group getVariable [QGVAR(groupName), ["UNKNOWN", "UNKNOWN"]];
+                private _groupVehicle = _group getVariable [QGVAR(vehicle), objNull];
+                private _groupData = [_group] call FUNC(groupGetData);
+                private _units = units _group;
+                _groupData params ["_level", "_type", "", "_children"];
+
+
+                if (count _units isNotEqualTo 0) then {
+                    if (count _children > 0 || _level isEqualTo 1) then {
+                        _formattedString = _formattedString + "<br/>" + _indent + ((_groupNames select 1) call _formatGroupHeader);
+                        _indent = _indent + "    ";
                     };
 
-                    /* Build equipment string */
-                    private _gear = [];
+                    if (_type isEqualTo "INF") then {
+                        _formattedString = _formattedString + _indent + ((_groupNames select 0) call _formatGroupHeader);
+                    };
 
-                    /* Get unit's primary */
-                    _gear pushBack ([configFile >> "CfgWeapons" >> (primaryWeapon _unit)] call BIS_fnc_displayName);
+                    if (_groupVehicle isNotEqualTo _vehicle) then {
+                        private _vehicleName = [configFile >> "CfgVehicles" >> (typeof _groupVehicle)] call BIS_fnc_displayName;
+                        _formattedString = _formattedString + _indent + format ["<font size='13' color='#fcba03'>    %1</font><br/>", _vehicleName];
+                        _vehicle = _groupVehicle;
+                    };
 
-                    /* Get unit's launcher */
-                    _gear pushBack ([configFile >> "CfgWeapons" >> (secondaryWeapon _unit)] call BIS_fnc_displayName);
+                    {
+                        if (isPlayer _x) then {
+                            private _roleDescription = "None";
+                            if (roleDescription _x != "") then {
+                                _roleDescription = ((roleDescription _x) splitString "@") select 0;
+                            };
 
-                    /* Get unit's radios */
-                    private _radioGear = [_x] call acre_sys_core_fnc_getGear;
-                    _radioGear = _radioGear apply { [_x] call acre_api_fnc_getBaseRadio };
-                    _radioGear = _radioGear select { _x != "" };
-                    _radioGear = _radioGear apply { [_x + "_ID_1"] call acre_api_fnc_getDisplayName };
-                    _gear append _radioGear;
+                            _formattedString = _formattedString + _indent + format ["    <font color='#fcba03'> %1</font>, %2<br/>", name _x, _roleDescription];
+                        } else {
+                            private _role = [_x] call EFUNC(kosherAI,getRole);
+                            private _roleDescription = (createHashMapFromArray [
+                                ["CRW", "Crewman"],
+                                ["RPIL", "Pilot"],
+                                ["WPIL", "Pilot"],
+                                ["MED", "Medic"],
+                                ["ENG", "Engineer"],
+                                ["AT", "Anti-Tank"],
+                                ["MG", "Machinegunner"],
+                                ["MAR", "Marksman"],
+                                ["SL", "Leader"]
+                            ]) getOrDefault [_role, "Rifleman"];
 
-                    _gear = _gear select { _x != "" };
-                    _gear = _gear joinString ", ";
-                    _rosterString = _rosterString + format ["<font size='13'>    <font color='#fcba03'> %1</font>, %2 - <font color='#888888'>%3</font></font><br/>", name _unit, _roleDescription, _gear];
-                } forEach units _group;
-            } forEach _allPlayerGroups;
+                            _formattedString = _formattedString + _indent + format ["    <font color='#888888'>[AI]</font><font color='#fcba03'> %1</font>, %2<br/>", name _x, _roleDescription];
+                        };
+                    } forEach units _group;
+                };
 
-            player createDiaryRecord ["cmf_toe", ["TO&E", _rosterString]]
+                /* Sort children */
+                _children = [_children, [], {
+                    private _group = _x;
+                    private _groupData = [_group] call FUNC(groupGetData);
+                    private _groupNames = _group getVariable [QGVAR(groupName), ["UNKNOWN", "UNKNOWN"]];
+                    _groupData params ["", "_type", "", "_children"];
+
+                    private _childrenCount = count _children;
+                    private _alphabetOrder = GVAR(phoneticAlphabet) findIf { (_x select [0, 1]) isEqualTo (_groupNames select [0, 1]) };
+
+                    ([_childrenCount + 1000, _alphabetOrder] select (_type isEqualTo "INF"))
+                }, "DESCEND"] call BIS_fnc_sortBy;
+
+                {
+                    _formattedString = _formattedString + ([_x, _indent, _vehicle] call FUNC(ToE_recursiveCheck));
+                } forEach _children;
+
+                _formattedString;
+            };
+
+
+            {
+                private _group = _x;
+                private _groupNames = _group getVariable [QGVAR(groupName), ["UNKNOWN", "UNKNOWN"]];
+                private _formattedString = "<br/><font size='12'>";
+
+                _formattedString = _formattedString + ([_group] call FUNC(ToE_recursiveCheck));
+
+                cmf_player createDiaryRecord ["cmf_toe", [(_groupNames select 1), _formattedString]];
+            } forEach _topLevelGroups;
         };
     }];
 }] call CBA_fnc_waitUntilAndExecute;

@@ -37,15 +37,6 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_tracersFlashlight),
-    "CHECKBOX",
-    ["Flashlights", "Give AI flashlights (tracers must be enabled)"],
-    QUOTE(MODULE_BEAUTIFIED - Tracers),
-    true,
-    1
-] call EFUNC(common,addSetting);
-
-[
     QGVAR(setting_tracersSides),
     "EDITBOX",
     ["Sides", "Sides to apply function to. sepperated by comma (,)"],
@@ -53,3 +44,22 @@
     "east, independent",
     1
 ] call EFUNC(common,addSetting);
+
+[
+    QGVAR(setting_tracersFlashlight),
+    "CHECKBOX",
+    ["Flashlights", "Give AI flashlights (tracers must be enabled)"],
+    QUOTE(MODULE_BEAUTIFIED - Tracers),
+    false,
+    1
+] call EFUNC(common,addSetting);
+
+[
+    QGVAR(setting_tracersRandomModel),
+    "CHECKBOX",
+    ["Randomize Magazine Model", "Should magazine model be randomized?"],
+    QUOTE(MODULE_BEAUTIFIED - Tracers),
+    false,
+    1
+] call EFUNC(common,addSetting);
+

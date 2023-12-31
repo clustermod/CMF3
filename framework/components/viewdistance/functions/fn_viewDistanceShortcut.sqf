@@ -1,18 +1,18 @@
 #include "script_component.hpp"
 /*
- * Author: [Authors]
- * [Description]
+ * Author: Eric
+ * Keybind shortcut for changing viewdistance
  * 
  * Arguments:
- * 0: Argument <TYPE>
+ * 0: Value <NUMBER>
  * 
  * Return Value:
- * Value <TYPE>
+ * None
  * 
  * Example:
- * [] call cmf_[module]_fnc_[functionName]
+ * [+1000] call cmf_viewdistance_fnc_viewDistanceShortcut
  * 
- * Public: [yes/no]
+ * Public: No
  */
 
 params ["_value"];
@@ -47,4 +47,4 @@ if (_value >= 0) then {
     [format ["Decreased View Distance to: %1m", _newView toFixed 0]] call ACE_common_fnc_displayText;
 };
 
-[] call FUNC(updateViewDistance);
+call FUNC(updateViewDistance);

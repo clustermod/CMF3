@@ -20,7 +20,7 @@
 params["_unit", "_role", "_whitelist"];
 
 /* Strip unit naked */
-[_unit] call EFUNC(utility,stripUnit);
+[_unit] call EFUNC(common,stripUnit);
 
 /* Randomize the loadout they get based on the available items */
 _unit addBackpack (selectRandom (_whitelist select 0));
@@ -50,7 +50,7 @@ if (!isNil "_primary") then {
     };
 
     private _primaryMagazines = _magazines select { _x in (compatibleMagazines _primary) };
-    for "_i" from 0 to round (random 5) do {
+    for "_i" from 2 to round 2 + (random 4) do {
         _unit addMagazineGlobal selectRandom _primaryMagazines;
     };
 };
@@ -78,13 +78,13 @@ if (!isNil "_handgun") then {
     };
 
     private _handgunMagazines = _magazines select { _x in (compatibleMagazines _handgun) };
-    for "_i" from 0 to round (random 2) do {
+    for "_i" from 1 to 1 + round (random 1) do {
         _unit addMagazineGlobal selectRandom _handgunMagazines;
     };
 };
 
 /* Add random weapon attachments if they are available */
-for "_i" from 0 to 2 do {
+for "_i" from 0 to round random 2 do {
     _unit addPrimaryWeaponItem (selectRandom (_whitelist select 5));
 };
 
@@ -101,7 +101,7 @@ for "_i" from 0 to round (random 2) do {
 };
 
 /* Add medical equipment */
-if (_role == "MED") then {
+if (_role isEqualTo "MED") then {
     for "_i" from 0 to (random 30) do {
         _unit addItem (selectRandom (_whitelist select 8));
     }

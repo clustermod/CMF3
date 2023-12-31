@@ -10,20 +10,20 @@
  * Child Action <ARRAY>
  * 
  * Example:
- * [] call cmf_menu_fnc_reportBug
+ * call cmf_menu_fnc_reportBug
  * 
  * Public: No
  */
 params ["_target"];
 
-private _action = ([QGVAR(bug_menu), "Bug Fixes", "rsc\data\icon_ace_bug_ca.paa", {}, { true }, {
+private _action = ([QGVAR(bug_menu), "Bug Fixes", "components\menu\data\icon_ace_bug_ca.paa", {}, { true }, {
     private _actions = [];
 
     /* Fix endless loading bug Action */
-    private _action = ([QGVAR(loadingbug), LSTRING(loading_bug_displayname), "rsc\data\icon_ace_bug_ca.paa", {
+    private _action = ([QGVAR(loadingbug), LSTRING(loading_bug_displayname), "components\menu\data\icon_ace_bug_ca.paa", {
         private _onConfirm = {
             params["_value"];
-            [[], EFUNC(utility,endLoadingScreen)] remoteExec ["call", _value, true];
+            [[], EFUNC(common,endLoadingScreen)] remoteExec ["call", _value, true];
         };
 
         /* Open a menu where you can select the player to apply the fix to */
@@ -45,11 +45,11 @@ private _action = ([QGVAR(bug_menu), "Bug Fixes", "rsc\data\icon_ace_bug_ca.paa"
     }, { alive player }] call ace_interact_menu_fnc_createAction);
     _actions pushBack [_action, [], _target];
 
-    private _action = ([ // @BUG: Ironically, bug report is bugged, dialog is not created
+    private _action = ([
         QGVAR(reportBug), 
         ELSTRING(3den,report_bug), 
         "\a3\3DEN\Data\Controls\ctrlMenu\link_ca.paa", 
-        { createDialog EGVAR(utility,reportBug) }, 
+        { createDialog QEGVAR(utility,reportBug) }, 
         { true }
     ] call ace_interact_menu_fnc_createAction);
     _actions pushBack [_action, [], _target];
