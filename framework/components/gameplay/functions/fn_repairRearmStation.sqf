@@ -18,6 +18,8 @@
 */
 SCRIPT(repairRearmStation);
 
+// @TODO: Move to Vehicle Component
+
 if (!isServer) exitWith {};
 
 // @TODO: replace spawn

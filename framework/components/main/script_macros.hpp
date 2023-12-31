@@ -29,6 +29,7 @@
 #define QQGVAR(var1) QUOTE(QGVAR(var1))
 #define QQEGVAR(var1,var2) QUOTE(QEGVAR(var1,var2))
 
+// @TODO: replace ACE, CBA and BIS functions with these macros
 #define ACEFUNC(var1,var2) TRIPLES(DOUBLES(ace,var1),fnc,var2)
 #define CBAFUNC(var1) TRIPLES(CBA,fnc,var1)
 #define BISFUNC(var1) TRIPLES(BIS,fnc,var1)
@@ -104,7 +105,7 @@
 
 #define IS_BOOLEAN(VAR)  IS_BOOL(VAR)
 #define IS_FUNCTION(VAR) IS_CODE(VAR)
-#define IS_INTEGER(VAR)  (if (IS_SCALAR(VAR)) then {floor (VAR) isEqualTo (VAR)} else {false})
+#define IS_INTEGER(VAR) (if (IS_SCALAR(VAR)) then {floor (VAR) isEqualTo (VAR)} else {false})
 #define IS_NUMBER(VAR)   IS_SCALAR(VAR)
 
 ///////////////////////////////////////// DEBUGGING ////////////////////////////////////////
