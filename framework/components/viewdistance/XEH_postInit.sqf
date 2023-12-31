@@ -1,12 +1,12 @@
 #include "script_component.hpp"
 
-[] call FUNC(updateViewDistance);
+call FUNC(updateViewDistance);
 
 FUNC(changedControllableObject) = {
     params ["_object"];
     private _type = typeOf _object;
     
-    if (_type == "") exitWith {};
+    if (_type isEqualTo "") exitWith {};
 
     [{
         [QGVAR(changedControllableObject), _this] call CBA_fnc_localEvent;
@@ -21,20 +21,20 @@ FUNC(changedControllableObject) = {
     params ["_type"];
 
     if (_type isKindOf "Man") exitWith {
-        if ((missionNamespace getVariable [QGVAR(vehicleType), ""]) == "INFANTRY") exitWith {};
+        if ((missionNamespace getVariable [QGVAR(vehicleType), ""]) isEqualTo "INFANTRY") exitWith {};
         GVAR(vehicleType) = "INFANTRY";
-        [] call FUNC(updateViewDistance);
+        call FUNC(updateViewDistance);
     };
 
     if (_type isKindOf "LandVehicle" || _type isKindOf "Ship") exitWith {
-        if ((missionNamespace getVariable [QGVAR(vehicleType), ""]) == "VEHICLE") exitWith {};
+        if ((missionNamespace getVariable [QGVAR(vehicleType), ""]) isEqualTo "VEHICLE") exitWith {};
         GVAR(vehicleType) = "VEHICLE";
-        [] call FUNC(updateViewDistance);
+        call FUNC(updateViewDistance);
     };
 
     if (_type isKindOf "Air") exitWith {
-        if ((missionNamespace getVariable [QGVAR(vehicleType), ""]) == "AIR") exitWith {};
+        if ((missionNamespace getVariable [QGVAR(vehicleType), ""]) isEqualTo "AIR") exitWith {};
         GVAR(vehicleType) = "AIR";
-        [] call FUNC(updateViewDistance);
+        call FUNC(updateViewDistance);
     };
 }] call CBA_fnc_addEventHandler;

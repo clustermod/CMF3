@@ -11,7 +11,7 @@
  * Nearest Match <NUMBER>
  * 
  * Example:
- * [] call cmf_common_fnc_nearestNumber
+ * call cmf_common_fnc_nearestNumber
  * 
  * Public: Yes
  */

@@ -1,3 +1,48 @@
+# Changelog v2.1.1.57 => v2.1.1.58
+## Added
+- Added new Dynamic group system
+- Added new component `map`
+- New map tools for mission makers
+- Added fuel canisters to vehicle cargo
+- Added new `kosherGarage` system
+- Added ability to name vehicles
+- Added new component: `environment`
+- Added AI automatic artillery
+- Added SETTING family of macros
+- Added more info for zeuses aswell as a keybind to toggle away this info
+- Added longest and shortest frametime to ace diagnostic menu
+- Added ability to rename vehicles
+- Added ability to set vehicles as rallypoints
+
+## Changed
+- Moved hideRespawns to new map category
+- Moved mapTexture to new map category
+- Moved resizeMarkers to new map category
+- Changed TO&E and Roster to reflect new dynamic system
+- TO&E is no longer restricted to team leaders
+- AI will now dissembark from the vehicle if it gets disabled
+- Made major improvements to performance
+- Towing ropes are now whitelisted from `clearVehicleCargo`
+- Changed so kosherAI will take into account if unit already has a role assigned
+- Renamed zeus component to `curator`
+- Replaced setVariable with CBA_fnc_setNetVar where the variable needed to be global (network optimization)
+- Replaced publicVariable with CBA_fnc_publicVariable (network optimization)
+
+## Fixed
+- Fixed bug where game would lag heavily during endMission screen
+- Fixed bug with clearVehicleCargo
+- Fixed offroad bumps bug
+- Fixed Bug with vehicle fires
+- Fixed twilight times diary record
+- Fixed humidity being wrongly displayed
+- Fixed Bug with assigning team color on respawn
+- Fixed bug with tracers function
+- Fixed bug with ACRE PTT assignment
+
+## Removed
+- Removed old kosherGarage system
+- Removed utility module and moved all it's functions to more appropriate modules
+
 # Changelog v2.1.1.56 => v2.1.1.57
 ## Added
 - New diagnostics module

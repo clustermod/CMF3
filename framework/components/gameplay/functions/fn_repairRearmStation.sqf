@@ -131,17 +131,17 @@ _this spawn {
         (_this select 0) params ["_centerPos", ["_centerRadius", 5], ["_types", ["Car", "Tank", "Plane", "Helicopter", "Ship"]]];
 
         while { !(missionNamespace getVariable [QGVAR(repairRearm_disable), false]) } do {
-            waitUntil { vehicle player != player && (vehicle player distance _centerPos) < _centerRadius && _types findIf { vehicle player isKindOf _x } != -1 };
-            private _vehicle = vehicle player;
+            waitUntil { !isNull objectParent player && { (objectParent player distance _centerPos) < _centerRadius && { _types findIf { objectParent player isKindOf _x } != -1 } } };
+            private _vehicle = objectParent player;
 
-            LOG("reapirRearm %1", typeOf _vehicle);
+            LOG_1("repairRearm %1", typeOf _vehicle);
 
             /* Spawn the repair and rearm script */
             // @TODO: replace spawn
             private _repairRearmHandle = _vehicle spawn (_this select 1);
 
             /* Wait until player leaves radius */
-            waitUntil { (vehicle player distance _centerPos) > _centerRadius };
+            waitUntil { (objectParent player distance _centerPos) > _centerRadius };
             if (!scriptDone _repairRearmHandle) then {
                 terminate _repairRearmHandle;
                 QGVAR(reapirRearm_info) cutText ["Cancelled Operation!", "PLAIN DOWN"];

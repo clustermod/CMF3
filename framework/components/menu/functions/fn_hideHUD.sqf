@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_menu_fnc_toggleHUDAction
+ * call cmf_menu_fnc_toggleHUDAction
  *
  * Public: No
  */
@@ -20,7 +20,7 @@ if (is3DEN) exitWith {};
 private _action = [
     QGVAR(toggleHUD), 
     LSTRING(hide_hud_displayname), 
-    "rsc\data\icon_ace_viewDistance_ca.paa", 
+    "components\menu\data\icon_ace_viewDistance_ca.paa", 
     {
         /* Save the default showHUD parameters */
         if (isNil QGVAR(hud_default)) then {
@@ -58,12 +58,12 @@ private _action = [
 
             /* Hide ACRE PAX */ // This code needs refactoring
             [] spawn {
-                while { !GVAR(hud_show) && !(vehicle player isEqualTo player) } do {
+                while { !GVAR(hud_show) && { !isNull objectParent player isEqualTo player } } do {
                     ("acre_sys_gui_vehicleInfo" call BIS_fnc_rscLayer) cutText ["", "PLAIN"];
                     sleep 0.01;
                 };
 
-                if !(vehicle player isEqualTo player) then {
+                if (!isNull objectParent player) then {
                     [true] call acre_sys_gui_fnc_showVehicleInfo;
                 };
             };

@@ -18,7 +18,9 @@
 SCRIPT(restrictedVehicle);
 params ["_vehicle", "_condition"];
 
-_vehicle setVariable [QGVAR(restrictedVehicle_condition), _condition, true];
+// @TODO: rewrite this to be event based
+
+[_vehicle, QGVAR(restrictedVehicle_condition), _condition] call CBA_fnc_setVarNet;
 
 /* Check units entering vehicle */
 _vehicle addEventHandler ["GetIn", {
@@ -31,7 +33,7 @@ _vehicle addEventHandler ["GetIn", {
     private _role = (assignedVehicleRole _unit) select 0;
 
     /* Check if player is allowed to be in seat */
-    if ((_role in ["driver", "Turret"]) && !_condition) then {
+    if ((_role in ["driver", "Turret"]) && { !_condition }) then {
         ["You do not know how to operate this vehicle"] remoteExec ["hint", _unit];
         _unit action ["getOut", _vehicle];
         LOG_2("Kicked %1 out of vehicle %2", name _unit, typeOf _vehicle);
@@ -47,7 +49,7 @@ _vehicle addEventHandler ["SeatSwitched", {
     private _condition = _unit call (_vehicle getVariable [QGVAR(restrictedVehicle_condition), { true }]);
 
     /* Check if player is allowed to be in seat */
-    if ((_role in ["driver", "Turret"]) && !_condition) then {
+    if ((_role in ["driver", "Turret"]) && { !_condition }) then {
         ["You do not know how to operate this vehicle"] remoteExec ["hint", _unit];
         _unit action ["getOut", _vehicle];
         LOG_2("Kicked %1 out of vehicle %2", name _unit, typeOf _vehicle);

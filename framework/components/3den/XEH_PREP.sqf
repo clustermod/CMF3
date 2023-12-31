@@ -12,4 +12,7 @@ PREP(removeFromInit);
 
 PREP(main_iconViewer);
 PREP(main_setConfig);
-PREP(unit_constructor);
+PREP(unitConstructor);
+
+PREP(missionDataSet);
+PREP(missionDataGet);

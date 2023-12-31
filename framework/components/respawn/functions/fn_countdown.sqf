@@ -7,10 +7,10 @@
  * None
  * 
  * Return Value:
- * Script Handle <SCRIPT>
+ * PerFrameHandler Handle <NUMBER>
  * 
  * Example:
- * [] call cmf_respawn_fnc_countdown
+ * call cmf_respawn_fnc_countdown
  * 
  * Public: No
  */
@@ -25,8 +25,8 @@ GVAR(countdownHandler) = [{
         _ctrl ctrlShow false;
         _ctrl ctrlCommit 0;
 
-        [GVAR(countdownHandler)] call CBA_fnc_removePerFrameHandler;
-        GVAR(countdownHandler) = scriptNull;
+        [(_this select 1)] call CBA_fnc_removePerFrameHandler;
+        GVAR(countdownHandler) = -1;
     };
 
     private _minutes = floor(GVAR(respawnTimer) / 60);

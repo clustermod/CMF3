@@ -8,7 +8,7 @@
 SCRIPT(XEH_MODULE);
 
 LOG("Initializing components");
-missionNamespace setVariable [QGVAR(components_initialized), false];
+GVAR(components_initialized) = false;
 
 /* CMF Modules to define */
 GVAR(components) = [
@@ -17,15 +17,16 @@ GVAR(components) = [
     "diagnostic",
     "3den",
     "viewdistance",
+    "environment",
     "menu",
+    "map",
     "gameplay",
-    "enhancedVehicles",
+    "vehicles",
     "kosherArsenal",
-    "kosherAI",
     "kosherGarage",
+    "kosherAI",
     "respawn",
-    "utility",
-    "zeus",
+    "curator",
     "ai",
     "aar",
     "logistics",
@@ -40,13 +41,13 @@ private _loadPrep = {
     private _path = format ["components\%1\XEH_PREP.sqf", _module];
 
     if (fileExists _path) then {
-        [] call compile preprocessFileLineNumbers _path;
+        call compile preprocessFileLineNumbers _path;
     } else {
         WARNING_1("Failed to find module %1", _path);
     };
 };
 
-private _loadSettings = { // @TODO: Add for initKeybinds aswell
+private _loadSettings = {
     params ["_module"];
 
     private _path = format ["components\%1\initSettings.sqf", _module];
@@ -75,7 +76,7 @@ private _loadPreInit = {
     private _path = format ["components\%1\XEH_preInit.sqf", _module];
 
     if (fileExists _path) then {
-        [] call compile preprocessFileLineNumbers _path;
+        call compile preprocessFileLineNumbers _path;
     };
 };
 
@@ -88,7 +89,7 @@ private _loadPostInit = {
     if (fileExists _path) then {
         [
             { missionNamespace getVariable [QGVAR(components_initialized), false] },
-            { [] call compile preprocessFileLineNumbers _this },
+            { call compile preprocessFileLineNumbers _this },
             _path
         ] call CBA_fnc_waitUntilAndExecute;
     };
@@ -103,7 +104,7 @@ private _loadServerInit = {
     private _path = format ["components\%1\XEH_serverInit.sqf", _module];
 
     if (fileExists _path) then {
-        [] call compile preprocessFileLineNumbers _path;
+        call compile preprocessFileLineNumbers _path;
     };
 };
 
@@ -115,9 +116,9 @@ private _loadPlayerInit = {
 
     if (fileExists _path) then {
         [
-            { (missionNamespace getVariable [QGVAR(server_initialized), false]) && !isNull player },
+            { (missionNamespace getVariable [QGVAR(server_initialized), false]) && { !isNull player } },
             {
-                [] call compile preprocessFileLineNumbers _this;
+                call compile preprocessFileLineNumbers _this;
             }, 
             _path
         ] call CBA_fnc_waitUntilAndExecute;
@@ -132,7 +133,7 @@ private _load3denInit = {
 
     if (fileExists _path) then {
         waitUntil { missionNamespace getVariable [QGVAR(components_initialized), false] };
-        [] spawn compile preprocessFileLineNumbers _path;
+        0 spawn compile preprocessFileLineNumbers _path;
     };
 };
 
@@ -156,4 +157,4 @@ private _load3denInit = {
 } forEach GVAR(components);
 
 INFO("Initialized components");
-missionNamespace setVariable [QGVAR(components_initialized), true];
+GVAR(components_initialized) = true;

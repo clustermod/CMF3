@@ -42,7 +42,7 @@ class cmf_player_spectatorAAR: cmf_RscButton {
     colorText[] = {1,1,1,1};
     font = "PuristaMedium";
     tooltip = "Submit After Action Report";
-    onButtonClick = "[] call cmf_utility_fnc_submitAAR";
+    onButtonClick = "call cmf_utility_fnc_submitAAR";
 };
 
 /*

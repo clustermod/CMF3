@@ -10,7 +10,7 @@
  * None
  * 
  * Example:
- * [] call cmf_respawn_fnc_respawnButtonPFH
+ * call cmf_respawn_fnc_respawnButtonPFH
  * 
  * Public: No
  */

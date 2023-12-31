@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_main_fnc_addonBlacklist
+ * call cmf_main_fnc_addonBlacklist
  *
  * Public: No
  */
@@ -18,11 +18,10 @@ SCRIPT(addonBlacklist);
 
 if (!isServer) exitWith {};
 
-// @TODO: Move to common
-
 /* Save server addons to a variable */
 private _serverAddons = ("true" configClasses (configFile >> "CfgPatches")) apply { configname _x };
-missionNamespace setVariable [QGVAR(serverAddons), _serverAddons, true];
+GVAR(serverAddons) = _serverAddons;
+publicVariable QGVAR(serverAddons);
 
 addMissionEventHandler ["PlayerConnected", {
     private _owner = _this select 4;
@@ -31,12 +30,12 @@ addMissionEventHandler ["PlayerConnected", {
     [_this, {
         /* Save client addons to a variable */
         private _clientAddons = ("true" configClasses (configFile >> "CfgPatches")) apply { configname _x };
-        missionNamespace setVariable [QGVAR(clientAddons), _clientAddons];
+        GVAR(clientAddons) = _clientAddons;
 
         /* Get the variable difference */
         private _serverAddons = missionNamespace getVariable [QGVAR(serverAddons), []];
         private _addonDifference = _clientAddons - _serverAddons;
-        player setVariable [QGVAR(addonDifference), _addonDifference, true];
+        player setVariable [QGVAR(addonDifference), _addonDifference];
 
         /* Check if any addons are blacklisted */
         private _illegalAddons = _clientAddons select { _x in EGVAR(common,setting_blacklistedAddons) };

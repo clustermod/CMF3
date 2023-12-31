@@ -5,13 +5,13 @@
  *
  * Arguments:
  * 0: 3DEN Entity <OBJECT>
- * 1: Line to add <STRING>
+ * 1: Line to check <STRING>
  *
  * Return Value:
  * In Init <BOOLEAN>
  *
  * Example:
- * [] call cmf_3den_fnc_inInit
+ * [_entity, "this allowDamage false"] call cmf_3den_fnc_inInit
  *
  * Public: No
  */

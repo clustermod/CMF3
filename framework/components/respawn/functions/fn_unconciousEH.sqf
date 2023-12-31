@@ -11,7 +11,7 @@
  * None
  * 
  * Example:
- * [] call cmf_respawn_fnc_unconciousEH
+ * call cmf_respawn_fnc_unconciousEH
  * 
  * Public: No
  */
@@ -21,9 +21,9 @@ params ["_unit", "_state"];
 if !(_unit isEqualTo player) exitWith {};
 
 if (_state) then {
-    if (!isNull GVAR(countdownHandler)) exitWith {};
+    if (!isNil GVAR(countdownHandler)) exitWith {};
     GVAR(respawnTimer) = GVAR(setting_unconciousTimer);
-    [] call FUNC(countdown);
+    call FUNC(countdown);
 } else {
     [GVAR(countdownHandler)] call CBA_fnc_removePerFrameHandler;
     GVAR(respawnState) = false;

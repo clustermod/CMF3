@@ -10,18 +10,19 @@
  * None
  *
  * Example:
- * [] call cmf_ai_fnc_fireEH
+ * call cmf_ai_fnc_fireEH
  *
  * Public: Yes
  */
 
+// @TODO: This won't work
 ["ace_fire_addFireSource", {
     params ["_unit"];
 
     if (_unit isEqualType []) exitWith {};
 
     /* Make unit enter panic action */
-    if (_unit isKindOf "Man" && !isPlayer _unit) then {
+    if (_unit isKindOf "Man" && { !isPlayer _unit }) then {
         _unit setBehaviour "CARELESS";
         _unit disableAI "FSM";
         _unit setUnitPosWeak "UP";

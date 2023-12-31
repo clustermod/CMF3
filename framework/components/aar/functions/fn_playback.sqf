@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_aar_fnc_playback
+ * [_aarData] call cmf_aar_fnc_playback
  *
  * Public: Yes
  */
@@ -44,7 +44,8 @@ _this spawn {
     [] spawn {
         while { true } do {
             private _oldCurTime = missionNameSpace getVariable [QGVAR(playBack_curTime), 0];
-            missionNameSpace setVariable [QGVAR(playBack_curTime), (_oldCurTime + 1), true];
+            GVAR(playBack_curTime) = (_oldCurTime + 1);
+            publicVariable QGVAR(playBack_curTime);
             sleep 1;
         };
     };

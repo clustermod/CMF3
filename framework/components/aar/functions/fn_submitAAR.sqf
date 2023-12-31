@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_aar_fnc_submitAAR
+ * call cmf_aar_fnc_submitAAR
  *
  * Public: No
  */
@@ -25,7 +25,9 @@ private _submit = {
 
     /* Call script serverside (extDB3 only installed serverside) */
     private _oldReports = missionNameSpace getVariable [QGVAR(AAR_playerReports), []];
-    missionNameSpace setVariable [QGVAR(AAR_playerReports), _oldReports + [[_name, _mission, _player, (name player)]], true];
+    _oldReports pushBack [_name, _mission, _player, (name player)];
+    GVAR(AAR_playerReports) = _oldReports;
+    publicVariable QGVAR(AAR_playerReports);
 
     /* Raise event */
     [QGVAR(debrief_onSubmit), []] call CBA_fnc_localEvent;

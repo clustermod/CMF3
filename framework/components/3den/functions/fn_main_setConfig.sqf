@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_3den_fnc_setConfig
+ * [0] call cmf_3den_fnc_setConfig
  *
  * Public: No
  */
@@ -19,7 +19,7 @@ params ["_cmfMenu"];
 
 /* Handle player attempting to delete logic */
 {
-    if ((_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_missionDataLogic']) then {
+    if ((_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_missionDataLogic_old']) then {
         _x addEventHandler ['UnregisteredFromWorld3DEN', {
             params ['_entity'];
             ['Deleted CMF Mission Data', 1, 1] call BIS_fnc_3DENNotification;
@@ -29,16 +29,16 @@ params ["_cmfMenu"];
 
 /* Handle Mission Data */
 FUNC(setConfig_missionDataHandler) = {
-    private _logics = (all3DENEntities select 0) select { (_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_missionDataLogic'] };
+    private _logics = (all3DENEntities select 0) select { (_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_missionDataLogic_old'] };
     private _logic = objNull;
     if (count _logics isEqualTo 0) then {
         _logic = create3DENEntity ['Object', 'Logic', [0,0,0], true];
-        _logic set3DENAttribute ['Name', QGVAR(missionDataLogic)];
+        _logic set3DENAttribute ['Name', QGVAR(missionDataLogic_old)];
     } else {
         _logic = _logics select 0;
     };
 
-    GVAR(missionDataLogic) = _logic;
+    GVAR(missionDataLogic_old) = _logic;
 
     _logic addEventHandler ['UnregisteredFromWorld3DEN', {
         params ['_entity'];
@@ -55,7 +55,7 @@ FUNC(setConfig_missionDataHandler) = {
         waitUntil { !isNull _display };
 
         /* load previous data */
-        [] call compile ((_logic get3DENAttribute "Init") select 0);
+        call compile ((_logic get3DENAttribute "Init") select 0);
         if (!isNil QEGVAR(common,missionData)) then {
             private _hash = [EGVAR(common,missionData)] call CBA_fnc_hashCreate;
 
@@ -105,23 +105,23 @@ FUNC(setConfig_missionDataHandler) = {
             _hash pushBack ["E_FLARE", ctrlText (_display displayCtrl 205)];
 
             /* Save to logic init */
-            GVAR(missionDataLogic) set3DENAttribute ["Init", format ["if (!isServer) exitWith { }; missionNamespace setVariable [""%1"", %2, true];", QEGVAR(common,missionData), str _hash]];
+            GVAR(missionDataLogic_old) set3DENAttribute ["Init", format ["if (!isServer) exitWith { }; missionNamespace setVariable [""%1"", %2, true];", QEGVAR(common,missionData), str _hash]];
 
             /* Set mission attributes */
             _hash = [_hash] call CBA_fnc_hashCreate;
             private _pictures = [
-                "rsc\data\icon_gametype_scenario_ca.paa",
-                "rsc\data\icon_gametype_custom_ca.paa",
-                "rsc\data\icon_gametype_sandbox_ca.paa",
-                "rsc\data\icon_gametype_training_ca.paa",
-                "rsc\data\icon_gametype_invasion_ca.paa",
-                "rsc\data\icon_gametype_assault_ca.paa",
-                "rsc\data\icon_gametype_defence_ca.paa",
-                "rsc\data\icon_gametype_csar_ca.paa",
-                "rsc\data\icon_gametype_qrf_ca.paa"
+                "components\3den\data\icon_gametype_scenario_ca.paa",
+                "components\3den\data\icon_gametype_custom_ca.paa",
+                "components\3den\data\icon_gametype_sandbox_ca.paa",
+                "components\3den\data\icon_gametype_training_ca.paa",
+                "components\3den\data\icon_gametype_invasion_ca.paa",
+                "components\3den\data\icon_gametype_assault_ca.paa",
+                "components\3den\data\icon_gametype_defence_ca.paa",
+                "components\3den\data\icon_gametype_csar_ca.paa",
+                "components\3den\data\icon_gametype_qrf_ca.paa"
             ];
             private _picture = if ((lbCurSel (_display displayCtrl 101)) > count _pictures - 1) then {
-                "rsc\data\icon_gametype_empty_ca.paa"
+                "components\3den\data\icon_gametype_empty_ca.paa"
             } else {
                 _pictures select (lbCurSel (_display displayCtrl 101))
             };

@@ -85,14 +85,14 @@ def check_config_style(filepath):
                             brackets_list.append('(')
                         elif (c == ')'):
                             if (len(brackets_list) > 0 and brackets_list[-1] in ['{', '[']):
-                                print("ERROR: Possible missing round bracket ')' detected at {0} Line number: {1}".format(filepath,lineNumber))
+                                print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " Possible missing round bracket ')' detected at {0} Line number: {1}".format(filepath,lineNumber))
                                 bad_count_file += 1
                             brackets_list.append(')')
                         elif (c == '['):
                             brackets_list.append('[')
                         elif (c == ']'):
                             if (len(brackets_list) > 0 and brackets_list[-1] in ['{', '(']):
-                                print("ERROR: Possible missing square bracket ']' detected at {0} Line number: {1}".format(filepath,lineNumber))
+                                print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " Possible missing square bracket ']' detected at {0} Line number: {1}".format(filepath,lineNumber))
                                 bad_count_file += 1
                             brackets_list.append(']')
                         elif (c == '{'):
@@ -100,11 +100,11 @@ def check_config_style(filepath):
                         elif (c == '}'):
                             lastIsCurlyBrace = True
                             if (len(brackets_list) > 0 and brackets_list[-1] in ['(', '[']):
-                                print("ERROR: Possible missing curly brace '}}' detected at {0} Line number: {1}".format(filepath,lineNumber))
+                                print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " Possible missing curly brace '}}' detected at {0} Line number: {1}".format(filepath,lineNumber))
                                 bad_count_file += 1
                             brackets_list.append('}')
                         elif (c== '\t'):
-                            print("ERROR: Tab detected at {0} Line number: {1}".format(filepath,lineNumber))
+                            print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " Tab detected at {0} Line number: {1}".format(filepath,lineNumber))
                             bad_count_file += 1
 
             else: # Look for the end of our comment block
@@ -118,36 +118,36 @@ def check_config_style(filepath):
             indexOfCharacter += 1
 
         if brackets_list.count('[') != brackets_list.count(']'):
-            print("ERROR: A possible missing square bracket [ or ] in file {0} [ = {1} ] = {2}".format(filepath,brackets_list.count('['),brackets_list.count(']')))
+            print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " A possible missing square bracket [ or ] in file {0} [ = {1} ] = {2}".format(filepath,brackets_list.count('['),brackets_list.count(']')))
             bad_count_file += 1
         if brackets_list.count('(') != brackets_list.count(')'):
-            print("ERROR: A possible missing round bracket ( or ) in file {0} ( = {1} ) = {2}".format(filepath,brackets_list.count('('),brackets_list.count(')')))
+            print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " A possible missing round bracket ( or ) in file {0} ( = {1} ) = {2}".format(filepath,brackets_list.count('('),brackets_list.count(')')))
             bad_count_file += 1
         if brackets_list.count('{') != brackets_list.count('}'):
-            print("ERROR: A possible missing curly brace {{ or }} in file {0} {{ = {1} }} = {2}".format(filepath,brackets_list.count('{'),brackets_list.count('}')))
+            print(bcolors.FAIL + "ERROR" + bcolors.ENDC + " A possible missing curly brace {{ or }} in file {0} {{ = {1} }} = {2}".format(filepath,brackets_list.count('{'),brackets_list.count('}')))
             bad_count_file += 1
 
         file.seek(0)
         for lineNumber, line in enumerate(file.readlines()):
             if reIsClass.match(line):
                 if reBadColon.match(line):
-                    print(f"WARNING: bad class colon {filepath} Line number: {lineNumber+1}")
+                    print(bcolors.WARNING + "WARNING" + bcolors.ENDC + f" bad class colon {filepath} Line number: {lineNumber+1}")
                     # bad_count_file += 1
                 if reIsClassInherit.match(line):
                     if not reSpaceAfterColon.match(line):
-                        print(f"WARNING: bad class missing space after colon {filepath} Line number: {lineNumber+1}")
+                        print(bcolors.WARNING + "WARNING" + bcolors.ENDC + f" bad class missing space after colon {filepath} Line number: {lineNumber+1}")
                 if reIsClassBody.match(line):
                     if not reSpaceBeforeCurly.match(line):
-                        print(f"WARNING: bad class inherit missing space before curly braces {filepath} Line number: {lineNumber+1}")
+                        print(bcolors.WARNING + "WARNING" + bcolors.ENDC + f" bad class inherit missing space before curly braces {filepath} Line number: {lineNumber+1}")
                 if not reClassSingleLine.match(line):
-                    print(f"WARNING: bad class braces placement {filepath} Line number: {lineNumber+1}")
+                    print(bcolors.WARNING + "WARNING" + bcolors.ENDC + f" bad class braces placement {filepath} Line number: {lineNumber+1}")
                     # bad_count_file += 1
 
     return bad_count_file
 
 def main():
 
-    print("Validating Config Style")
+    print(bcolors.WARNING + "Validating Config Style" + bcolors.ENDC)
 
     sqf_list = []
     bad_count = 0
@@ -173,9 +173,9 @@ def main():
 
     print("------\nChecked {0} files\nErrors detected: {1}".format(len(sqf_list), bad_count))
     if (bad_count == 0):
-        print("Config validation PASSED")
+        print(bcolors.OKGREEN + "Config validation PASSED" + bcolors.ENDC)
     else:
-        print("Config validation FAILED")
+        print(bcolors.FAIL + "Config validation FAILED" + bcolors.ENDC)
 
     return bad_count
 

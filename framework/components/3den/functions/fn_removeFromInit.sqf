@@ -5,13 +5,13 @@
  *
  * Arguments:
  * 0: 3DEN Entity <OBJECT>
- * 1: Line to add <STRING>
+ * 1: Line to remove <STRING>
  *
  * Return Value:
  * Deleted Success <BOOLEAN>
  *
  * Example:
- * [] call cmf_3den_fnc_addToInit
+ * [_entity, "this allowDamage false"] call cmf_3den_fnc_addToInit
  *
  * Public: No
  */
@@ -31,7 +31,7 @@ if ((_init select [(count _line) + _index, 1]) isEqualTo ";") then {
 private _p2 = _init select [_deleteRange, count _init];
 
 _init = (_p1 + _p2) splitString toString [13, 10];
-_init = _init select { _x != " " && _x != "" };
+_init = _init select { _x != " " && { _x != "" } };
 _init = _init joinString toString [13, 10];
 
 _entity set3DENAttribute ["Init", _init];
