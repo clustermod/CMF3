@@ -1,5 +1,5 @@
-# Map
-Adds new map tools and enhances the map immersion
+# Gameplay
+Adds gameplay enhancements
 
 ## Dependencies
 ### Components

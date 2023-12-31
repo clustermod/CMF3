@@ -1,5 +1,5 @@
-# Map
-Adds new map tools and enhances the map immersion
+# Logistics
+Adds a new dynamic logistical system to Arma.
 
 ## Dependencies
 ### Components

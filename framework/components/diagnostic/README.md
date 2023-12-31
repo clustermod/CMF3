@@ -1,2 +1,9 @@
 # Diagnostic
-Adds diagnostic tools to CMF3
+Handles diagnostic aspects of CMF3 like logging and performance tracking.
+
+## Dependencies
+### Components
+- Common
+
+## Maintainers
+- Eric
