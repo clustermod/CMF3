@@ -92,7 +92,7 @@ def check_loadouts(src):
     
     return errorCount
 
-def release_build(rootPath, src):
+def release_build(rootPath, src, name, versionArr):
     errorcount = 0
 
     errorcount += check_config_style()
@@ -101,23 +101,27 @@ def release_build(rootPath, src):
     errorcount += check_scripts(src)
     errorcount += check_loadouts(src)
 
-    print(bcolors.WARNING + "\nBuilding Release" + bcolors.ENDC)
+    print(bcolors.WARNING + "\nBuilding Release ({0})".format(os.path.basename(src)) + bcolors.ENDC)
 
     if (errorcount == 0):
         releaseDir = os.path.join(rootPath, 'release')
         if not os.path.exists(releaseDir):
             os.makedirs(releaseDir)
 
-        versionArr = get_version(src);
-        releaseName = os.path.join(releaseDir, '{0}-{1}.{2}.{3}.{4}.zip'.format(get_name(src), versionArr[0], versionArr[1], versionArr[2], versionArr[3]))
+        releaseName = os.path.join(releaseDir, '{0}-{1}.{2}.{3}.{4}.zip'.format(name, versionArr[0], versionArr[1], versionArr[2], versionArr[3]))
 
+        # If optionals append directory name
+        if os.path.basename(src) != 'framework':
+            releaseName = releaseName.replace('.zip', '-{0}.zip'.format(os.path.basename(src)))
+        
         fileCount = 0
         with zipfile.ZipFile(releaseName, 'w', zipfile.ZIP_DEFLATED) as archive:
             for root, dirs, files in os.walk(src):
                 for file in files:
-                    if file.upper() in ['README.MD', 'TODO.MD', 'CHANGELOG.MD']: continue
+                    if file.upper() in ['TODO.MD', 'CHANGELOG.MD']: continue
+                    if os.path.basename(src) == 'framework' and file.upper() == 'README.MD': continue
                     
-                    targetRoot = remove_dir(root, 'framework')
+                    targetRoot = remove_dir(root, os.path.basename(src))
                     print(bcolors.OKCYAN + "ZIP" + bcolors.ENDC + " Adding File: {0}".format(remove_dir(os.path.join(root, file), '..')))
                     archive.write(os.path.join(root, file), os.path.relpath(os.path.join(targetRoot, file), os.path.join(src, '..')))
                     fileCount += 1
@@ -134,10 +138,12 @@ def release_build(rootPath, src):
 def main():
     errorcount = 0
     rootDir = '..'
-    for folder in ['framework']:
+    frameworkVersion = get_version(os.path.join(rootDir, 'framework'));
+    frameworkName = get_name(os.path.join(rootDir, 'framework'));
+    for folder in ['framework', 'optionals']:
         src = os.path.join(rootDir, folder)
         if (os.path.exists(src)):
-            errorcount += release_build(rootDir, src)
+            errorcount += release_build(rootDir, src, frameworkName, frameworkVersion)
 
     return errorcount
 
