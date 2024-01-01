@@ -1,3 +1,21 @@
+#include "script_component.hpp"
+/*
+ * Author: Eric
+ * Creates more effects when firing inside like sparks, smoke and louder reverberated sounds.
+ * For sound to work shot_inside.ogg needs to be inside rsc\sounds
+ * 
+ * Arguments:
+ * None
+ * 
+ * Return Value:
+ * None
+ * 
+ * Example:
+ * call compile preprocessFileLineNumbers "rsc\scripts\insideEffects.sqf"
+ * 
+ * Public: Yes
+ */
+
 if (!hasInterface) exitWith {};
 
 ms_isSuppressor = {
@@ -36,6 +54,8 @@ ms_inBuilding = {
 ms_insideParticles_playSound = {
     params ["_unit"];
 
+    if (!fileExists getMissionPath "rsc\sounds\shot_inside.ogg") exitWith {};
+
     private _sources = [];
     for "_i" from 1 to 2 do {
         private _index = _sources pushBack ("Land_HelipadEmpty_F" createVehicleLocal (_unit modelToWorld [0.2,1,0]));
@@ -44,7 +64,7 @@ ms_insideParticles_playSound = {
 
     _sources spawn {
         {
-            _x say3D ["cmf_shot_inside", 100];
+            playSound3D [getMissionPath "rsc\sounds\shot_inside.ogg", _x, true, getPosASLVisual _x, 50, 0.9 + random 0.2, 100, 0, true];
             sleep 0.01;
         } forEach _this;
         sleep 3;

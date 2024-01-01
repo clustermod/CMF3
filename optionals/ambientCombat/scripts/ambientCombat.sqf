@@ -4,17 +4,23 @@
  * Plays simulated combat sounds and light flashes from explosions
  * 
  * Arguments:
- * None
+ * 0: Flashes (optional, default: true) <BOOLEAN>
  * 
  * Return Value:
  * None
  * 
  * Example:
- * call compile preprocessFileLineNumbers "rsc\scripts\ambientCombat"
+ * [] call compile preprocessFileLineNumbers "rsc\scripts\ambientCombat"
+ *
+ * [false] call compile preprocessFileLineNumbers "rsc\scripts\ambientCombat
  * 
  * Public: Yes
  */
 if (!isServer) exitWith {};
+
+params [["_flashes", true]];
+
+GVAR(ambientCombatFlashes) = _flashes;
 
 if (isNil QGVAR(ambientCombat)) then {
     GVAR(ambientCombat) = true;
@@ -49,7 +55,7 @@ for '_i' from 0 to 2 do {
                 playSound _this;
             }] remoteExec ["call", 0, false];
 
-            if (_sound in _explosions) then {
+            if (GVAR(ambientCombatFlashes) && _sound in _explosions) then {
                 private _flashPos = [worldSize / 2, worldsize / 2, 0] getPos [worldsize * 1.2, random 360];
                 [_flashPos, _flashFunction] remoteExec ["call", 0, false];
             };
