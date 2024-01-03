@@ -1,0 +1,26 @@
+name: Feature Request
+description: Suggest an idea for this project
+labels: ["kind/Feature Request"]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for taking the time to report a bug with our Framework.
+  - type: checkboxes
+    attributes:
+      label: I ACKNOWLEDGE THE FOLLOWING BEFORE PROCEEDING
+      options:
+        - label: If I delete this entire template or parts of it and go my own path, the team may close my issue without further explanation or engagement.
+          required: true
+        - label: If I list multiple features in this one issue, the team may close my issue without further explanation or engagement.
+          required: true
+        - label: If I write a feature that has duplicates, the team may close my issue without further explanation or engagement (and without necessarily spending time to find the exact duplicate ID number).
+          required: true
+        - label: If I leave the title incomplete when filing the request, the team may close my issue without further explanation or engagement.
+          required: true
+        - label: If I file something completely blank in the body, the team may close my issue without further explanation or engagement.
+          required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description of Feature
+      description: A clear and concise description of the feature.
