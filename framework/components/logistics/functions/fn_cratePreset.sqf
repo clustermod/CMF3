@@ -21,7 +21,8 @@ private _path = format["rsc\loadouts\%1.sqf", _name];
 if !(FILE_EXISTS(_path)) exitWith { ERROR_MSG_1("Unable to find preset: %1", _name); };
 
 private _presets = [call compile preprocessFileLineNumbers _path] call CBA_fnc_hashCreate;
-missionNamespace setVariable [QGVAR(crateConfig), _presets, true];
+GVAR(crateConfig) = _presets;
+publicVariable QGVAR(crateConfig);
 
 {
     private _key = _x;
@@ -32,13 +33,14 @@ missionNamespace setVariable [QGVAR(crateConfig), _presets, true];
     /* Create amount tracker */
     private _crateHash = missionNamespace getVariable [QGVAR(crateHash), [] call CBA_fnc_hashCreate];
     private _newAmount = [_crateHash, _key, 0] call CBA_fnc_hashSet;
-    missionNamespace setVariable [QGVAR(crateHash), _newAmount, true];
+    GVAR(crateHash) = _newAmount;
+    publicVariable QGVAR(crateHash);
 
     /* Using this method won't allow for using the same crate for different crates */
     [(_presetData select 1), "init", compile ("
         params ['_crate'];
         if (_crate getVariable ['ace_cargo_customName', ''] isEqualTo '') then {
-            _crate setVariable ['ace_cargo_customName', '" + _key + " Crate | ', true];
+            [_crate, 'ace_cargo_customName', '" + _key + " Crate | '] call CBA_fnc_setVarNet;
         };
         [_crate, true] call ace_dragging_fnc_setCarryable;
         [_crate, true] call ace_dragging_fnc_setDraggable;

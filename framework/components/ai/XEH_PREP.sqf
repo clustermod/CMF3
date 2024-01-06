@@ -7,3 +7,4 @@ PREP(fireEH);
 PREP(silenceAI);
 PREP(panic);
 PREP(hostage);
+PREP(artillery);

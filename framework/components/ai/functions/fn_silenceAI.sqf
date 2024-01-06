@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_ai_fnc_silenceAI
+ * call cmf_ai_fnc_silenceAI
  *
  * Public: Yes
  */
@@ -21,8 +21,8 @@ enableSentences false;
 ["CAManBase", "init", {
     params ["_unit"];
 
-    if ([side player, side _unit] call BIS_fnc_sideIsFriendly) then {
-        _unit setVariable ["BIS_noCoreConversations", true, false];
-        while {!conversationDisabled _unit} do {_unit disableConversation true};
+    if ([side cmf_player, side _unit] call BIS_fnc_sideIsFriendly) then {
+        _unit setVariable ["BIS_noCoreConversations", true];
+        while { !conversationDisabled _unit } do { _unit disableConversation true };
     }
 }] call CBA_fnc_addClassEventHandler;

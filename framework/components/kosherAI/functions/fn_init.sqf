@@ -22,7 +22,7 @@
 SCRIPT(kosherAI);
 
 /* Save the configs */
-missionNamespace setVariable [QGVAR(configs), _this];
+GVAR(configs) = _this;
 
 if (!isServer) exitWith {};
 
@@ -51,7 +51,7 @@ if (!isServer) exitWith {};
                     [_unit, _role, _whitelist] spawn FUNC(setLoadout);
                 };
             } else {
-                if (side _unit isEqualTo _side && { !(_unitClass in _list) && !(_unitFaction in _list) }) exitWith {
+                if (side _unit isEqualTo _side && { !(_unitClass in _list) && { !(_unitFaction in _list) } }) exitWith {
                     private _role = [_unit] call FUNC(getRole);
                     private _whitelist = ([_role] call compile(preprocessFileLineNumbers format["rsc\loadouts\%1.sqf", _loadout])) select 1;
 

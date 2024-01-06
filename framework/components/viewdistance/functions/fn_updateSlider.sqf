@@ -1,18 +1,19 @@
 #include "script_component.hpp"
 /*
- * Author: [Authors]
- * [Description]
+ * Author: Eric
+ * Updates viewdistance slider values
  * 
  * Arguments:
- * 0: Argument <TYPE>
+ * 0: Control <CONTROL>
+ * 1: New Value <NUMBER>
  * 
  * Return Value:
  * Value <TYPE>
  * 
  * Example:
- * [] call cmf_[module]_fnc_[functionName]
+ * call cmf_viewdistance_fnc_updateSlider
  * 
- * Public: [yes/no]
+ * Public: No
  */
 
 params ["_control", "_newValue"];
@@ -86,4 +87,4 @@ switch (ctrlIDC _control) do {
 
 profileNamespace setVariable [_varName, _savedValues];
 
-// [] call FUNC(updateViewDistance);
+// call FUNC(updateViewDistance);

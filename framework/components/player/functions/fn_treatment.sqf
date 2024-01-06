@@ -10,7 +10,7 @@
  * None
  * 
  * Example:
- * [] call cmf_player_fnc_treatment
+ * call cmf_player_fnc_treatment
  * 
  * Public: No
  */
@@ -31,7 +31,7 @@
         };
 
         private _handler = [_text, [safeZoneX - 0.35, safeZoneW - safeZoneX], safezoneH - 0.7, 9999, 1, 0, ([QGVAR(treatment_notification)] call BIS_fnc_rscLayer)] spawn BIS_fnc_dynamicText;
-        _target setVariable [QGVAR(treatment_notifHandler), _handler, true];
+        _target setVariable [QGVAR(treatment_notifHandler), _handler];
     }] remoteExec ["call", _target];
 }] call CBA_fnc_addEventHandler;
 
@@ -49,7 +49,7 @@
         if (!isNil "_handler") then {
             terminate _handler;
             ([QGVAR(treatment_notification)] call BIS_fnc_rscLayer) cutText ["", "plain"];
-            _target setVariable [QGVAR(treatment_notifHandler), nil, true];
+            _target setVariable [QGVAR(treatment_notifHandler), nil];
         };
     }] remoteExec ["call", _target];
 
@@ -69,7 +69,7 @@
         if (!isNil "_handler") then {
             terminate _handler;
             ([QGVAR(treatment_notification)] call BIS_fnc_rscLayer) cutText ["", "plain"];
-            _target setVariable [QGVAR(treatment_notifHandler), nil, true];
+            _target setVariable [QGVAR(treatment_notifHandler), nil];
         };
     }] remoteExec ["call", _target];
 }] call CBA_fnc_addEventHandler;

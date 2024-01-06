@@ -10,7 +10,7 @@
  * None
  * 
  * Example:
- * [] call cmf_diagnostic_fnc_logFlush
+ * call cmf_diagnostic_fnc_logFlush
  * 
  * Public: no
  */

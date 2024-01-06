@@ -10,17 +10,13 @@
  * None
  *
  * Example:
- * [] call cmf_player_fnc_spectator
+ * call cmf_player_fnc_spectator
  *
  * Public: No
  */
 
-/* Add control to ui when it's opened */
-// @TODO: replace spawn
+// @TODO: Rewrite to create control inside a control group
 _this spawn {
-
-    /* Check if it's being executed on the Clustercommunity server */
-    if (serverName != "Clustercommunity") exitWith {};
 
     while { true } do {
         waitUntil {!isNull findDisplay IDD_SPEC_DISPLAY};

@@ -1,18 +1,19 @@
 #include "script_component.hpp"
 /*
- * Author: [Authors]
- * [Description]
+ * Author: Eric
+ * Initializes viewdistance dialog
  * 
  * Arguments:
- * 0: Argument <TYPE>
+ * 0: Dialog <DIALOG>
+ * 1: Config <CONFIG>
  * 
  * Return Value:
- * Value <TYPE>
+ * None
  * 
  * Example:
- * [] call cmf_[module]_fnc_[functionName]
+ * call cmf_viewdistance_fnc_dialogInit
  * 
- * Public: [yes/no]
+ * Public: No
  */
 
 params ["_dialog", ["_config", configNull]];

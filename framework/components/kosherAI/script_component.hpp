@@ -1,7 +1,7 @@
 #define MODULE kosherAI
 #define MODULE_BEAUTIFIED Kosher AI
 
-#define REQUIRED_ADDONS ["ace_arsenal"]
+#define REQUIRED_ADDONS []
 #define REQUIRED_MODULES ["common"]
 
 #ifdef DEBUG_ENABLED_KOSHERAI

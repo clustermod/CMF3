@@ -1,15 +1,18 @@
 #include "script_component.hpp"
 
-waitUntil { !isNil { missionNameSpace getVariable QEGVAR(3den,menu_entity) } };
+/* Create sub category for radios */
+[([] call acre_api_fnc_getAllRadios) select 0, "Radios", "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\call_ca.paa", 1] call ace_arsenal_fnc_addRightPanelButton;
 
-private _path = missionNameSpace getVariable QEGVAR(3den,menu_entity);
+waitUntil { !isNil QEGVAR(3den,menu_entity) };
+
+private _path = EGVAR(3den,menu_entity);
 
 /* Action to add a radio rack to a vehicle */
 private _acreRadioRackAction = [
     "Add Radio Rack (ACRE)",
     "a3\ui_f\data\gui\rsc\rscdisplayarsenal\radio_ca.paa",
     {
-        if (count get3DENSelected "object" == 0) exitWith {
+        if (count get3DENSelected "object" isEqualTo 0) exitWith {
             ["No Objects selected", 0, 1] call BIS_fnc_3DENNotification;
         };
 
@@ -57,7 +60,7 @@ private _simulationAction = [
     LSTRING(toggle_sim_3den_displayName),
     "a3\modules_f\data\editterrainobject\textureunchecked_wall_ca.paa",
     {
-        if (count get3DENSelected "object" == 0) exitWith {
+        if (count get3DENSelected "object" isEqualTo 0) exitWith {
             ["No Objects selected", 0, 1] call BIS_fnc_3DENNotification;
         };
         
@@ -78,7 +81,7 @@ private _simpleAction = [
     LSTRING(make_obj_simple_displayName),
     "z\ace\addons\zeus\ui\icon_module_zeus_editable_objects_ca.paa",
     {
-        if (count get3DENSelected "object" == 0) exitWith {
+        if (count get3DENSelected "object" isEqualTo 0) exitWith {
             ["No Objects selected", 0, 1] call BIS_fnc_3DENNotification;
         };
         
@@ -123,7 +126,7 @@ private _carryAction = [
     "Toggle ACE Carryable",
     "z\ace\addons\dragging\ui\icons\box_carry.paa",
     {
-        if (count get3DENSelected "object" == 0) exitWith {
+        if (count get3DENSelected "object" isEqualTo 0) exitWith {
             ["No Objects selected", 0, 1] call BIS_fnc_3DENNotification;
         };
 
@@ -160,7 +163,7 @@ private _dragAction = [
     "Toggle ACE Draggable",
     "z\ace\addons\dragging\ui\icons\box_carry.paa",
     {
-        if (count get3DENSelected "object" == 0) exitWith {
+        if (count get3DENSelected "object" isEqualTo 0) exitWith {
             ["No Objects selected", 0, 1] call BIS_fnc_3DENNotification;
         };
 

@@ -10,16 +10,16 @@
  * None
  *
  * Example:
- * [] call cmf_aar_fnc_endMission
+ * call cmf_aar_fnc_endMission
  *
  * Public: No
  */
 
-/* Custom end mission function */
+/* Custom end mission function */ // @TODO: Replace spawn
 EFUNC(inline_aar,endMission) = {
     /* Close mission end type dialog (or timeout if user doesn't have dialog)*/
-    private _timeout = time + 3;
-    waitUntil { if (_timeout < time) exitWith {}; !isNull (uiNamespace getVariable "RscDisplayAttributesModuleEndMission") };
+    private _timeout = serverTime + 3;
+    waitUntil { if (_timeout < serverTime) exitWith { true }; !isNull (uiNamespace getVariable ["RscDisplayAttributesModuleEndMission", controlNull]) };
     if (isNull (uiNamespace getVariable "RscDisplayAttributesModuleEndMission")) exitWith { };
     (uiNamespace getVariable "RscDisplayAttributesModuleEndMission") closeDisplay 2;
 
@@ -32,7 +32,7 @@ EFUNC(inline_aar,endMission) = {
             /* Generate the seperate sections */
             private _missionData = missionNameSpace getVariable [QEGVAR(common,missionData), []];
             private _hash = [_missionData] call CBA_fnc_hashCreate;
-            private _operationName = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(utility,hexToASCII)] call CBA_fnc_hashGet;
+            private _operationName = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(common,hexToASCII)] call CBA_fnc_hashGet;
             private _op = format ["<t color='#%3'>%1 was an operational %2</t>", _operationName, (["Success", "Failure"] select !(_opSuccess)), (["fcba03", "fc3d03"] select !(_opSuccess))];
             private _tac = format ["<t>%1 was a tactical %2</t>", _operationName, (["Success", "Failure"] select !(_tacSuccess))];
             private _message = _message splitString toString [13,10] joinString "<br/>";
@@ -79,8 +79,8 @@ EFUNC(inline_aar,endMission) = {
 
             /* Show kill and death stats aslong as spectator is active */
             [_groupDeaths, _enemyGroupKills, _friendlyGroupKills, _civilianGroupKills, _op, _tac, _message, _objectives] spawn {
-                player setVariable [QGVAR(spectatorStatus), true, true];
-                ["ace_spectator_displayUnloaded", { player setVariable [QGVAR(spectatorStatus), false, true] }] call CBA_fnc_addEventHandler;
+                player setVariable [QGVAR(spectatorStatus), true];
+                ["ace_spectator_displayUnloaded", { player setVariable [QGVAR(spectatorStatus), false] }] call CBA_fnc_addEventHandler;
 
                 private _statsText = format ["<t align='center' size='1.1'>%1</t><br/><t align='center' size='1'>%2</t align='center'><t size='0.9'>%3</t><t size='0.8'>%4</t><br/><br/>", (_this select 4), (_this select 5), (_this select 6), (_this select 7)];
 
@@ -183,4 +183,4 @@ private _EHIndex = addMissionEventHandler ["EntityCreated", {
     };
 }];
 
-missionNameSpace setVariable [QGVAR(endMission_moduleOverride), ["EntityCreated", _EHIndex]];
+GVAR(endMission_moduleOverride) = ["EntityCreated", _EHIndex];

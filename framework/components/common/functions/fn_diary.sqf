@@ -15,7 +15,7 @@
  * Public: No
  */
 
-[{ missionNamespace getVariable [QEGVAR(main,server_initialized), false] && (!isNull player && alive player) }, {
+[{ missionNamespace getVariable [QEGVAR(main,server_initialized), false] && { (!isNull player && { alive player }) } }, {
     /* Create subject */
     player createDiarySubject [QGVAR(diary), QUOTE(FRAMEWORK)];
 
@@ -99,7 +99,7 @@
             /* List version number for CMF and it's dependencies */
             private _versionString = "<br/>";
 
-            private _cmfVersion = ["CMF3", missionNamespace getVariable QEGVAR(main,version)];
+            private _cmfVersion = ["CMF3", EGVAR(main,version)];
             private _cbaVersion = ["CBA3", getText (configFile >> "CfgPatches" >> "cba_main" >> "versionStr")];
             private _aceVersion = ["ACE3", getText (configFile >> "CfgPatches" >> "ace_main" >> "versionStr")];
             private _zenVersion = ["ZEN3", getText (configFile >> "CfgPatches" >> "zen_main" >> "versionStr")];

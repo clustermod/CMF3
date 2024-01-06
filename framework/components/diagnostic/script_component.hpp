@@ -4,8 +4,6 @@
 #define REQUIRED_ADDONS []
 #define REQUIRED_MODULES ["common"]
 
-#include "..\main\script_component.hpp"
-
 #ifdef DEBUG_ENABLED_DIAGNOSTIC
     #define DEBUG_MODE_FULL
 #endif
@@ -13,3 +11,29 @@
 #ifdef DEBUG_SETTINGS_DIAGNOSTIC
     #define DEBUG_SETTINGS DEBUG_SETTINGS_DIAGNOSTIC
 #endif
+
+#include "..\main\script_component.hpp"
+
+#include "\a3\ui_f\hpp\definecommongrids.inc"
+
+#define DIALOG_CENTER ((20 * GUI_GRID_CENTER_W) / 2) - GUI_GRID_W
+
+#define SLIDER_HEIGHT 1.3 * GUI_GRID_CENTER_H
+#define SLIDER_WIDTH 20 * GUI_GRID_CENTER_W
+#define SLIDER_X DIALOG_CENTER + (0 * GUI_GRID_CENTER_W + GUI_GRID_CENTER_X)
+#define SLIDER_GAP 0.01
+#define SLIDER_Y(var1) (SLIDER_HEIGHT + SLIDER_GAP) * var1
+
+#define LABEL_X SLIDER_X + SLIDER_WIDTH + SLIDER_GAP
+
+#define BUTTON_GAP 0.025
+#define BUTTON_W ((SLIDER_WIDTH / 3) - BUTTON_GAP)
+#define BUTTON_X(var1) SLIDER_X + (BUTTON_W * var1) + (BUTTON_GAP * var1)
+
+#define CONTROL_WIDTH(var1) (GUI_GRID_W * var1)
+#define CONTROL_HEIGHT(var1) (GUI_GRID_H * var1)
+
+#define DIALOG_MARGIN 0.1
+
+#define DIALOG_X(var1) ((GUI_GRID_X + CONTROL_WIDTH(DIALOG_MARGIN) + var1) min (GUI_GRID_W - CONTROL_WIDTH(DIALOG_MARGIN)))
+#define DIALOG_Y(var1) ((GUI_GRID_Y + CONTROL_HEIGHT(DIALOG_MARGIN) + var1) min (GUI_GRID_H - CONTROL_HEIGHT(DIALOG_MARGIN)))

@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * [] call cmf_ai_fnc_setSkill
+ * call cmf_ai_fnc_setSkill
  *
  * public: Yes
 */
@@ -20,7 +20,7 @@ SCRIPT(setSkill);
 ["CAManBase", "init", {
     params ["_unit"];
 
-    if (!GVAR(setting_skill)) exitWith {};
+    if (!SETTING(skill)) exitWith {};
 
     _unit setSkill ["aimingAccuracy",   0.3 ];
     _unit setSkill ["aimingShake",      0.5 ];

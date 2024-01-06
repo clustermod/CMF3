@@ -4,7 +4,7 @@
  */
 
 /* Message displayed to players who tried to take the zeus slot when not zeus */
-class cmf_utility_notZeus {
+class cmf_common_notZeus {
     title = "You have been blocked from joining this slot";
     subtitle = "";
     description = "This slot is reserved for zeus";

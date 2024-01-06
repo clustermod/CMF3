@@ -20,13 +20,13 @@ SCRIPT(setLimit);
 params["_obj", "_respawns", ["_silent", false]];
 
 /* Set the new amount of respawns and reset death counter */
-_obj setVariable[QGVAR(respawns), _respawns, true];
-_obj setVariable[QGVAR(deaths), 0, true];
+[_obj, QGVAR(respawns), _respawns] call CBA_fnc_setVarNet;
+[_obj, QGVAR(deaths), 0] call CBA_fnc_setVarNet;
 
 if (!local _obj) exitWith {};
 
 /* Close spectator if players is spectating */
-if (_obj in ([] call ace_spectator_fnc_players)) then {
+if (_obj in (call ace_spectator_fnc_players)) then {
     [false] call ace_spectator_fnc_setSpectator;
 };
 

@@ -26,14 +26,14 @@ private _spawnScript = {_this spawn {
 
     private _position = screenToWorld [0.5, 0.5];
 
-    private _unitArr = [_type] call EFUNC(3den,unit_constructor);
+    private _unitArr = [_type] call EFUNC(3den,unitConstructor);
 
     private _unitPos = (_position select 0);
     private _groupPos = (_position select 1);
     private _spawnedGroups = [];
     private _spawnedUnits = [];
     {
-        _x params ["_groupName", "_lobbyName", "_groupType", "_groupSize", "_groupOffset", "_groupUnits"];
+        _x params ["_groupLevel", "_groupType", "_groupOffset", "_groupUnits"];
         private _groupOffset = _groupPos + _groupOffset;
         private _unitGroup = grpNull;
         {
@@ -53,7 +53,7 @@ private _spawnScript = {_this spawn {
             save3DENInventory [_unit];
             _unit switchMove "amovpercmstpsnonwnondnon";
             _unit set3DENAttribute ["Init", format["[this, ""%1"", 0] call cmf_organization_fnc_setRole;", _role]];
-            _unit set3DENAttribute ["description", format["%1@%2", _roleName, _lobbyName]];
+            _unit set3DENAttribute ["description", _roleName];
             _unit set3DENAttribute ["ControlMP", true];
             _unit set3DENAttribute ["Rank", _rank];
 
@@ -74,8 +74,10 @@ private _spawnScript = {_this spawn {
             [QGVAR(onUnitSpawned), [_unitGroup]] call CBA_fnc_localEvent;
         } forEach _groupUnits;
 
-        _unitGroup set3DENAttribute ["groupID", _groupName];
-        _unitGroup set3DENAttribute ["Init", format["[this, ""%1"", ""%2"", ""%3""] call cmf_common_fnc_setCallsign;", _lobbyName, _groupType, _groupSize]];
+        private _groupRegister = format["[this, %1, ""%2""] call cmf_organization_fnc_groupRegister;", _groupLevel, _groupType];
+        _unitGroup set3DENAttribute ["Init", _groupRegister];
+
+        [_unitGroup, _groupLevel, _groupType] call FUNC(groupRegister);
 
         _spawnedGroups pushBack _unitGroup;
 
@@ -89,6 +91,9 @@ private _spawnScript = {_this spawn {
         /* Raise event */
         [QGVAR(onUnitTemplateSpawned), [_spawnedUnits, _spawnedGroups]] call CBA_fnc_localEvent;
     };
+
+    /* Reorganize all groups */
+    call FUNC(groupReorganize);
 }};
 
 /* Create menu */
