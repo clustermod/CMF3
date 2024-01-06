@@ -223,8 +223,8 @@ private _action = [QGVAR(other), "Set as rallypoint", "components\respawn\data\i
         [cmf_player, QGVAR(rallypoint_canCreate), true] call CBA_fnc_setVarNet;
     }, [], GVAR(setting_rallypointCooldown)] call CBA_fnc_waitAndExecute;
 }, {
-    ((isNull objectParent player) && { (player getVariable [QGVAR(rallypoint_canCreate), true]) && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]) })
-    && { (player getVariable [QGVAR(showRallypoint), true])
+    ((isNull objectParent cmf_player) && { (cmf_player getVariable [QGVAR(rallypoint_canCreate), true]) && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]) })
+    && { (cmf_player getVariable [QGVAR(showRallypoint), true])
     && !visibleMap }
 }] call ace_interact_menu_fnc_createAction;
 

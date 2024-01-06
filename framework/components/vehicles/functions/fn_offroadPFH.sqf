@@ -65,7 +65,7 @@ if (GVAR(setting_offroadBumps)) then {
     if (time < GVAR(offroad_bump_delay)) exitWith {};
 
     /* Apply the bump settings */
-    private _bumpParam = 1.2 * (_surfaceParams select 0) / 100;
+    private _bumpParam = 1.2 * (_surfaceParams select 0) * 10;
     private _i1 = random [(_ix * _bumpParam), 0, (_iy * _bumpParam)];
     private _i2 = random [(_ix * _bumpParam), 0, (_iy * _bumpParam)];
     _veh addTorque (_veh vectorModelToWorld [_i1, _i2, 0]);

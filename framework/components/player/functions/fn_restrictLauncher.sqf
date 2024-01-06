@@ -27,7 +27,7 @@ cmf_player addEventHandler ["Respawn", {
 
         private _ret = true;
         private _loadoutFile = cmf_player getVariable [QEGVAR(kosherArsenal,loadout), ""];
-        private _role = cmf_player getVariable [QEGVAR(common,role), "RFL"];
+        private _role = cmf_player getVariable [QEGVAR(organization,role), "RFL"];
 
         if (cmf_player getVariable [QGVAR(restrictLauncher_unitDisable), false]) exitWith { false };
         if (missionNamespace getVariable [QGVAR(restrictLauncher_disable), false]) exitWith { false };
