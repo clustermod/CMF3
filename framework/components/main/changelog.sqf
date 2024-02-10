@@ -13,7 +13,7 @@
 <t size='1.05' color='#009eaa'>Changed</t>
 	• Replaced `CBA_fnc_setVarNet` with vanilla `setVariable` (setVarNet was too unstable)
 "
-
+// @TODO: Use markdown parser with a custom stylesheet mimicking github markdown
 /*
 	TEMPLATES
 
