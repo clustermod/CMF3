@@ -1,3 +1,11 @@
+# Changelog v2.1.1.59 => v2.1.1.60
+## Changed
+- Temporarily disabled logistics crate actions as it created a bug where all ace actions were removed from the crate
+- Use SETTING Macro in every instance
+
+## Fixed
+- Fixed bug where players where unable to take items from cmf logistic crates 
+
 # Changelog v2.1.1.58 => v2.1.1.59
 ## Changed
 - Replaced `CBA_fnc_setVarNet` with vanilla `setVariable` (setVarNet was too unstable)

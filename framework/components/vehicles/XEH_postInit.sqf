@@ -19,7 +19,7 @@ private _fnc_initEH = {
     params ["_vehicle"];
 
     /* Exit if enhancedVehicles is disabled on vehicle or globally */
-    if (!GVAR(setting_enable)) exitWith {};
+    if (!SETTING(enable)) exitWith {};
     if (_vehicle getVariable [QGVAR(disable), false]) exitWith {};
 
     _vehicle setVariable ["ace_cookoff_enable", false, true];

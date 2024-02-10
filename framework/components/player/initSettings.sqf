@@ -2,7 +2,7 @@
 
 
 [
-    QGVAR(setting_restrictLauncher),
+    QSETTING(restrictLauncher),
     "CHECKBOX",
     ["Restrict Launcher Access", "Restricts operation of launchers to those who has a launcher defined in their slot"],
     QUOTE(MODULE_BEAUTIFIED),
@@ -11,7 +11,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_hearing),
+    QSETTING(hearing),
     "CHECKBOX",
     ["Hearing", "Allows the use of items to reduce game volume"],
     QUOTE(MODULE_BEAUTIFIED - Hearing),
@@ -20,7 +20,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_attenuateHeadgear),
+    QSETTING(attenuateHeadgear),
     "CHECKBOX",
     ["Attenuate Headgear", "Headgear volume statistics will affect game volume"],
     QUOTE(MODULE_BEAUTIFIED - Hearing),
@@ -29,7 +29,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_earplugVolume),
+    QSETTING(earplugVolume),
     "SLIDER",
     ["Earplug Volume", "The volume that will be set when earplugs are inserted"],
     QUOTE(MODULE_BEAUTIFIED - Hearing),

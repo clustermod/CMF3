@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 [
-    QGVAR(setting_freezeTime),
+    QSETTING(freezeTime),
     "CHECKBOX",
     ["Freeze Time", "Freezes time completly"],
     QUOTE(MODULE_BEAUTIFIED),

@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 [
-    QGVAR(setting_unconciousTimer),
+    QSETTING(unconciousTimer),
     "TIME",
     ["Unconcious Timer", "How long before respawning is possible"],
     QUOTE(MODULE_BEAUTIFIED),
@@ -10,7 +10,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_rallypointCooldown),
+    QSETTING(rallypointCooldown),
     "TIME",
     ["Cooldown", "Delay between placing rallypoints"],
     QUOTE(MODULE_BEAUTIFIED - Rallypoints),
@@ -19,7 +19,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_rallypointKillRadius),
+    QSETTING(rallypointKillRadius),
     "SLIDER",
     ["Enemy Kill Radius", "Radius from rallypoint an enemy has to be for the rallypoint to dissapear"],
     QUOTE(MODULE_BEAUTIFIED - Rallypoints),
@@ -28,7 +28,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_rallypointObject),
+    QSETTING(rallypointObject),
     "EDITBOX",
     ["Rallypoint Object Class", "Classname of rallypoint object"],
     QUOTE(MODULE_BEAUTIFIED - Rallypoints),

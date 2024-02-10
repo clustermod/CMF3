@@ -61,7 +61,7 @@ if ((_surfaceParams select 1) isEqualTo -1) exitWith {
 };
 
 /* Apply bumps */
-if (GVAR(setting_offroadBumps)) then {
+if (SETTING(offroadBumps)) then {
     if (time < GVAR(offroad_bump_delay)) exitWith {};
 
     /* Apply the bump settings */
@@ -76,7 +76,7 @@ if (GVAR(setting_offroadBumps)) then {
 };
 
 /* Apply damage */
-if (GVAR(setting_offroadDamage)) then {
+if (SETTING(offroadDamage)) then {
     if (time < GVAR(offroad_damage_delay)) exitWith {};
 
     if (speed _veh < OFFROAD_DAMAGESPEED) exitWith {

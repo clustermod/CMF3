@@ -19,7 +19,7 @@ SCRIPT(localEffect);
 // @TODO: Change hearing here
 
 /* Play sound effects */
-if (GVAR(setting_audiable)) then {
+if (SETTING(audiable)) then {
         cmf_player setVariable ["defaultVolume", soundVolume];
         0 fadeSound 0.2;
         playsound "ACE_Combat_Deafness_Medium_NoRing";
@@ -32,7 +32,7 @@ if (GVAR(setting_audiable)) then {
 };
 
 /* Show visual effects */
-if (GVAR(setting_visual)) then {
+if (SETTING(visual)) then {
     addCamShake [5,2,9];
     private _visualEffect = ppEffectCreate ["RadialBlur", 10000];
     cutText ["", "BLACK OUT", 0.001];

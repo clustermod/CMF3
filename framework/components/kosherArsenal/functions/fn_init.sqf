@@ -56,7 +56,7 @@ if (!hasInterface) exitWith {};
         private _disconUnits = missionNameSpace getVariable [QEGVAR(main,disconUnits), createHashMap];
         if (!isNil { _disconUnits get (getPlayerUID player) }) then { _reJip = true; };
 
-        if (_reJip && { EGVAR(gameplay,setting_safestart) && { missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] } }) exitWith { };
+        if (_reJip && { ESETTING(gameplay,safestart) && { missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] } }) exitWith { };
 
         /* Create the arsenal object and initialize ace arsenal */
         private _arsenal = "HeliHEmpty" createVehicleLocal [0,0,0];

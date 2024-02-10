@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 [
-    QGVAR(setting_flashbang),
+    QSETTING(flashbang),
     "CHECKBOX",
     ["Override Flashbangs", "Replace default flashbang effects"],
     QUOTE(MODULE_BEAUTIFIED),
@@ -10,7 +10,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_safestart),
+    QSETTING(safestart),
     "CHECKBOX",
     ["Safestart", "Dissalow combat at start of mission"],
     QUOTE(MODULE_BEAUTIFIED - Safestart),
@@ -19,7 +19,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_safestartDelay),
+    QSETTING(safestartDelay),
     "TIME",
     ["Safestart Delay", "Delay in seconds for safestart to be disabled"],
     QUOTE(MODULE_BEAUTIFIED - Safestart),
@@ -28,7 +28,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_tracers),
+    QSETTING(tracers),
     "CHECKBOX",
     ["Tracers", "Replaces AIs ammunition with tracer munitions"],
     QUOTE(MODULE_BEAUTIFIED - Tracers),
@@ -37,7 +37,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_tracersSides),
+    QSETTING(tracersSides),
     "EDITBOX",
     ["Sides", "Sides to apply function to. sepperated by comma (,)"],
     QUOTE(MODULE_BEAUTIFIED - Tracers),
@@ -46,7 +46,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_tracersFlashlight),
+    QSETTING(tracersFlashlight),
     "CHECKBOX",
     ["Flashlights", "Give AI flashlights (tracers must be enabled)"],
     QUOTE(MODULE_BEAUTIFIED - Tracers),
@@ -55,7 +55,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_tracersRandomModel),
+    QSETTING(tracersRandomModel),
     "CHECKBOX",
     ["Randomize Magazine Model", "Should magazine model be randomized?"],
     QUOTE(MODULE_BEAUTIFIED - Tracers),

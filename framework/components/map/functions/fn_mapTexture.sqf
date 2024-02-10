@@ -17,7 +17,7 @@
 SCRIPT(mapSwitchTextures);
 
 /* Check if it's enabled */
-if !(GVAR(setting_switchMapTextures)) exitWith {};
+if !(SETTING(switchMapTextures)) exitWith {};
 
 if ( isDedicated ) exitWith {};
 

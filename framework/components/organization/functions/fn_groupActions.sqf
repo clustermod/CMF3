@@ -62,7 +62,7 @@ private _childrenGroup = {
 
             [[side _this], FUNC(groupReorganize)] remoteExec ["call", 2];
         };
-    }, { !EGVAR(gameplay,setting_safestart) || !(missionNamespace getVariable [QGVAR(safestart_disable), false]) }] call ace_interact_menu_fnc_createAction;
+    }, { !ESETTING(gameplay,safestart) || !(missionNamespace getVariable [QGVAR(safestart_disable), false]) }] call ace_interact_menu_fnc_createAction;
     _actions pushBack [_action, [], _target];
 
     /* Create an action for each team member */

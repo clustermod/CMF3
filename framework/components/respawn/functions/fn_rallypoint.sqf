@@ -41,7 +41,7 @@ private _rallypointPlaceCode = {
         player addAction ["", { player removeAction (_this select 2)}, "", 0, false, true, "DefaultAction"];
 
         /* Placement loop */
-        private _obj = GVAR(setting_rallypointObject) createVehicleLocal (getPos player);
+        private _obj = SETTING(rallypointObject) createVehicleLocal (getPos player);
         _obj setPosASL (getPosASL player);
         while { GVAR(rallypoint_placeLoop) } do {
             /* Get X and Y Coordinate */
@@ -76,7 +76,7 @@ private _rallypointPlaceCode = {
         private _rallyPos = getPosASL _obj;
         private _rallyDir = getDir _obj;
         deleteVehicle _obj;
-        _obj = GVAR(setting_rallypointObject) createVehicle [0,0,0];
+        _obj = SETTING(rallypointObject) createVehicle [0,0,0];
         _obj setPosASL _rallyPos;
         _obj setDir _rallyDir;
 
@@ -90,9 +90,9 @@ private _rallypointPlaceCode = {
             _oldRallyParams params ["_oldObject", "_oldRespawn"];
 
             /* Check if enemies are close to rally */
-            private _units = (nearestObjects [_obj, ["Man"], GVAR(setting_rallypointKillRadius)]) apply { [side _x, side player] call BIS_fnc_sideIsFriendly };
+            private _units = (nearestObjects [_obj, ["Man"], SETTING(rallypointKillRadius)]) apply { [side _x, side player] call BIS_fnc_sideIsFriendly };
             if (false in _units) exitWith {
-                hint format[LSTRING(rally_too_close_message), GVAR(setting_rallypointKillRadius)];
+                hint format[LSTRING(rally_too_close_message), SETTING(rallypointKillRadius)];
                 deleteVehicle _obj;
             };
 
@@ -114,7 +114,7 @@ private _rallypointPlaceCode = {
 
             /* Spawn script to Kill rally point if enemy units get too close */
             [{
-                private _nearestUnits = nearestObjects [(_this select 0), ["Man"], GVAR(setting_rallypointKillRadius)];
+                private _nearestUnits = nearestObjects [(_this select 0), ["Man"], SETTING(rallypointKillRadius)];
                 isNull (_this select 0) || _nearestUnits findIf { !([side _x, side player] call BIS_fnc_sideIsFriendly) } > -1
             }, {
                 params ["_obj", "_respawn"];
@@ -133,7 +133,7 @@ private _rallypointPlaceCode = {
             cmf_player setVariable [QGVAR(rallypoint_canCreate), false, true];
             [{
                 cmf_player setVariable [QGVAR(rallypoint_canCreate), true, true];
-            }, [], GVAR(setting_rallypointCooldown)] call CBA_fnc_waitAndExecute;
+            }, [], SETTING(rallypointCooldown)] call CBA_fnc_waitAndExecute;
         } else {
             deleteVehicle _obj;
         };
@@ -142,7 +142,7 @@ private _rallypointPlaceCode = {
 
 /* Code to run when rallypoint is unavailable */
 private _rallypointFailedCode = {
-    hint format[LSTRING(time_restriction_message), (GVAR(setting_rallypointCooldown) / 60)];
+    hint format[LSTRING(time_restriction_message), (SETTING(rallypointCooldown) / 60)];
 };
 
 /* Create Place action */
@@ -221,7 +221,7 @@ private _action = [QGVAR(other), "Set as rallypoint", "components\respawn\data\i
     cmf_player setVariable [QGVAR(rallypoint_canCreate), false, true];
     [{
         cmf_player setVariable [QGVAR(rallypoint_canCreate), true, true];
-    }, [], GVAR(setting_rallypointCooldown)] call CBA_fnc_waitAndExecute;
+    }, [], SETTING(rallypointCooldown)] call CBA_fnc_waitAndExecute;
 }, {
     ((isNull objectParent cmf_player) && { (cmf_player getVariable [QGVAR(rallypoint_canCreate), true]) && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]) })
     && { (cmf_player getVariable [QGVAR(showRallypoint), true])

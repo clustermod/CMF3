@@ -23,7 +23,7 @@ private _action = ([QGVAR(safestart_menu),
         publicVariable QEGVAR(gameplay,safestart_Countdown);
 
         [[], {
-            [EGVAR(gameplay,setting_safestartDelay), "Weapons are live in: ", true] call EFUNC(common,countDown);
+            [ESETTING(gameplay,safestartDelay), "Weapons are live in: ", true] call EFUNC(common,countDown);
             EGVAR(gameplay,safestart_disable) = true;
             publicVariable QEGVAR(gameplay,safestart_disable);
         }] remoteExec ["spawn", 0];

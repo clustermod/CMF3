@@ -168,7 +168,7 @@ class cmf_aar_aarReadingDisplay {
     };
 };
 
-/* changelog display */
+/* changelog display */ // @TODO: Make it a fixed height instead of variable
 class cmf_main_changelogDisplay {
     idd = -1;
     enableDisplay = 1;

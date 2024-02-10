@@ -19,7 +19,7 @@ SCRIPT(freezeTime);
 GVAR(freezeTime_initDate) = date;
 
 private _handle = [{
-    if (!GVAR(setting_freezeTime) && { !GVAR(freezeTime_override) }) exitWith { GVAR(freezeTime_initDate) = date };
+    if (!SETTING(freezeTime) && { !GVAR(freezeTime_override) }) exitWith { GVAR(freezeTime_initDate) = date };
 
     setdate GVAR(freezeTime_initDate);
 }] call CBA_fnc_addPerFrameHandler;

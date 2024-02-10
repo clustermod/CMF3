@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 [
-    QGVAR(setting_clearCargo),
+    QSETTING(clearCargo),
     "CHECKBOX",
     ["Empty Vehicle Cargo", "Clears vehicle cargo of all items"],
     QUOTE(MODULE_BEAUTIFIED),
@@ -10,7 +10,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_enable),
+    QSETTING(enable),
     "CHECKBOX",
     ["Enable", "Enables an enhanced damage model"],
     QUOTE(MODULE_BEAUTIFIED - Enhanced Damage Model),
@@ -19,7 +19,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_visual),
+    QSETTING(visual),
     "CHECKBOX",
     ["Visual Effects", "Show visual effects on vehicle disable"],
     QUOTE(MODULE_BEAUTIFIED - Enhanced Damage Model),
@@ -28,7 +28,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_audiable),
+    QSETTING(audiable),
     "CHECKBOX",
     ["Audiable Effects", "Play audiable effects on vehicle disable"],
     QUOTE(MODULE_BEAUTIFIED - Enhanced Damage Model),
@@ -37,7 +37,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_offroadBumps),
+    QSETTING(offroadBumps),
     "CHECKBOX",
     ["Bumps", "Going offroad gets bumpy"],
     QUOTE(MODULE_BEAUTIFIED - Offroad),
@@ -46,7 +46,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QGVAR(setting_offroadDamage),
+    QSETTING(offroadDamage),
     "CHECKBOX",
     ["Damage", "Going offroad can damage a vehicle at high speeds"],
     QUOTE(MODULE_BEAUTIFIED - Offroad),

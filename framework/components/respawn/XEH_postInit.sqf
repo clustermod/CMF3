@@ -26,7 +26,7 @@ GVAR(rallypoints) = [];
 
 GVAR(countdownHandler) = scriptNull;
 GVAR(respawnState) = false;
-GVAR(respawnTimer) = GVAR(setting_unconciousTimer);
+GVAR(respawnTimer) = SETTING(unconciousTimer);
 
 [FUNC(respawnButtonPFH)] call CBA_fnc_addPerFrameHandler;
 ["ace_unconscious", FUNC(unconciousEH)] call CBA_fnc_addEventHandler;
@@ -57,7 +57,7 @@ cmf_player addEventHandler ["Take", {
 private _disconUnits = missionNameSpace getVariable [QGVAR(disconUnits), createHashMap];
 private _disconUnit = _disconUnits get (getPlayerUID cmf_player);
 
-if (!isNil "_disconUnit" && { !EGVAR(gameplay,setting_safestart) || missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] }) then {
+if (!isNil "_disconUnit" && { !ESETTING(gameplay,safestart) || missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] }) then {
     GVAR(player_rejip) = true;
 
     [{ cmf_player getVariable [QGVAR(player_loaded), false] && { alive cmf_player } }, {
