@@ -21,7 +21,7 @@ if (!isServer) exitWith {};
 ["AllVehicles", "init", {
     params ["_vehicle"];
 
-    if (!GVAR(setting_clearCargo)) exitWith {};
+    if (!SETTING(clearCargo)) exitWith {};
 
     if (_vehicle isKindOf "CAManBase") exitWith {};
 
