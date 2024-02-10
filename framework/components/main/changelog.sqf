@@ -3,6 +3,7 @@
 
 <t size='1.05' color='#009eaa'>Changed</t>
 	• Temporarily disabled logistics crate actions as it created a bug where all ace actions were removed from the crate
+	• Use SETTING Macro in every instance
 
 <t size='1.05' color='#009eaa'>Fixed</t>
 	• Fixed bug where players where unable to take items from cmf logistic crates 
