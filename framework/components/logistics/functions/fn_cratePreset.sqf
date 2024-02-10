@@ -14,6 +14,7 @@
  * 
  * Public: Yes
  */
+if (!isServer) exitWith { };
 params ["_name"];
 
 if (isNil "_name") exitWith { ERROR_MSG("No preset defined") };
