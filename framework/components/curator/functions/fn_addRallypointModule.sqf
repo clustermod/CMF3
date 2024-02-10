@@ -24,7 +24,7 @@ private _moduleFunction = {
     if !((_this select 1) getVariable [QEGVAR(respawn,rallypoint), false]) then {
         [[(_this select 1)]] call EFUNC(respawn,rallypoint);
     } else {
-        [(_this select 1), QEGVAR(respawn,showRallypoint), true] call CBA_fnc_setVarNet;
+        (_this select 1) setVariable [QEGVAR(respawn,showRallypoint), true, true];
     };
     [format[LSTRING(rallypoint_success_message), name (_this select 1)]] call zen_common_fnc_showMessage;
 };

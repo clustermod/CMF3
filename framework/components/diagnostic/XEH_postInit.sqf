@@ -18,7 +18,7 @@
 
 [{
     if (isNull cmf_player) exitWith { };
-    [cmf_player, QGVAR(fps), floor diag_fps] call CBA_fnc_setVarNet;
+    cmf_player setVariable [QGVAR(fps), floor diag_fps, true];
 }, 1] call CBA_fnc_addPerFrameHandler;
 
 GVAR(longestFrame) = 0;

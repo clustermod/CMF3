@@ -38,7 +38,7 @@ private _dialogFunction = {
         /* Set the unit's loadoutfile */
         private _loadout = format["rsc\loadouts\%1.sqf", _loadout];
         if !(FILE_EXISTS(_loadout)) exitWith { [LSTRING(no_loadoutFile_message)] call zen_common_fnc_showMessage };
-        [_unit, QEGVAR(kosherArsenal,loadout), _loadout] call CBA_fnc_setVarNet;
+        _unit setVariable [QEGVAR(kosherArsenal,loadout), _loadout, true];
 
         /* Open kosher arsenal */
         [_unit] call EFUNC(common,stripUnit);

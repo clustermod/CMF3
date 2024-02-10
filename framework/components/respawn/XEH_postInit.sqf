@@ -79,8 +79,8 @@ if (!isNil "_disconUnit" && { !EGVAR(gameplay,setting_safestart) || missionNames
             };
 
             /* Set respawns */
-            [cmf_player, QEGVAR(respawn,respawns), ((_this select 4) select 0)] call CBA_fnc_setVarNet;
-            [cmf_player, QEGVAR(respawn,deaths), ((_this select 4) select 1)] call CBA_fnc_setVarNet;
+            cmf_player setVariable [QEGVAR(respawn,respawns), ((_this select 4) select 0), true];
+            cmf_player setVariable [QEGVAR(respawn,deaths), ((_this select 4) select 1), true];
 
             /* set player position and if leader is in vehicle attempt to move into vehicle cargo */
             if (!isNull leader (_this select 1)) then {

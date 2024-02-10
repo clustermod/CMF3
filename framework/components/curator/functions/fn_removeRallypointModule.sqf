@@ -21,7 +21,7 @@ private _moduleFunction = {
     if !((_this select 1) isKindOf "Man") exitWith { [LSTRING(unit_requirement_message)] call zen_common_fnc_showMessage };
     if !(isPlayer (_this select 1)) exitWith { [LSTRING(player_requirement_message)] call zen_common_fnc_showMessage };
 
-    [(_this select 1), QEGVAR(respawn,showRallypoint), false] call CBA_fnc_setVarNet;
+    (_this select 1) setVariable [QEGVAR(respawn,showRallypoint), false, true];
     [format[LSTRING(rallypoint_remove_success_message), name (_this select 1)]] call zen_common_fnc_showMessage;
 };
 

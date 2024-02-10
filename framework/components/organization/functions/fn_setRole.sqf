@@ -26,10 +26,10 @@ if (isNil {(_this select 0)}) exitWith { ERROR_MSG("No object") };
 if (isNil {(_this select 1)}) exitWith { WARNING("No role, defaulting to ""RFL""") };
 
 /* Set the objects role */
-[_unit, QGVAR(role), _role] call CBA_fnc_setVarNet;
+_unit setVariable [QGVAR(role), _role, true];
 
 /* Set the objects team */
-[_unit, QGVAR(team), _team] call CBA_fnc_setVarNet;
+_unit setVariable [QGVAR(team), _team, true];
 
 LOG_3("team %1 and role %2 set for %3", _team, _role, name _unit);
 

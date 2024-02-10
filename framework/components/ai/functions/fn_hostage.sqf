@@ -21,7 +21,7 @@ _unit disableAI "AUTOCOMBAT";
 [_unit] joinSilent createGroup civilian;
 _unit setBehaviour "CARELESS";
 _unit setUnloadInCombat [false, false];
-[_unit, "lambs_danger_disableAI", true] call CBA_fnc_setVarNet;
+_unit setVariable ["lambs_danger_disableAI", true, true];
 
 GVAR(hostage_translateStance) = {
     params ["_stance"];
@@ -36,7 +36,7 @@ GVAR(hostage_translateStance) = {
 GVAR(hostage_releaseFNC) = {
     params ["_hostage", "_target"];
 
-    [_hostage, QGVAR(hostage_owner), objNull] call CBA_fnc_setVarNet;
+    _hostage setVariable [QGVAR(hostage_owner), objNull, true];
     [_hostage] joinSilent createGroup civilian;
     [_hostage getVariable QGVAR(hostage_handler)] call CBA_fnc_removePerFrameHandler;
 };
@@ -44,14 +44,14 @@ GVAR(hostage_releaseFNC) = {
 GVAR(hostage_followPlayerFNC) = {
     params ["_hostage", "_target"];
 
-    [_hostage, QGVAR(hostage_owner), _target] call CBA_fnc_setVarNet;
+    _hostage setVariable [QGVAR(hostage_owner), _target, true];
     [_hostage] joinSilent createGroup side _target;
     
     private _handle = [{
         (_this select 0) params ["_hostage", "_target"];
 
         if (!alive _target) exitWith {
-            [_target, QGVAR(hostage_owner), objNull] call CBA_fnc_setVarNet;
+            _target setVariable [QGVAR(hostage_owner), objNull, true];
             [_hostage] joinSilent createGroup civilian;
             [_hostage getVariable QGVAR(hostage_handler)] call CBA_fnc_removePerFrameHandler;
         };
@@ -77,7 +77,7 @@ GVAR(hostage_followPlayerFNC) = {
         }
     }, 0.3, [_hostage, _target]] call CBA_fnc_addPerFrameHandler;
 
-    [_hostage, QGVAR(hostage_handler), _handle] call CBA_fnc_setVarNet;
+    _hostage setVariable [QGVAR(hostage_handler), _handle, true];
 };
 
 if (_captive) then {

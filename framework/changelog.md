@@ -1,3 +1,7 @@
+# Changelog v2.1.1.58 => v2.1.1.59
+## Changed
+- Replaced `CBA_fnc_setVarNet` with vanilla `setVariable` (setVarNet was too unstable)
+
 # Changelog v2.1.1.57 => v2.1.1.58
 ## Added
 - Added new Dynamic group system

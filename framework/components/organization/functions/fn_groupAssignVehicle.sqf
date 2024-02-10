@@ -80,5 +80,5 @@ _group addVehicle _vehicle;
 private _groups = _vehicle getVariable [QGVAR(groups), []];
 _groups pushBackUnique _group;
 
-[_vehicle, QGVAR(groups), _groups] call CBA_fnc_setVarNet;
-[_group, QGVAR(vehicle), _vehicle] call CBA_fnc_setVarNet;
+_vehicle setVariable [QGVAR(groups), _groups, true];
+_group setVariable [QGVAR(vehicle), _vehicle, true];
