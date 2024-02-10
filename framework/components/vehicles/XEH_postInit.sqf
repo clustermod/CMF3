@@ -22,7 +22,7 @@ private _fnc_initEH = {
     if (!GVAR(setting_enable)) exitWith {};
     if (_vehicle getVariable [QGVAR(disable), false]) exitWith {};
 
-    [_vehicle, "ace_cookoff_enable", false] call CBA_fnc_setVarNet;
+    _vehicle setVariable ["ace_cookoff_enable", false, true];
     _vehicle addEventHandler ["HandleDamage", FUNC(damageEH)];
 
     // Disable engine when damage is 0.8

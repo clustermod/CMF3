@@ -20,8 +20,8 @@ SCRIPT(setLimit);
 params["_obj", "_respawns", ["_silent", false]];
 
 /* Set the new amount of respawns and reset death counter */
-[_obj, QGVAR(respawns), _respawns] call CBA_fnc_setVarNet;
-[_obj, QGVAR(deaths), 0] call CBA_fnc_setVarNet;
+_obj setVariable [QGVAR(respawns), _respawns, true];
+_obj setVariable [QGVAR(deaths), 0, true];
 
 if (!local _obj) exitWith {};
 

@@ -36,7 +36,7 @@ addMissionEventHandler ["EntityCreated", {
                     private _projectilePos2 = getPosASL _projectile;
 
                     _fireData pushBack [_weapon, [_projectilePos1, _projectilePos2]];
-                    [_unit, QGVAR(fire_data), _fireData] call CBA_fnc_setVarNet;
+                    _unit setVariable [QGVAR(fire_data), _fireData, true];
                 };
             };
         }];
@@ -66,7 +66,7 @@ _this spawn {
             private _fireData = _x getVariable [QGVAR(fire_data), []];
             _objects pushBack [_x, typeof _x, side _x, lifeState _x, getPosASL _x, getDir _x, crew _x, _fireData];
 
-            [_x, QGVAR(fire_data), []] call CBA_fnc_setVarNet;
+            _x setVariable [QGVAR(fire_data), [], true];
         } forEach (allUnits + allDead);
         private _objectArray = [_time, _objects];
 

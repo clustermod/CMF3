@@ -123,16 +123,16 @@ private _rallypointPlaceCode = {
 
                 _respawn call BIS_fnc_RemoveRespawnPosition;
                 deleteVehicle _obj;
-                [cmf_player, QGVAR(rallypoint_lastRally), [objNull, [objNull, -1], scriptNull]] call CBA_fnc_setVarNet;
+                cmf_player setVariable [QGVAR(rallypoint_lastRally), [objNull, [objNull, -1], scriptNull], true];
             }, [_obj, _respawn]] call CBA_fnc_waitUntilAndExecute;
 
             /* Save current rally to unit */
-            [cmf_player, QGVAR(rallypoint_lastRally), [_obj, _respawn]] call CBA_fnc_setVarNet;
+            cmf_player setVariable [QGVAR(rallypoint_lastRally), [_obj, _respawn], true];
 
             /* Spawn cooldown timer */
-            [cmf_player, QGVAR(rallypoint_canCreate), false] call CBA_fnc_setVarNet;
+            cmf_player setVariable [QGVAR(rallypoint_canCreate), false, true];
             [{
-                [cmf_player, QGVAR(rallypoint_canCreate), true] call CBA_fnc_setVarNet;
+                cmf_player setVariable [QGVAR(rallypoint_canCreate), true, true];
             }, [], GVAR(setting_rallypointCooldown)] call CBA_fnc_waitAndExecute;
         } else {
             deleteVehicle _obj;
@@ -173,7 +173,7 @@ if (count _units isEqualTo 0) exitWith {
             [typeOf player, 1, ["ACE_SelfActions"], _rallypointPlaceAction] call ace_interact_menu_fnc_addActionToClass;
             [typeOf player, 1, ["ACE_SelfActions"], _rallypointFailedAction] call ace_interact_menu_fnc_addActionToClass;
 
-            [cmf_player, QGVAR(rallypoint), true] call CBA_fnc_setVarNet;
+            cmf_player setVariable [QGVAR(rallypoint), true, true];
             LOG_1("Added rallypoint for %1", name player);
         };
         continue;
@@ -187,7 +187,7 @@ if (count _units isEqualTo 0) exitWith {
             [[typeOf _x, 1, ["ACE_SelfActions"], _rallypointPlaceAction], ace_interact_menu_fnc_addActionToClass] remoteExec ["call", _x];
             [[typeOf _x, 1, ["ACE_SelfActions"], _rallypointFailedAction], ace_interact_menu_fnc_addActionToClass] remoteExec ["call", _x];
 
-            [_x, QGVAR(rallypoint), true] call CBA_fnc_setVarNet;
+            _x setVariable [QGVAR(rallypoint), true, true];
             LOG_1("Added rallypoint for %1", name _x);
         };
     };
@@ -215,12 +215,12 @@ private _action = [QGVAR(other), "Set as rallypoint", "components\respawn\data\i
     publicVariable QGVAR(rallypoints);
 
     /* Save current rally to unit */
-    [cmf_player, QGVAR(rallypoint_lastRally), [_target, _respawn]] call CBA_fnc_setVarNet;
+    cmf_player setVariable [QGVAR(rallypoint_lastRally), [_target, _respawn], true];
 
     /* Spawn cooldown timer */
-    [cmf_player, QGVAR(rallypoint_canCreate), false] call CBA_fnc_setVarNet;
+    cmf_player setVariable [QGVAR(rallypoint_canCreate), false, true];
     [{
-        [cmf_player, QGVAR(rallypoint_canCreate), true] call CBA_fnc_setVarNet;
+        cmf_player setVariable [QGVAR(rallypoint_canCreate), true, true];
     }, [], GVAR(setting_rallypointCooldown)] call CBA_fnc_waitAndExecute;
 }, {
     ((isNull objectParent cmf_player) && { (cmf_player getVariable [QGVAR(rallypoint_canCreate), true]) && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]) })

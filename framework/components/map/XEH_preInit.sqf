@@ -12,5 +12,5 @@ call FUNC(resizeMarkers);
 [{
     if ((cmf_player getVariable [QGVAR(visibleMap), false]) isEqualTo visibleMap) exitWith {};
 
-    [cmf_player, QGVAR(visibleMap), visibleMap] call CBA_fnc_setVarNet;
+    cmf_player setVariable [QGVAR(visibleMap), visibleMap, true];
 }] call CBA_fnc_addPerFrameHandler;

@@ -52,10 +52,10 @@ if (!isServer) exitWith {};
             };
             private _wp = _reinforceGroup addWaypoint [_target, 0];
             _wp setWaypointType "MOVE";
-            [_reinforceGroup, QGVAR(reinforce_targetGroup), _shareGroup] call CBA_fnc_setVarNet;
+            _reinforceGroup setVariable [QGVAR(reinforce_targetGroup), _shareGroup, true];
         };
     }, _group] call CBA_fnc_addEventHandlerArgs;
 
     LOG_1("Enabled reinforce on %1", groupId _group);
-    [_group, QGVAR(reinforce_initialized), true] call CBA_fnc_setVarNet;
+    _group setVariable [QGVAR(reinforce_initialized), true, true];
 }, true, [], true] call CBA_fnc_addClassEventHandler;

@@ -20,7 +20,7 @@ params ["_vehicle", "_condition"];
 
 // @TODO: rewrite this to be event based and move to Vehicle Component
 
-[_vehicle, QGVAR(restrictedVehicle_condition), _condition] call CBA_fnc_setVarNet;
+_vehicle setVariable [QGVAR(restrictedVehicle_condition), _condition, true];
 
 /* Check units entering vehicle */
 _vehicle addEventHandler ["GetIn", {

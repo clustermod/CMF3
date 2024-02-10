@@ -75,7 +75,7 @@ FUNC(addTracers) = {
         };
 
         LOG_1("Added tracers for %1", _unit);
-        [_unit, QGVAR(tracers_initialized), true] call CBA_fnc_setVarNet;
+        _unit setVariable [QGVAR(tracers_initialized), true, true];
     };
 
     if (SETTING(tracersFlashlight)) then {

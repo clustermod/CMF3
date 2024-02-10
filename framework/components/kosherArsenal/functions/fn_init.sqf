@@ -49,7 +49,7 @@ if (!hasInterface) exitWith {};
         /* Verify that the loadoutfile exists and save it on the unit */
         private _loadout = format["rsc\loadouts\%1.sqf", (_loadouts select _team)];
         if !(FILE_EXISTS(_loadout)) exitWith { ERROR_MSG_1("Unable to find loadoutfile: %1", _loadout); };
-        [cmf_player, QGVAR(loadout), _loadout] call CBA_fnc_setVarNet;
+        cmf_player setVariable [QGVAR(loadout), _loadout, true];
 
         /* If player is Re-Jip in same role exit */
         private _reJip = false;
@@ -152,7 +152,7 @@ if (!hasInterface) exitWith {};
                 deleteVehicle _lightobject;
             };
 
-            [cmf_player, QGVAR(close), false] call CBA_fnc_setVarNet;
+            cmf_player setVariable [QGVAR(close), false, true];
 
             /* Raise event */
             [QGVAR(onClose), [(player getVariable [QGVAR(close), false])]] call CBA_fnc_localEvent;

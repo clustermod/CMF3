@@ -144,7 +144,7 @@ private _fired_event = {
             [_acePickup, true] remoteExec ["hideObjectGlobal", 2];
             _acePickup setVectorUp [(random(selectRandom[1, -1])), (random(selectRandom[1, -1])), 0];
             [_grenadeObject, _acePickup] call BIS_fnc_attachToRelative;
-            [_acePickup, "ace_advanced_throwing_disablePickUp", true] call CBA_fnc_setVarNet;
+            _acePickup setVariable ["ace_advanced_throwing_disablePickUp", true, true];
             _acePickup enableSimulation false;
 
             _grenade setPos [0,0,0];

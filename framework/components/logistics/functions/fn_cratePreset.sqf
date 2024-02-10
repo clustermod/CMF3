@@ -40,7 +40,7 @@ publicVariable QGVAR(crateConfig);
     [(_presetData select 1), "init", compile ("
         params ['_crate'];
         if (_crate getVariable ['ace_cargo_customName', ''] isEqualTo '') then {
-            [_crate, 'ace_cargo_customName', '" + _key + " Crate | '] call CBA_fnc_setVarNet;
+            _crate setVariable ['ace_cargo_customName', '" + _key + " Crate | ', true];
         };
         [_crate, true] call ace_dragging_fnc_setCarryable;
         [_crate, true] call ace_dragging_fnc_setDraggable;
