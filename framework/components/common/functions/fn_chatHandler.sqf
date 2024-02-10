@@ -31,7 +31,7 @@ if (hasInterface) then {
         private _disconUnit = _disconUnits get (getPlayerUID player);
 
         if (!isNil "_disconUnit") then {
-            if ( !EGVAR(gameplay,setting_safestart) || missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] ) then {
+            if ( !ESETTING(gameplay,safestart) || missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] ) then {
                 [format ["%1 Re-jipped", name player]] remoteExec ["systemChat", 0, false];
             } else {
                 [format ["%1 Joined %2 in ""%3"" as a ""%4""", name player, _sideLUT select ((side player) call BIS_fnc_sideID), groupID group player, _roleDescription]] remoteExec ["systemChat", 0, false];

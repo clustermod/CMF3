@@ -17,10 +17,10 @@
 SCRIPT(disableFreezeTime);
 
 [LSTRING(common_module_category_displayname), LSTRING(dis_freezeTime_module_displayname), {
-    EGVAR(environment,setting_freezeTime) = !EGVAR(environment,setting_freezeTime);
-    publicVariable QEGVAR(environment,setting_freezeTime);
+    ESETTING(environment,freezeTime) = !ESETTING(environment,freezeTime);
+    publicVariable ESETTING(environment,freezeTime);
     
-    if (EGVAR(environment,setting_freezeTime)) then {
+    if (ESETTING(environment,freezeTime)) then {
         [LSTRING(en_freezeTime_success_message)] call zen_common_fnc_showMessage;
     } else {
         [LSTRING(dis_freezeTime_success_message)] call zen_common_fnc_showMessage;

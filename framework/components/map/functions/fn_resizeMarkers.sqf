@@ -20,7 +20,7 @@ if (!hasInterface) exitWith {};
 
 [{ !isNull findDisplay 12 }, {
     findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
-        if !(GVAR(setting_consistentMarkers)) exitWith {};
+        if !(SETTING(consistentMarkers)) exitWith {};
 
         if (visibleMap) then {
             private _scale = 0.05 / ctrlMapScale (_this select 0);
@@ -62,7 +62,7 @@ if (!hasInterface) exitWith {};
     addMissionEventHandler ["Map", {
         params ["_mapIsOpened"];
 
-        if !(GVAR(setting_consistentMarkers)) exitWith {};
+        if !(SETTING(consistentMarkers)) exitWith {};
 
         if (!_mapIsOpened) then {
             private _m = format [QGVAR(marker_size_%1), _x];

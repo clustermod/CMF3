@@ -16,7 +16,7 @@
 */
 SCRIPT(safestart);
 
-if !(GVAR(setting_safestart)) exitWith {};
+if !(SETTING(safestart)) exitWith {};
 
 /* Freeze Time */
 EGVAR(environment,freezeTime_override) = true;

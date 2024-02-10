@@ -117,7 +117,7 @@ GVAR(flashbang_explosion) = {
 
 /* Check if player fired */
 private _fired_event = {
-    if (!GVAR(setting_flashbang)) exitWith {};
+    if (!SETTING(flashbang)) exitWith {};
 
     private _grenadeConfig = (createHashMapFromArray GVAR(flashbang_grenades)) getOrDefault [(_this select 5), [-1]];
     if ((_grenadeConfig select 0) > -1) then {

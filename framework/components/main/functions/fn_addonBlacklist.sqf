@@ -38,8 +38,8 @@ addMissionEventHandler ["PlayerConnected", {
         player setVariable [QGVAR(addonDifference), _addonDifference];
 
         /* Check if any addons are blacklisted */
-        private _illegalAddons = _clientAddons select { _x in EGVAR(common,setting_blacklistedAddons) };
-        if (_clientAddons findIf { _x in EGVAR(common,setting_blacklistedAddons) } != -1) then {
+        private _illegalAddons = _clientAddons select { _x in ESETTING(common,blacklistedAddons) };
+        if (_clientAddons findIf { _x in ESETTING(common,blacklistedAddons) } != -1) then {
             [format ["%1 has been blacklisted! Please remove it from your modset to join the server", (_illegalAddons joinString ", ")], "Blacklisted Addon", true, false] call BIS_fnc_guiMessage;
             QGVAR(blacklistedAddon) call BIS_fnc_endMission;
         };

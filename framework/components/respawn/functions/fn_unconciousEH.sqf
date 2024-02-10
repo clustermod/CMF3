@@ -22,7 +22,7 @@ if !(_unit isEqualTo player) exitWith {};
 
 if (_state) then {
     if (!isNil GVAR(countdownHandler)) exitWith {};
-    GVAR(respawnTimer) = GVAR(setting_unconciousTimer);
+    GVAR(respawnTimer) = SETTING(unconciousTimer);
     call FUNC(countdown);
 } else {
     [GVAR(countdownHandler)] call CBA_fnc_removePerFrameHandler;

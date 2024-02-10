@@ -18,7 +18,7 @@ SCRIPT(hideRespawnMarker);
 
 [{ !isNull findDisplay 12 }, {
     findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
-        if !(GVAR(setting_hideRespawnMarkers)) exitWith {};
+        if !(SETTING(hideRespawnMarkers)) exitWith {};
         
         if (visibleMap) then {
             {

@@ -33,7 +33,7 @@ FUNC(addTracers) = {
 
     if (count _tracerMags > 0) then {
         private _newMagazine = [];
-        if (GVAR(setting_tracersRandomModel)) then {
+        if (SETTING(tracersRandomModel)) then {
             _newMagazine pushBack (_tracerMags select (random (count _tracerMags)));
         } else {
             {

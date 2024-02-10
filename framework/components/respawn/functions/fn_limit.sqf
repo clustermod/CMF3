@@ -30,7 +30,7 @@ if (call _condition) then {
     player addEventHandler ["Respawn", {
         _respawns = player getVariable[QGVAR(respawns), 1];
 
-        if ( EGVAR(gameplay,setting_safestart) && { !(missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false]) } ) exitWith {};
+        if ( ESETTING(gameplay,safestart) && { !(missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false]) } ) exitWith {};
 
         if ((player getVariable[QGVAR(deaths), 0]) isEqualTo _respawns) then {
             if (!isNull objectParent player) then {

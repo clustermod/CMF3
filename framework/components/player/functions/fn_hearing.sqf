@@ -17,7 +17,7 @@
 SCRIPT(hearing);
 
 /* Check if it is enabled */
-if !(GVAR(setting_hearing)) exitWith {};
+if !(SETTING(hearing)) exitWith {};
 
 /* Code for putting in the earplugs */
 GVAR(hearing_fnc_codein) = {
@@ -57,20 +57,20 @@ player addEventHandler ["Killed", GVAR(hearing_fnc_codeout)];
     };
 
     /* Get the hearing protection value from headgear */
-    if (headgear player != "" && { GVAR(setting_attenuateHeadgear) }) then {
+    if (headgear player != "" && { SETTING(attenuateHeadgear) }) then {
         private _attenuation = getNumber (configFile >> "CfgWeapons" >> headgear player >> "ace_hearing_lowerVolume") min 1;
         _volumeAttenuation = _volumeAttenuation * (1 - _attenuation);
     };
 
     /* Get the hearing protection value from goggles */
-    if (goggles player != "" && { GVAR(setting_attenuateHeadgear) }) then {
+    if (goggles player != "" && { SETTING(attenuateHeadgear) }) then {
         private _attenuation = getNumber (configFile >> "CfgGlasses" >> goggles player >> "ace_hearing_lowerVolume") min 1;
         _volumeAttenuation = _volumeAttenuation * (1 - _attenuation);
     };
 
     /* Check if earplugs are in */
     if (player getVariable [QGVAR(hearing_earplugsIn), false]) then {
-        private _attenuation = GVAR(setting_earplugVolume);
+        private _attenuation = SETTING(earplugVolume);
         _volumeAttenuation = _volumeAttenuation * (1 - _attenuation);
     };
 

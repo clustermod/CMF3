@@ -1,4 +1,12 @@
 "
+<t size='1.1'>CMF Changelog v2.1.1.59 => v2.1.1.60</t>
+
+<t size='1.05' color='#009eaa'>Changed</t>
+	• Temporarily disabled logistics crate actions as it created a bug where all ace actions were removed from the crate
+
+<t size='1.05' color='#009eaa'>Fixed</t>
+	• Fixed bug where players where unable to take items from cmf logistic crates 
+
 <t size='1.1'>CMF Changelog v2.1.1.58 => v2.1.1.59</t>
 
 <t size='1.05' color='#009eaa'>Changed</t>
