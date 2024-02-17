@@ -1,10 +1,8 @@
-"
-<br/><br/><t size='1.1'>CMF Changelog v2.1.1.60 => v2.1.1.61</t>
-## Fixed
+<t size='1.1'>CMF Changelog v2.1.1.60 => v2.1.1.61</t>
 <t size='1.05' color='#009eaa'>Fixed</t>
 	• Fixed bug with ace action on crates being broken
-
-<t size='1.1'>CMF Changelog v2.1.1.59 => v2.1.1.60</t>
+ 
+<br/><br/><t size='1.1'>CMF Changelog v2.1.1.59 => v2.1.1.60</t>
 
 <t size='1.05' color='#009eaa'>Changed</t>
 	• Temporarily disabled logistics crate actions as it created a bug where all ace actions were removed from the crate

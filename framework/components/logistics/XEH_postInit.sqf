@@ -1,7 +1,7 @@
 #include "script_component.hpp"
 
 call FUNC(cratePFH);
-call FUNC(crateActions); // Temporarily disabled as it breaks the ace actions on the crate
+call FUNC(crateActions);
 
 ["ReammoBox_F", "init", {
     params ["_crate"];
