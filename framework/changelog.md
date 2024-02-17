@@ -1,3 +1,7 @@
+# Changelog v2.1.1.60 => v2.1.1.61
+## Fixed
+- Fixed bug with ace action on crates being broken
+
 # Changelog v2.1.1.59 => v2.1.1.60
 ## Changed
 - Temporarily disabled logistics crate actions as it created a bug where all ace actions were removed from the crate

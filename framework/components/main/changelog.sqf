@@ -1,4 +1,9 @@
 "
+<br/><br/><t size='1.1'>CMF Changelog v2.1.1.60 => v2.1.1.61</t>
+## Fixed
+<t size='1.05' color='#009eaa'>Fixed</t>
+	• Fixed bug with ace action on crates being broken
+
 <t size='1.1'>CMF Changelog v2.1.1.59 => v2.1.1.60</t>
 
 <t size='1.05' color='#009eaa'>Changed</t>
@@ -8,7 +13,7 @@
 <t size='1.05' color='#009eaa'>Fixed</t>
 	• Fixed bug where players where unable to take items from cmf logistic crates 
 
-<t size='1.1'>CMF Changelog v2.1.1.58 => v2.1.1.59</t>
+<br/><br/><t size='1.1'>CMF Changelog v2.1.1.58 => v2.1.1.59</t>
 
 <t size='1.05' color='#009eaa'>Changed</t>
 	• Replaced `CBA_fnc_setVarNet` with vanilla `setVariable` (setVarNet was too unstable)
