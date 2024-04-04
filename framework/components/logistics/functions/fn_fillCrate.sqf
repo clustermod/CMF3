@@ -24,17 +24,17 @@
 params ["_crate", "_cargoPreset"];
 
 if (is3DEN) exitWith {
-	private _equipment = [
-		[
-			[(_cargoPreset select 4) apply { _x select 0 }, (_cargoPreset select 4) apply { _x select 1 }],
-			[(_cargoPreset select 3) apply { _x select 0 }, (_cargoPreset select 3) apply { _x select 1 }],
-			[(_cargoPreset select 2) apply { _x select 0 }, (_cargoPreset select 2) apply { _x select 1 }],
-			[[],[]] // Backpacks
-		], 
-		false
-	];
+    private _equipment = [
+        [
+            [(_cargoPreset select 4) apply { _x select 0 }, (_cargoPreset select 4) apply { _x select 1 }],
+            [(_cargoPreset select 3) apply { _x select 0 }, (_cargoPreset select 3) apply { _x select 1 }],
+            [(_cargoPreset select 2) apply { _x select 0 }, (_cargoPreset select 2) apply { _x select 1 }],
+            [[],[]] // Backpacks
+        ], 
+        false
+    ];
 
-	_crate set3DENAttribute ["ammoBox", str _equipment];
+    _crate set3DENAttribute ["ammoBox", str _equipment];
 };
 
 if (!isServer && { !local _crate }) exitWith {};
@@ -49,15 +49,15 @@ clearBackpackCargoGlobal _crate;
 {_crate addItemCargoGlobal _x} forEach (_cargoPreset select 4);
 
 if (count (_cargoPreset select 5) > 0) then {
-	private _cargoSpace = 0;
-	{
-		_cargoSpace = _cargoSpace + _x;
-	} forEach ((_cargoPreset select 5) apply { ([_x select 0] call ace_cargo_fnc_getSizeItem) * (_x select 1) });
-	[_crate, _cargoSpace] call ace_cargo_fnc_setSpace;
-	{
-		private _cargo = _x;
-		for '_i' from 0 to (_cargo select 1) do {
-			[(_cargo select 0), _crate] call ace_cargo_fnc_loadItem;
-		};
-	} forEach (_cargoPreset select 5);
+    private _cargoSpace = 0;
+    {
+        _cargoSpace = _cargoSpace + _x;
+    } forEach ((_cargoPreset select 5) apply { ([_x select 0] call ace_cargo_fnc_getSizeItem) * (_x select 1) });
+    [_crate, _cargoSpace] call ace_cargo_fnc_setSpace;
+    {
+        private _cargo = _x;
+        for '_i' from 0 to (_cargo select 1) do {
+            [(_cargo select 0), _crate] call ace_cargo_fnc_loadItem;
+        };
+    } forEach (_cargoPreset select 5);
 };

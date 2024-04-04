@@ -24,10 +24,10 @@
 
 #define UI_GRID_W (5 * 0.5 * pixelW * pixelGrid)
 #define UI_GRID_H (5 * 0.5 * pixelH * pixelGrid)
-#define CUI_GRID_X	(0.5)
-#define CUI_GRID_Y	(0.5)
-#define CUI_GRID_W	UI_GRID_W
-#define CUI_GRID_H	UI_GRID_H
+#define CUI_GRID_X (0.5)
+#define CUI_GRID_Y (0.5)
+#define CUI_GRID_W UI_GRID_W
+#define CUI_GRID_H UI_GRID_H
 
 #define LOG_FONTSIZE 0.7 * CUI_GRID_H
 
