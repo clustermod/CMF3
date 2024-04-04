@@ -105,7 +105,7 @@ if (_damage > 0.8 && { (_selection in _vehicleSelections) || _selection isEqualT
             ["ace_fire_addFireSource", [_veh, _radius, 10 * (fuel _veh), _key, { (_this select 0) > time }, [_burnTime]]] call CBA_fnc_serverEvent;
             _veh setVariable [QGVAR(isBurning), true, true];
 
-            [{time > (_this select 0)}, { (_this select 1) setVariable [QGVAR(isBurning), false, true]; }, [_burnTime, _veh]] call CBA_fnc_waitUntilAndExecute;
+            [{time > (_this select 0)}, { (_this select 1) setVariable [QGVAR(isBurning), false, true] }, [_burnTime, _veh]] call CBA_fnc_waitUntilAndExecute;
         };
     } else {
         _damage = 0.8;

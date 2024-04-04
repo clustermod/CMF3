@@ -55,6 +55,11 @@
     #define PATHTOF_SYS(var1,var2) components\var1\var2
 #endif
 
+#define PATHTOF(var1) PATHTOF_SYS(MODULE,var1)
+#define PATHTOEF(var1,var2) PATHTOF_SYS(var1,var2)
+#define QPATHTOF(var1) QUOTE(PATHTOF(var1))
+#define QPATHTOEF(var1,var2) QUOTE(PATHTOEF(var1,var2))
+
 #define DSTRING(var1) QUOTE(TRIPLES(STR,COMPONENT,var1))
 #define EDSTRING(var1,var2) QUOTE(TRIPLES(STR,DOUBLES(PREFIX,var1),var2))
 #define LSTRING(var1) ([QUOTE(PATHTOF_SYS(MODULE,stringtable.sqf)), DSTRING(var1)] call compile preProcessFileLineNumbers QUOTE(PATHTOF_SYS(main,localize.sqf)))

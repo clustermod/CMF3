@@ -59,6 +59,6 @@ cmf_player addEventHandler ["Respawn", {
     /* Make sure player is able to use ACRE */
     cmf_player setVariable [QGVAR(overrideSound), nil];
     GVAR(disableACRERadio) = false;
-    cmf_player setVariable ['acre_sys_core_isDisabled', false, true];
-    cmf_player setVariable ['acre_sys_core_isDisabledRadio', false, true];
+    cmf_player setVariable ["acre_sys_core_isDisabled", false, true];
+    cmf_player setVariable ["acre_sys_core_isDisabledRadio", false, true];
 }];

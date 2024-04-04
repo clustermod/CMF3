@@ -94,6 +94,8 @@ EFUNC(inline_aar,endMission) = {
                 _statsText = _statsText + format["<t align='left' color='#888888'>Your Enemy Kills:</t> <t align='right' color='#888888'>%1</t><br/>", (player getVariable [QGVAR(stats_E_kills), 0])];
                 _statsText = _statsText + format["<t align='left' color='#888888'>Your Friendly Kills:</t> <t align='right' color='#888888'>%1</t><br/>", (player getVariable [QGVAR(stats_F_kills), 0])];
                 _statsText = _statsText + format["<t align='left' color='#888888'>Your Civilian Kills:</t> <t align='right' color='#888888'>%1</t><br/>", (player getVariable [QGVAR(stats_C_kills), 0])];
+                _statsText = _statsText + format["<t align='left' color='#888888'>Shots Fired:</t> <t align='right' color='#888888'>%1</t><br/>", (player getVariable [QGVAR(stats_shots_fired), 0])];
+                // @TODO: Make sure to save stats incase of a rejip
 
                 while { player getVariable QGVAR(spectatorStatus) } do {
                     hintSilent parseText _statsText;
@@ -177,7 +179,7 @@ EFUNC(inline_aar,endMission) = {
 private _EHIndex = addMissionEventHandler ["EntityCreated", {
     params ["_entity"];
 
-    if ((typeof _entity) isEqualTo "ModuleEndMission_F") then {
+    if ((typeof _entity) isEqualTo "ModuleEndMission_F" && local _entity) then {
         deleteVehicle _entity;
         [] spawn EFUNC(inline_aar,endMission);
     };

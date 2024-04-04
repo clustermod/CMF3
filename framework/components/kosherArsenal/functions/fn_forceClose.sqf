@@ -19,4 +19,4 @@ SCRIPT(forceClose);
 params ["_unit"];
 
 /* Forcefully close the units kosherArsenal */
-cmf_player setVariable [QGVAR(close), true, true];
+_unit setVariable [QGVAR(close), true, true];

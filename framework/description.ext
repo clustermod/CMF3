@@ -12,17 +12,8 @@ enableDebugConsole[] = {"76561198065818848"};
 /* Force rotor lib */
 forceRotorLibSimulation = 0;
 
-/* Include imported UI elements */
-#include "rsc\ui\RscImports.hpp"
-
-/* Include custom defines */
-#include "rsc\ui\RscDefines.hpp"
-
-/* Include Dialogs */
-#include "rsc\ui\RscDialogs.hpp"
-
-/* Include Controls */
-#include "rsc\ui\RscControls.hpp"
+/* Include UI Classes */
+#include "rsc\ui\UI.hpp"
 
 /* include Enhanced Vehicles config */
 #include "configs\CfgEnhancedVehicles.hpp"

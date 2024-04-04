@@ -24,7 +24,7 @@ if (isNil "_respawns") exitWith { ERROR_MSG("respawns cannot be nil"); false };
 
 if (call _condition) then {
     /* Set the amount of allowed respawns */
-    cmf_player setVariable [QGVAR(respawns), _respawns, true];
+    player setVariable[QGVAR(respawns), _respawns, true];
 
     /* Check if player is out of lives on respawn */
     player addEventHandler ["Respawn", {
@@ -44,7 +44,7 @@ if (call _condition) then {
             /* Decrement the respawn counter */
             private _pCount = player getVariable[QGVAR(deaths), 0];
             private _pCount = _pCount + 1;
-            cmf_player setVariable [QGVAR(deaths), _pCount, true];
+            player setVariable[QGVAR(deaths), _pCount, true];
         };
     }];
 };

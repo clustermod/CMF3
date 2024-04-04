@@ -19,7 +19,7 @@
 ] call EFUNC(common,addSetting);
 
 [
-    QSETTING(_consistentMarkers),
+    QSETTING(consistentMarkers),
     "CHECKBOX",
     ["Consistent Marker Size", "Forces a consistent marker size regardless of zoom"],
     QUOTE(MODULE_BEAUTIFIED),

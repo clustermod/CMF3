@@ -20,8 +20,8 @@ SCRIPT(setLimit);
 params["_obj", "_respawns", ["_silent", false]];
 
 /* Set the new amount of respawns and reset death counter */
-_obj setVariable [QGVAR(respawns), _respawns, true];
-_obj setVariable [QGVAR(deaths), 0, true];
+_obj setVariable[QGVAR(respawns), _respawns, true];
+_obj setVariable[QGVAR(deaths), 0, true];
 
 if (!local _obj) exitWith {};
 

@@ -38,10 +38,10 @@ if (!isServer) exitWith {};
         _thisArgs params ["_reinforceGroup"];
         params ["", "_shareGroup", "_target"];
 
-        if (_reinforceGroup getVariable [QGVAR(reinforce_disableGroup), false]) exitWith { };
-        if ((group _target) getVariable [QGVAR(reinforce_disableTarget), false]) exitWith { };
+        if (_reinforceGroup getVariable [QGVAR(reinforce_disableGroup), false]) exitWith {};
+        if ((group _target) getVariable [QGVAR(reinforce_disableTarget), false]) exitWith {};
 
-        if ( (leader _reinforceGroup distance leader _shareGroup) < SETTING(reinforceRange) && { _reinforceGroup != _shareGroup && { !(_reinforceGroup getVariable [QGVAR(reinforce_targetGroup), grpNull] isEqualTo _shareGroup) && { side _reinforceGroup isEqualTo side _shareGroup } } }) then {
+        if ( (leader _reinforceGroup distance leader _shareGroup) < SETTING(reinforceRange) && _reinforceGroup != _shareGroup && !(_reinforceGroup getVariable [QGVAR(reinforce_targetGroup), grpNull] isEqualTo _shareGroup) && side _reinforceGroup isEqualTo side _shareGroup ) then {
             LOG_2("%1 reinforcing %2(TaskRush)", groupId _reinforceGroup, groupId _shareGroup);
 
             [_reinforceGroup, 200, 15, [], getPos _target, false] spawn lambs_wp_fnc_taskRush;

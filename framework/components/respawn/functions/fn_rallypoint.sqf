@@ -123,16 +123,16 @@ private _rallypointPlaceCode = {
 
                 _respawn call BIS_fnc_RemoveRespawnPosition;
                 deleteVehicle _obj;
-                cmf_player setVariable [QGVAR(rallypoint_lastRally), [objNull, [objNull, -1], scriptNull], true];
+                player setVariable [QGVAR(rallypoint_lastRally), [objNull, [objNull, -1], scriptNull], true];
             }, [_obj, _respawn]] call CBA_fnc_waitUntilAndExecute;
 
             /* Save current rally to unit */
-            cmf_player setVariable [QGVAR(rallypoint_lastRally), [_obj, _respawn], true];
+            player setVariable [QGVAR(rallypoint_lastRally), [_obj, _respawn], true];
 
             /* Spawn cooldown timer */
-            cmf_player setVariable [QGVAR(rallypoint_canCreate), false, true];
+            player setVariable [QGVAR(rallypoint_canCreate), false, true];
             [{
-                cmf_player setVariable [QGVAR(rallypoint_canCreate), true, true];
+                player setVariable [QGVAR(rallypoint_canCreate), true, true];
             }, [], SETTING(rallypointCooldown)] call CBA_fnc_waitAndExecute;
         } else {
             deleteVehicle _obj;
@@ -148,7 +148,7 @@ private _rallypointFailedCode = {
 /* Create Place action */
 private _rallypointPlaceAction = [QGVAR(rallypoint_place), LSTRING(place_rallypoint), "components\respawn\data\icon_ace_rallypoint_place_ca.paa", _rallypointPlaceCode, {
     ((isNull objectParent player) && { (player getVariable [QGVAR(rallypoint_canCreate), true]) && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]) })
-    && { (player getVariable [QGVAR(showRallypoint), true])
+    && { (player getVariable [QGVAR(showRallypoint), false])
     && !visibleMap }
 }] call ace_interact_menu_fnc_createAction;
 
@@ -156,7 +156,7 @@ private _rallypointPlaceAction = [QGVAR(rallypoint_place), LSTRING(place_rallypo
 private _rallypointFailedAction = [QGVAR(rallypoint_disabled), LSTRING(place_rallypoint), "components\respawn\data\icon_ace_rallypoint_disabled_ca.paa", _rallypointFailedCode, {
     (((isNull objectParent player) && { !(player getVariable [QGVAR(rallypoint_canCreate), true]) })
     || (missionNamespace getVariable [QGVAR(rallypoint_disabled), false]))
-    && { (player getVariable [QGVAR(showRallypoint), true])
+    && { (player getVariable [QGVAR(showRallypoint), false])
     && !visibleMap }
 }] call ace_interact_menu_fnc_createAction;
 
@@ -173,7 +173,8 @@ if (count _units isEqualTo 0) exitWith {
             [typeOf player, 1, ["ACE_SelfActions"], _rallypointPlaceAction] call ace_interact_menu_fnc_addActionToClass;
             [typeOf player, 1, ["ACE_SelfActions"], _rallypointFailedAction] call ace_interact_menu_fnc_addActionToClass;
 
-            cmf_player setVariable [QGVAR(rallypoint), true, true];
+            player setVariable [QGVAR(rallypoint), true, true];
+            player setVariable [QGVAR(showRallypoint), true, true];
             LOG_1("Added rallypoint for %1", name player);
         };
         continue;
@@ -188,6 +189,7 @@ if (count _units isEqualTo 0) exitWith {
             [[typeOf _x, 1, ["ACE_SelfActions"], _rallypointFailedAction], ace_interact_menu_fnc_addActionToClass] remoteExec ["call", _x];
 
             _x setVariable [QGVAR(rallypoint), true, true];
+            _x setVariable [QGVAR(showRallypoint), true, true];
             LOG_1("Added rallypoint for %1", name _x);
         };
     };
@@ -215,16 +217,16 @@ private _action = [QGVAR(other), "Set as rallypoint", "components\respawn\data\i
     publicVariable QGVAR(rallypoints);
 
     /* Save current rally to unit */
-    cmf_player setVariable [QGVAR(rallypoint_lastRally), [_target, _respawn], true];
+    player setVariable [QGVAR(rallypoint_lastRally), [_target, _respawn], true];
 
     /* Spawn cooldown timer */
-    cmf_player setVariable [QGVAR(rallypoint_canCreate), false, true];
+    player setVariable [QGVAR(rallypoint_canCreate), false, true];
     [{
-        cmf_player setVariable [QGVAR(rallypoint_canCreate), true, true];
+        player setVariable [QGVAR(rallypoint_canCreate), true, true];
     }, [], SETTING(rallypointCooldown)] call CBA_fnc_waitAndExecute;
 }, {
     ((isNull objectParent cmf_player) && { (cmf_player getVariable [QGVAR(rallypoint_canCreate), true]) && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]) })
-    && { (cmf_player getVariable [QGVAR(showRallypoint), true])
+    && { (cmf_player getVariable [QGVAR(showRallypoint), false])
     && !visibleMap }
 }] call ace_interact_menu_fnc_createAction;
 

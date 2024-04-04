@@ -16,6 +16,8 @@
  */
 params ["_newUnit", "_oldUnit"]; 
 
+if (isNull _oldUnit) exitWith { };
+
 private _oldPTT = cmf_player getVariable [QGVAR(ACREPTT), call acre_api_fnc_getMultiPushToTalkAssignment];
 private _oldRadios = ([_oldUnit] call acre_sys_core_fnc_getGear) select { ([_x] call acre_api_fnc_getBaseRadio) != "" };
 private _newRadios = ([_newUnit] call acre_sys_core_fnc_getGear) select { ([_x] call acre_api_fnc_getBaseRadio) != "" };

@@ -70,7 +70,7 @@ GVAR(hostage_followPlayerFNC) = {
 
             private _getSeat = [vehicle _target] call ace_captives_fnc_findEmptyNonFFVCargoSeat;
             _getSeat params ["_cargoIndex"];
-            if (_cargoIndex isEqualTo -1) exitWith {};
+            if (_cargoIndex == -1) exitWith {};
 
             _hostage assignAsCargoIndex [vehicle _target, _cargoIndex];
             [_hostage] orderGetIn true;
@@ -89,7 +89,7 @@ private _followAction = [QGVAR(hostageFollow), "Follow Me!", "",
     GVAR(hostage_followPlayerFNC), 
     { 
         isNull ((_this select 0) getVariable [QGVAR(hostage_owner), objNull]) &&
-        { !((_this select 0) getVariable ["ace_captives_isHandcuffed", false]) }
+        !((_this select 0) getVariable ["ace_captives_isHandcuffed", false])
     }
 ] call ace_interact_menu_fnc_createAction;
 

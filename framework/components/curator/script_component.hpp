@@ -15,3 +15,5 @@
 #include "..\main\script_component.hpp"
 
 #include "\a3\ui_f\hpp\definedikcodes.inc"
+
+#define IDD_ZEUS 312

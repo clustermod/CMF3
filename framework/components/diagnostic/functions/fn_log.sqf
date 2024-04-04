@@ -15,6 +15,6 @@
  * Public: no
  */
 
-if (!is3DEN) then { _nil = GVAR(logOut) pushBack _this };
+if (!is3DEN) then { _nil = GVAR(logOut) pushBack [serverTime, systemTime, _this] };
 
 _this call CBA_fnc_log;

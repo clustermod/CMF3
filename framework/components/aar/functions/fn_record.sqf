@@ -10,7 +10,7 @@
  * None
  *
  * Example:
- * call cmf_aar_fnc_record
+ * [] call cmf_aar_fnc_record
  *
  * Public: No
  */
@@ -22,7 +22,7 @@ if (!isServer) exitWith { };
 addMissionEventHandler ["EntityCreated", {
     params ["_entity"];
 
-    if ((_entity in allUnits || _entity in allMapMarkers || _entity in vehicles) && { !isNull _entity }) then {
+    if ((_entity in allUnits || _entity in allMapMarkers || _entity in vehicles) && !isNull _entity) then {
         _entity addEventHandler ["Fired", {
             params ["_unit", "_weapon", "", "", "", "", "_projectile"];
 
@@ -45,10 +45,10 @@ addMissionEventHandler ["EntityCreated", {
 
 _this spawn {
     /* Get title of mission */
-    private _missionTitle = if (!isNil QGVAR(safestart_title)) then {
-        GVAR(safestart_title)
+    private _missionTitle = if (!isNil { missionNameSpace getVariable QGVAR(safestart_title) }) then {
+        missionNameSpace getVariable QGVAR(safestart_title)
     } else {
-        [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(common,hexToASCII);
+        [getMissionConfigValue ['IntelBriefingName', briefingName]] call cmf_utility_fnc_hexToASCII;
     };
 
     /* Set base AAR data (and overwrite any old data) */

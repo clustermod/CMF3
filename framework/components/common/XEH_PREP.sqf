@@ -18,3 +18,4 @@ PREP(versionCompare);
 PREP(zeusHint);
 PREP(acreRestore);
 PREP(chatHandler);
+PREP(displayAddInitEvent);
