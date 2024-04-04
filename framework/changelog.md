@@ -7,6 +7,7 @@
 - Added a script log viewer to the CMF menu
 - Added `PATHTO` family of macros
 - Added shots fired statistic to AAR
+- Added `cmf_common_fnc_displayAddInitEvent` function
 
 # Changed
 - Changed how ui elements are included. it now uses a master include file in the ui directory

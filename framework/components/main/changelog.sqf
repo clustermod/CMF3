@@ -8,6 +8,7 @@ Reverted codebase back to v2.1.1.58
 	• Added a script log viewer to the CMF menu
 	• Added `PATHTO` family of macros
 	• Added shots fired statistic to AAR
+	• Added cmf_common_fnc_displayAddInitEvent function
 
 <t size='1.05' color='#009eaa'>Changed</t>
 	• Changed how ui elements are included. it now uses a master include file in the ui directory
