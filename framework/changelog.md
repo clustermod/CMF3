@@ -6,6 +6,7 @@
 - Added function to set a crate loadout for a crate using a specified logistics file in 3den and zeus
 - Added a script log viewer to the CMF menu
 - Added `PATHTO` family of macros
+- Added shots fired statistic to AAR
 
 # Changed
 - Changed how ui elements are included. it now uses a master include file in the ui directory
