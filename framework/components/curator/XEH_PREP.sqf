@@ -1,15 +1,18 @@
 #include "script_component.hpp"
 
-PREP(setLivesModule);
-PREP(forceArsenalModule);
-PREP(ammoboxModule);
-PREP(resetKosherRoleModule);
-PREP(kosherForceCloseModule);
-PREP(disableFreezeTime);
-PREP(toggleSpectatorModule);
-PREP(addRallypointModule);
-PREP(removeRallypointModule);
+PREP(setLives);
+PREP(forceArsenal);
+PREP(setAmmobox);
+PREP(setUnitParameters);
+PREP(forceCloseArsenal);
+PREP(toggleFreezeTime);
+PREP(toggleSpectator);
+PREP(enableRallypoints);
+PREP(disableRallypoints);
+PREP(setPhase);
+PREP(addCutoffPhase);
+PREP(removeCutoffPhase);
+PREP(randomLoadout);
+PREP(setCrateLoadout);
 PREP(playerInfo);
-PREP(safestartPhases);
-PREP(safestartCutoffPhases);
 PREP(initDisplayCurator);

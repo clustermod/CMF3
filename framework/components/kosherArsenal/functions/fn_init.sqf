@@ -28,8 +28,11 @@ if (!hasInterface) exitWith {};
 
         if (isNil "_loadouts") exitWith { ERROR_MSG("No loadoutfiles defined"); };
 
+        /* Keep a list of used loadouts */
+        { GVAR(loadouts) pushBackUnique _x } forEach _loadouts;
+
         /* Check if light should be attached */
-        _light = ((getLightingAt cmf_player) select 1 < 0.75); // @TODO: Fine tune this value
+        _light = ((getLightingAt cmf_player) select 1 < 30); // @TODO: Fine tune this value
 
         /* Randomize player spawn position if enabled */
         if (_randomPos) then {
@@ -49,7 +52,7 @@ if (!hasInterface) exitWith {};
         /* Verify that the loadoutfile exists and save it on the unit */
         private _loadout = format["rsc\loadouts\%1.sqf", (_loadouts select _team)];
         if !(FILE_EXISTS(_loadout)) exitWith { ERROR_MSG_1("Unable to find loadoutfile: %1", _loadout); };
-        cmf_player setVariable [QGVAR(loadout), _loadout, true];
+        player setVariable [QGVAR(loadout), _loadout, true];
 
         /* If player is Re-Jip in same role exit */
         private _reJip = false;
@@ -152,7 +155,7 @@ if (!hasInterface) exitWith {};
                 deleteVehicle _lightobject;
             };
 
-            cmf_player setVariable [QGVAR(close), false, true];
+            player setVariable [QGVAR(close), false, true];
 
             /* Raise event */
             [QGVAR(onClose), [(player getVariable [QGVAR(close), false])]] call CBA_fnc_localEvent;

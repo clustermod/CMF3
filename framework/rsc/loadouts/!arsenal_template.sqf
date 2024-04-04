@@ -52,7 +52,7 @@ if (_condition && _role in ["PL", "SL", "FTL"]) then {
 
 /* Medic */
 if (_condition && _role in ["MED"]) then {
-    [_unit, "ace_medical_medicclass", 2] call CBA_fnc_setVarNet;
+    _unit setVariable ["ace_medical_medicclass", 2, true];
     _availableUniforms = [];
     _availableWeapons = [];
     _availableAttachments = [];

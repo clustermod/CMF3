@@ -136,7 +136,7 @@
 
 ## cleanup
  - [X] Move images from rsc\data to folders inside components
- - [ ] Add Readme to each module <!-- @LIST_TODO: Add a README to each of the modules -->
+ - [X] Add Readme to each module
  - [ ] Cleanup ui files <!-- @LIST_TODO: Do a big cleanup of all ui classes -->
  - [ ] Follow ACE Code rules and remove sleeps, spawns etc. Get everything unscheduled: 
         https://ace3.acemod.org/wiki/development/arma-3-scheduler-and-our-practices.html <!-- @LIST_TODO: Try to make as much of the code unscheduled as possible -->

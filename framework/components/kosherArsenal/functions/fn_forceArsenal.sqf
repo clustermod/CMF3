@@ -79,7 +79,7 @@ params ["_unit", ["_forcePrimary", true]];
 
         /* Remove the closed eventHandler */
         ["ace_arsenal_displayClosed", _thisId] call CBA_fnc_removeEventHandler;
-        cmf_player setVariable [QGVAR(close), false, true];
+        player setVariable [QGVAR(close), false, true];
 
         /* Raise event */
         [QGVAR(onClose), [(player getVariable [QGVAR(close), false])]] call CBA_fnc_localEvent;

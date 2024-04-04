@@ -16,7 +16,7 @@ addMissionEventHandler ["ScriptError", {
         text format ["at %1:%2", _sourceFile, _lineNumber]
     ];
 
-    GVAR(errorOut) pushBack [QUOTE(PREFIX), QUOTE(MODULE), _errorText, _errorPos, _sourceFile, _lineNumber];
+    GVAR(errorOut) pushBack [serverTime, systemTime, [QUOTE(PREFIX), QUOTE(MODULE), _errorText, _errorPos, _sourceFile, _lineNumber]];
 
     [QGVAR(errorNotification), _notif] call CBA_fnc_globalEvent;
 }];

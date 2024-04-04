@@ -22,15 +22,6 @@ cmf_player removeDiarySubject "Statistics";
 /* Remove team diary */
 cmf_player removeDiarySubject "Units";
 
-/* Create notification colors */
-GVAR(notificationColors) = createHashMapFromArray [
-    ["DEFAULT", [0.69, 0.69, 0.69, 0.50]],
-    ["INFO", [0.00, 0.75, 0.75, 0.50]],
-    ["DEBUG", [0.99, 0.42, 0.98, 0.50]],
-    ["WARNING", [0.78, 0.78, 0.00, 0.50]],
-    ["ERROR", [0.81, 0.20, 0.17, 0.50]]
-];
-
 /* Create sub category for radios */
 [(call acre_api_fnc_getAllRadios) select 0, "Radios", "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\call_ca.paa", 1] call ace_arsenal_fnc_addRightPanelButton;
 

@@ -1,3 +1,23 @@
+# Changelog v2.1.1.61 => v2.1.1.62
+*Reverted back to v2.1.1.58*
+
+## Added
+- Added function to set a random loadout for a unit using a specified loadoutfile in 3den and zeus
+- Added function to set a crate loadout for a crate using a specified logistics file in 3den and zeus
+- Added a script log viewer to the CMF menu
+- Added `PATHTO` family of macros
+- Added shots fired statistic to AAR
+- Added `cmf_common_fnc_displayAddInitEvent` function
+
+# Changed
+- Changed how ui elements are included. it now uses a master include file in the ui directory
+- Changed how zeus/curator modules are registered
+- Renamed all curator functions to reflect the change
+- Changed so logistics crates will always be carryable / draggable regardless of weight
+
+# Fixed
+- Fixed bug where vehicle rallypoints were placeable for everyone
+
 # Changelog v2.1.1.60 => v2.1.1.61
 ## Fixed
 - Fixed bug with ace action on crates being broken

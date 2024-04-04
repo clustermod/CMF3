@@ -98,7 +98,9 @@ private _action = ([QGVAR(diag_menu), "Diagnostics", "z\ace\addons\medical_gui\d
     _actions pushBack [_action, [], _target];
 
     /* Error Count */
-    private _action = ([QGVAR(fps), "Errors: 0", ["a3\ui_f\data\igui\cfg\simpletasks\types\documents_ca.paa", (EGVAR(common,notificationColors) get "ERROR") call BIS_fnc_colorRGBtoHTML], { }, { true }, { }, [], "", 4, [false, false, false, true, false], {
+    private _action = ([QGVAR(fps), "Errors: 0", ["a3\ui_f\data\igui\cfg\simpletasks\types\documents_ca.paa", (EGVAR(common,notificationColors) get "ERROR") call BIS_fnc_colorRGBtoHTML], {
+        ([] call BIS_fnc_displayMission) createDisplay "CMF_RscLog";
+    }, { true }, { }, [], "", 4, [false, false, false, true, false], {
         (_this select 3) set [1, format ["Errors: %1", count EGVAR(diagnostic,errorOut)]]
     }] call ace_interact_menu_fnc_createAction);
     _actions pushBack [_action, [], _target];

@@ -20,13 +20,8 @@
         ["English", "Added rallypoints for %1"],
         ["Spanish", "Añadido rallypoints para %1"]
     ]],
-    [DSTRING(respawn_module_category_displayname), [
-        ["English", "CMF: Respawn"],
-        ["Spanish", "CMF: Respawn"]
-    ]],
-    [DSTRING(rallypoint_module_displayname), [
-        ["English", "Add rallypoint"],
-        ["Spanish", "Añadir rallypoint"]
+    [DSTRING(enableRallypoints), [
+        ["English", "Enable rallypoints"]
     ]],
 
     [DSTRING(object_requirement_message), [
@@ -41,20 +36,12 @@
         ["English", "Failed to add kosher ammobox"],
         ["Spanish", "Fallo al añadir KosherArsenal a la caja de munición"]
     ]],
-    [DSTRING(kosherArsenal_module_category_displayname), [
-        ["English", "CMF: Kosher Arsenal"],
-        ["Spanish", "CMF: Kosher Arsenal"]
-    ]],
-    [DSTRING(ammobox_module_displayname), [
+    [DSTRING(setAmmobox), [
         ["English", "Set as ammobox"],
         ["Spanish", "Configurar como caja de munición"]
     ]],
 
-    [DSTRING(common_module_category_displayname), [
-        ["English", QUOTE(FRAMEWORK: Common)],
-        ["Spanish", QUOTE(FRAMEWORK: Common)]
-    ]],
-    [DSTRING(dis_freezeTime_module_displayname), [
+    [DSTRING(toggleFreezeTime), [
         ["English", "Toggle frozen time"]
     ]],
     [DSTRING(en_freezeTime_success_message), [
@@ -68,7 +55,7 @@
         ["English", "Forced open kosher arsenal on unit"],
         ["Spanish", "Se ha forzado la apertura del Kosher Arsenal en la unidad"]
     ]],
-    [DSTRING(forceopen_kosherArsenal_module_displayname), [
+    [DSTRING(forceArsenal), [
         ["English", "Open Kosher Arsenal"],
         ["Spanish", "Abrir Kosher Arsenal"]
     ]],
@@ -77,7 +64,7 @@
         ["English", "Closed units arsenal"],
         ["Spanish", "Cerrar arsenal a todos"]
     ]],
-    [DSTRING(forceclose_kosherArsenal_module_displayname), [
+    [DSTRING(forceCloseArsenal), [
         ["English", "Close Kosher Arsenal"],
         ["Spanish", "Cerrar Kosher Arsenal"]
     ]],
@@ -86,9 +73,8 @@
         ["English", "Removed rallypoints from %1"],
         ["Spanish", "Eliminar rallypoint para %1"]
     ]],
-    [DSTRING(rallypoint_remove_module_displayname), [
-        ["English", "Remove rallypoint"],
-        ["Spanish", "Eliminar rallypoint"]
+    [DSTRING(disableRallypoints), [
+        ["English", "Disable rallypoints"]
     ]],
 
     [DSTRING(no_loadoutFile_message), [
@@ -123,12 +109,11 @@
         ["English", "Sets player's loadout. Only write the filename without it's extension"],
         ["Spanish", "Asignar equipación al jugador. Solo escribe el nombre del archivo, sin la extensión"]
     ]],
-    [DSTRING(change_kosherArsenal_module_displayname), [
-        ["English", "Change kosher parameters"],
-        ["Spanish", "Cambiar los parámetros del Kosher Arsenal"]
+    [DSTRING(setUnitParameters), [
+        ["English", "Set Unit Parameters"]
     ]],
 
-    [DSTRING(setRespawns_module_displayname), [
+    [DSTRING(setLives), [
         ["English", "Set respawns"],
         ["Spanish", "Asignar respawns"]
     ]],
@@ -153,7 +138,7 @@
         ["Spanish", "Si es falso no mostrará una pista al jugador"]
     ]],
 
-    [DSTRING(toggle_spectator_module_displayname), [
+    [DSTRING(toggleSpectator), [
         ["English", "Toggle Spectator"],
         ["Spanish", "Alternar Espectador"]
     ]],

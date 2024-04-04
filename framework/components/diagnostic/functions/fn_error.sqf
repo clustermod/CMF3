@@ -20,6 +20,6 @@
  * Public: no
  */
 
-if (!is3DEN) then { _nil = GVAR(errorOut) pushBack _this };
+if (!is3DEN) then { _nil = GVAR(errorOut) pushBack [serverTime, systemTime, _this] };
 
 _this call CBA_fnc_error;

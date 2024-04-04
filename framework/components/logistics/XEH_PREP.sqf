@@ -4,4 +4,5 @@ PREP(cratePFH);
 PREP(crateActions);
 PREP(cratePreset);
 PREP(presetCompile);
+PREP(fillCrate);
 PREP(crateSpawner);
