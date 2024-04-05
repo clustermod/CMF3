@@ -3,5 +3,5 @@
 - _Each change in a separate line_
 
 ### IMPORTANT
-- [ ] If the contribution affects [the documentation](https://wiki.cluster-community.com/index.php/Category:Cluster_Community_Framework_(CMF3)), please update any affected pages or add new ones, and mark the new documentation with the pull request link and ID.
+- If the contribution affects [the documentation](https://github.com/clustermod/CMF3/tree/master/docs), please include your changes in this pull request so the documentation will appear on the [website](https://cmf3.cluster-community.com/).
 - [ ] Title of this PR uses our standard template `Component - Add|Fix|Improve|Change|Make|Remove {changes}`.

@@ -21,3 +21,6 @@ CHANGELOG.md
 # template files
 framework/components/_blank
 framework/components/*/functions/fn_empty.sqf
+
+# mkdoc
+site
