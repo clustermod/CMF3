@@ -1,0 +1,7 @@
+.md-header__title {
+    visibility: hidden;
+}
+
+article.md-content__inner.md-typeset > h1:first-child {
+    display: none;
+}

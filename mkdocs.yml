@@ -1,0 +1,32 @@
+# https://squidfunk.github.io/mkdocs-material
+site_name: CMF3
+remote_branch: wiki
+repo_url: https://github.com/clustermod/CMF3
+
+extra_css:
+  - styles.css
+theme:
+  name: material
+  logo: img\logo\cmf3_logo_trans.png
+  palette:
+    scheme: default
+    primary: black
+    accent: indigo
+
+  features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tabs
+    - header.autohide
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - attr_list
+  - md_in_html
+  
+nav:
+  - Home: index.md
+  - Wiki: wiki/index.md
+  - Maintainers: maintainers.md
