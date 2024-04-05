@@ -1,1 +1,0 @@
-#include "..\..\components\organization\script_component.hpp"
