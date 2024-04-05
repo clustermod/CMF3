@@ -1,23 +1,55 @@
 # https://squidfunk.github.io/mkdocs-material
 site_name: CMF3
-remote_branch: wiki
+remote_branch: docs
 repo_url: https://github.com/clustermod/CMF3
+copyright: Copyright &copy; 2019 - 2024 Eric
+
+extra:
+  generator: false
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.gg/6Sq6hDgbGF
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/@clustercommunity5241
+  
+  prefix: cmf
+  version:
+    release:
+      download_url: https://github.com/clustermod/CMF3/releases/download/v2.1.0/cmf3_2.1.0.zip
+      major: 2
+      minor: 1
+      patch: 0
+
+nav:
+  - Home: index.md
+  - Wiki: wiki/index.md
+  - Maintainers: maintainers.md
 
 extra_css:
   - styles.css
 theme:
   name: material
-  logo: img\logo\cmf3_logo_trans.png
+  logo: img/logo/cmf3_logo_trans.png
+  font:
+    text: Open Sans
   palette:
     scheme: default
     primary: black
     accent: indigo
-
   features:
     - navigation.instant
     - navigation.instant.progress
     - navigation.tabs
-    - header.autohide
+    - navigation.path
+    - navigation.footer
+    - navigation.top
+    - content.code.copy
+
+
+
+plugins:
+  - macros:
+        module_name: docs/macros
 
 markdown_extensions:
   - admonition
@@ -25,8 +57,3 @@ markdown_extensions:
   - pymdownx.superfences
   - attr_list
   - md_in_html
-  
-nav:
-  - Home: index.md
-  - Wiki: wiki/index.md
-  - Maintainers: maintainers.md
