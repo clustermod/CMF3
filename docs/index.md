@@ -8,11 +8,14 @@ hide:
 <p align="center">
     <img src="https://raw.githubusercontent.com/clustermod/CMF3/master/extras/assets/logo/black/cmf3_logo_trans.png" width="480">
 </p>
+<div style="text-align: center;" markdown>
 
 # Cluster Mission Framework 3 <small>(CMF3)</small>
 **CMF3** is an effort by the **Cluster Community Mod Team** to enhance the individual experience by our playerbase.
 
-<div class="grid cards" markdown>
+</div>
+
+<div class="grid cards downloads-card" markdown>
 
 -   [Get CMF3 v{{version.release.major}}.{{version.release.minor}}.{{version.release.patch}} (Stable)]({{version.release.download_url}}){ .md-button .md-button--primary }
     

@@ -18,4 +18,12 @@ hide:
 
     [Learn More](kosherArsenal/index.md){ .md-button .md-button--primary }
 
+-   ## Kosher AI
+
+    ---
+
+    Kosher AI...
+
+    [Learn More](kosherAI/index.md){ .md-button .md-button--primary }
+
 </div>

@@ -46,3 +46,27 @@ examples:
 <table class="function-table">
     {{FUNC_EXAMPLES(examples)}}
 </table>
+
+<h2 class="function">Additional Information</h2>
+!!! info "N/A"
+
+<h2 class="function">Notes</h2>
+<div class="function notes" markdown>
+
+Report bugs on the [Issue Tracker]({{config.repo_url}}/issues) and/or discuss them on the [Cluster Community Discord ](#):fontawesome-brands-discord:.<br/>
+**Only post proven facts here!**
+
+[Add Note](#){ .md-button }
+
+<!-- 
+    TO ADD A NOTE COPY THE FOLLOWING:
+!!! note
+
+    Write note content here
+    anything written with the current indentation will be added to this note
+    ```scilab
+        Code blocks should be formatted this way
+    ```
+ -->
+
+</div>

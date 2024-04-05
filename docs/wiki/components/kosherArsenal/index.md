@@ -14,8 +14,8 @@ Kosher Arsenal provides a way for mission makers to define restricted player loa
 
 ## Functions
 <div class="grid cards" markdown>
--   [Init `{{FUNC(component, 'init')}}`](fn_init)
--   [Ammobox `{{FUNC(component, 'ammoBox')}}`](fn_ammobox)
+-   [Init `{{FUNC(component, 'init')}}`](fn_init.md)
+-   [Ammobox `{{FUNC(component, 'ammoBox')}}`](fn_ammobox.md)
 -   [Force Arsenal `{{FUNC(component, 'forceArsenal')}}`](#)
 -   [forceClose `{{FUNC(component, 'forceClose')}}`](#)
 </div>
