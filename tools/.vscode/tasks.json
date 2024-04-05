@@ -46,6 +46,20 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Deploy MkDocs: mkdocs gh-deploy",
+            "command": "mkdocs",
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "args": [
+                "gh-deploy"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
