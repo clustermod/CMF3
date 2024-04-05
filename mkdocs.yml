@@ -23,7 +23,7 @@ extra:
 nav:
   - Home: index.md
   - Wiki: wiki/index.md
-  - Maintainers: maintainers.md
+  - Contributors: contributors.md
 
 extra_css:
   - styles.css
