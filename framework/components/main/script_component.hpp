@@ -1,10 +1,10 @@
 #ifndef MODULE
     #define MODULE main
     #define MODULE_BEAUTIFIED Main
+    #define REQUIRED_ADDONS []
+    #define REQUIRED_MODULES []
 #endif
 
-#define REQUIRED_ADDONS []
-#define REQUIRED_MODULES []
 
 #include "script_mod.hpp"
 
