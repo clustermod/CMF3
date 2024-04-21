@@ -20,9 +20,9 @@ if (!hasInterface) exitWith {};
 
 [{ !isNull findDisplay 12 }, {
     findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
-        if !(SETTING(consistentMarkers)) exitWith {};
+        if !SETTING(consistentMarkers) exitWith {};
 
-        if (visibleMap) then {
+        if visibleMap then {
             private _scale = 0.05 / ctrlMapScale (_this select 0);
             {
                 if (markerShape _x isNotEqualTo "ICON" ) then { continue };
@@ -33,12 +33,12 @@ if (!hasInterface) exitWith {};
                 };
 
                 private _worldModifier = worldSize / 12800;
-                private _sX = ((((missionNamespace getVariable _m) select 0) * _scale) / _worldModifier) max 0.35;
-                private _sY = ((((missionNamespace getVariable _m) select 1) * _scale) / _worldModifier) max 0.35;
+                private _sX = (((missionNamespace getVariable _m) select 0) * _scale) / _worldModifier max 0.35;
+                private _sY = (((missionNamespace getVariable _m) select 1) * _scale) / _worldModifier max 0.35;
                 private _markerSizeFinal = [_sX, _sY];
 
                 /* Check if marker is currently moused over (will reset scale if marker is moused over) */
-                (ctrlMapMouseOver (findDisplay 12 displayCtrl 51)) params ["_mouseOverType", "_marker"];
+                ctrlMapMouseOver (findDisplay 12 displayCtrl 51) params ["_mouseOverType", "_marker"];
                 if (_mouseOverType isEqualTo "marker") then {
                     if (_marker isEqualTo _x) then {
                         _markerSizeFinal = missionNamespace getVariable [_m, [1,1]];
@@ -62,7 +62,7 @@ if (!hasInterface) exitWith {};
     addMissionEventHandler ["Map", {
         params ["_mapIsOpened"];
 
-        if !(SETTING(consistentMarkers)) exitWith {};
+        if !SETTING(consistentMarkers) exitWith {};
 
         if (!_mapIsOpened) then {
             private _m = format [QGVAR(marker_size_%1), _x];

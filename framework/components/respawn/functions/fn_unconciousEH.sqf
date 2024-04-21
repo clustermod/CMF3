@@ -20,7 +20,7 @@ params ["_unit", "_state"];
 
 if !(_unit isEqualTo player) exitWith {};
 
-if (_state) then {
+if _state then {
     if (!isNil GVAR(countdownHandler)) exitWith {};
     GVAR(respawnTimer) = SETTING(unconciousTimer);
     call FUNC(countdown);

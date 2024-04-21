@@ -25,7 +25,7 @@ if (_line isEqualType {}) then {
     _line = toString _line;
 };
 
-if ((_line select [(count _line - 1), 1]) != ";") then {
+if (_line select [count _line - 1, 1] != ";") then {
     _line = [_line, ";"] joinString "";
 };
 

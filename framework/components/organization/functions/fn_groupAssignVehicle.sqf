@@ -35,7 +35,7 @@ if (_group isEqualType []) exitWith {
     /* Check if group already exists and then assign vehicle */
     private _groupsHash = [GVAR(groups), _side, [] call CBA_fnc_hashCreate] call CBA_fnc_hashGet;
     private _candidates = [_groupsHash, _level, []] call CBA_fnc_hashGet;
-    _candidates = _candidates select { (count units _x) > 0 };
+    _candidates = _candidates select { count units _x > 0 };
     
     if (_type isNotEqualTo "") then {
         _candidates = _candidates select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo _type };
@@ -51,7 +51,7 @@ if (_group isEqualType []) exitWith {
 
             [_testGroup, _vehicle] call FUNC(groupAssignVehicle);
 
-            if (_children) then {
+            if _children then {
                 {
                     [_x, _vehicle] call FUNC(groupAssignVehicle);
                 } forEach (_testGroupData select 3);

@@ -17,15 +17,15 @@
 disableSerialization;
 
 if (isNull (findDisplay 49)) exitWith {};
-if (!ctrlShown ((findDisplay 49) displayCtrl 1010)) exitWith {};
+if (!ctrlShown (findDisplay 49 displayCtrl 1010)) exitWith {};
 
-if (ctrlShown ((findDisplay 49) displayCtrl 1010) && isNull (uiNamespace getVariable [QGVAR(ctrlCounter), controlNull])) then {
-    private _ctrl = (findDisplay 49) ctrlCreate ["RscText", -1];
+if (ctrlShown (findDisplay 49 displayCtrl 1010) && isNull (uiNamespace getVariable [QGVAR(ctrlCounter), controlNull])) then {
+    private _ctrl = findDisplay 49 ctrlCreate ["RscText", -1];
     _ctrl ctrlSetTextColor [1, 0.3, 0.3, 1];
-    _ctrl ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
+    _ctrl ctrlSetFontHeight (((safezoneW / safezoneH min 1.2) / 1.2) / 25) * 1;
 
     _ctrl ctrlSetPosition [
-        ( safeZoneX + ( safeZoneWAbs / 2 )) - ( 0.5 / 2 ),
+        ( safeZoneX +  safeZoneWAbs / 2 ) -  0.5 / 2 ,
         (( safeZoneY + safeZoneH ) - 0.1) - 0.1,
         0.5,
         0.1
@@ -37,4 +37,4 @@ if (ctrlShown ((findDisplay 49) displayCtrl 1010) && isNull (uiNamespace getVari
     uiNamespace setVariable [QGVAR(ctrlCounter), _ctrl];
 };
 
-((findDisplay 49) displayCtrl 1010) ctrlEnable GVAR(respawnState);
+(findDisplay 49 displayCtrl 1010) ctrlEnable GVAR(respawnState);

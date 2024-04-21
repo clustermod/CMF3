@@ -46,7 +46,7 @@
                 _time params ["_hour", "_minute"];
                 private _string = format["<font size='13' color='#fcba03'>%1:%2 <font color='#ffffff'>| %3</font></font>", [_hour, 2] call CBA_fnc_formatNumber, [_minute, 2] call CBA_fnc_formatNumber, _name];
 
-                if ((date select 3) < _hour || (date select 3) < _hour && { (date select 4) < _minute } ) then {
+                if (date select 3 < _hour || date select 3 < _hour && { date select 4 < _minute } ) then {
                     private _hours = _hour - (date select 3);
                     private _minutes = abs (_minute - (date select 4)) max 0;
                     _string = _string + format [" <font size='13' color='#fcba03'>%1h %2m</font>", _hours, _minutes];

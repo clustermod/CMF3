@@ -18,7 +18,7 @@ params ["_name"];
 
 if (isNil "_name") exitWith { ERROR_MSG("No preset defined") };
 private _path = format["rsc\loadouts\%1.sqf", _name];
-if !(FILE_EXISTS(_path)) exitWith { ERROR_MSG_1("Unable to find preset: %1", _name); };
+if !(fileExists _path) exitWith { ERROR_MSG_1("Unable to find preset: %1", _name); };
 GVAR(crateConfigFile) = _name;
 
 private _presets = [call compile preprocessFileLineNumbers _path] call CBA_fnc_hashCreate;

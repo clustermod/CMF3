@@ -3,14 +3,14 @@ STHud_Namelist = {
 
     /* Create new column for name positions */
     private _uiXDist = ((STHud_Namepos select 6) select 0) - ((STHud_Namepos select 0) select 0);
-    for "_i" from (count STHud_Namepos) - 6 to (count STHud_Namepos) - 1 do {
+    for "_i" from count STHud_Namepos - 6 to count STHud_Namepos - 1 do {
         private _prevColX = (STHud_Namepos select _i) select 0;
         private _prevColY = (STHud_Namepos select _i) select 1;
         STHud_Namepos pushBack [_prevColX + _uiXDist, _prevColY];
     };
 
     /* Create new column for selection positions */
-    for "_i" from (count STHud_Selectpos) - 6 to (count STHud_Selectpos) - 1 do {
+    for "_i" from count STHud_Selectpos - 6 to count STHud_Selectpos - 1 do {
         private _prevColX = (STHud_Selectpos select _i) select 0;
         private _prevColY = (STHud_Selectpos select _i) select 1;
         STHud_Selectpos pushBack [_prevColX + _uiXDist, _prevColY];
@@ -23,36 +23,36 @@ STHud_Namelist = {
         private _parentData = [(_groupData select 2)] call cmf_organization_fnc_groupGetData;
 
         /* Add parent if is less than level 2 */
-        if ( !isNull (_groupData select 2) && { (_parentData select 0) < 2 }) then {
-            _allUnits append (units (_groupData select 2));
+        if ( !isNull (_groupData select 2) && { _parentData select 0 < 2 }) then {
+            _allUnits append units (_groupData select 2);
 
             /* Add children of parent */
             {
                 private _childData = [_x] call cmf_organization_fnc_groupGetData;
 
-                _allUnits append (units _x);
+                _allUnits append units _x;
             } forEach (_parentData select 3);
         } else {
             /* Add own group */
-            _allUnits append (units player);
+            _allUnits append units player;
         };
 
         /* Add children */
         {
             private _childData = [_x] call cmf_organization_fnc_groupGetData;
 
-            if ((_childData select 0) <= 0) then {
-                _allUnits append (units _x);
+            if (_childData select 0 <= 0) then {
+                _allUnits append units _x;
             };
         } forEach (_groupData select 3);
     } else {
-        _allUnits append (units player);
+        _allUnits append units player;
     };
 
     private _units = [] call CBA_fnc_hashCreate;
     private _unitsCount = 0;
     {
-        if (alive(_x) || {!isNil {_x getVariable "sth_name"}}) then {
+        if (alive _x || {!isNil {_x getVariable "sth_name"}}) then {
             _oldUnits = [_units, group _x, []] call CBA_fnc_hashGet;
             _oldUnits pushBack [_x, _x call STHud_Colour_Text];
             _units = [_units, group _x, _oldUnits] call CBA_fnc_hashSet;
@@ -64,7 +64,7 @@ STHud_Namelist = {
 
     // Could expand this to check if the player is a driver, gunner, or commander, but I don't recall what exactly is needed to check to catch multiple turrets etc while excluding FFV.
     if (STHud_ShowBearingInVehicle && {vehicle player != player}) then {
-        private _viewVec = positionCameratoWorld [0,0,0] vectorFromTo (positionCameraToWorld [0,0,50]);
+        private _viewVec = positionCameratoWorld [0,0,0] vectorFromTo positionCameraToWorld [0,0,50];
         private _bearing = ((_viewVec select 0) atan2 (_viewVec select 1) + 360) % 360;
 
         private _bearingBase = (str round _bearing);
@@ -101,8 +101,8 @@ STHud_Namelist = {
         private _groupData = [_group] call cmf_organization_fnc_groupGetData;
         
         _groupUnits = [_groupUnits, [], {
-            if ((leader group (_x select 0)) isEqualTo (_x select 0)) exitWith { 0 };
-            if ((assignedTeam leader group (_x select 0)) isEqualTo (assignedTeam (_x select 0))) exitWith { 1 };
+            if (leader group (_x select 0) isEqualTo (_x select 0)) exitWith { 0 };
+            if (assignedTeam leader group (_x select 0) isEqualTo assignedTeam (_x select 0)) exitWith { 1 };
 
             switch (_x select 1) do {
                 case [1,1,1,1]: { 2 };
@@ -115,14 +115,14 @@ STHud_Namelist = {
         }] call BIS_fnc_sortBy;
 
         /* Don't display parent group above squadlevel*/
-        if ((_playerGroupData select 0) > 1 && { _group isEqualTo (_playerGroupData select 2) }) then {
+        if (_playerGroupData select 0 > 1 && { _group isEqualTo (_playerGroupData select 2) }) then {
             continue;
         };
 
         /* Draw group on new column */
-        if ((_playerGroupData select 0) < 2) then {
-            if (_unitIndex != 0 && { (_unitIndex % 6) isNotEqualTo 0 }) then {
-                _unitIndex = _unitIndex + (6 - (_unitIndex % 6));
+        if (_playerGroupData select 0 < 2) then {
+            if (_unitIndex != 0 && { _unitIndex % 6 isNotEqualTo 0 }) then {
+                _unitIndex = _unitIndex + (6 - _unitIndex % 6);
             };
         };
 
@@ -134,7 +134,7 @@ STHud_Namelist = {
         };
 
         /* Add Group name */
-        if (_unitIndex > (count STHud_Namepos) - 1) exitWith {};
+        if (_unitIndex > count STHud_Namepos - 1) exitWith {};
         _canvas drawIcon [
             "#(argb,1,1,1)color(0,0,0,0)", _groupColor,
             STHud_Namepos select _unitIndex,
@@ -146,21 +146,21 @@ STHud_Namelist = {
         {
             _x params ["_unit", "_colour"];
 
-            if (_unitIndex > (count STHud_Namepos) - 1) exitWith {};
+            if (_unitIndex > count STHud_Namepos - 1) exitWith {};
 
-            private _isUnitSelected = if ([player] call STHUD_IsGroupLeader) then {_unit in (groupSelectedUnits player)} else {false}; // Check if they're leader, if not, ignore.
+            private _isUnitSelected = if ([player] call STHUD_IsGroupLeader) then {_unit in groupSelectedUnits player} else {false}; // Check if they're leader, if not, ignore.
             private _selIndicator = "";
-            if (_isUnitSelected) then { _selIndicator = "> " }; // Tried this on the left and right. Being on the left seems to make it 'pop' more.
+            if _isUnitSelected then { _selIndicator = "> " }; // Tried this on the left and right. Being on the left seems to make it 'pop' more.
             private _icon = [_unit, false] call STHud_Icon;
 
             private _finalName = ([_unit, _fullName] call STHud_GetName);
 
-            if (STHud_NoSquadBarMode) then {_finalName = _selIndicator + _finalName;};
+            if STHud_NoSquadBarMode then {_finalName = _selIndicator + _finalName;};
 
             if (count (groupSelectedUnits player) > 0 && STHud_NoSquadBarMode && { _unit in units player }) then {
                 private _tempName = vehicleVarName _unit;
                 _unit setVehicleVarName "";
-                private _strName = str(_x);
+                private _strName = str _x;
                 _unit setVehicleVarName _tempName;
                 private _pl = _strName find ":";
                 private _numStr = _strName select [_pl +1,2];
@@ -209,7 +209,7 @@ STHud_Namelist = {
             "#(argb,1,1,1)color(0,0,0,0)", _groupNameColour,
             STHud_GroupNamePos,
             16, 16, 0,
-            group(player) getVariable ["STMF_GroupID", ""], STHud_TextShadow, 0.035, STHud_Font, "Right"
+            group player getVariable ["STMF_GroupID", ""], STHud_TextShadow, 0.035, STHud_Font, "Right"
         ];
     };
 };

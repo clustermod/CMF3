@@ -23,7 +23,7 @@
  */
 params ["_crate", "_cargoPreset"];
 
-if (is3DEN) exitWith {
+if is3DEN exitWith {
     private _equipment = [
         [
             [(_cargoPreset select 4) apply { _x select 0 }, (_cargoPreset select 4) apply { _x select 1 }],

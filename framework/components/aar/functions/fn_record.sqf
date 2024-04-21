@@ -67,7 +67,7 @@ _this spawn {
             _objects pushBack [_x, typeof _x, side _x, lifeState _x, getPosASL _x, getDir _x, crew _x, _fireData];
 
             _x setVariable [QGVAR(fire_data), [], true];
-        } forEach (allUnits + allDead);
+        } forEach allUnits + allDead;
         private _objectArray = [_time, _objects];
 
         /* get marker data */

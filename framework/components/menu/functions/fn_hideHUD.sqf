@@ -15,7 +15,7 @@
  * Public: No
  */
 
-if (is3DEN) exitWith {};
+if is3DEN exitWith {};
 
 private _action = [
     QGVAR(toggleHUD), 
@@ -34,7 +34,7 @@ private _action = [
 
         /* Toggle the HUD */
         private _staminaBarContainer = uiNamespace getVariable ["ace_advanced_fatigue_staminaBarContainer", controlNull];
-        if (GVAR(hud_show)) then {
+        if GVAR(hud_show) then {
 
             GVAR(hud_show) = false;
 

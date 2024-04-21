@@ -29,8 +29,8 @@ SCRIPT(drinking);
         private _itemData = [[GVAR(drinking_hydrationItems)] call CBA_fnc_hashCreate, _item] call CBA_fnc_hashGet;
         private _objClass = _itemData select 0;
         private _replacementItem = getText (configFile >> "CfgWeapons" >> _item >> "acex_field_rations_replacementItem");
-        private _animation = (getArray (configFile >> "CfgWeapons" >> _item >> "acex_field_rations_consumeAnims")) select _stanceIndex;
-        private _sound = (getArray (configFile >> "CfgWeapons" >> _item >> "acex_field_rations_consumeSounds")) select _stanceIndex;
+        private _animation = getArray (configFile >> "CfgWeapons" >> _item >> "acex_field_rations_consumeAnims") select _stanceIndex;
+        private _sound = getArray (configFile >> "CfgWeapons" >> _item >> "acex_field_rations_consumeSounds") select _stanceIndex;
 
         /* Play animation */
         [player, _animation, 1] call ace_common_fnc_doAnimation;
@@ -106,7 +106,7 @@ SCRIPT(drinking);
     };
 
     private _condition = {
-        (((items player) findIf {_x in ([[GVAR(drinking_hydrationItems)] call CBA_fnc_hashCreate] call CBA_fnc_hashKeys)}) != -1)
+        items player findIf {_x in ([[GVAR(drinking_hydrationItems)] call CBA_fnc_hashCreate] call CBA_fnc_hashKeys)} != -1
         && { isNull objectParent player
         && { !visibleMap } }
     };
@@ -117,14 +117,14 @@ SCRIPT(drinking);
         private _actions = [];
         private _hydrationItems = [];
         {
-            if ((_x in ([[GVAR(drinking_hydrationItems)] call CBA_fnc_hashCreate] call CBA_fnc_hashKeys)) && { !(_x in _hydrationItems) }) then {
+            if (_x in ([[GVAR(drinking_hydrationItems)] call CBA_fnc_hashCreate] call CBA_fnc_hashKeys) && { !(_x in _hydrationItems) }) then {
                 private _displayName = getText (configFile >> "CfgWeapons" >> _x >> "displayName");
                 private _icon = getText (configFile >> "CfgWeapons" >> _x >> "picture");
                 private _action = [format [QGVAR(drinking_)+"%1", _x], format[LSTRING(drink_from), _displayName], _icon, { _this spawn GVAR(drinking_fnc_consume) }, { true }, {}, _x] call ace_interact_menu_fnc_createAction;
                 _actions pushBack [_action, [], _target];
                 _hydrationItems pushBack _x;
             };
-        } forEach (items player);
+        } forEach items player;
 
         _actions;
     };

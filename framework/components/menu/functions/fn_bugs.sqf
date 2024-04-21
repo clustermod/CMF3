@@ -31,14 +31,14 @@ private _action = ([QGVAR(bug_menu), "Bug Fixes", "components\menu\data\icon_ace
         private _playerIds = _players apply { owner _x };
         private _playernames = _players apply { name _x };
         [LSTRING(select_player_displayname), [["LIST", [LSTRING(players), LSTRING(select_player_tooltip)], [_playerIds, _playernames, 0, 3]]], _onConfirm] call zen_dialog_fnc_create;
-    }, { (!isNull (getAssignedCuratorLogic player)) || ((call BIS_fnc_admin) > 0) }] call ace_interact_menu_fnc_createAction);
+    }, { !isNull (getAssignedCuratorLogic player) || call BIS_fnc_admin > 0 }] call ace_interact_menu_fnc_createAction);
     _actions pushBack [_action, [], _target];
 
     /* Suicide action */
     private _action = ([QGVAR(suicide), "Suicide", "a3\ui_f_curator\data\cfgmarkers\kia_ca.paa", {
         _target spawn {
             private _result = ["Are you sure?", "Confirm", true, true] call BIS_fnc_guiMessage;
-            if (_result) then {
+            if _result then {
                 player setDamage 1;
             };
         };

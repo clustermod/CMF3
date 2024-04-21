@@ -23,14 +23,14 @@
  */
 if (!hasInterface || !local player) exitWith {};
 
-#define mapAdjustment ((worldSize * 2) + 10000)
+#define mapAdjustment worldSize * 2 + 10000
 #define SCALE(var1) (sqrt ((_size select 0) * (_size select 1)) * 0.000089663) * var1
 
 params ["_position", "_size", "_topBar"];
 
-if (is3DEN) exitWith {
+if is3DEN exitWith {
     for "_y" from 1 to 9001 do {
-        _marker = QGVAR(markerID_) + str(_y);
+        _marker = QGVAR(markerID_) + str _y;
         if (markerShape _marker isEqualTo "") exitWith {};
     };
 
@@ -44,7 +44,7 @@ private "_marker";
 
 {
     for "_y" from 1 to 9001 do {
-        _marker = QGVAR(markerID_) + str(_y);
+        _marker = QGVAR(markerID_) + str _y;
         if (markerShape _marker isEqualTo "") exitWith {};
     };
     createMarkerLocal [_marker, [(_position select 0) + (_x select 0 select 0), (_position select 1) + (_x select 0 select 1)]];
@@ -67,21 +67,21 @@ private "_marker";
     [[0, 0], [(_size select 0) / 2, (_size select 1) / 2], ["ColorBlack", "Border"]]
 ];
 
-private _x1 = (_position select 0) - ((_size select 0) / 2);
-private _x2 = (_position select 0) + ((_size select 0) / 2);
-_x1 = _x1 + (100 - (_x1 % 100));
-_x2 = _x2 - (_x2 % 100);
+private _x1 = (_position select 0) - (_size select 0) / 2;
+private _x2 = (_position select 0) + (_size select 0) / 2;
+_x1 = _x1 + (100 - _x1 % 100);
+_x2 = _x2 - _x2 % 100;
 
-private _y1 = (_position select 1) - ((_size select 1) / 2);
-private _y2 = (_position select 1) + ((_size select 1) / 2);
-_y1 = _y1 + (100 - (_y1 % 100));
-_y2 = _y2 - (_y2 % 100);
+private _y1 = (_position select 1) - (_size select 1) / 2;
+private _y2 = (_position select 1) + (_size select 1) / 2;
+_y1 = _y1 + (100 - _y1 % 100);
+_y2 = _y2 - _y2 % 100;
 
 /* Draw Latitude Grid Numbers */
 for "_i" from _x1 to _x2 step 100 do {
     private _symbol = str (_i / 100);
 
-    for "-" from 0 to 2 - (count _symbol) do {
+    for "-" from 0 to 2 - count _symbol do {
         _symbol = "0" + _symbol;
     };
 
@@ -93,7 +93,7 @@ for "_i" from _x1 to _x2 step 100 do {
         _textWidth = _textWidth + ((_symbol select [_i, _i + 1] call FUNC(mapFont)) select 1) * _scale;
     };
 
-    if ((_i % 1000) isNotEqualTo 0) then {
+    if (_i % 1000 isNotEqualTo 0) then {
         _scale = SCALE(2.5);
         _symbol = _symbol select [count _symbol - 1, count _symbol];
         _textWidth = 0;
@@ -101,13 +101,13 @@ for "_i" from _x1 to _x2 step 100 do {
     };
 
     [
-        [_i - (_textWidth / 2), ((_position select 1) + (22 * _scale) + (_size select 1) / 2) + _yOffset],
+        [_i - _textWidth / 2, ((_position select 1) + 22 * _scale + (_size select 1) / 2) + _yOffset],
         [0, _scale],
         [_symbol, "ColorBlack", 1]
     ] call FUNC(writeText);
 
     [
-        [_i - (_textWidth / 2), ((_position select 1) - (22 * _scale) - (_size select 1) / 2) - _yOffset],
+        [_i - _textWidth / 2, ((_position select 1) - 22 * _scale - (_size select 1) / 2) - _yOffset],
         [0, _scale],
         [_symbol, "ColorBlack", 1]
     ] call FUNC(writeText);
@@ -117,7 +117,7 @@ for "_i" from _x1 to _x2 step 100 do {
 for "_i" from _y1 to _y2 step 100 do {
     private _symbol = str (_i / 100);
 
-    for "-" from 0 to 2 - (count _symbol) do {
+    for "-" from 0 to 2 - count _symbol do {
         _symbol = "0" + _symbol;
     };
 
@@ -127,20 +127,20 @@ for "_i" from _y1 to _y2 step 100 do {
         _textWidth = _textWidth + ((_symbol select [_i, _i + 1] call FUNC(mapFont)) select 1) * _scale;
     };
 
-    if ((_i % 1000) isNotEqualTo 0) then {
+    if (_i % 1000 isNotEqualTo 0) then {
         _scale = SCALE(2.5);
         _symbol = _symbol select [count _symbol - 1, count _symbol];
         _textWidth = 0;
     };
 
     [
-        [((_position select 0) + (22 * _scale) + (_size select 0) / 2) , _i],
+        [((_position select 0) + 22 * _scale + (_size select 0) / 2) , _i],
         [0, _scale],
         [_symbol, "ColorBlack", 1]
     ] call FUNC(writeText);
 
     [
-        [((_position select 0) - (22 * _scale) - (_size select 0) / 2) - _textWidth, _i],
+        [((_position select 0) - 22 * _scale - (_size select 0) / 2) - _textWidth, _i],
         [0, _scale],
         [_symbol, "ColorBlack", 1]
     ] call FUNC(writeText);
@@ -165,7 +165,7 @@ if (isNil "_topBar" || { count _topBar != 3 }) then {
     if (_forEachIndex isEqualTo 1) then {
         _scale = SCALE(9);
         _textWidth = ([_x, _scale] call FUNC(textWidth));
-        _textPos = _x1 + (((_x2 - _x1) / 2) - (_textWidth / 2));
+        _textPos = _x1 + ((_x2 - _x1) / 2 - _textWidth / 2);
     };
 
     if (_forEachIndex isEqualTo 2) then {

@@ -56,7 +56,7 @@ GVAR(hostage_followPlayerFNC) = {
             [_hostage getVariable QGVAR(hostage_handler)] call CBA_fnc_removePerFrameHandler;
         };
 
-        if ((vehicle _target) isEqualTo _target) then {
+        if (vehicle _target isEqualTo _target) then {
             if (vehicle _hostage != _hostage) then {
                 unassignVehicle _hostage;
             };
@@ -65,7 +65,7 @@ GVAR(hostage_followPlayerFNC) = {
             _hostage setUnitPos ([stance _target] call GVAR(hostage_translateStance));
         } else {
             if (vehicle _hostage != _hostage) exitWith {
-                _hostage moveInCargo [vehicle _target, (vehicle _target) getCargoIndex _hostage];
+                _hostage moveInCargo [vehicle _target, vehicle _target getCargoIndex _hostage];
             };
 
             private _getSeat = [vehicle _target] call ace_captives_fnc_findEmptyNonFFVCargoSeat;
@@ -80,7 +80,7 @@ GVAR(hostage_followPlayerFNC) = {
     _hostage setVariable [QGVAR(hostage_handler), _handle, true];
 };
 
-if (_captive) then {
+if _captive then {
     [_unit, true] call ACE_captives_fnc_setHandcuffed;
 };
 

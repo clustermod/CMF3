@@ -23,7 +23,7 @@ cmf_player addEventHandler ["Respawn", {
 
     /* Create function to check if user has any launchers in loadout */
     private _allowedLauncher = toString {
-        if !(SETTING(restrictLauncher)) exitWith { false };
+        if !SETTING(restrictLauncher) exitWith { false };
 
         private _ret = true;
         private _loadoutFile = cmf_player getVariable [QEGVAR(kosherArsenal,loadout), ""];
@@ -31,7 +31,7 @@ cmf_player addEventHandler ["Respawn", {
 
         if (cmf_player getVariable [QGVAR(restrictLauncher_unitDisable), false]) exitWith { false };
         if (missionNamespace getVariable [QGVAR(restrictLauncher_disable), false]) exitWith { false };
-        if ((currentWeapon cmf_player != secondaryWeapon cmf_player) || currentWeapon cmf_player isEqualTo "") exitWith { false };
+        if (currentWeapon cmf_player != secondaryWeapon cmf_player || currentWeapon cmf_player isEqualTo "") exitWith { false };
 
         private _whitelist = [_role, cmf_player, true] call compile(preprocessFileLineNumbers _loadoutFile);
 

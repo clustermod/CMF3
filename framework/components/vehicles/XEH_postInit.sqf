@@ -28,7 +28,7 @@ private _fnc_initEH = {
     // Disable engine when damage is 0.8
     _vehicle addEventHandler ["Engine", {
         params ["_vehicle", "_engineState"];
-        if (!_engineState || (_vehicle gethit "engine") < 0.8) exitWith {};
+        if (!_engineState || _vehicle gethit "engine" < 0.8) exitWith {};
         _vehicle engineOn false;
     }];
 
@@ -44,7 +44,7 @@ private _fnc_initEH = {
 call FUNC(gunEffectEH);
 
 /* Add Fuel canisters to vehicle cargo */
-if (isServer) then {
+if isServer then {
     ["AllVehicles", "init", {
         params ["_vehicle"];
 

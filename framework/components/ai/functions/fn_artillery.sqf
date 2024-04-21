@@ -25,7 +25,7 @@ private _fnc_register = {
     /* Check if the vehicle is a artillery vehicle */
     private _isArtillery = [GVAR(artilleryHash), typeof _vehicle] call CBA_fnc_hashGet;
     if (isNil "_isArtillery") then {
-        _isArtillery = (getNumber (configOf _vehicle >> "artilleryScanner")) > 0;
+        _isArtillery = getNumber (configOf _vehicle >> "artilleryScanner") > 0;
         GVAR(artilleryHash) = [GVAR(artilleryHash), typeof _vehicle, _isArtillery] call CBA_fnc_hashSet;
     };
     if (!_isArtillery) exitWith { };
@@ -40,14 +40,14 @@ private _fnc_register = {
 ["lambs_danger_OnInformationShared", {
     params ["", "_shareGroup", "_target"];
 
-    if (!SETTING(reinforceArtillery) || (getPos _target) isEqualTo []) exitWith { };
+    if (!SETTING(reinforceArtillery) || getPos _target isEqualTo []) exitWith { };
 
     /* Check if automatic artillery is allowed for side */
     private _allowedSides = call compile format ["[%1]", SETTING(reinforceArtillerySides)];
-    if !((side _shareGroup) in _allowedSides) exitWith {};
+    if !(side _shareGroup in _allowedSides) exitWith {};
 
     /* Don't do danger close */
-    if ( (leader _shareGroup) distance _target < 100 ) exitWith { };
+    if ( leader _shareGroup distance _target < 100 ) exitWith { };
 
     /* Timeout between fire missions */
     private _timeout = [GVAR(artilleryTimeOut), side _shareGroup, 0] call CBA_fnc_hashGet;
@@ -59,7 +59,7 @@ private _fnc_register = {
 
     GVAR(artilleryTargets) pushBack [side _shareGroup, _target, _mainSalvo];
 
-    [{ time < ([GVAR(artilleryTimeOut), side (_this select 0), 0] call CBA_fnc_hashGet) }, {
+    [{ time < [GVAR(artilleryTimeOut), side (_this select 0), 0] call CBA_fnc_hashGet }, {
         GVAR(artilleryTargets) deleteAt (GVAR(artilleryTargets) find (_this select 1));
     }, [_shareGroup, [side _shareGroup, _target, _mainSalvo]]] call CBA_fnc_waitUntilAndExecute;
 

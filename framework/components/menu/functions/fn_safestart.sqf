@@ -29,9 +29,9 @@ private _action = ([QGVAR(safestart_menu),
         }] remoteExec ["spawn", 0];
     }, 
     { 
-        is3DENPreview || (!(missionNamespace getVariable [QEGVAR(gameplay,safestart_Countdown), false]) && 
-        { !isNull (getAssignedCuratorLogic player) }) || ((call BIS_fnc_admin) > 0 && 
-        { !(missionNamespace getVariable [QEGVAR(gameplay,safestart_Countdown), false]) })
+        is3DENPreview || !(missionNamespace getVariable [QEGVAR(gameplay,safestart_Countdown), false] && 
+        { !isNull (getAssignedCuratorLogic player) }) || call BIS_fnc_admin > 0 && 
+        { !(missionNamespace getVariable [QEGVAR(gameplay,safestart_Countdown), false]) }
     }
 ] call ace_interact_menu_fnc_createAction);
 

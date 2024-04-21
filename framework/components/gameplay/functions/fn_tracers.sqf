@@ -26,19 +26,19 @@ FUNC(addTracers) = {
 
     private _tracerMags = [];
     {
-        if ((getNumber (configfile >> "CfgMagazines" >> _x >> "tracersEvery")) > 0) then {
+        if (getNumber (configfile >> "CfgMagazines" >> _x >> "tracersEvery") > 0) then {
             _tracerMags pushBack _x;
         };
     } forEach _supportedMags;
 
     if (count _tracerMags > 0) then {
         private _newMagazine = [];
-        if (SETTING(tracersRandomModel)) then {
-            _newMagazine pushBack (_tracerMags select (random (count _tracerMags)));
+        if SETTING(tracersRandomModel) then {
+            _newMagazine pushBack (_tracerMags select random (count _tracerMags));
         } else {
             {
                 private _curMag = getText (configfile >> "CfgMagazines" >> _x >> "model");
-                private _curprimaryMag = getText (configfile >> "CfgMagazines" >> ((primaryWeaponMagazine _unit) select 0) >> "model");
+                private _curprimaryMag = getText (configfile >> "CfgMagazines" >> primaryWeaponMagazine _unit select 0 >> "model");
                 if (isNil "_curprimaryMag") then {
                     _curprimaryMag = "";
                 };
@@ -48,7 +48,7 @@ FUNC(addTracers) = {
                 };
             } forEach _tracerMags;
 
-            if ((count _newMagazine) isEqualTo 0) then
+            if (count _newMagazine isEqualTo 0) then
             {
                 _newMagazine pushBack (_tracerMags select 0);
             };
@@ -78,7 +78,7 @@ FUNC(addTracers) = {
         _unit setVariable [QGVAR(tracers_initialized), true, true];
     };
 
-    if (SETTING(tracersFlashlight)) then {
+    if SETTING(tracersFlashlight) then {
         private _flashLights = [];
         private _compatMods = [_primaryWeapon] call CBA_fnc_compatibleItems;
         {
@@ -89,7 +89,7 @@ FUNC(addTracers) = {
             };
         } forEach _compatMods;
         if (count _flashLights > 0) then {
-            _unit addPrimaryWeaponItem (_flashLights select (random (count _flashLights)));
+            _unit addPrimaryWeaponItem (_flashLights select random (count _flashLights));
             _unit enableGunLights "ForceOn";
         };
 

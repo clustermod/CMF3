@@ -83,7 +83,7 @@ FUNC(setConfig_missionDataHandler) = {
             _hash pushBack ["M_TITLE", ctrlText (_display displayCtrl 100)];
 
             /* Mission Type */
-            _hash pushBack ["M_TYPE", [lbCurSel (_display displayCtrl 101), (_display displayCtrl 101) lbData (lbCurSel (_display displayCtrl 101))]];
+            _hash pushBack ["M_TYPE", [lbCurSel (_display displayCtrl 101), (_display displayCtrl 101) lbData lbCurSel (_display displayCtrl 101)]];
             _hash pushBack ["M_CTYPE", ctrlText (_display displayCtrl 102)];
 
             /* Equipment Map */
@@ -120,10 +120,10 @@ FUNC(setConfig_missionDataHandler) = {
                 "components\3den\data\icon_gametype_csar_ca.paa",
                 "components\3den\data\icon_gametype_qrf_ca.paa"
             ];
-            private _picture = if ((lbCurSel (_display displayCtrl 101)) > count _pictures - 1) then {
+            private _picture = if (lbCurSel (_display displayCtrl 101) > count _pictures - 1) then {
                 "components\3den\data\icon_gametype_empty_ca.paa"
             } else {
-                _pictures select (lbCurSel (_display displayCtrl 101))
+                _pictures select lbCurSel (_display displayCtrl 101)
             };
             private _gameType = [([_hash, "M_TYPE"] call CBA_fnc_hashGet) select 1, [_hash, "M_CTYPE"] call CBA_fnc_hashGet] select ((([_hash, "M_TYPE"] call CBA_fnc_hashGet) select 1) isEqualTo "custom");
             private _author = profileName;

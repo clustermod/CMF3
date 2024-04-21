@@ -33,8 +33,8 @@ EFUNC(inline_aar,endMission) = {
             private _missionData = missionNameSpace getVariable [QEGVAR(common,missionData), []];
             private _hash = [_missionData] call CBA_fnc_hashCreate;
             private _operationName = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(common,hexToASCII)] call CBA_fnc_hashGet;
-            private _op = format ["<t color='#%3'>%1 was an operational %2</t>", _operationName, (["Success", "Failure"] select !(_opSuccess)), (["fcba03", "fc3d03"] select !(_opSuccess))];
-            private _tac = format ["<t>%1 was a tactical %2</t>", _operationName, (["Success", "Failure"] select !(_tacSuccess))];
+            private _op = format ["<t color='#%3'>%1 was an operational %2</t>", _operationName, (["Success", "Failure"] select !_opSuccess), (["fcba03", "fc3d03"] select !_opSuccess)];
+            private _tac = format ["<t>%1 was a tactical %2</t>", _operationName, (["Success", "Failure"] select !_tacSuccess)];
             private _message = _message splitString toString [13,10] joinString "<br/>";
             if (_message != "") then { _message = format ["<br/> <t>%1</t>", _message]; };
             private _objectives = _objectivesState splitString toString [13,10] joinString "<br/>";
@@ -112,7 +112,7 @@ EFUNC(inline_aar,endMission) = {
             /* Open dialog for reading */
             waitUntil { count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) != 0 };
 
-            private _display = (findDisplay 60000) createDisplay QGVAR(aarReadingDisplay);
+            private _display = findDisplay 60000 createDisplay QGVAR(aarReadingDisplay);
             uiNamespace setVariable [QGVAR(aarIndex), 0];
 
             /* Set first AAR entry */
@@ -126,9 +126,9 @@ EFUNC(inline_aar,endMission) = {
             _display spawn {
                 private _curValue = (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]));
                 while { !isNull _this } do {
-                    waitUntil { (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []])) != _curValue };
+                    waitUntil { count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) != _curValue };
                     private _curValue = (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]));
-                    ((ctrlParent _ctrl) displayCtrl 300) ctrlSetText format ["AAR Feedback (%1/%2)", (uiNamespace getVariable [QGVAR(aarIndex), 0]) + 1, _curValue];
+                    (ctrlParent _ctrl displayCtrl 300) ctrlSetText format ["AAR Feedback (%1/%2)", (uiNamespace getVariable [QGVAR(aarIndex), 0]) + 1, _curValue];
                 };
             };
 
@@ -137,11 +137,11 @@ EFUNC(inline_aar,endMission) = {
                 params ["_ctrl"];
 
                 private _index = uiNamespace getVariable [QGVAR(aarIndex), 0];
-                private _currentAAR = ( missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) select (0 max (_index - 1));
-                ((ctrlParent _ctrl) displayCtrl 100) ctrlSetText (_currentAAR select 0);
-                ((ctrlParent _ctrl) displayCtrl 101) ctrlSetText (_currentAAR select 1);
-                ((ctrlParent _ctrl) displayCtrl 102) ctrlSetText (_currentAAR select 2);
-                ((ctrlParent _ctrl) displayCtrl 300) ctrlSetText format ["AAR Feedback (%1/%2)", (0 max (_index + 1)), (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]))];
+                private _currentAAR = ( missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) select 0 max (_index - 1);
+                (ctrlParent _ctrl displayCtrl 100) ctrlSetText (_currentAAR select 0);
+                (ctrlParent _ctrl displayCtrl 101) ctrlSetText (_currentAAR select 1);
+                (ctrlParent _ctrl displayCtrl 102) ctrlSetText (_currentAAR select 2);
+                (ctrlParent _ctrl displayCtrl 300) ctrlSetText format ["AAR Feedback (%1/%2)", (0 max (_index + 1)), (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]))];
 
                 uiNamespace setVariable [QGVAR(aarIndex), (0 max (_index - 1))];
             }];
@@ -151,16 +151,16 @@ EFUNC(inline_aar,endMission) = {
                 params ["_ctrl"];
 
                 private _index = uiNamespace getVariable [QGVAR(aarIndex), 0];
-                private _currentAAR = ( missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) select ((count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []])) min (_index + 1));
-                ((ctrlParent _ctrl) displayCtrl 100) ctrlSetText (_currentAAR select 0);
-                ((ctrlParent _ctrl) displayCtrl 101) ctrlSetText (_currentAAR select 1);
-                ((ctrlParent _ctrl) displayCtrl 102) ctrlSetText (_currentAAR select 2);
-                ((ctrlParent _ctrl) displayCtrl 300) ctrlSetText format ["AAR Feedback (%1/%2)",
-                    ((count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []])) min (_index + 2)),
+                private _currentAAR = ( missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) select count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) min (_index + 1);
+                (ctrlParent _ctrl displayCtrl 100) ctrlSetText (_currentAAR select 0);
+                (ctrlParent _ctrl displayCtrl 101) ctrlSetText (_currentAAR select 1);
+                (ctrlParent _ctrl displayCtrl 102) ctrlSetText (_currentAAR select 2);
+                (ctrlParent _ctrl displayCtrl 300) ctrlSetText format ["AAR Feedback (%1/%2)",
+                    (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) min (_index + 2)),
                     (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]))
                 ];
 
-                uiNamespace setVariable [QGVAR(aarIndex), ((count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []])) min (_index + 1))];
+                uiNamespace setVariable [QGVAR(aarIndex), (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) min (_index + 1))];
             }];
 
         }] remoteExec ["spawn", 0, true];
@@ -179,7 +179,7 @@ EFUNC(inline_aar,endMission) = {
 private _EHIndex = addMissionEventHandler ["EntityCreated", {
     params ["_entity"];
 
-    if ((typeof _entity) isEqualTo "ModuleEndMission_F" && local _entity) then {
+    if (typeof _entity isEqualTo "ModuleEndMission_F" && local _entity) then {
         deleteVehicle _entity;
         [] spawn EFUNC(inline_aar,endMission);
     };

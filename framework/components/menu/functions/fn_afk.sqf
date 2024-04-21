@@ -19,9 +19,9 @@ private _action = ([QGVAR(safestart_menu),
     "Toggle AFK Mode", 
     "", {
         if (!GVAR(isAFK)) then {
-            private _attachUnitIndex = (units group cmf_player) findIf { _x isNotEqualTo cmf_player && { (cmf_player distance _x) < 10 } };
+            private _attachUnitIndex = units group cmf_player findIf { _x isNotEqualTo cmf_player && { cmf_player distance _x < 10 } };
             if (_attachUnitIndex isEqualTo -1) exitWith { hintSilent "You must be within 5m of a group member to go AFK" };
-            private _attachUnit = (units group cmf_player) select _attachUnitIndex;
+            private _attachUnit = units group cmf_player select _attachUnitIndex;
             private _relPos = _attachUnit worldToModelVisual getPos cmf_player;
 
             GVAR(afkData) = [_attachUnit, _relPos];

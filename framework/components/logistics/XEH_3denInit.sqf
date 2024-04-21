@@ -16,7 +16,7 @@ private _crateLoadoutAction = [
             params ["_values", "_crates"];
 
             private _path = format["rsc\loadouts\%1.sqf", (_values select 0)];
-            if !(FILE_EXISTS(_path)) exitWith { ERROR_MSG_1("Unable to find preset: %1", (_values select 0)); };
+            if !fileExists _path exitWith { ERROR_MSG_1("Unable to find preset: %1", (_values select 0)); };
 
             private _presets = [call compile preprocessFileLineNumbers _path] call CBA_fnc_hashCreate;
             private _preset = [_presets, (_values select 1)] call CBA_fnc_hashGet;
@@ -32,7 +32,7 @@ private _crateLoadoutAction = [
         ["Set Crate Loadout", [
             ["EDIT", ["Logistics File", "Logistics file to use"], [""]],
             ["EDIT", ["Crate type", "Type of create to make e.g. Fireteam, Medical etc. (case sensitive)"], [""]]
-        ], _setLoadout, {}, (get3DENSelected "object") select { !(_x isKindOf "Man") }] call zen_dialog_fnc_create;
+        ], _setLoadout, {}, get3DENSelected "object" select { !(_x isKindOf "Man") }] call zen_dialog_fnc_create;
     }
 ];
 

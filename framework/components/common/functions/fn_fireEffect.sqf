@@ -44,20 +44,20 @@ private _density = (_radius * 0.7) * 30;
 
 /* Fire Particle effect creation */
 _fireSource setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal", 16, 10, 32, 1], "", "Billboard", 1, 1.5, [0, 0, 0], [0, 1, 0], 0, 0.045, 0.04, 0.05, [1.8, 0.12], [[1,1,1,-1]], [0.5, 1], 0, 0, "", "", _fireSource];
-_fireSource setDropInterval (0.15 - 0.01 * _radius);
+_fireSource setDropInterval 0.15 - 0.01 * _radius;
 _fireSource setParticleRandom [0.4, [_radius - 0.1, _radius - 0.1, 0.3], [0.1, 0.5, 0.1], 0, 0.1, [0.1,0.1,0.1,0], 0, 0, 0.1];
 
 /* Smoke Particle effect creation */
 _smokeSource setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal_02", 8, 0, 40, 1], "", "Billboard", 1, 22, [0,0,0], [0,2.5,0], 1, 0.05, 0.04, 0.05, [2, 20], [[0.35,0.35,0.35,0.6],[0.35,0.35,0.35,0.75],[0.35,0.35,0.35,0.45],[0.42,0.42,0.42,0.28],[0.42,0.42,0.42,0.16],[0.42,0.42,0.42,0.09],
     [0.42,0.42,0.42,0.06],[0.5,0.5,0.5,0.02],[0.5,0.5,0.5,0]], [1,0.55,0.35], 0.3, 0.2, "", "", _smokeSource];
-_smokeSource setDropInterval (0.65 - 0.05 * _radius);
+_smokeSource setDropInterval 0.65 - 0.05 * _radius;
 _smokeSource setParticleRandom [8, [5,5,0.15], [0.25,0.5,1.25], 0.5, 0, [0,0,0,0.06], 0, 0, 0.5];
 
 /* Light creation */
-_lightSize = (1 + (_radius * 0.7)) / 2;
-_light = "#lightpoint" createVehicleLocal (getPos _fireSource);
+_lightSize = (1 + _radius * 0.7) / 2;
+_light = "#lightpoint" createVehicleLocal getPos _fireSource;
 if (_source isEqualType objNull) then {
-    _light setPosASL [(getPosASL _source) select 0, (getPosASL _source) select 1, ((getPosASL _source) select 2) + 0.5];
+    _light setPosASL [getPosASL _source select 0, getPosASL _source select 1, (getPosASL _source select 2) + 0.5];
     _light attachTo [_source];
 } else {
     _light setPosASL [_source select 0, _source select 1, (_source select 2) + 0.5];
@@ -65,7 +65,7 @@ if (_source isEqualType objNull) then {
 _light setLightBrightness 1.0;
 _light setLightColor [1, 0.65, 0.4];
 _light setLightAmbient [0.15, 0.05, 0];
-_light setLightIntensity (50 + 400 * _lightSize);
+_light setLightIntensity 50 + 400 * _lightSize;
 _light setLightAttenuation [0, 0, 0, 1];
 _light setLightDayLight false;
 

@@ -6,12 +6,12 @@ GVAR(rallypoints) = [];
     { !isNull (findDisplay 49) }, 
     {
         disableSerialization;
-        private _ctrl = (findDisplay 49) ctrlCreate ["RscText", -1];
+        private _ctrl = findDisplay 49 ctrlCreate ["RscText", -1];
         _ctrl ctrlSetTextColor [1, 0.3, 0.3, 1];
-        _ctrl ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
+        _ctrl ctrlSetFontHeight (((safezoneW / safezoneH min 1.2) / 1.2) / 25) * 1;
 
         _ctrl ctrlSetPosition [
-            ( safeZoneX + ( safeZoneWAbs / 2 )) - ( 0.5 / 2 ),
+            ( safeZoneX +  safeZoneWAbs / 2 ) -  0.5 / 2 ,
             (( safeZoneY + safeZoneH ) - 0.1) - 0.1,
             0.5,
             0.1
@@ -55,7 +55,7 @@ cmf_player addEventHandler ["Take", {
 
 /* Bring disconnected player back */
 private _disconUnits = missionNameSpace getVariable [QGVAR(disconUnits), createHashMap];
-private _disconUnit = _disconUnits get (getPlayerUID cmf_player);
+private _disconUnit = _disconUnits get getPlayerUID cmf_player;
 
 if (!isNil "_disconUnit" && { !ESETTING(gameplay,safestart) || missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] }) then {
     GVAR(player_rejip) = true;
@@ -73,9 +73,9 @@ if (!isNil "_disconUnit" && { !ESETTING(gameplay,safestart) || missionNamespace 
 
             /* Attempt to set the same stance as the squad leader */
             switch (unitPos leader (_this select 1)) do {
-                case ("UP"): { cmf_player playAction "PlayerStand" };
-                case ("MIDDLE"): { cmf_player playAction "PlayerCrouch" };
-                case ("DOWN"): { cmf_player playAction "PlayerProne" };
+                case "UP": { cmf_player playAction "PlayerStand" };
+                case "MIDDLE": { cmf_player playAction "PlayerCrouch" };
+                case "DOWN": { cmf_player playAction "PlayerProne" };
             };
 
             /* Set respawns */
@@ -88,7 +88,7 @@ if (!isNil "_disconUnit" && { !ESETTING(gameplay,safestart) || missionNamespace 
                 if (vehicle leader (_this select 1) != leader (_this select 1)) then {
                     cmf_player moveInCargo vehicle leader (_this select 1);
 
-                    if (!isNull objectParent cmf_player && { (objectParent cmf_player) isKindOf "Helicopter" }) then {
+                    if (!isNull objectParent cmf_player && { objectParent cmf_player isKindOf "Helicopter" }) then {
                         private _groundPos = getposATL cmf_player;
                         _groundPos set [2, 0];
                         cmf_player setPosATL _groundPos;

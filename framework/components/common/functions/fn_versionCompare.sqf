@@ -24,7 +24,7 @@ private _ver2Arr = (_ver2 splitString ".") apply { call compile _x };
 private _ret = 0;
 
 {
-    if ((count _ver1Arr) isEqualTo  _forEachIndex) exitWith { };
+    if (count _ver1Arr isEqualTo  _forEachIndex) exitWith { };
 
     private _seg1 = _ver1Arr select _forEachIndex;
     private _seg2 = _x;

@@ -20,7 +20,7 @@ params ["_veh"];
 if (!isServer) exitWith { };
 
 while { alive _veh } do {
-    waitUntil { (_veh getHitPointDamage "HitFuel") >= 0.9 };
+    waitUntil { _veh getHitPointDamage "HitFuel" >= 0.9 };
 
     private _fuelPos = getPosATL _veh;
     _fuelPos set [2, 0];
@@ -60,7 +60,7 @@ while { alive _veh } do {
             if (random 100 < 10) exitWith {
                 terminate _expHandler;
                 private _boundingRect = boundingBoxReal _fuel;
-                private _radius = ((((_boundingRect select 1) select 1) - ((_boundingRect select 0) select 0)) / 2) * (getObjectScale _fuel);
+                private _radius = ((((_boundingRect select 1) select 1) - ((_boundingRect select 0) select 0)) / 2) * getObjectScale _fuel;
 
                 private _burnEnd = time + 300;
 
@@ -71,12 +71,12 @@ while { alive _veh } do {
                     if !(_key in _aceKeys) exitWith {};
                 };
 
-                ["ace_fire_addFireSource", [_fuel, _radius, 10 * (getObjectScale _fuel), _key, { (_this select 0) > time }, [_burnEnd]]] call CBA_fnc_serverEvent;
+                ["ace_fire_addFireSource", [_fuel, _radius, 10 * getObjectScale _fuel, _key, { _this select 0 > time }, [_burnEnd]]] call CBA_fnc_serverEvent;
 
                 /* Light crew on fire */
                 {
                     private _burning = [_x] call ace_fire_fnc_isBurning;
-                    if !(_burning) then {
+                    if !_burning then {
                         [QGVAR(burn), [_x, 4]] call CBA_fnc_globalEvent;
                     };
 

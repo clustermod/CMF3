@@ -5,7 +5,7 @@ GVAR(phoneticAlphabet) = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot
     "Kilo", "Lima", "Mike", "November", "Oscar", "Papa", "Quebec", "Romeo", "Sierra", "Tango", "Uniform", "Victor", "Whisky", "Xray", "Yankee", "Zulu"];
 
 /* Add groupVehicles */
-if (isServer) then {
+if isServer then {
     /* Create groups hash for dynamic group system */
     GVAR(groups) = [[
         [west, [] call CBA_fnc_hashCreate],
@@ -53,7 +53,7 @@ if (isServer) then {
 
         [_group, _vehicle] call FUNC(groupAssignVehicle);
 
-        if (_children) then {
+        if _children then {
             {
                 [_x, _vehicle] call FUNC(groupAssignVehicle);
             } forEach (_groupData select 3);

@@ -40,7 +40,7 @@ if (!isNil "_names") then {
     [[_groupID, _colors select 0, _colors select 1], ace_map_gestures_fnc_addGroupColorMapping] remoteExec ["call", 0, true];
 
     /* Handle 3DEN */
-    if (is3DEN) then {
+    if is3DEN then {
         _group set3DENAttribute ["groupID", _names select 2];
         {
             private _roleName = _x get3DENAttribute "description";

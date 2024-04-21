@@ -16,7 +16,7 @@
  */
 
 /* Own join message */
-if (hasInterface) then {
+if hasInterface then {
     [{
         !isNull player
     }, {
@@ -24,20 +24,20 @@ if (hasInterface) then {
 
         private _roleDescription = "Unknown";
         if (roleDescription player != "") then {
-            _roleDescription = ((roleDescription player) splitString "@") select 0;
+            _roleDescription = (roleDescription player splitString "@") select 0;
         };
 
         private _disconUnits = missionNameSpace getVariable [QEGVAR(respawn,disconUnits), createHashMap];
-        private _disconUnit = _disconUnits get (getPlayerUID player);
+        private _disconUnit = _disconUnits get getPlayerUID player;
 
         if (!isNil "_disconUnit") then {
             if ( !ESETTING(gameplay,safestart) || missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] ) then {
                 [format ["%1 Re-jipped", name player]] remoteExec ["systemChat", 0, false];
             } else {
-                [format ["%1 Joined %2 in ""%3"" as a ""%4""", name player, _sideLUT select ((side player) call BIS_fnc_sideID), groupID group player, _roleDescription]] remoteExec ["systemChat", 0, false];
+                [format ["%1 Joined %2 in ""%3"" as a ""%4""", name player, _sideLUT select (side player call BIS_fnc_sideID), groupID group player, _roleDescription]] remoteExec ["systemChat", 0, false];
             };
         } else {
-            [format ["%1 Joined %2 in ""%3"" as a ""%4""", name player, _sideLUT select ((side player) call BIS_fnc_sideID), groupID group player, _roleDescription]] remoteExec ["systemChat", 0, false];
+            [format ["%1 Joined %2 in ""%3"" as a ""%4""", name player, _sideLUT select (side player call BIS_fnc_sideID), groupID group player, _roleDescription]] remoteExec ["systemChat", 0, false];
         };
     }] call CBA_fnc_waitUntilAndExecute;
 };
@@ -51,7 +51,7 @@ addMissionEventHandler ["HandleChatMessage", {
     if (" CONNECTED" in toUpper _text) then {
         private _name = (_text splitString " ");
         _name deleteAt 0;
-        _name deleteAt (count _name - 1);
+        _name deleteAt count _name - 1;
         _name = _name joinString " ";
         private _message = format ["%1 in lobby selection", _name];
         _return = ["", _message];

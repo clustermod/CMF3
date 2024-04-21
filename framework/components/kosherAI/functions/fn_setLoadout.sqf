@@ -23,11 +23,11 @@ params["_unit", "_role", "_whitelist"];
 [_unit] call EFUNC(common,stripUnit);
 
 /* Randomize the loadout they get based on the available items */
-_unit addBackpack (selectRandom (_whitelist select 0));
-_unit addVest (selectRandom (_whitelist select 1));
-_unit forceAddUniform (selectRandom (_whitelist select 2));
-_unit addGoggles (selectRandom (_whitelist select 3));
-_unit addHeadgear (selectRandom (_whitelist select 4));
+_unit addBackpack selectRandom (_whitelist select 0);
+_unit addVest selectRandom (_whitelist select 1);
+_unit forceAddUniform selectRandom (_whitelist select 2);
+_unit addGoggles selectRandom (_whitelist select 3);
+_unit addHeadgear selectRandom (_whitelist select 4);
 
 /* Add random weapons for each slot */
 private _primaries = (_whitelist select 7) select { getNumber (configFile >> "CfgWeapons" >> _x >> "type") isEqualTo 1 };
@@ -49,8 +49,8 @@ if (!isNil "_primary") then {
         WARNING("Failed to add primary weapon on unit");
     };
 
-    private _primaryMagazines = _magazines select { _x in (compatibleMagazines _primary) };
-    for "_i" from 2 to round 2 + (random 4) do {
+    private _primaryMagazines = _magazines select { _x in compatibleMagazines _primary };
+    for "_i" from 2 to round 2 + random 4 do {
         _unit addMagazineGlobal selectRandom _primaryMagazines;
     };
 };
@@ -63,7 +63,7 @@ if (!isNil "_secondary") then {
         WARNING("Failed to add secondary weapon on unit");
     };
 
-    private _secondaryMagazines = _magazines select { _x in (compatibleMagazines _secondary) };
+    private _secondaryMagazines = _magazines select { _x in compatibleMagazines _secondary };
     for "_i" from 0 to round (random 4) do {
         _unit addMagazineGlobal selectRandom _secondaryMagazines;
     };
@@ -77,7 +77,7 @@ if (!isNil "_handgun") then {
         WARNING("Failed to add handgun weapon on unit");
     };
 
-    private _handgunMagazines = _magazines select { _x in (compatibleMagazines _handgun) };
+    private _handgunMagazines = _magazines select { _x in compatibleMagazines _handgun };
     for "_i" from 1 to 1 + round (random 1) do {
         _unit addMagazineGlobal selectRandom _handgunMagazines;
     };
@@ -85,7 +85,7 @@ if (!isNil "_handgun") then {
 
 /* Add random weapon attachments if they are available */
 for "_i" from 0 to round random 2 do {
-    _unit addPrimaryWeaponItem (selectRandom (_whitelist select 5));
+    _unit addPrimaryWeaponItem selectRandom (_whitelist select 5);
 };
 
 /* Add grenades */
@@ -94,7 +94,7 @@ for "_i" from 0 to round (random 3) do {
 };
 
 /* Add Explosives */
-private _compatibleMagazines = (compatibleMagazines primaryWeapon _unit) + (compatibleMagazines handgunWeapon _unit) + (compatibleMagazines secondaryWeapon _unit);
+private _compatibleMagazines = compatibleMagazines primaryWeapon _unit +(compatibleMagazines handgunWeapon _unit + (compatibleMagazines secondaryWeapon _unit);
 private _explosives = _magazines select { !(_x in _compatibleMagazines) };
 for "_i" from 0 to round (random 2) do {
     _unit addMagazineGlobal selectRandom _explosives;

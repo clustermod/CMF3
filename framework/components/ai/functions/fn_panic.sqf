@@ -35,7 +35,7 @@
     /* 50% Chance of group retreating when paniced */
     if (SETTING(panicRetreatChance) > random 1) then {
         LOG_1("%1 is Retreating", _unit);
-        private _attackDir = _unit getDir (getAttackTarget _unit);
+        private _attackDir = _unit getDir getAttackTarget _unit;
         private _retreatDir = (_attackDir + 180) % 360;
         private _retreatPos = _unit getPos [_retreatDir, random 500];
 

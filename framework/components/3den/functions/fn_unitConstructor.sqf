@@ -39,8 +39,8 @@ private _fnc_customUnitControl = {
 };
 
 private _unitArr = [];
-switch (_unitID) do {
-    case ("COMPANY"): {
+switch _unitID do {
+    case "COMPANY": {
         _unitArr = [
         [ // COY HQ
             3, "INF", 0, [
@@ -211,7 +211,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("PLATOON"): {
+    case "PLATOON": {
         _unitArr = [
         [ // PLT HQ
             2, "INF", 0, [
@@ -295,7 +295,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("SQUAD"): {
+    case "SQUAD": {
         _unitArr = [
         [ // Squadleader
             1, "INF", 0, [
@@ -324,7 +324,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("FIRETEAM"): {
+    case "FIRETEAM": {
         _unitArr = [
         [
             0, "INF", -1, [
@@ -338,11 +338,11 @@ switch (_unitID) do {
         ];
     };
 
-    case ("UNIT"): {
+    case "UNIT": {
         GVAR(unitConstructor_customMenuReturn) = [];
         [] spawn _fnc_customUnitControl;
 
-        waitUntil {(count GVAR(unitConstructor_customMenuReturn)) > 0};
+        waitUntil {count GVAR(unitConstructor_customMenuReturn) > 0};
         GVAR(unitConstructor_customMenuReturn) params ["_role", "_prettyRole", "_rank", "_level", "_type"];
 
         _unitArr = [[
@@ -354,7 +354,7 @@ switch (_unitID) do {
         GVAR(unitConstructor_customMenuReturn) = [];
     };
 
-    case ("ZEUS"): {
+    case "ZEUS": {
         _unitArr = [
         [
             0, "ZEUS", 0, [
@@ -364,7 +364,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("PHANTOM"): {
+    case "PHANTOM": {
         _unitArr = [
         [
             3, "TRANS", 0, [
@@ -375,7 +375,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("REAPER"): {
+    case "REAPER": {
         _unitArr = [
         [
             3, "LCAS", 0, [
@@ -386,7 +386,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("UGLY"): {
+    case "UGLY": {
         _unitArr = [
         [
             3, "HCAS", 0, [
@@ -397,7 +397,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("HAWG"): {
+    case "HAWG": {
         _unitArr = [
         [
             3, "FWCAS", 0, [
@@ -407,7 +407,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("PAVEMENT"): {
+    case "PAVEMENT": {
         _unitArr = [
         [
             3, "BOMBER", 0, [
@@ -417,7 +417,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("SIERRA"): {
+    case "SIERRA": {
         _unitArr = [
         [
             2, "APC", 0, [
@@ -429,7 +429,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("MIKE"): {
+    case "MIKE": {
         _unitArr = [
         [
             2, "IFV", 0, [
@@ -441,7 +441,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("TANGO"): {
+    case "TANGO": {
         _unitArr = [
         [
             2, "MBT", 0, [
@@ -453,7 +453,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("ANVIL"): {
+    case "ANVIL": {
         _unitArr = [
         [
             2, "SPAAG", 0, [
@@ -465,7 +465,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("MORTARS"): {
+    case "MORTARS": {
         _unitArr = [
         [
             1, "MORTAR", 0, [
@@ -476,7 +476,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("ROMEO"): {
+    case "ROMEO": {
         _unitArr = [
         [
             1, "RECON", 0, [
@@ -487,7 +487,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("ENGI"): {
+    case "ENGI": {
         _unitArr = [
         [
             1, "ENGI", 0, [
@@ -498,7 +498,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("LOGI"): {
+    case "LOGI": {
         _unitArr = [
             [
                 1, "LOGI", 0, [
@@ -509,7 +509,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("MMG"): {
+    case "MMG": {
         _unitArr = [
             [
                 1, "MMG", 0, [
@@ -521,7 +521,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("HMG"): {
+    case "HMG": {
         _unitArr = [
             [
                 1, "HMG", 0, [
@@ -533,7 +533,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("MAT"): {
+    case "MAT": {
         _unitArr = [
             [
                 1, "MAT", 0, [
@@ -545,7 +545,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("HAT"): {
+    case "HAT": {
         _unitArr = [
             [
                 1, "HAT", 0, [
@@ -557,7 +557,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("DHAT"): {
+    case "DHAT": {
         _unitArr = [
             [
                 1, "DHAT", 0, [
@@ -569,7 +569,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("RGR_RFL_SQUAD"): {
+    case "RGR_RFL_SQUAD": {
         _unitArr = [
             [ // Squadleader
                 1, "RECON", 0, [
@@ -598,7 +598,7 @@ switch (_unitID) do {
         ];
     };
 
-    case ("RGR_MG_SQUAD"): {
+    case "RGR_MG_SQUAD": {
         _unitArr = [
             [ // Squadleader
                 1, "RECON", 0, [

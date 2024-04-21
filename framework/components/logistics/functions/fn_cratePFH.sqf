@@ -31,7 +31,7 @@
 
     /* Exit if player is looking at same object */
     if (_newObject isEqualTo (_oldObject select 0)) exitWith {
-        if ((_oldObject select 0) distance cmf_player > 5 || (count crew (_oldObject select 0)) > 0) then {
+        if ((_oldObject select 0) distance cmf_player > 5 || count crew (_oldObject select 0) > 0) then {
             terminate (_oldObject select 1);
             ([QGVAR(name)] call BIS_fnc_rscLayer) cutText ["","plain"];
             GVAR(observedCrate) = [objNull, scriptNull];
@@ -50,7 +50,7 @@
         _name = _newObject getVariable [QGVAR(objectName), nil];
     };
 
-    if (!isNil "_name" && { (count crew (_oldObject select 0)) isEqualTo 0 }) then {
+    if (!isNil "_name" && { count crew (_oldObject select 0) isEqualTo 0 }) then {
         private _handle = [format ["<t font='PuristaMedium' size='0.6'>%1</t>", _name], -1, -1, 9999, 0.5, 0, ([QGVAR(name)] call BIS_fnc_rscLayer)] spawn BIS_fnc_dynamicText;
         GVAR(observedCrate) = [_newObject, _handle];
     } else {

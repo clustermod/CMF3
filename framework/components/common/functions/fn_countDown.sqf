@@ -22,7 +22,7 @@ private _fnc_CD_CountDown = {
     params["_time", "_text", "_i"];
 
     for [{ _i=_time }, { _i >= 0 }, { _i = _i - 1 }] do {
-        hintSilent (format ["%1 %2", _text, ([((_i) / 60) + 0.01, "HH:MM"] call BIS_fnc_timetostring)]);
+        hintSilent (format ["%1 %2", _text, ([_i / 60 + 0.01, "HH:MM"] call BIS_fnc_timetostring)]);
         sleep 1;
     };
     hintSilent "";
@@ -30,7 +30,7 @@ private _fnc_CD_CountDown = {
 
 
 /* If true will block further execution until timer is done */
-if (_blocking) then {
+if _blocking then {
     [_time, _text] call _fnc_CD_CountDown;
 } else {
     [_time, _text] spawn _fnc_CD_CountDown;

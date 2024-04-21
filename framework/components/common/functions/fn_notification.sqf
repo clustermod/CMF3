@@ -79,7 +79,7 @@ _textCtrl ctrlCommit 0.4;
     } forEach _this;
 }, [_textCtrl, _borderCtrl], _speed + 0.3] call CBA_fnc_waitAndExecute;
 
-GVAR(notifications) = ([[_borderCtrl, _textCtrl]] + GVAR(notifications)) select {!isNull (_x select 0) && { !isNull (_x select 1) }};
+GVAR(notifications) = [[_borderCtrl, _textCtrl]] + GVAR(notifications) select {!isNull (_x select 0) && { !isNull (_x select 1) }};
 
 private _offsetY = 0;
 if (count GVAR(notifications) > 0) then {
@@ -92,7 +92,7 @@ if (count GVAR(notifications) > 0) then {
             _ctrlText ctrlSetPosition [(_posX + NOTIFICATION_BORDER_W), (_posY + _offsetY)];
             _ctrlBorder ctrlCommit 0.25;
             _ctrlText ctrlCommit 0.25;
-            _offsetY = _offsetY + NOTIFICATION_M + ((ctrlPosition _ctrlText) select 3);
+            _offsetY = _offsetY + NOTIFICATION_M + (ctrlPosition _ctrlText select 3);
 
             if (_activeNotifications > 3) then {
                 _ctrlText ctrlSetFade 1;

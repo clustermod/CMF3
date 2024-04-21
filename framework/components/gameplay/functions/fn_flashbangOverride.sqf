@@ -119,8 +119,8 @@ GVAR(flashbang_explosion) = {
 private _fired_event = {
     if (!SETTING(flashbang)) exitWith {};
 
-    private _grenadeConfig = (createHashMapFromArray GVAR(flashbang_grenades)) getOrDefault [(_this select 5), [-1]];
-    if ((_grenadeConfig select 0) > -1) then {
+    private _grenadeConfig = createHashMapFromArray GVAR(flashbang_grenades) getOrDefault [(_this select 5), [-1]];
+    if (_grenadeConfig select 0 > -1) then {
         [(_this select 6), _grenadeConfig] spawn {
             params["_grenade", "_grenadeConfig", ""];
             _grenadeConfig params["_grenadeFuze", ["_bangs", 1], ["_bangDelay", {random [0.1, 0.3, 0.8]}]];
@@ -184,7 +184,7 @@ private _fired_event = {
                         }
                     } forEach _units;
                     sleep _bangDelay;
-                    private _newPos = (getPos _grenadeObject) getPos [(random 1), (random 360)];
+                    private _newPos = getPos _grenadeObject getPos [(random 1), (random 360)];
                     if ([_grenadeObject, "VIEW"] checkVisibility [[(_newPos select 0), (_newPos select 1), _height + 0.5], [(_posASL select 0), (_posASL select 1), _height + 0.5]] > 0.6) then {
                         _grenadeObject setPosASL [(_newPos select 0), (_newPos select 1), _height + 0.03];
                         _grenadeObject setVectorUp [(random(selectRandom[1,-1])),(random(selectRandom[1,-1])),0];
