@@ -5,6 +5,9 @@
     #define REQUIRED_MODULES []
 #endif
 
+/* Disable sqf-vm linting errors for include lookups */
+#pragma sls disable file SQFVM-70014
+#pragma sls disable file SQFVM-10004
 
 #include "script_mod.hpp"
 

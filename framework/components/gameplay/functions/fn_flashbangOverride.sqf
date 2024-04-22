@@ -26,13 +26,13 @@ GVAR(flashbang_extraEffects) = {
         private _sparkEmitter = "#particlesource" createVehicleLocal [((_this select 0) select 0), ((_this select 0) select 1), ((_this select 0) select 2) + 0.1];
 
         [_SmokeEmitter, _sparkEmitter] spawn {
-            params["_SmokeEmitter", "_sparkEmitter"];
+            params["_smokeEmitter", "_sparkEmitter"];
             _sparkEmitter setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,0,12,0],"","Billboard",1,20,[0,0,1.2],[0,0,0],0,10.071,7.9,0,[0.005,0.005,0.005,0.005,0.005,0.005,0.005,0.005,0.005,0],[[1,1,1,-6.5],[1,1,1,-6],[1,1,1,-5.5],[1,1,1,-4.5]],[1000],1,0,"","","",0,false,0,[[20000,13000,8000,0.5]]];
             _sparkEmitter setParticleRandom [1,[2,2,1],[0,0,0],0,0,[0,0.15,0.15,0],0,0,1,0];
             _sparkEmitter setDropInterval 0.5;
-            _SmokeEmitter setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,12,13,0],"","Billboard",1,30,[0,0,0],[0,0,0],0,0.051,0.04,0,[3.5],[[0.305037,0.301192,0.3,0.05]],[1000],0.001,0.008,"","","",0,false,0,[[0,0,0,0]]];
-            _SmokeEmitter setParticleRandom [1,[4,1.5,1],[0,0,0],0,0,[0,0,0,0],0,0,1,0];
-            _SmokeEmitter setDropInterval 0.0005;
+            _smokeEmitter setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,12,13,0],"","Billboard",1,30,[0,0,0],[0,0,0],0,0.051,0.04,0,[3.5],[[0.305037,0.301192,0.3,0.05]],[1000],0.001,0.008,"","","",0,false,0,[[0,0,0,0]]];
+            _smokeEmitter setParticleRandom [1,[4,1.5,1],[0,0,0],0,0,[0,0,0,0],0,0,1,0];
+            _smokeEmitter setDropInterval 0.0005;
 
             _smokeEmitter spawn {
                 sleep 0.1;

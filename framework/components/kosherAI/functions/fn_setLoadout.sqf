@@ -17,10 +17,10 @@
  * Public: No
  */
 
-params["_unit", "_role", "_whitelist"];
+params ["_unit", "_role", "_whitelist"];
 
 /* Strip unit naked */
-[_unit] call EFUNC(common,stripUnit);
+[_unit] call EFUNC(common,stripunit);
 
 /* Randomize the loadout they get based on the available items */
 _unit addBackpack selectRandom (_whitelist select 0);

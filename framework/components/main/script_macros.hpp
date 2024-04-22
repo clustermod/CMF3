@@ -1,3 +1,4 @@
+#pragma sls disable SQFVM-10005
 #define DOUBLES(var1,var2) var1##_##var2
 #define TRIPLES(var1,var2,var3) var1##_##var2##_##var3
 #define QUOTE(var1) #var1
@@ -369,3 +370,5 @@ Parameters:
     #define TRACE_8(MESSAGE,A,B,C,D,E,F,G,H) /* disabled */
     #define TRACE_9(MESSAGE,A,B,C,D,E,F,G,H,I) /* disabled */
 #endif
+
+#pragma sls enable SQFVM-10005
