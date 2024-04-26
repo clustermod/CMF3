@@ -111,7 +111,7 @@ class GVAR(menu) {
             x = BUTTON_X(0);
             y = SLIDER_Y(6);
             w = BUTTON_W;
-            h = SLIDER_HEIGHT
+            h = SLIDER_HEIGHT;
             colorBackground[] = {0, 0, 0, 0.5};
             colorBackgroundActive[] = {0, 0, 0, 0};
             color[] = {1, 1, 1, 1};

@@ -5,7 +5,7 @@
 class CMF_RscLog {
     idd = -1;
     movingEnable = "true";
-    onLoad = QUOTE(_this call FUNC(initDisplayLog))
+    onLoad = QUOTE(_this call FUNC(initDisplayLog));
     class ControlsBackground {
         //class BackgroundDisable: ctrlStaticBackgroundDisable {};
         //class BackgroundDisableTiles: ctrlStaticBackgroundDisableTiles {};
