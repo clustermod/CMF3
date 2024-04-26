@@ -1,3 +1,5 @@
+#pragma sls disable VV-001
+#pragma sls disable VV-006
 STHud_Namelist = {
     params ["_canvas"];
 
@@ -69,7 +71,7 @@ STHud_Namelist = {
 
         private _bearingBase = (str round _bearing);
         
-        private ["_bearingPretty"];
+        private "_bearingPretty";
         switch (count _bearingBase) do
         {
             case 1: { _bearingPretty = "00" + _bearingBase };

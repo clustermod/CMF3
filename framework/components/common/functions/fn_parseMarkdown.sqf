@@ -34,7 +34,7 @@ _style = createHashMapFromArray _style;
 private _parsedStyles = createHashMap;
 {
     private _key = _x;
-    private _value = _y;
+    // private _value = _y;
 
     private _parsed = "";
     if _diary then {

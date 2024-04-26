@@ -35,7 +35,7 @@ EFUNC(inline_aar,endMission) = {
             private _operationName = [_hash, "M_TITLE", [getMissionConfigValue ['IntelBriefingName', briefingName]] call EFUNC(common,hexToASCII)] call CBA_fnc_hashGet;
             private _op = format ["<t color='#%3'>%1 was an operational %2</t>", _operationName, (["Success", "Failure"] select !_opSuccess), (["fcba03", "fc3d03"] select !_opSuccess)];
             private _tac = format ["<t>%1 was a tactical %2</t>", _operationName, (["Success", "Failure"] select !_tacSuccess)];
-            private _message = _message splitString toString [13,10] joinString "<br/>";
+            private _message = _message splitString toString [13, 10] joinString "<br/>";
             if (_message != "") then { _message = format ["<br/> <t>%1</t>", _message]; };
             private _objectives = _objectivesState splitString toString [13,10] joinString "<br/>";
             if (_objectives != "") then { _objectives = format ["<br/><t color='#888888'>%1</t>", _objectives]; };

@@ -15,13 +15,12 @@
  * Public: No
  */
 
-params ["_cmfMenu"];
+// params ["_cmfMenu"];
 
 /* Handle player attempting to delete logic */
 {
     if ((_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_missionDataLogic_old']) then {
         _x addEventHandler ['UnregisteredFromWorld3DEN', {
-            params ['_entity'];
             ['Deleted CMF Mission Data', 1, 1] call BIS_fnc_3DENNotification;
         }];
     };
@@ -41,7 +40,6 @@ FUNC(setConfig_missionDataHandler) = {
     GVAR(missionDataLogic_old) = _logic;
 
     _logic addEventHandler ['UnregisteredFromWorld3DEN', {
-        params ['_entity'];
         ['Deleted CMF Mission Data', 1, 1] call BIS_fnc_3DENNotification;
     }];
 
@@ -125,7 +123,7 @@ FUNC(setConfig_missionDataHandler) = {
             } else {
                 _pictures select lbCurSel (_display displayCtrl 101)
             };
-            private _gameType = [([_hash, "M_TYPE"] call CBA_fnc_hashGet) select 1, [_hash, "M_CTYPE"] call CBA_fnc_hashGet] select ((([_hash, "M_TYPE"] call CBA_fnc_hashGet) select 1) isEqualTo "custom");
+            // private _gameType = [([_hash, "M_TYPE"] call CBA_fnc_hashGet) select 1, [_hash, "M_CTYPE"] call CBA_fnc_hashGet] select ((([_hash, "M_TYPE"] call CBA_fnc_hashGet) select 1) isEqualTo "custom");
             private _author = profileName;
             private _gameName = [_hash, "M_TITLE"] call CBA_fnc_hashGet;
 

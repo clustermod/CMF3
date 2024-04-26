@@ -145,11 +145,11 @@ switch _mode do {
         private _y0 = 0.5 call _fnc_GRID_Y;
 
         private _ctrls = [];
-        for [{_i = 0}, {_i < _boxesY}, {_i = _i + 1}] do {
+        for "_i" from 0 to _boxesY do {
             private _y = _y0 + ((0.5 call _fnc_GRID_Y) + _h0) * _i;
-            private _x = _x0;
-
-            for [{_j = 0}, {_j < _boxesX}, {_j = _j + 1}] do {
+            
+            private "_x";
+            for "_j" from 0 to _boxesX do {
                 _x = _x0 + ((0.5 call _fnc_GRID_X) + _w0) * _j;
                 private _pos = [_x, _y, _w0, _h0];
 
@@ -404,7 +404,7 @@ switch _mode do {
             private _maxPages = ceil (count _items / _iconsPerPage);
 
             private _n = count _items;
-            for [{_i = 0}, {_i < _iconsPerPage}, {_i = _i + 1}] do {
+            for "_i" from 0 to _iconsPerPage do {
                 private _ctrlBox = _ctrls select _i;
 
                 private _idx = _page * _iconsPerPage + _i;

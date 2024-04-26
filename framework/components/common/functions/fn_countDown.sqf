@@ -19,9 +19,9 @@
 params ["_time", "_text", ["_blocking", false]];
 
 private _fnc_CD_CountDown = {
-    params["_time", "_text", "_i"];
+    params["_time", "_text"];
 
-    for [{ _i=_time }, { _i >= 0 }, { _i = _i - 1 }] do {
+    for "_i" from _time to 0 step -1 do {
         hintSilent (format ["%1 %2", _text, ([_i / 60 + 0.01, "HH:MM"] call BIS_fnc_timetostring)]);
         sleep 1;
     };
