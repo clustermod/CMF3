@@ -31,7 +31,7 @@ if (!hasInterface) exitWith {};
         { GVAR(loadouts) pushBackUnique _x } forEach _loadouts;
 
         /* Check if light should be attached */
-        _light = ((getLightingAt cmf_player) select 1 < 30); // @TODO: Fine tune this value
+        _light = ((getLightingAt cmf_player) select 1 < 120);
 
         /* Randomize player spawn position if enabled */
         if (_randomPos) then {
