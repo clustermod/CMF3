@@ -39,7 +39,7 @@ if (!fileExists "WARNO.sqf") exitWith {};
         "Date: <font color=""#fcba03"">" + _formattedDate + "</font>",
         "Operation: <font color=""#fcba03"">" + _operationName + "</font>",
         "Terrain: <font color=""#fcba03"">" + _worldName + "</font>",
-        "Weather: <font color=""#fcba03"">" + (_weather select 0) + " at " + (_weather select 1) + " with winds at " + (_weather select 2) + "</font>"
+        "Weather: <font color=""#fcba03""><log subject=""cmf_environment"" record=""1"">" + (_weather select 0) + " at " + (_weather select 1) + " with winds at " + (_weather select 2) + "</log></font>"
     ] joinString "<br/>";
 
     /* Parse Markdown and remove chasing and trailing newlines */
