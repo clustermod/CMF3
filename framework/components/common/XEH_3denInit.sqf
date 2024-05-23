@@ -1,7 +1,9 @@
 #include "script_component.hpp"
 
 /* Create sub category for radios */
-[([] call acre_api_fnc_getAllRadios) select 0, "Radios", "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\call_ca.paa", 1] call ace_arsenal_fnc_addRightPanelButton;
+if (!isNil "acre_api_fnc_getAllRadios") then {
+    [([] call acre_api_fnc_getAllRadios) select 0, "Radios", "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\call_ca.paa", 1] call ace_arsenal_fnc_addRightPanelButton;
+};
 
 waitUntil { !isNil QEGVAR(3den,menu_entity) };
 
