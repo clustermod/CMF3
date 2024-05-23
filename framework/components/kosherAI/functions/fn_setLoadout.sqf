@@ -94,7 +94,7 @@ for "_i" from 0 to round (random 3) do {
 };
 
 /* Add Explosives */
-private _compatibleMagazines = compatibleMagazines primaryWeapon _unit +(compatibleMagazines handgunWeapon _unit + (compatibleMagazines secondaryWeapon _unit);
+private _compatibleMagazines = compatibleMagazines primaryWeapon _unit + (compatibleMagazines handgunWeapon _unit + (compatibleMagazines secondaryWeapon _unit));
 private _explosives = _magazines select { !(_x in _compatibleMagazines) };
 for "_i" from 0 to round (random 2) do {
     _unit addMagazineGlobal selectRandom _explosives;
