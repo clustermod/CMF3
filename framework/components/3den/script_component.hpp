@@ -29,5 +29,3 @@
 #define CUI_GRID_H UI_GRID_H
 
 #define LOG_FONTSIZE 0.7 * CUI_GRID_H
-
-#define LINES_TOOLTIP QUOTE(Define the number of lines to be shown. 30 means the last 30 lines are shown. Use a small number to speed up the process. Use a very large number to display all lines.)

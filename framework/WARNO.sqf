@@ -102,6 +102,11 @@
 ### Succession of Command
 <!-- Succession of Command -->
 
+### Organization
+<!-- Do not touch -->
+- <log subject=""cmf_toe"" record=""0"">Table of Organization and Equipment</log>
+- <log subject=""cmf_roster"" record=""0"">Player Roster</log>
+
 ## Signal
 ### Table of Communications
 <!-- Table of Communications in format: [Net Name] - [Radio] - [Chn/Freq] -->

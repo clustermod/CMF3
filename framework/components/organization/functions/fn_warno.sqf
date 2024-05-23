@@ -45,11 +45,6 @@ if (!fileExists "WARNO.sqf") exitWith {};
     private _toeRecord = ((cmf_player allDiaryRecords "cmf_toe") select 0) select 0;
     private _rosterRecord = ((cmf_player allDiaryRecords "cmf_toe") select 0) select 0;
 
-    private _organization = [
-        ["# Organization", true] call EFUNC(common,parseMarkdown),
-        "<log subject=""cmf_roster"" record=" + str _rosterRecord + ">Roster</log>",
-        "<log subject=""cmf_toe"" record=" + str _toeRecord + ">Table of Organization and Equipment</log>"
-    ] joinString "<br/>";
 
     /* Parse Markdown and remove chasing and trailing newlines */
     _warno = _warno apply { 
@@ -58,7 +53,7 @@ if (!fileExists "WARNO.sqf") exitWith {};
         [_parsed, [_parsed, 0, count _parsed - 5] call BIS_fnc_trimString] select (_parsed select [count _parsed - 5, 5] isEqualTo "<br/>")
     };
 
-    player createDiaryRecord ["Diary", ["Command / Signal", (_warno select 4)/*  + "<br/><br/>" + _organization */]];
+    player createDiaryRecord ["Diary", ["Command / Signal", (_warno select 4)]];
     player createDiaryRecord ["Diary", ["Administration / Logistics", _warno select 3]];
     player createDiaryRecord ["Diary", ["Execution", _warno select 2]];
     player createDiaryRecord ["Diary", ["Mission", _warno select 1]];
