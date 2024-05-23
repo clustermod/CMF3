@@ -13,3 +13,5 @@
 #endif
 
 #include "..\main\script_component.hpp"
+
+#include "\z\ace\addons\arsenal\defines.hpp"

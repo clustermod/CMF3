@@ -65,7 +65,7 @@
                     };
 
                     if (_groupVehicle isNotEqualTo _vehicle) then {
-                        private _vehicleName = [configFile >> "CfgVehicles" >> (typeof _groupVehicle)] call BIS_fnc_displayName;
+                        private _vehicleName = [configFile >> "CfgVehicles" >> typeof _groupVehicle] call BIS_fnc_displayName;
                         _formattedString = _formattedString + _indent + format ["<font size='13' color='#fcba03'>    %1</font><br/>", _vehicleName];
                         _vehicle = _groupVehicle;
                     };
@@ -74,13 +74,13 @@
                         if (isPlayer _x) then {
                             private _roleDescription = "None";
                             if (roleDescription _x != "") then {
-                                _roleDescription = ((roleDescription _x) splitString "@") select 0;
+                                _roleDescription = (roleDescription _x splitString "@") select 0;
                             };
 
                             _formattedString = _formattedString + _indent + format ["    <font color='#fcba03'> %1</font>, %2<br/>", name _x, _roleDescription];
                         } else {
                             private _role = [_x] call EFUNC(kosherAI,getRole);
-                            private _roleDescription = (createHashMapFromArray [
+                            private _roleDescription = createHashMapFromArray [
                                 ["CRW", "Crewman"],
                                 ["RPIL", "Pilot"],
                                 ["WPIL", "Pilot"],
@@ -90,7 +90,7 @@
                                 ["MG", "Machinegunner"],
                                 ["MAR", "Marksman"],
                                 ["SL", "Leader"]
-                            ]) getOrDefault [_role, "Rifleman"];
+                            ] getOrDefault [_role, "Rifleman"];
 
                             _formattedString = _formattedString + _indent + format ["    <font color='#888888'>[AI]</font><font color='#fcba03'> %1</font>, %2<br/>", name _x, _roleDescription];
                         };

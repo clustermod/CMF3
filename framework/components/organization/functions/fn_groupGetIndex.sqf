@@ -28,9 +28,9 @@ private _siblings = [_groupsHash, _level, []] call CBA_fnc_hashGet; */
 private _parentData = [_parent] call FUNC(groupGetData);
 _parentData params ["", "", "", "_siblings"];
 
-_siblings = _siblings select { (count units _x) > 0 };
+_siblings = _siblings select { count units _x > 0 };
 
-if (_filter) then {
+if _filter then {
     _siblings = _siblings select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo _type };
 };
 

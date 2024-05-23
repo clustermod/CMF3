@@ -27,7 +27,7 @@
 #define EQUINOX_ERROR 2
 
 /* Equinox - 360 is the number of orbital degrees per year, 365 the number of days per year. 81 accounts for march equinox */
-#define EQUINOX_MAR	((360 * dateToNumber _date) - (360 * (81 + EQUINOX_ERROR) / 365))
+#define EQUINOX_MAR	(360 * dateToNumber _date - 360 * (81 + EQUINOX_ERROR) / 365)
 
 /* verify and cleanup input parameters */
 _date = [];
@@ -58,9 +58,9 @@ _return pushBack asin( sin _declination * sin _latitude + cos _declination * cos
 /* calculate solar zentih angle */
 if ( sin (90 - (_return select 0)) != 0) then {
     if (dayTime <= 12) then {
-        _return pushBack (acos ( ((sin _declination) * (cos _latitude) - (cos _hra) * (cos _declination) * (sin _latitude)) / sin (90 - (_return select 0)) ));
+        _return pushBack acos ( (sin _declination * cos _latitude - cos _hra * cos _declination * sin _latitude) / sin (90 - (_return select 0)) );
     } else {
-        _return pushBack (360 - acos ( ((sin _declination) * (cos _latitude) - (cos _hra) * (cos _declination) * (sin _latitude)) / sin (90 - (_return select 0)) ));
+        _return pushBack 360 - acos ( (sin _declination * cos _latitude - cos _hra * cos _declination * sin _latitude) / sin (90 - (_return select 0)) );
     };
 } else {
     _return pushBack 90;

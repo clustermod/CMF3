@@ -39,7 +39,7 @@ if (!isNil "_action") then {
 
 if (!isNil "_children") then {
     {
-        ([_path] + _x) call FUNC(addMenuItem);
+        [_path] + _x call FUNC(addMenuItem);
     } forEach _children;
 };
 

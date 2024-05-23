@@ -17,7 +17,7 @@
 SCRIPT(hearing);
 
 /* Check if it is enabled */
-if !(SETTING(hearing)) exitWith {};
+if !SETTING(hearing) exitWith {};
 
 /* Code for putting in the earplugs */
 GVAR(hearing_fnc_codein) = {
@@ -36,7 +36,7 @@ GVAR(hearing_fnc_codeout) = {
 };
 
 private _actionIn = [QGVAR(hearing_insertEarplugs), "Insert earplugs", "", GVAR(hearing_fnc_codein), 
-    { "ACE_EarPlugs" in (items cmf_player) && { !(cmf_player getVariable [QGVAR(hearing_earplugsIn), false]) } }] call ace_interact_menu_fnc_createAction;
+    { "ACE_EarPlugs" in items cmf_player && { !(cmf_player getVariable [QGVAR(hearing_earplugsIn), false]) } }] call ace_interact_menu_fnc_createAction;
 
 private _actionOut = [QGVAR(hearing_takeOutEarplugs), "Take out earplugs", "", GVAR(hearing_fnc_codeout), 
     { (cmf_player getVariable [QGVAR(hearing_earplugsIn), false]) }] call ace_interact_menu_fnc_createAction;

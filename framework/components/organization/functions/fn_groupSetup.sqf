@@ -37,37 +37,37 @@ if (scriptDone GVAR(groupSetupScript)) then {
             private _isPlayerGroup = {
                 params ["_group"];
 
-                if (is3DEN) exitWith {
-                    ((units _group) findIf { (_x get3DENAttribute "ControlMP") select 0 }) > -1
+                if is3DEN exitWith {
+                    units _group findIf { (_x get3DENAttribute "ControlMP") select 0 } > -1
                 };
 
-                ((units _group) findIf { isPlayer _x }) > -1
+                units _group findIf { isPlayer _x } > -1
             };
 
             private _groupData = [_group] call FUNC(groupGetData);
             /* private _isEmpty = (count units _group) isEqualTo 0; */
             private _hierArchyOptions = _groupData param [5, [false, false]];
 
-            if (((_groupData select 0) isEqualTo -1) /* || _isEmpty */) then { continue };
+            if ((_groupData select 0) isEqualTo -1 /* || _isEmpty */) then { continue };
 
             private _groupsHash = [GVAR(groups), side _group, [] call CBA_fnc_hashCreate] call CBA_fnc_hashGet;
             private _typeOrbat = [GVAR(orbat), (_groupData select 1)] call CBA_fnc_hashGet;
             private _levelOrbat = [_typeOrbat select 0, (_groupData select 0)] call CBA_fnc_hashGet;
 
             /* Assign children */
-            if (([_levelOrbat select 1, _groupData select 1, 0] call CBA_fnc_hashGet) > 0) then {
+            if ([_levelOrbat select 1, _groupData select 1, 0] call CBA_fnc_hashGet > 0) then {
                 private _subLevels = [_groupsHash, (_groupData select 0) - 1, []] call CBA_fnc_hashGet;
                 
                 private _i = 0;
-                while { _i < count _subLevels && { ([_levelOrbat select 1, _groupData select 1, 0] call CBA_fnc_hashGet) > count (_groupData select 3) } } do {
+                while { _i < count _subLevels && { [_levelOrbat select 1, _groupData select 1, 0] call CBA_fnc_hashGet > count (_groupData select 3) } } do {
                     private _subGroup = _subLevels select _i;
                     private _subGroupData = [_subGroup] call FUNC(groupGetData);
 
                     _subGroupHierArchyOptions = _subGroupData param [5, [false, false]];
                     if (
-                        (!(_hierArchyOptions param [0, false]) && { !(_subGroupHierArchyOptions param [0, false]) }) || 
-                        ((_hierArchyOptions param [0, false]) && { [_subGroup] call _isPlayerGroup }) && 
-                        { (_subGroupHierArchyOptions param [0, false]) && { [_group] call _isPlayerGroup } }
+                        !(_hierArchyOptions param [0, false]) && { !(_subGroupHierArchyOptions param [0, false]) } || 
+                        (_hierArchyOptions param [0, false] && { [_subGroup] call _isPlayerGroup }) && 
+                        { _subGroupHierArchyOptions param [0, false] && { [_group] call _isPlayerGroup } }
                     ) then {
                         if ((_subGroupData select 1) isEqualTo (_groupData select 1) && { isNull (_subGroupData select 2) /* && { (count units _subGroup) > 0 } */ }) then {
                             (_groupData select 3) pushBack _subGroup;
@@ -96,9 +96,9 @@ if (scriptDone GVAR(groupSetupScript)) then {
                 private _typeCount = { (([_x] call FUNC(groupGetData)) select 1) isEqualTo (_groupData select 1) } count (_surGroupData select 3);
                 
                 if (
-                    (!(_hierArchyOptions param [1, false]) && { !(_surGroupHierArchyOptions param [0, false]) }) || 
-                    ((_hierArchyOptions param [1, false]) && { [_surGroup] call _isPlayerGroup }) && 
-                    { (_surGroupHierArchyOptions param [0, false]) && { [_group] call _isPlayerGroup } }
+                    !(_hierArchyOptions param [1, false]) && { !(_surGroupHierArchyOptions param [0, false]) } || 
+                    (_hierArchyOptions param [1, false] && { [_surGroup] call _isPlayerGroup }) && 
+                    { _surGroupHierArchyOptions param [0, false] && { [_group] call _isPlayerGroup } }
                 ) then {
                     if (_typeAmount > _typeCount /* && { (count units _surGroup) > 0 } */) then {
                         (_surGroupData select 3) pushBack _group;
@@ -110,7 +110,7 @@ if (scriptDone GVAR(groupSetupScript)) then {
 
                 if (!isNull (_groupData select 2)) exitWith {};
 
-                if (isNil "_smallestCount" || { _typeCount < (_smallestCount select 0) }) then {
+                if (isNil "_smallestCount" || { _typeCount < _smallestCount select 0 }) then {
                     _smallestCount = [_typeCount, _surGroup];
                 };
             } forEach _surLevels;
@@ -120,7 +120,7 @@ if (scriptDone GVAR(groupSetupScript)) then {
                 private _surGroup = (_smallestCount select 1);
                 private _surGroupData = [_surGroup] call FUNC(groupGetData);
                 
-                if (true /* (count units _surGroup) > 0 */) then {
+                if true /* (count units _surGroup) > 0 */ then {
                     (_surGroupData select 3) pushBack _group;
                     _groupData set [2, _surGroup];
                     [_surGroup, _surGroupData] call FUNC(groupSetData);

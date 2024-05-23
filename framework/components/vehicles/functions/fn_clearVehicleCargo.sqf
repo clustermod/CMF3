@@ -32,7 +32,7 @@ if (!isServer) exitWith {};
     clearWeaponCargoGlobal _vehicle;
     clearBackpackCargoGlobal _vehicle;
 
-    [{ (itemCargo _this) isNotEqualTo [] }, {}, _vehicle, 2, {
+    [{ itemCargo _this isNotEqualTo [] }, {}, _vehicle, 2, {
         _this addItemCargoGlobal ["ACE_rope12", 1];
     }] call CBA_fnc_waitUntilAndExecute;
 

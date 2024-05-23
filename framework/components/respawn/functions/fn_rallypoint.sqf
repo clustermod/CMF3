@@ -28,21 +28,21 @@ private _rallypointPlaceCode = {
         /* Detect mouse input */
         GVAR(rallypoint_placeLoop) = true;
         GVAR(rallypoint_place) = false;
-        (findDisplay 46) displayAddEventHandler ["mouseButtonDown", {
-            switch ((_this select 1)) do {
-                case (0): { GVAR(rallypoint_place) = true };
-                case (1): { GVAR(rallypoint_place) = false };
+        findDisplay 46 displayAddEventHandler ["mouseButtonDown", {
+            switch (_this select 1) do {
+                case 0: { GVAR(rallypoint_place) = true };
+                case 1: { GVAR(rallypoint_place) = false };
             };
             GVAR(rallypoint_placeLoop) = false;
-            (findDisplay 46) displayRemoveEventHandler ["mouseButtonDown", _thisEventHandler];
+            findDisplay 46 displayRemoveEventHandler ["mouseButtonDown", _thisEventHandler];
         }];
 
         /* Block LMB from firing */
         player addAction ["", { player removeAction (_this select 2)}, "", 0, false, true, "DefaultAction"];
 
         /* Placement loop */
-        private _obj = SETTING(rallypointObject) createVehicleLocal (getPos player);
-        _obj setPosASL (getPosASL player);
+        private _obj = SETTING(rallypointObject) createVehicleLocal getPos player;
+        _obj setPosASL getPosASL player;
         while { GVAR(rallypoint_placeLoop) } do {
             /* Get X and Y Coordinate */
             private _intersections = lineIntersectsSurfaces [eyePos player, AGLToASL (screenToWorld[0.5, 0.5]), player, _obj, true, 1];
@@ -55,7 +55,7 @@ private _rallypointPlaceCode = {
             private _dir = player getDir _pos;
             private _distance = player distance2D _pos;
             private _height = (_pos select 2) + 0.1;
-            private _pos = (getPos player) getPos [(_distance - 0.1) min 3, _dir];
+            private _pos = getPos player getPos [(_distance - 0.1) min 3, _dir];
 
             /* Get height correction */
             private _height = ((lineIntersectsSurfaces [[_pos select 0, _pos select 1, _height], [(_pos select 0), (_pos select 1), 0], _obj] select 0) select 0) select 2;
@@ -84,13 +84,13 @@ private _rallypointPlaceCode = {
         call ace_interaction_fnc_hideMouseHint;
 
         /* place rallypoint if not cancelled */
-        if (GVAR(rallypoint_place)) then {
+        if GVAR(rallypoint_place) then {
             /* Get old rallypoint */
             private _oldRallyParams = player getVariable [QGVAR(rallypoint_lastRally), [objNull, [objNull, -1]]];
             _oldRallyParams params ["_oldObject", "_oldRespawn"];
 
             /* Check if enemies are close to rally */
-            private _units = (nearestObjects [_obj, ["Man"], SETTING(rallypointKillRadius)]) apply { [side _x, side player] call BIS_fnc_sideIsFriendly };
+            private _units = nearestObjects [_obj, ["Man"], SETTING(rallypointKillRadius)] apply { [side _x, side player] call BIS_fnc_sideIsFriendly };
             if (false in _units) exitWith {
                 hint format[LSTRING(rally_too_close_message), SETTING(rallypointKillRadius)];
                 deleteVehicle _obj;
@@ -147,16 +147,16 @@ private _rallypointFailedCode = {
 
 /* Create Place action */
 private _rallypointPlaceAction = [QGVAR(rallypoint_place), LSTRING(place_rallypoint), "components\respawn\data\icon_ace_rallypoint_place_ca.paa", _rallypointPlaceCode, {
-    ((isNull objectParent player) && { (player getVariable [QGVAR(rallypoint_canCreate), true]) && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]) })
-    && { (player getVariable [QGVAR(showRallypoint), false])
+    (isNull objectParent player && { player getVariable [QGVAR(rallypoint_canCreate), true] && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]) })
+    && { player getVariable [QGVAR(showRallypoint), false]
     && !visibleMap }
 }] call ace_interact_menu_fnc_createAction;
 
 /* Create Unable to place action */
 private _rallypointFailedAction = [QGVAR(rallypoint_disabled), LSTRING(place_rallypoint), "components\respawn\data\icon_ace_rallypoint_disabled_ca.paa", _rallypointFailedCode, {
-    (((isNull objectParent player) && { !(player getVariable [QGVAR(rallypoint_canCreate), true]) })
-    || (missionNamespace getVariable [QGVAR(rallypoint_disabled), false]))
-    && { (player getVariable [QGVAR(showRallypoint), false])
+    (isNull objectParent player && { !(player getVariable [QGVAR(rallypoint_canCreate), true]) }
+    || missionNamespace getVariable [QGVAR(rallypoint_disabled), false])
+    && { player getVariable [QGVAR(showRallypoint), false]
     && !visibleMap }
 }] call ace_interact_menu_fnc_createAction;
 
@@ -167,8 +167,8 @@ if (count _units isEqualTo 0) exitWith {
 
 {
     /* If the unit is a string check player role against it */
-    if (IS_STRING(_x)) then {
-        if (([player, _x] call EFUNC(organization,isRole)) && { !(player getVariable [QGVAR(rallypoint), false]) }) then {
+    if IS_STRING(_x) then {
+        if ([player, _x] call EFUNC(organization,isRole) && { !(player getVariable [QGVAR(rallypoint), false]) }) then {
             waitUntil { alive player && { !isNull player } };
             [typeOf player, 1, ["ACE_SelfActions"], _rallypointPlaceAction] call ace_interact_menu_fnc_addActionToClass;
             [typeOf player, 1, ["ACE_SelfActions"], _rallypointFailedAction] call ace_interact_menu_fnc_addActionToClass;
@@ -181,7 +181,7 @@ if (count _units isEqualTo 0) exitWith {
     };
 
     /* If the unit is a object apply to object */
-    if (IS_OBJECT(_x)) then {
+    if IS_OBJECT(_x) then {
         if !(_x getVariable [QGVAR(rallypoint), false]) then {
             waitUntil { alive _x && { !isNull _x } };
             /* Add interactions where unit is local */
@@ -225,8 +225,8 @@ private _action = [QGVAR(other), "Set as rallypoint", "components\respawn\data\i
         player setVariable [QGVAR(rallypoint_canCreate), true, true];
     }, [], SETTING(rallypointCooldown)] call CBA_fnc_waitAndExecute;
 }, {
-    ((isNull objectParent cmf_player) && { (cmf_player getVariable [QGVAR(rallypoint_canCreate), true]) && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]) })
-    && { (cmf_player getVariable [QGVAR(showRallypoint), false])
+    (isNull objectParent cmf_player && { cmf_player getVariable [QGVAR(rallypoint_canCreate), true] && !(missionNamespace getVariable [QGVAR(rallypoint_disabled), false]) })
+    && { cmf_player getVariable [QGVAR(showRallypoint), false]
     && !visibleMap }
 }] call ace_interact_menu_fnc_createAction;
 
@@ -237,17 +237,17 @@ private _action = [QGVAR(other), "Set as rallypoint", "components\respawn\data\i
 
 /* Add button to ping SL to create rallypoint */
 [{
-    !isNull ((findDisplay 12) displayCtrl 88800)
+    !isNull (findDisplay 12 displayCtrl 88800)
 }, {
     waitUntil { !isNull findDisplay 12 };
-    waitUntil { !isNull ((findDisplay 12) displayCtrl 88800) };
+    waitUntil { !isNull (findDisplay 12 displayCtrl 88800) };
 
     /* Find rally-capable units in group */
-    private _rallyUnits = (units group player) select { (_x getVariable [QGVAR(rallypoint), false]) && { (alive _x) && { (lifeState _x != "UNCONCIOUS") } } };
+    private _rallyUnits = units group player select { _x getVariable [QGVAR(rallypoint), false] && { alive _x && { lifeState _x != "UNCONCIOUS" } } };
 
     /* Create button */
-    private _ctrlGroup = (findDisplay 12) displayCtrl 88800;
-    private _ctrlButton = (findDisplay 12) ctrlCreate ["RscGearShortcutButton", -1, _ctrlGroup];
+    private _ctrlGroup = findDisplay 12 displayCtrl 88800;
+    private _ctrlButton = findDisplay 12 ctrlCreate ["RscGearShortcutButton", -1, _ctrlGroup];
     _ctrlButton ctrlSetPosition [0,0.386,0.378,0.044];
     _ctrlButton ctrlCommit 0;
     _ctrlButton ctrlSetBackgroundColor [0.101961,0.101961,0.101961,0.8];
@@ -266,7 +266,7 @@ private _action = [QGVAR(other), "Set as rallypoint", "components\respawn\data\i
     /* Ping rally-capable units in group */
     _ctrlButton ctrlAddEventHandler ["ButtonClick", {
         /* Find rally-capable units in group */
-        private _rallyUnits = (units group player) select { _x getVariable [QGVAR(rallypoint), false] && { alive _x } };
+        private _rallyUnits = units group player select { _x getVariable [QGVAR(rallypoint), false] && { alive _x } };
 
         /* Show ping for rallypoint-capable units */
         {
@@ -282,9 +282,9 @@ private _action = [QGVAR(other), "Set as rallypoint", "components\respawn\data\i
     addMissionEventHandler ["Map", {
         params ["_mapIsOpened", "_mapIsForced"];
 
-        if (_mapIsOpened && { !isNull ((findDisplay 12) displayCtrl 88800) }) then {
+        if (_mapIsOpened && { !isNull (findDisplay 12 displayCtrl 88800) }) then {
             GVAR(rallypoint_PFH) = [{
-                private _rallyUnits = (units group player) select { (_x getVariable [QGVAR(rallypoint), false]) && { (alive _x) && { (lifeState _x != "UNCONCIOUS") } } };
+                private _rallyUnits = units group player select { _x getVariable [QGVAR(rallypoint), false] && { alive _x && { lifeState _x != "UNCONCIOUS" } } };
 
                 _ctrlButton ctrlEnable (count _rallyUnits > 0);
                 if (count _rallyUnits > 0) then {

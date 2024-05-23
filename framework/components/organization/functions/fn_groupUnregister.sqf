@@ -31,7 +31,7 @@ publicVariable QGVAR(groups);
 {
     private _childData = [_x] call FUNC(groupGetData);
 
-    if ((_childData select 0) > -1) then {
+    if (_childData select 0 > -1) then {
         _childData set [2, grpNull];
         _x setVariable [QGVAR(groupData), _childData, true];
     };
@@ -39,7 +39,7 @@ publicVariable QGVAR(groups);
 
 /* Unregister parents */
 private _parentData = [(_groupData select 2)] call FUNC(groupGetData);
-if ((_parentData select 0) > -1) then {
+if (_parentData select 0 > -1) then {
     (_parentData select 3) deleteAt ((_parentData select 3) find _group);
     [(_groupData select 2), _parentData] call FUNC(groupSetData);
 };

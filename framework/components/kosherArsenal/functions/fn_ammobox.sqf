@@ -1,5 +1,4 @@
 #include "script_component.hpp"
-#include "\z\ace\addons\arsenal\defines.hpp"
 /*
  * Author: Eric
  * initializes an object as a ammobox
@@ -33,7 +32,7 @@ private _onOpen = {
     private _loadout = player getVariable [QGVAR(loadout), ""];
 
     /* Check if the file exists and load the whitelist */
-    if !(FILE_EXISTS(_loadout)) exitWith { ERROR_1("Loadoutfile %1 does not exist!",_loadout) };
+    if !(fileExists _loadout) exitWith { ERROR_1("Loadoutfile %1 does not exist!",_loadout) };
     private _whitelist = [_role, player, true] call compile(preprocessFileLineNumbers _loadout);
 
     /* Get gear from whitelist and check loadout file version */

@@ -42,7 +42,7 @@
             {
                 private _groups = [_groupHash, _x, []] call CBA_fnc_hashGet;
 
-                if ((_groups findIf { (units _x findIf { isPlayer _x }) > -1 }) > -1) exitWith {
+                if (_groups findIf { units _x findIf { isPlayer _x } > -1 } > -1) exitWith {
                     _topLevelGroups = _groups;
                 };
             } forEach _levels;
@@ -75,7 +75,7 @@
                         if (isPlayer _x) then {
                             private _roleDescription = "None";
                             if (roleDescription _x != "") then {
-                                _roleDescription = ((roleDescription _x) splitString "@") select 0;
+                                _roleDescription = (roleDescription _x splitString "@") select 0;
                             };
 
                             _formattedString = _formattedString + _indent + format ["    <font color='#fcba03'> %1</font>, %2<br/>", name _x, _roleDescription];
@@ -97,7 +97,7 @@
                 }, "DESCEND"] call BIS_fnc_sortBy;
 
                 {
-                    if (((units _x) findIf { isPlayer _x }) > -1) then {
+                    if (units _x findIf { isPlayer _x } > -1) then {
                         _formattedString = _formattedString + ([_x, _indent] call FUNC(ToE_recursiveCheck));
                     }
                 } forEach _children;
@@ -108,7 +108,7 @@
 
             {
                 private _group = _x;
-                if (((units _group) findIf { isPlayer _x }) > -1) then {
+                if (units _group findIf { isPlayer _x } > -1) then {
                     private _groupNames = _group getVariable [QGVAR(groupName), ["UNKNOWN", "UNKNOWN"]];
                     private _formattedString = "<br/><font size='12'>";
 

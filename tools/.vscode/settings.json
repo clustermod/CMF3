@@ -2,5 +2,6 @@
 	"files.exclude": {
 		"**/release": true,
         "**/site": true
-	}
+	},
+	"python.pythonPath": "C:\\Python312\\python.exe"
 }

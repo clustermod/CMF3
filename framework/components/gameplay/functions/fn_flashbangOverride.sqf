@@ -26,13 +26,13 @@ GVAR(flashbang_extraEffects) = {
         private _sparkEmitter = "#particlesource" createVehicleLocal [((_this select 0) select 0), ((_this select 0) select 1), ((_this select 0) select 2) + 0.1];
 
         [_SmokeEmitter, _sparkEmitter] spawn {
-            params["_SmokeEmitter", "_sparkEmitter"];
+            params["_smokeEmitter", "_sparkEmitter"];
             _sparkEmitter setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,0,12,0],"","Billboard",1,20,[0,0,1.2],[0,0,0],0,10.071,7.9,0,[0.005,0.005,0.005,0.005,0.005,0.005,0.005,0.005,0.005,0],[[1,1,1,-6.5],[1,1,1,-6],[1,1,1,-5.5],[1,1,1,-4.5]],[1000],1,0,"","","",0,false,0,[[20000,13000,8000,0.5]]];
             _sparkEmitter setParticleRandom [1,[2,2,1],[0,0,0],0,0,[0,0.15,0.15,0],0,0,1,0];
             _sparkEmitter setDropInterval 0.5;
-            _SmokeEmitter setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,12,13,0],"","Billboard",1,30,[0,0,0],[0,0,0],0,0.051,0.04,0,[3.5],[[0.305037,0.301192,0.3,0.05]],[1000],0.001,0.008,"","","",0,false,0,[[0,0,0,0]]];
-            _SmokeEmitter setParticleRandom [1,[4,1.5,1],[0,0,0],0,0,[0,0,0,0],0,0,1,0];
-            _SmokeEmitter setDropInterval 0.0005;
+            _smokeEmitter setParticleParams [["\A3\data_f\ParticleEffects\Universal\Universal.p3d",16,12,13,0],"","Billboard",1,30,[0,0,0],[0,0,0],0,0.051,0.04,0,[3.5],[[0.305037,0.301192,0.3,0.05]],[1000],0.001,0.008,"","","",0,false,0,[[0,0,0,0]]];
+            _smokeEmitter setParticleRandom [1,[4,1.5,1],[0,0,0],0,0,[0,0,0,0],0,0,1,0];
+            _smokeEmitter setDropInterval 0.0005;
 
             _smokeEmitter spawn {
                 sleep 0.1;
@@ -119,8 +119,8 @@ GVAR(flashbang_explosion) = {
 private _fired_event = {
     if (!SETTING(flashbang)) exitWith {};
 
-    private _grenadeConfig = (createHashMapFromArray GVAR(flashbang_grenades)) getOrDefault [(_this select 5), [-1]];
-    if ((_grenadeConfig select 0) > -1) then {
+    private _grenadeConfig = createHashMapFromArray GVAR(flashbang_grenades) getOrDefault [(_this select 5), [-1]];
+    if (_grenadeConfig select 0 > -1) then {
         [(_this select 6), _grenadeConfig] spawn {
             params["_grenade", "_grenadeConfig", ""];
             _grenadeConfig params["_grenadeFuze", ["_bangs", 1], ["_bangDelay", {random [0.1, 0.3, 0.8]}]];
@@ -184,7 +184,7 @@ private _fired_event = {
                         }
                     } forEach _units;
                     sleep _bangDelay;
-                    private _newPos = (getPos _grenadeObject) getPos [(random 1), (random 360)];
+                    private _newPos = getPos _grenadeObject getPos [(random 1), (random 360)];
                     if ([_grenadeObject, "VIEW"] checkVisibility [[(_newPos select 0), (_newPos select 1), _height + 0.5], [(_posASL select 0), (_posASL select 1), _height + 0.5]] > 0.6) then {
                         _grenadeObject setPosASL [(_newPos select 0), (_newPos select 1), _height + 0.03];
                         _grenadeObject setVectorUp [(random(selectRandom[1,-1])),(random(selectRandom[1,-1])),0];

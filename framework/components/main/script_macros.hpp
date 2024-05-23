@@ -1,5 +1,4 @@
-#include "script_mod.hpp"
-
+#pragma sls disable SQFVM-10005
 #define DOUBLES(var1,var2) var1##_##var2
 #define TRIPLES(var1,var2,var3) var1##_##var2##_##var3
 #define QUOTE(var1) #var1
@@ -69,12 +68,12 @@
 
 #define PREP_SYS(var1) TRIPLES(DOUBLES(PREFIX,MODULE),fnc,var1) = compile preProcessFileLineNumbers QUOTE(PATHTO_SYS(MODULE,DOUBLES(fn,var1)))
 
-#define PREP_MODULE(var1) if (((count REQUIRED_MODULES) isEqualTo 0) || count (REQUIRED_MODULES - EGVAR(main,components)) isEqualTo 0) then {\
+#define PREP_MODULE(var1) if (count REQUIRED_MODULES isEqualTo 0 || count (REQUIRED_MODULES - EGVAR(main,components)) isEqualTo 0) then {\
     PREP_SYS(var1)\
 } else {\
     FUNC(var1) = { ERROR_2("%1 missing required modules: %2.", QFUNC(var1), REQUIRED_MODULES - EGVAR(main,components)) }\
 }
-#define PREP_ADDON(var1) if (((count REQUIRED_ADDONS) isEqualTo 0) || REQUIRED_ADDONS findIf {!isClass(configFile >> "CfgPatches" >> _x)} isEqualTo -1) then {\
+#define PREP_ADDON(var1) if (count REQUIRED_ADDONS isEqualTo 0 || REQUIRED_ADDONS findIf {!isClass(configFile >> "CfgPatches" >> _x)} isEqualTo -1) then {\
     PREP_MODULE(var1)\
 } else {\
     FUNC(var1) = {ERROR_1("%1 missing a required addon.",QFUNC(var1))}\
@@ -91,7 +90,7 @@
 #define SCRIPT(NAME) scriptName 'components\MODULE\NAME'
 #define ESCRIPT(var1, NAME) scriptName 'var1\MODULE\NAME'
 
-#define IS_META_SYS(VAR,TYPE) (if (isNil {VAR}) then {false} else {(VAR) isEqualType TYPE})
+#define IS_META_SYS(VAR,TYPE) (if isNil {VAR} then {false} else {VAR isEqualType TYPE})
 #define IS_ARRAY(VAR)    IS_META_SYS(VAR,[])
 #define IS_HASHMAP(VAR)  IS_META_SYS(VAR,createhashMap)
 #define IS_BOOL(VAR)     IS_META_SYS(VAR,false)
@@ -371,3 +370,5 @@ Parameters:
     #define TRACE_8(MESSAGE,A,B,C,D,E,F,G,H) /* disabled */
     #define TRACE_9(MESSAGE,A,B,C,D,E,F,G,H,I) /* disabled */
 #endif
+
+#pragma sls enable SQFVM-10005

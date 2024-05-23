@@ -25,17 +25,6 @@ private _ammoBoxAction = [
     }
 ];
 
-[
-    _path, 
-    "Kosher Arsenal",
-    "a3\3den\data\displays\display3den\toolbar\open_ca.paa",
-    {},
-    [],
-    [
-        _ammoBoxAction
-    ]
-] call EFUNC(3den,addMenuItem);
-
 private _randomLoadoutAction = [
     "Set Random Loadout",
     "a3\ui_f\data\gui\rsc\rscdisplayarsenal\uniform_ca.paa",
@@ -48,7 +37,7 @@ private _randomLoadoutAction = [
             params ["_values", "_units"];
 
             private _loadout = format["rsc\loadouts\%1.sqf", _values select 1];
-            if !(FILE_EXISTS(_loadout)) exitWith { ERROR_MSG_1("Unable to find loadoutfile: %1", _loadout) };
+            if !(fileExists _loadout) exitWith { ERROR_MSG_1("Unable to find loadoutfile: %1", _loadout) };
             private _whitelist = [_values select 0, player, true] call compile(preprocessFileLineNumbers _loadout);
 
             {
@@ -62,7 +51,7 @@ private _randomLoadoutAction = [
         ["Set Random Loadout", [
             ["EDIT", ["Role", "Role to set unit as"], ["RFL"]],
             ["EDIT", ["Loadoutfile", "Loadoutfile to use"], [""]]
-        ], _randomizeLoadout, {}, (get3DENSelected "object") select { _x isKindOf "Man" }] call zen_dialog_fnc_create;
+        ], _randomizeLoadout, {}, get3DENSelected "object" select { _x isKindOf "Man" }] call zen_dialog_fnc_create;
 
     }
 ];

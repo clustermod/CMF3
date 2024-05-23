@@ -26,7 +26,7 @@ if (!hasInterface) exitWith {};
 disableSerialization;
 
 private _fnc_GRID_X = {
-    pixelW * pixelGridNoUIScale * (((_this) * (2)) / 4)
+    pixelW * pixelGridNoUIScale * ((_this * 2) / 4)
 };
 
 private _fnc_GRID_Y = {
@@ -49,10 +49,10 @@ switch _mode do {
                 private _icons = [];
                 private _addons = allAddonsInfo apply {_x select 0};
                 {
-                    _icons append (addonFiles [_x, ".paa"]);
-                    _icons append (addonFiles [_x, ".jpg"]);
-                    _icons append (addonFiles [_x, ".tga"]);
-                    _icons append (addonFiles [_x, ".bmp"]);
+                    _icons append addonFiles [_x, ".paa"];
+                    _icons append addonFiles [_x, ".jpg"];
+                    _icons append addonFiles [_x, ".tga"];
+                    _icons append addonFiles [_x, ".bmp"];
                 } forEach _addons;
 
                 localNamespace setVariable [QGVAR(gameIcons), _icons];
@@ -74,10 +74,10 @@ switch _mode do {
         private _TABLE_HEIGHT = 120;
 
         private _pos = [
-            safeZoneX + (safeZoneW / 2) - (((_TABLE_WIDTH / 2) call _fnc_GRID_X)),
-            safeZoneY + (safeZoneH / 2) - (((_TABLE_HEIGHT / 2) call _fnc_GRID_Y)),
-            ((_TABLE_WIDTH) call _fnc_GRID_X),
-            ((_TABLE_HEIGHT) call _fnc_GRID_Y)
+            safeZoneX + safeZoneW / 2 - (_TABLE_WIDTH / 2 call _fnc_GRID_X),
+            safeZoneY + safeZoneH / 2 - (_TABLE_HEIGHT / 2 call _fnc_GRID_Y),
+            (_TABLE_WIDTH call _fnc_GRID_X),
+            (_TABLE_HEIGHT call _fnc_GRID_Y)
         ];
 
         private _ctrlGroupMain = _display ctrlCreate ["RscControlsGroupNoScrollbars", -1];
@@ -91,7 +91,7 @@ switch _mode do {
         _background ctrlCommit 0;
 
         private _headerBackground = _display ctrlCreate ["RscText", -1, _ctrlGroupMain];
-        _headerBackground ctrlSetPosition [0, 0, _pos select 2, ((3) call _fnc_GRID_Y)];
+        _headerBackground ctrlSetPosition [0, 0, _pos select 2, (3 call _fnc_GRID_Y)];
         _headerBackground ctrlSetBackgroundColor [
             profilenamespace getvariable ['GUI_BCG_RGB_R', 0.3843],
             profilenamespace getvariable ['GUI_BCG_RGB_G', 0.7019],
@@ -102,17 +102,17 @@ switch _mode do {
         _headerBackground ctrlCommit 0;
 
         private _headerText = _display ctrlCreate ["RscText", -1, _ctrlGroupMain];
-        _headerText ctrlSetPosition [0, 0, _pos select 2, ((3) call _fnc_GRID_Y)];
+        _headerText ctrlSetPosition [0, 0, _pos select 2, (3 call _fnc_GRID_Y)];
         _headerText ctrlSetFont "RobotoCondensed";
         _headerText ctrlSetTextColor [0.95, 0.95, 0.95, 1];
-        _headerText ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
+        _headerText ctrlSetFontHeight (((safezoneW / safezoneH min 1.2) / 1.2) / 25) * 1;
         _headerText ctrlSetText "Icon Viewer";
         _headerText ctrlEnable false;
         _headerText ctrlCommit 0;
 
         private _closeButton = _display ctrlCreate ["ctrlButtonPictureKeepAspect", -1, _ctrlGroupMain];
         _closeButton ctrlSetText "\a3\3DEN\Data\Displays\Display3DEN\search_end_ca.paa";
-        _closeButton ctrlSetPosition [(_pos select 2) - ((3 + 0.5) call _fnc_GRID_X), 0, ((3 + 0.5) call _fnc_GRID_X), ((3) call _fnc_GRID_Y)];
+        _closeButton ctrlSetPosition [(_pos select 2) - (3 + 0.5 call _fnc_GRID_X), 0, (3 + 0.5 call _fnc_GRID_X), (3 call _fnc_GRID_Y)];
         _closeButton ctrlAddEventHandler ["ButtonClick", {
             private _display = uiNamespace getVariable [QGVAR(icons_idd), displayNull];
             if (!isNull _display) then {_display closeDisplay 2;};
@@ -120,7 +120,7 @@ switch _mode do {
         _closeButton ctrlCommit 0;
 
         private _footerBackground = _display ctrlCreate ["RscText", -1, _ctrlGroupMain];
-        _footerBackground ctrlSetPosition [0, (_pos select 3) - ((5) call _fnc_GRID_Y), _pos select 2, ((5) call _fnc_GRID_Y)];
+        _footerBackground ctrlSetPosition [0, (_pos select 3) - (5 call _fnc_GRID_Y), _pos select 2, (5 call _fnc_GRID_Y)];
         _footerBackground ctrlSetBackgroundColor [0.1, 0.1, 0.1, 1];
         _footerBackground ctrlEnable false;
         _footerBackground ctrlCommit 0;
@@ -128,9 +128,9 @@ switch _mode do {
         private _ctrlGroupList = _display ctrlCreate ["RscControlsGroupNoScrollbars", 12002, _ctrlGroupMain];
         _ctrlGroupList ctrlSetPosition [
             0,
-            ((3 + 0.5) call _fnc_GRID_Y),
+            (3 + 0.5 call _fnc_GRID_Y),
             _pos select 2,
-            (_pos select 3) - ((3 + 0.5 + 0.5 + 5) call _fnc_GRID_Y)
+            (_pos select 3) - (3 + 0.5 + 0.5 + 5 call _fnc_GRID_Y)
         ];
         _ctrlGroupList ctrlSetBackgroundColor [1, 1, 1, 0.9];
         _ctrlGroupList ctrlCommit 0;
@@ -139,18 +139,18 @@ switch _mode do {
         private _boxesX = localNamespace getVariable [QGVAR(icons_boxesX), 5];
         private _boxesY = localNamespace getVariable [QGVAR(icons_boxesY), 5];
 
-        private _w0 = ((_origPos select 2) - ((_boxesX + 1) * ((0.5) call _fnc_GRID_X))) / _boxesX;
-        private _h0 = ((_origPos select 3) - ((_boxesY + 1) * ((0.5) call _fnc_GRID_Y))) / _boxesY;
-        private _x0 = (0.5) call _fnc_GRID_X;
-        private _y0 = (0.5) call _fnc_GRID_Y;
+        private _w0 = ((_origPos select 2) - (_boxesX + 1) * (0.5 call _fnc_GRID_X)) / _boxesX;
+        private _h0 = ((_origPos select 3) - (_boxesY + 1) * (0.5 call _fnc_GRID_Y)) / _boxesY;
+        private _x0 = 0.5 call _fnc_GRID_X;
+        private _y0 = 0.5 call _fnc_GRID_Y;
 
         private _ctrls = [];
-        for [{_i = 0}, {_i < _boxesY}, {_i = _i + 1}] do {
-            private _y = _y0 + (((0.5) call _fnc_GRID_Y) + _h0) * _i;
-            private _x = _x0;
-
-            for [{_j = 0}, {_j < _boxesX}, {_j = _j + 1}] do {
-                _x = _x0 + (((0.5) call _fnc_GRID_X) + _w0) * _j;
+        for "_i" from 0 to _boxesY do {
+            private _y = _y0 + ((0.5 call _fnc_GRID_Y) + _h0) * _i;
+            
+            private "_x";
+            for "_j" from 0 to _boxesX do {
+                _x = _x0 + ((0.5 call _fnc_GRID_X) + _w0) * _j;
                 private _pos = [_x, _y, _w0, _h0];
 
                 private _ctrlBox = _display ctrlCreate ["RscControlsGroupNoScrollbars", -1, _ctrlGroupList];
@@ -181,7 +181,7 @@ switch _mode do {
                 ];
                 _ctrlTextTitle setVariable ["bg", _ctrlTextBG];
 
-                _ctrlTextTitle ctrlSetPosition [0, 0, _pos select 2, (ctrlTextHeight _ctrlTextTitle) min (_pos select 3)];
+                _ctrlTextTitle ctrlSetPosition [0, 0, _pos select 2, ctrlTextHeight _ctrlTextTitle min (_pos select 3)];
                 _ctrlTextTitle ctrlEnable false;
                 _ctrlTextTitle ctrlCommit 0;
 
@@ -220,14 +220,14 @@ switch _mode do {
 
         private _ctrlSearchInfo = _display ctrlCreate ["RscStructuredText", -1, _ctrlGroupMain];
         _ctrlSearchInfo ctrlSetPosition [
-            ((0.5) call _fnc_GRID_X),
-            (_pos select 3) - ((1 + 3) call _fnc_GRID_Y),
-            ((_TABLE_WIDTH - 0.5*2) call _fnc_GRID_X),
-            ((3) call _fnc_GRID_Y)
+            (0.5 call _fnc_GRID_X),
+            (_pos select 3) - (1 + 3 call _fnc_GRID_Y),
+            (_TABLE_WIDTH - 0.5*2 call _fnc_GRID_X),
+            (3 call _fnc_GRID_Y)
         ];
         _ctrlSearchInfo ctrlSetTextColor [0.95, 0.95, 0.95, 1];
         _ctrlSearchInfo ctrlEnable false;
-        _ctrlSearchInfo ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
+        _ctrlSearchInfo ctrlSetFontHeight (((safezoneW / safezoneH min 1.2) / 1.2) / 25) * 1;
         _ctrlSearchInfo ctrlSetStructuredText parseText format ["<t align='right'>%1 "+LSTRING(images_found)+"</t>", 0];
         _ctrlSearchInfo ctrlCommit 0;
 
@@ -235,10 +235,10 @@ switch _mode do {
 
         private _ctrlSearchCheckbox = _display ctrlCreate ["ctrlCheckbox", 12001, _ctrlGroupMain];
         _ctrlSearchCheckbox ctrlSetPosition [
-            ((_TABLE_WIDTH / 2) call _fnc_GRID_X) - ((_TABLE_WIDTH / 4) call _fnc_GRID_X) - ((3 + 0.5) call _fnc_GRID_X),
-            (_pos select 3) - ((1 + 3) call _fnc_GRID_Y),
-            ((3) call _fnc_GRID_X),
-            ((3) call _fnc_GRID_Y)
+            (_TABLE_WIDTH / 2 call _fnc_GRID_X) - (_TABLE_WIDTH / 4 call _fnc_GRID_X) - (3 + 0.5 call _fnc_GRID_X),
+            (_pos select 3) - (1 + 3 call _fnc_GRID_Y),
+            (3 call _fnc_GRID_X),
+            (3 call _fnc_GRID_Y)
         ];
         _ctrlSearchCheckbox ctrlAddEventHandler ["CheckedChanged", {
             private _checked = (_this select 1) isEqualTo 1;
@@ -256,24 +256,24 @@ switch _mode do {
 
         private _ctrlSearch = _display ctrlCreate ["RscEdit", 12001, _ctrlGroupMain];
         _ctrlSearch ctrlSetPosition [
-            ((_TABLE_WIDTH / 2) call _fnc_GRID_X) - ((_TABLE_WIDTH / 4) call _fnc_GRID_X),
-            (_pos select 3) - ((1 + 3) call _fnc_GRID_Y),
-            ((_TABLE_WIDTH / 2) call _fnc_GRID_X),
-            ((3) call _fnc_GRID_Y)
+            (_TABLE_WIDTH / 2 call _fnc_GRID_X) - (_TABLE_WIDTH / 4 call _fnc_GRID_X),
+            (_pos select 3) - (1 + 3 call _fnc_GRID_Y),
+            (_TABLE_WIDTH / 2 call _fnc_GRID_X),
+            (3 call _fnc_GRID_Y)
         ];
         _ctrlSearch ctrlSetFont "RobotoCondensed";
         _ctrlSearch ctrlSetTextColor [0.95, 0.95, 0.95, 1];
         _ctrlSearch ctrlSetText (localNamespace getVariable [QGVAR(icons_searchText), ""]);
-        _ctrlSearch ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
+        _ctrlSearch ctrlSetFontHeight (((safezoneW / safezoneH min 1.2) / 1.2) / 25) * 1;
         _ctrlSearch ctrlSetBackgroundColor [0, 0, 0, 0.7];
         _ctrlSearch ctrlCommit 0;
 
         private _ctrlButtonSearch = _display ctrlCreate ["ctrlButtonPictureKeepAspect", 12001, _ctrlGroupMain];
         _ctrlButtonSearch ctrlSetPosition [
-            ((_TABLE_WIDTH / 2) call _fnc_GRID_X) - ((_TABLE_WIDTH / 4) call _fnc_GRID_X) + ((_TABLE_WIDTH / 2) call _fnc_GRID_X) + ((0.5) call _fnc_GRID_Y),
-            (_pos select 3) - ((4) call _fnc_GRID_Y),
-            ((3) call _fnc_GRID_X),
-            ((3) call _fnc_GRID_Y)
+            (_TABLE_WIDTH / 2 call _fnc_GRID_X) - (_TABLE_WIDTH / 4 call _fnc_GRID_X) + (_TABLE_WIDTH / 2 call _fnc_GRID_X) + (0.5 call _fnc_GRID_Y),
+            (_pos select 3) - (4 call _fnc_GRID_Y),
+            (3 call _fnc_GRID_X),
+            (3 call _fnc_GRID_Y)
         ];
         _ctrlButtonSearch ctrlSetText "\a3\3DEN\Data\Displays\Display3DEN\search_start_ca.paa";
         _ctrlButtonSearch ctrlSetBackgroundColor [0, 0, 0, 0];
@@ -299,13 +299,13 @@ switch _mode do {
 
         private _ctrlPageInfo = _display ctrlCreate ["RscStructuredText", -1, _ctrlGroupMain];
         _ctrlPageInfo ctrlSetPosition [
-            (1 + 3 + 0.5) call _fnc_GRID_X,
-            (_pos select 3) - ((1 + 3) call _fnc_GRID_Y),
-            ((10) call _fnc_GRID_X),
-            ((5) call _fnc_GRID_Y)
+            1 + 3 + 0.5 call _fnc_GRID_X,
+            (_pos select 3) - (1 + 3 call _fnc_GRID_Y),
+            (10 call _fnc_GRID_X),
+            (5 call _fnc_GRID_Y)
         ];
         _ctrlPageInfo ctrlSetTextColor [0.95, 0.95, 0.95, 1];
-        _ctrlPageInfo ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
+        _ctrlPageInfo ctrlSetFontHeight (((safezoneW / safezoneH min 1.2) / 1.2) / 25) * 1;
         _ctrlPageInfo ctrlSetStructuredText parseText format ["<t align='center'>1 | %2</t>", 99, 99];
         _ctrlPageInfo ctrlEnable false;
         _ctrlPageInfo ctrlCommit 0;
@@ -314,32 +314,32 @@ switch _mode do {
 
         private _ctrlButtonL = _display ctrlCreate ["ctrlButton", -1, _ctrlGroupMain];
         _ctrlButtonL ctrlSetPosition [
-            (1) call _fnc_GRID_X,
-            (_pos select 3) - ((1 + 3) call _fnc_GRID_Y),
-            ((3) call _fnc_GRID_X),
-            ((3) call _fnc_GRID_Y)
+            1 call _fnc_GRID_X,
+            (_pos select 3) - (1 + 3 call _fnc_GRID_Y),
+            (3 call _fnc_GRID_X),
+            (3 call _fnc_GRID_Y)
         ];
         _ctrlButtonL ctrlSetFont "PuristaMedium";
         _ctrlButtonL ctrlSetText "<";
         _ctrlButtonL ctrlSetTooltip LSTRING(previous_page);
         _ctrlButtonL ctrlSetBackgroundColor [1, 1, 1, 0.15];
-        _ctrlButtonL ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
+        _ctrlButtonL ctrlSetFontHeight (((safezoneW / safezoneH min 1.2) / 1.2) / 25) * 1;
         _ctrlButtonL ctrlSetTextColor [0.95, 0.95, 0.95, 1];
         _ctrlButtonL ctrlAddEventHandler ["ButtonClick", {["changePage", [-1]] call FUNC(main_iconViewer);}];
         _ctrlButtonL ctrlCommit 0;
 
         private _ctrlButtonR = _display ctrlCreate ["ctrlButton", -1, _ctrlGroupMain];
         _ctrlButtonR ctrlSetPosition [
-            (1 + 3 + 0.5 + 10 + 0.5) call _fnc_GRID_X,
-            (_pos select 3) - ((1 + 3) call _fnc_GRID_Y),
-            ((3) call _fnc_GRID_X),
-            ((3) call _fnc_GRID_Y)
+            1 + 3 + 0.5 + 10 + 0.5 call _fnc_GRID_X,
+            (_pos select 3) - (1 + 3 call _fnc_GRID_Y),
+            (3 call _fnc_GRID_X),
+            (3 call _fnc_GRID_Y)
         ];
         _ctrlButtonR ctrlSetFont "PuristaMedium";
         _ctrlButtonR ctrlSetText ">";
         _ctrlButtonR ctrlSetTooltip LSTRING(next_page);
         _ctrlButtonR ctrlSetBackgroundColor [1, 1, 1, 0.15];
-        _ctrlButtonR ctrlSetFontHeight (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1);
+        _ctrlButtonR ctrlSetFontHeight (((safezoneW / safezoneH min 1.2) / 1.2) / 25) * 1;
         _ctrlButtonR ctrlSetTextColor [0.95, 0.95, 0.95, 1];
         _ctrlButtonR ctrlAddEventHandler ["ButtonClick", {["changePage", [1]] call FUNC(main_iconViewer);}];
         _ctrlButtonR ctrlCommit 0;
@@ -351,11 +351,11 @@ switch _mode do {
 
         if (_searchText != "") then {
             if (localNamespace getVariable [QGVAR(icons_caseSensitive), true]) then {
-                _items = _items select {(_x find _searchText) > -1};
+                _items = _items select {_x find _searchText > -1};
             } else {
                 _searchText = toLowerANSI _searchText;
 
-                _items = _items select {(toLowerANSI _x find _searchText) > -1};
+                _items = _items select {toLowerANSI _x find _searchText > -1};
             };
         };
 
@@ -404,7 +404,7 @@ switch _mode do {
             private _maxPages = ceil (count _items / _iconsPerPage);
 
             private _n = count _items;
-            for [{_i = 0}, {_i < _iconsPerPage}, {_i = _i + 1}] do {
+            for "_i" from 0 to _iconsPerPage do {
                 private _ctrlBox = _ctrls select _i;
 
                 private _idx = _page * _iconsPerPage + _i;

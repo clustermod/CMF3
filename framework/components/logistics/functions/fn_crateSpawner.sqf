@@ -38,7 +38,7 @@
 
                     private _crateHash = missionNamespace getVariable [QGVAR(crateHash), [] call CBA_fnc_hashCreate];
                     private _oldAmount = [_crateHash, _key] call CBA_fnc_hashGet;
-                    if (_oldAmount >= (_preset select 0)) exitWith {};
+                    if (_oldAmount >= _preset select 0) exitWith {};
 
                     private _crate = (_preset select 1) createVehicle [0, 0, 0];
                     private _position = [_target, _crate, _player] call ace_common_fnc_findUnloadPosition;
@@ -57,7 +57,7 @@
                     private _crateHash = missionNamespace getVariable [QGVAR(crateHash), [] call CBA_fnc_hashCreate];
                     private _oldAmount = [_crateHash, _key, 0] call CBA_fnc_hashGet;
 
-                    private _color = ["#888888", "#ffffff"] select (_oldAmount < (_preset select 0));
+                    private _color = ["#888888", "#ffffff"] select (_oldAmount < _preset select 0);
                     _actionData set [1, format ["<t color='%4'>Create %1 Crate [%2/%3]</t>", _key, _oldAmount, _preset select 0, _color]];
                 }
             ] call ace_interact_menu_fnc_createAction;

@@ -36,7 +36,7 @@ private _action = [QGVAR(crate_menu), "Other", "", {}, { true }, {
     private _action = ([QGVAR(renameObject), "Destroy Crate", "a3\ui_f_curator\data\cfgmarkers\kia_ca.paa", {
         _target spawn {
             private _result = ["Are you sure?", "Confirm", true, true] call BIS_fnc_guiMessage;
-            if (_result) then {
+            if _result then {
                 deleteVehicle _this;
             };
         };

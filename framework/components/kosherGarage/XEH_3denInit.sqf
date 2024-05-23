@@ -15,7 +15,7 @@ private _createVehicleSpawner = [
 
             private _spawnerpadVar = (all3DENEntities select 0) select { (_x get3DENAttribute 'Name') isEqualTo ['cmf_3den_missionDataLogic_old'] };
             for "_y" from 1 to 9001 do {
-                _spawnerpadVar = QGVAR(spawnpad_) + str(_y);
+                _spawnerpadVar = QGVAR(spawnpad_) + str _y;
                 if ((all3DENEntities select 0) findIf { [_spawnerpadVar] isEqualTo (_x get3DENAttribute 'Name')} isEqualTo -1) exitWith {};
             };
 

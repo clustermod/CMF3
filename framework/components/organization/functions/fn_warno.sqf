@@ -55,7 +55,7 @@ if (!fileExists "WARNO.sqf") exitWith {};
     _warno = _warno apply { 
         _parsed = [_x, true] call EFUNC(common,parseMarkdown);
         _parsed = [_parsed, [_parsed, 5] call BIS_fnc_trimString] select (_parsed select [0, 5] isEqualTo "<br/>");
-        [_parsed, [_parsed, 0, (count _parsed) - 5] call BIS_fnc_trimString] select (_parsed select [(count _parsed) - 5, 5] isEqualTo "<br/>")
+        [_parsed, [_parsed, 0, count _parsed - 5] call BIS_fnc_trimString] select (_parsed select [count _parsed - 5, 5] isEqualTo "<br/>")
     };
 
     player createDiaryRecord ["Diary", ["Command / Signal", (_warno select 4)/*  + "<br/><br/>" + _organization */]];

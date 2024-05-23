@@ -18,9 +18,9 @@ SCRIPT(hideRespawnMarker);
 
 [{ !isNull findDisplay 12 }, {
     findDisplay 12 displayCtrl 51 ctrlAddEventHandler ["Draw", {
-        if !(SETTING(hideRespawnMarkers)) exitWith {};
+        if !SETTING(hideRespawnMarkers) exitWith {};
         
-        if (visibleMap) then {
+        if visibleMap then {
             {
                 if (markerShape _x isEqualTo "ICON" && { markerType _x isEqualTo "respawn_inf" }) then {
                     _x setMarkerAlphaLocal 0;

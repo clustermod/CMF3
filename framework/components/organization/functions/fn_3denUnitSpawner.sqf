@@ -42,7 +42,7 @@ private _spawnScript = {_this spawn {
             private _groupOffset = _groupOffset + _unitGroupOffset;
 
             private _unit = objNull;
-            if (_isLeader) then {
+            if _isLeader then {
                 _unit = create3DENEntity ["Object", _class, [_unitOffset, _groupOffset, 0]];
                 _unitGroup = group _unit;
             } else {

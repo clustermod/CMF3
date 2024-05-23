@@ -13,7 +13,7 @@
 
     /* Toggle the HUD */
     private _staminaBarContainer = uiNamespace getVariable ["ace_advanced_fatigue_staminaBarContainer", controlNull];
-    if (GVAR(hud_show)) then {
+    if GVAR(hud_show) then {
 
         GVAR(hud_show) = false;
 

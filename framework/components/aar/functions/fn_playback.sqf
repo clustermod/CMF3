@@ -31,7 +31,7 @@ _this spawn {
     private _markers = _data select 4;
 
     /* Get length of recording */
-    private _timeSpan = [0, ((_objects select (count _objects - 1)) select 0) - (_data select 2)];
+    private _timeSpan = [0, ((_objects select count _objects - 1) select 0) - (_data select 2)];
 
     /* Loop through data */
     while { true } do {

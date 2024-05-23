@@ -12,11 +12,11 @@ _fireteamNaming = {
     private "_index";
     if (!isNull _parent) then {
         private _parentData = [_parent] call FUNC(groupGetData);
-        private _siblings = (_parentData select 3) select { (count units _x) > 0 };
-        _index = _siblings find (_group);
+        private _siblings = (_parentData select 3) select { count units _x > 0 };
+        _index = _siblings find _group;
     } else {
         private _siblings = ([_groupsHash, _level, []] call CBA_fnc_hashGet) select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo _type };
-        _siblings = _siblings select { (count units _x) > 0 };
+        _siblings = _siblings select { count units _x > 0 };
         _index = _siblings find _group;
     };
 
@@ -31,11 +31,11 @@ _fireteamNaming = {
 
         if (isNil "_names") then {
             private _siblings = ([_groupsHash, (_parentData select 0), []] call CBA_fnc_hashGet) select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo (_parentData select 1) };
-            _siblings = _siblings select { (count units _x) > 0 };
+            _siblings = _siblings select { count units _x > 0 };
             private _index = _siblings find _parent;
 
-            if ((_parentData select 0) isEqualTo (_level + 1)) then {
-                private _name = [GVAR(phoneticAlphabet) select _index, "ZULU"] select ((count GVAR(phoneticAlphabet)) < _index);
+            if ((_parentData select 0) isEqualTo _level + 1) then {
+                private _name = [GVAR(phoneticAlphabet) select _index, "ZULU"] select count GVAR(phoneticAlphabet) < _index;
                 _names = [_name select [0, 1], _name];
             } else {
                 _names = [_index, _index];
@@ -43,7 +43,7 @@ _fireteamNaming = {
 
         };
 
-        if ((_parentData select 0) isEqualTo (_level + 1)) then {
+        if ((_parentData select 0) isEqualTo _level + 1) then {
             _parentIDs pushBack (_names select 1);
         } else {
             _parentIDs pushBack ((_names select 0) select [0, 1]);
@@ -52,7 +52,7 @@ _fireteamNaming = {
     };
 
     reverse _parentIDs;
-    private _squadName = _parentIDs deleteAt ((count _parentIDs) - 1);
+    private _squadName = _parentIDs deleteAt count _parentIDs - 1;
     if (isNil "_squadName") then {
         _squadName = "";
     };
@@ -78,9 +78,9 @@ private _squadNaming = {
 
     private _groupsHash = [GVAR(groups), side _group, [] call CBA_fnc_hashCreate] call CBA_fnc_hashGet;
     private _siblings = ([_groupsHash, _level, []] call CBA_fnc_hashGet) select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo _type }; // @TODO: Try to get siblings from parent first
-    _siblings = _siblings select { (count units _x) > 0 };
+    _siblings = _siblings select { count units _x > 0 };
     private _index = _siblings find _group;
-    private _name = [GVAR(phoneticAlphabet) select _index, "ZULU"] select ((count GVAR(phoneticAlphabet)) < _index);
+    private _name = [GVAR(phoneticAlphabet) select _index, "ZULU"] select (count GVAR(phoneticAlphabet) < _index);
 
     private _parentIDs = [];
     while { !isNull _parent } do {
@@ -92,7 +92,7 @@ private _squadNaming = {
 
         if (isNil "_names") then {
             private _siblings = ([_groupsHash, (_parentData select 0), []] call CBA_fnc_hashGet) select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo (_parentData select 1) };
-            _siblings = _siblings select { (count units _x) > 0 };
+            _siblings = _siblings select { count units _x > 0 };
             private _index = _siblings find _parent;
             _names = [_index];
         };
@@ -121,7 +121,7 @@ private _platoonNaming = {
 
     private _groupsHash = [GVAR(groups), side _group, [] call CBA_fnc_hashCreate] call CBA_fnc_hashGet;
     private _siblings = ([_groupsHash, _level, []] call CBA_fnc_hashGet) select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo _type };
-    _siblings = _siblings select { (count units _x) > 0 };
+    _siblings = _siblings select { count units _x > 0 };
     private _index = _siblings find _group;
 
     private _parentIDs = [];
@@ -134,7 +134,7 @@ private _platoonNaming = {
 
         if (isNil "_names") then {
             private _siblings = ([_groupsHash, (_parentData select 0), []] call CBA_fnc_hashGet) select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo (_parentData select 1) };
-            _siblings = _siblings select { (count units _x) > 0 };
+            _siblings = _siblings select { count units _x > 0 };
             private _index = _siblings find _parent;
             _names = [_index];
         };
@@ -142,7 +142,7 @@ private _platoonNaming = {
         _parentIDs pushBack ((_names select 0) select [0, 1]);
         _parent = _parentData select 2;
     };
-    _parentIDs pushBack (_index + 1);
+    _parentIDs pushBack _index + 1;
     // reverse _parentIDs;
 
     private _subFix = ["", "st", "nd", "rd"] param [_index + 1, "th"];
@@ -156,9 +156,9 @@ private _companyNaming = {
 
     private _groupsHash = [GVAR(groups), side _group, [] call CBA_fnc_hashCreate] call CBA_fnc_hashGet;
     private _siblings = ([_groupsHash, _level, []] call CBA_fnc_hashGet) select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo _type };
-    _siblings = _siblings select { (count units _x) > 0 };
+    _siblings = _siblings select { count units _x > 0 };
     private _index = _siblings find _group;
-    private _name = [GVAR(phoneticAlphabet) select _index, "ZULU"] select ((count GVAR(phoneticAlphabet)) < _index);
+    private _name = [GVAR(phoneticAlphabet) select _index, "ZULU"] select (count GVAR(phoneticAlphabet) < _index);
 
     private _parentIDs = [];
     while { !isNull _parent } do {
@@ -170,7 +170,7 @@ private _companyNaming = {
 
         if (isNil "_names") then {
             private _siblings = ([_groupsHash, (_parentData select 0), []] call CBA_fnc_hashGet) select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo (_parentData select 1) };
-            _siblings = _siblings select { (count units _x) > 0 };
+            _siblings = _siblings select { count units _x > 0 };
             private _index = _siblings find _parent;
             _names = [_index];
         };
@@ -192,11 +192,11 @@ _vehicleSquadNaming = {
     private "_index";
     if (!isNull _parent) then {
         private _parentData = [_parent] call FUNC(groupGetData);
-        private _siblings = (_parentData select 3) select { (count units _x) > 0 };
-        _index = _siblings find (_group);
+        private _siblings = (_parentData select 3) select { count units _x > 0 };
+        _index = _siblings find _group;
     } else {
         private _siblings = ([_groupsHash, _level, []] call CBA_fnc_hashGet) select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo _type };
-        _siblings = _siblings select { (count units _x) > 0 };
+        _siblings = _siblings select { count units _x > 0 };
         _index = _siblings find _group;
     };
 
@@ -211,11 +211,11 @@ _vehicleSquadNaming = {
 
         if (isNil "_names") then {
             private _siblings = ([_groupsHash, (_parentData select 0), []] call CBA_fnc_hashGet) select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo (_parentData select 1) };
-            _siblings = _siblings select { (count units _x) > 0 };
+            _siblings = _siblings select { count units _x > 0 };
             private _index = _siblings find _parent;
 
-            if ((_parentData select 0) isEqualTo (_level + 1)) then {
-                private _name = [GVAR(phoneticAlphabet) select _index, "ZULU"] select ((count GVAR(phoneticAlphabet)) < _index);
+            if ((_parentData select 0) isEqualTo _level + 1) then {
+                private _name = [GVAR(phoneticAlphabet) select _index, "ZULU"] select (count GVAR(phoneticAlphabet) < _index);
                 _names = [_name select [0, 1], _name];
             } else {
                 _names = [_index, _index];
@@ -223,7 +223,7 @@ _vehicleSquadNaming = {
 
         };
 
-        if ((_parentData select 0) isEqualTo (_level + 1)) then {
+        if ((_parentData select 0) isEqualTo _level + 1) then {
             _parentIDs pushBack (_names select 1);
         } else {
             _parentIDs pushBack ((_names select 0) select [0, 1]);
@@ -232,7 +232,7 @@ _vehicleSquadNaming = {
     };
 
     reverse _parentIDs;
-    private _squadName = _parentIDs deleteAt ((count _parentIDs) - 1);
+    private _squadName = _parentIDs deleteAt count _parentIDs - 1;
     if (isNil "_squadName") then {
         _squadName = "";
     };
@@ -259,7 +259,7 @@ private _specialNaming = {
 
     private _groupsHash = [GVAR(groups), side _group, [] call CBA_fnc_hashCreate] call CBA_fnc_hashGet;
     private _siblings = ([_groupsHash, _level, []] call CBA_fnc_hashGet) select { (([_x] call FUNC(groupGetData)) select 1) isEqualTo _type };
-    _siblings = _siblings select { (count units _x) > 0 };
+    _siblings = _siblings select { count units _x > 0 };
     private _index = _siblings find _group;
 
     private _parentIDs = [];
@@ -272,7 +272,7 @@ private _specialNaming = {
 
         if (isNil "_names") then {
             private _siblings = [_groupsHash, (_parentData select 0), []] call CBA_fnc_hashGet;
-            _siblings = _siblings select { (count units _x) > 0 };
+            _siblings = _siblings select { count units _x > 0 };
             private _index = _siblings find _parent;
             _names = [_index];
         };
@@ -282,7 +282,7 @@ private _specialNaming = {
     };
 
     /* Get name and color */
-    private _special = switch (_type) do {
+    private _special = switch _type do {
         case "RECON": { ["ROMEO", [[1, 1, 0.2, 0.7], [1, 1, 0.2, 0.95]]] };
         case "MORTAR": { ["MORTAR", [[1, 1, 0.2, 0.7], [1, 1, 0.2, 0.95]]] };
         case "LOGI": { ["LOGI", [[1, 1, 0.2, 0.7], [1, 1, 0.2, 0.95]]] };

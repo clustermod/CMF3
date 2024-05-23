@@ -42,8 +42,8 @@ if (!isServer) exitWith {};
         {
             _x params ["_side", "_loadout", ["_list", []], ["_whitelist", false]];
 
-            if (_whitelist) then {
-                if (side _unit isEqualTo _side && { (_unitClass in _list) || (_unitFaction in _list) }) exitWith {
+            if _whitelist then {
+                if (side _unit isEqualTo _side && { _unitClass in _list || _unitFaction in _list }) exitWith {
                     private _role = [_unit] call FUNC(getRole);
                     private _whitelist = ([_role] call compile(preprocessFileLineNumbers format["rsc\loadouts\%1.sqf", _loadout])) select 1;
 

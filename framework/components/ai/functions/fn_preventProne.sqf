@@ -31,7 +31,7 @@ SCRIPT(preventProne);
         params ["_unit", "_anim"];
 
         /* Check if animation is a state change animation to prone */
-        if ((_anim in _proneAnimArray) || (unitPos _unit isEqualTo "down")) then {
+        if (_anim in _proneAnimArray || unitPos _unit isEqualTo "down") then {
             _unit setunitPos "middle"
         };
     }];

@@ -1,10 +1,15 @@
 #ifndef MODULE
     #define MODULE main
     #define MODULE_BEAUTIFIED Main
+    #define REQUIRED_ADDONS []
+    #define REQUIRED_MODULES []
 #endif
 
-#define REQUIRED_ADDONS []
-#define REQUIRED_MODULES []
+/* Disable sqf-vm linting errors for include lookups */
+#pragma sls disable file SQFVM-70014 // External Includes Lookup
+#pragma sls disable file SQFVM-10004 // External Includes Fail
+#pragma sls disable file VV-001      // Unused Private Variable
+#pragma sls disable file VV-006      // Node type mismatch
 
 #include "script_mod.hpp"
 

@@ -16,7 +16,7 @@
  */
 SCRIPT(stats);
 
-if (isServer) then { 
+if isServer then { 
     addMissionEventHandler ["EntityKilled", {
         /* Track deaths */
         if (isPlayer (_this select 0)) then {
@@ -29,13 +29,13 @@ if (isServer) then {
 
         /* Track kills */
         if (isPlayer (_this select 1) && (_this select 0) isKindOf "Man") then {
-            switch (true) do {
-                case (([side (_this select 1), side group (_this select 0)] call BIS_fnc_sideIsEnemy) && (side group (_this select 0) != civilian)): {
+            switch true do {
+                case ([side (_this select 1), side group (_this select 0)] call BIS_fnc_sideIsEnemy && { side group (_this select 0) != civilian }): {
                     private _kills = (_this select 1) getVariable [QGVAR(stats_E_kills), 0];
                     (_this select 1) setVariable [QGVAR(stats_E_kills), _kills + 1, true];
                 };
 
-                case (([side (_this select 1), side group (_this select 0)] call BIS_fnc_sideIsFriendly) && (side group (_this select 0) != civilian)): {
+                case ([side (_this select 1), side group (_this select 0)] call BIS_fnc_sideIsFriendly && { side group (_this select 0) != civilian }): {
                     private _kills = (_this select 1) getVariable [QGVAR(stats_F_kills), 0];
                     (_this select 1) setVariable [QGVAR(stats_F_kills), _kills + 1, true];
                 };

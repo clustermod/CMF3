@@ -60,7 +60,7 @@ _this spawn {
 
         /* Reload magazines */
         if (_turrets > 0) then {
-            for "_i" from 0 to (_turrets - 1) do {
+            for "_i" from 0 to _turrets - 1 do {
                 private _config = (configFile >> "CfgVehicles" >> _type >> "Turrets") select _i;
                 private _turretName = configName _config;
                 _magazines = getArray(_config >> "magazines");
@@ -82,7 +82,7 @@ _this spawn {
 
                 private _count_other = count (_config >> "Turrets");
                 if (_count_other > 0) then {
-                    for "_i" from 0 to (_count_other - 1) do {
+                    for "_i" from 0 to _count_other - 1 do {
                         private _config2 = (_config >> "Turrets") select _i;
                         _magazines = getArray(_config2 >> "magazines");
                         _removed = [];
@@ -119,7 +119,7 @@ _this spawn {
         //_veh vehicleChat "Refuelling...";
         QGVAR(reapirRearm_info) cutText ["Refueling...", "PLAIN DOWN"];
         while {fuel _veh < 0.99} do {
-            _veh setFuel ((fuel _veh + 0.01) min 1);
+            _veh setFuel (fuel _veh + 0.01) min 1;
             sleep 0.05;
         };
         sleep _reloadTimeFactor;
@@ -133,7 +133,7 @@ _this spawn {
         (_this select 0) params ["_centerPos", ["_centerRadius", 5], ["_types", ["Car", "Tank", "Plane", "Helicopter", "Ship"]]];
 
         while { !(missionNamespace getVariable [QGVAR(repairRearm_disable), false]) } do {
-            waitUntil { !isNull objectParent player && { (objectParent player distance _centerPos) < _centerRadius && { _types findIf { objectParent player isKindOf _x } != -1 } } };
+            waitUntil { !isNull objectParent player && { objectParent player distance _centerPos < _centerRadius && { _types findIf { objectParent player isKindOf _x } != -1 } } };
             private _vehicle = objectParent player;
 
             LOG_1("repairRearm %1", typeOf _vehicle);
@@ -143,7 +143,7 @@ _this spawn {
             private _repairRearmHandle = _vehicle spawn (_this select 1);
 
             /* Wait until player leaves radius */
-            waitUntil { (objectParent player distance _centerPos) > _centerRadius };
+            waitUntil { objectParent player distance _centerPos > _centerRadius };
             if (!scriptDone _repairRearmHandle) then {
                 terminate _repairRearmHandle;
                 QGVAR(reapirRearm_info) cutText ["Cancelled Operation!", "PLAIN DOWN"];

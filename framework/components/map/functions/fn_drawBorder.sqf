@@ -68,7 +68,7 @@ if (!isNil "_textArray") then {
         private _lineDir = ((_posArray select _from) getDir (_posArray select _to));
         private _textDir = -(_lineDir - 90);
         private _textWidth = [_text, _scale] call FUNC(textWidth);
-        private _textPos = (_posArray select _from) getPos [(((_posArray select _from) distance (_posArray select _to)) / 2) - (_textWidth / 2), _lineDir];
+        private _textPos = (_posArray select _from) getPos [((_posArray select _from) distance (_posArray select _to)) / 2 - _textWidth / 2, _lineDir];
         
         [
             _textPos getPos [_textOffset, _textDir + 90],

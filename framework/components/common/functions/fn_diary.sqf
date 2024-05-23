@@ -58,10 +58,11 @@
                 private _settingsArr = [GVAR(clientSettings), _x] call CBA_fnc_hashGet;
                 {
                     private _title = [_x select 1, (_x select 1) select 0] select ((_x select 1) isEqualType []);
+                    private _setting = _x;
                     _clientSettings = _clientSettings + format [
                         "<font size='13'>  %1: <font color='#fcba03'>%2</font><br/>",
                         _title, 
-                        str (missionNamespace getVariable [_x select 0, ""])
+                        str (missionNamespace getVariable [_setting select 0, ""])
                     ];
                 } forEach _settingsArr;
                 _clientSettings = _clientSettings + "<br/>";

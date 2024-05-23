@@ -1,5 +1,4 @@
 #include "script_component.hpp"
-#include "\z\ace\addons\arsenal\defines.hpp"
 /*
  * Author: Eric
  * Loads kosherArsenal

@@ -14,7 +14,7 @@
 
     if (_unit != player) exitWith { };
 
-    if (_active) then {
+    if _active then {
         if (!isNil "acre_api_fnc_setGlobalVolume") then {
             private _acreGlobalVolume = [] call acre_api_fnc_getGlobalVolume;
             if (isNil "_acreGlobalVolume") then { _acreGlobalVolume = 1 };

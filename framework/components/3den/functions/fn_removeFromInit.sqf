@@ -25,12 +25,12 @@ if (_index isEqualTo -1) exitWith { false };
 private _p1 = _init select [0, _index];
 
 private _deleteRange = count _line + _index;
-if ((_init select [(count _line) + _index, 1]) isEqualTo ";") then {
+if (_init select [count _line + _index, 1] isEqualTo ";") then {
     _deleteRange = count _line + 1 + _index;
 };
 private _p2 = _init select [_deleteRange, count _init];
 
-_init = (_p1 + _p2) splitString toString [13, 10];
+_init = _p1 + _p2 splitString toString [13, 10];
 _init = _init select { _x != " " && { _x != "" } };
 _init = _init joinString toString [13, 10];
 

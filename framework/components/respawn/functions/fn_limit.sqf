@@ -38,7 +38,7 @@ if (call _condition) then {
             };
 
             /* Put player in a new group and initialize spectator for him */
-            [player] joinSilent (createGroup west);
+            [player] joinSilent createGroup west;
             [true, true, true] call ace_spectator_fnc_setSpectator;
         } else {
             /* Decrement the respawn counter */
@@ -53,7 +53,7 @@ if (!hasInterface) exitwith {};
 
 /* Get the respawns left for all players in mission and create 3D widget displaying the remaining respawns for zeuses */
 [{!isnull (getAssignedCuratorLogic player)}, {
-    if (player in (call bis_fnc_listcuratorplayers)) then {
+    if (player in call bis_fnc_listcuratorplayers) then {
         addMissionEventHandler ["Draw3D", {
             if (isNull curatorCamera || !EGVAR(curator,zeusInfoShow)) exitWith {};
             {

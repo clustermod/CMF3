@@ -70,7 +70,7 @@ private _loadKeybinds = {
 };
 
 private _loadPreInit = {
-    if (is3DEN) exitWith {};
+    if is3DEN exitWith {};
     params ["_module"];
 
     private _path = format ["components\%1\XEH_preInit.sqf", _module];
@@ -81,7 +81,7 @@ private _loadPreInit = {
 };
 
 private _loadPostInit = {
-    if (is3DEN) exitWith {};
+    if is3DEN exitWith {};
     params ["_module"];
 
     private _path = format ["components\%1\XEH_postInit.sqf", _module];
@@ -96,7 +96,7 @@ private _loadPostInit = {
 };
 
 private _loadServerInit = {
-    if (is3DEN) exitWith {};
+    if is3DEN exitWith {};
     params ["_module"];
 
     if (!isServer) exitWith {};
@@ -109,14 +109,14 @@ private _loadServerInit = {
 };
 
 private _loadPlayerInit = {
-    if (is3DEN) exitWith {};
+    if is3DEN exitWith {};
     params ["_module"];
     
     private _path = format ["components\%1\XEH_playerInit.sqf", _module];
 
     if (fileExists _path) then {
         [
-            { (missionNamespace getVariable [QGVAR(server_initialized), false]) && { !isNull player } },
+            { missionNamespace getVariable [QGVAR(server_initialized), false] && { !isNull player } },
             {
                 call compile preprocessFileLineNumbers _this;
             }, 

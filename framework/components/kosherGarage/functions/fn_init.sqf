@@ -52,7 +52,7 @@ private _action = [QGVAR(root), "Spawn Vehicle", "", { true }, { true }, {
             "params [""_target"", ""_player"", ""_params""];",
             "_params params [""_vehicle"", ""_center""];",
             "(count (nearestObjects [_center, [""AllVehicles""], 5]) isEqualTo 0) &&"
-        ] joinString endl) + (toString _condition));
+        ] joinString endl) + toString _condition);
 
         private _action = [
             format [QGVAR(%1), _vehicle], 

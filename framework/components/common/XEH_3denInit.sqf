@@ -34,7 +34,7 @@ private _acreRadioRackAction = [
             private _display = ctrlParent _ctrl;
             private _vehicles = get3DENSelected "object";
             private _comboCtrl = _display displayCtrl 100;
-            private _radio = call compile (_comboCtrl lbData (lbCurSel _comboCtrl));
+            private _radio = call compile (_comboCtrl lbData lbCurSel _comboCtrl);
 
             if (isNil "_radio") exitWith {
                 ["You need to select a radio", 1, 1] call BIS_fnc_3DENNotification;
@@ -65,7 +65,7 @@ private _simulationAction = [
         };
         
         private _selections = get3DENSelected "object";
-        private _first = (_selections) select 0;
+        private _first = _selections select 0;
         private _toggle = (simulationEnabled _first);
 
         {
@@ -134,12 +134,12 @@ private _carryAction = [
         private _disableCommand = "[this, fales] call ace_dragging_fnc_setCarryable";
         
         private _selections = get3DENSelected "object";
-        private _first = (_selections) select 0;
+        private _first = _selections select 0;
         private _isSet = ([_first, _enableCommand] call EFUNC(3den,inInit) || [_first, _disableCommand] call EFUNC(3den,inInit));
         private _toggle = ([_first, _enableCommand] call EFUNC(3den,inInit) || !_isSet);
 
         {
-            if (_toggle) then {
+            if _toggle then {
                 if ([_x, _disableCommand] call EFUNC(3den,inInit)) then {
                     [_x, _disableCommand] call EFUNC(3den,removeFromInit);
                 };
@@ -171,12 +171,12 @@ private _dragAction = [
         private _disableCommand = "[this, fales] call ace_dragging_fnc_setDraggable";
         
         private _selections = get3DENSelected "object";
-        private _first = (_selections) select 0;
+        private _first = _selections select 0;
         private _isSet = ([_first, _enableCommand] call EFUNC(3den,inInit) || [_first, _disableCommand] call EFUNC(3den,inInit));
         private _toggle = ([_first, _enableCommand] call EFUNC(3den,inInit) || !_isSet);
 
         {
-            if (_toggle) then {
+            if _toggle then {
                 if ([_x, _disableCommand] call EFUNC(3den,inInit)) then {
                     [_x, _disableCommand] call EFUNC(3den,removeFromInit);
                 };

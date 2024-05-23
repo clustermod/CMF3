@@ -34,10 +34,10 @@ _style = createHashMapFromArray _style;
 private _parsedStyles = createHashMap;
 {
     private _key = _x;
-    private _value = _y;
+    // private _value = _y;
 
     private _parsed = "";
-    if (_diary) then {
+    if _diary then {
         _parsed = "<font";
         {
             _parsed = _parsed + format [" %1=""%2""", _x, _y];

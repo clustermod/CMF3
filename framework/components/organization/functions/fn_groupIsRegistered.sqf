@@ -16,4 +16,4 @@
  */
 params ["_group"];
 
-(([_group] call FUNC(groupGetData)) select 0) > -1
+[_group] call FUNC(groupGetData) select 0 > -1

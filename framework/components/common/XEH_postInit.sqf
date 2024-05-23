@@ -23,11 +23,12 @@ cmf_player removeDiarySubject "Statistics";
 cmf_player removeDiarySubject "Units";
 
 /* Create sub category for radios */
-[(call acre_api_fnc_getAllRadios) select 0, "Radios", "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\call_ca.paa", 1] call ace_arsenal_fnc_addRightPanelButton;
+[call acre_api_fnc_getAllRadios select 0, "Radios", "\a3\Ui_f\data\GUI\Cfg\CommunicationMenu\call_ca.paa", 1] call ace_arsenal_fnc_addRightPanelButton;
 
 /* Remove KP ranks ace interactions */
 [{
-    if (isNil { ([(ace_interact_menu_ActSelfNamespace getVariable (typeOf player)), ["ACE_SelfActions","KPR_Admin"]] call ace_interact_menu_fnc_findActionNode) }) exitWith {};
+    playerClass = typeOf player;
+    if (isNil { ([(ace_interact_menu_ActSelfNamespace getVariable playerClass), ["ACE_SelfActions","KPR_Admin"]] call ace_interact_menu_fnc_findActionNode) }) exitWith {};
 
     [(typeOf player), 1, ["ACE_SelfActions", "KPR_Admin"]] call ace_interact_menu_fnc_removeActionFromClass;
     [(typeOf player), 1, ["ACE_SelfActions", "ACE_Equipment", "KPR_Check"]] call ace_interact_menu_fnc_removeActionFromClass;
@@ -76,7 +77,7 @@ cmf_player addEventHandler ["Killed", {
 
 /* Player respawn event */
 cmf_player addEventHandler ["Respawn", {
-    params ["_unit", "_corpse"];
+    params ["_unit", ""];
 
     /* Load loadout */
     if (!isNil { cmf_player getVariable [QGVAR(player_loadout), nil] }) then {

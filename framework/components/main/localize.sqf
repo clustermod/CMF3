@@ -21,7 +21,7 @@ SCRIPT(localize);
 params [["_stringtable", ""], ["_string", ""]];
 
 /* Check if stringtable exists */
-if !(FILE_EXISTS(_stringtable)) exitWith {
+if !(fileExists _stringtable) exitWith {
     WARNING_1("Failed to find stringtable %1", _stringtable);
     _string
 };

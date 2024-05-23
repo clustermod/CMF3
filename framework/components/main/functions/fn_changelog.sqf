@@ -24,13 +24,13 @@ addMissionEventHandler ["Map", {
 
     if !(([_lastVersion, _curVersion] call EFUNC(common,versionCompare)) isEqualTo 1 && { _disabled isEqualTo 0 }) exitWith {};
 
-    if (_mapIsOpened && { !isNull ((findDisplay 12) displayCtrl 88800) }) then {
+    if (_mapIsOpened && { !isNull (findDisplay 12 displayCtrl 88800) }) then {
         /* Show warning if server version is older than the latest CMF version */
         if ([_lastVersion, _curVersion] call EFUNC(common,versionCompare) isEqualTo -1) then {
             [format ["Version Mismatch! (Machine: %1 (%4) version: %3, serverVersion: %2)", player, _curVersion, _lastVersion, name player], "CMF", [CBA_display_ingame_warnings, true, true]] call CBA_fnc_debug;
         };
         
-        private _display = (findDisplay 12) createDisplay QGVAR(changelogDisplay);
+        private _display = findDisplay 12 createDisplay QGVAR(changelogDisplay);
 
         waitUntil {!isNull _display};
         private _changelog = call compile preprocessFileLineNumbers "components\main\changelog.sqf";
@@ -38,7 +38,7 @@ addMissionEventHandler ["Map", {
         _changelog = _changelogLines joinString "<br/>";
 
         (_display displayCtrl 100) ctrlSetStructuredText parseText _changelog;
-        private _height = (count _changelogLines) * 0.038;
+        private _height = count _changelogLines * 0.038;
 
         (_display displayCtrl 100) ctrlSetPositionH _height;
         (_display displayCtrl 100) ctrlCommit 0;

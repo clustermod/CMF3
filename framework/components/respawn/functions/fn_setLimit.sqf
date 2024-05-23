@@ -26,7 +26,7 @@ _obj setVariable[QGVAR(deaths), 0, true];
 if (!local _obj) exitWith {};
 
 /* Close spectator if players is spectating */
-if (_obj in (call ace_spectator_fnc_players)) then {
+if (_obj in call ace_spectator_fnc_players) then {
     [false] call ace_spectator_fnc_setSpectator;
 };
 

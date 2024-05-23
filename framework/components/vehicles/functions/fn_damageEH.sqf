@@ -46,8 +46,8 @@ if (isNil "_projectileType") then {
 /* Get the vehicle selectionNames */
 private _vehicleSelections = [GVAR(vehicleCache), typeOf _veh, []] call CBA_fnc_hashGet;
 if (_vehicleSelections isEqualTo []) then {
-    private _engineName = getText (configFile >> "cfgVehicles" >> (typeOf _veh) >> "HitPoints" >> "HitEngine" >> "name");
-    private _fuelName = getText (configFile >> "cfgVehicles" >> (typeOf _veh) >> "HitPoints" >> "HitFuel" >> "name");
+    private _engineName = getText (configFile >> "cfgVehicles" >> typeOf _veh >> "HitPoints" >> "HitEngine" >> "name");
+    private _fuelName = getText (configFile >> "cfgVehicles" >> typeOf _veh >> "HitPoints" >> "HitFuel" >> "name");
 
     _vehicleSelections = [_engineName, _fuelName];
 
@@ -57,11 +57,11 @@ if (_vehicleSelections isEqualTo []) then {
 
 /* Check if the damage is enough to kill the vehicle, and if it is take over the damage handling */
 //LOG_2("%1 in %2 || %1 isEqualTo """"", _selection, str _vehicleSelections);
-if (_damage > 0.8 && { (_selection in _vehicleSelections) || _selection isEqualTo "" }) then {
+if (_damage > 0.8 && { _selection in _vehicleSelections || _selection isEqualTo "" }) then {
     LOG_2("Registered damage on selection: %1 = %2", _selection, str _damage);
 
     /* If the projectile type was explosive play cool visual and audiable effects */
-    if ((_projectileType isEqualTo 1)) then {
+    if (_projectileType isEqualTo 1) then {
         [_veh, _projectile, _hitPoint] spawn {
             params["_veh", "_projectile", "_hitPoint"];
             {
@@ -91,7 +91,7 @@ if (_damage > 0.8 && { (_selection in _vehicleSelections) || _selection isEqualT
 
     /* Allow fueltank to start leaking */
     if (_selection isEqualTo "fuel") then {
-        if (_veh getHit "fuel" >= 0.9 && { _veh getVariable [QGVAR(isBurning), false] && { (random 1) < (0.5 * (fuel _veh)) } }) then {
+        if (_veh getHit "fuel" >= 0.9 && { _veh getVariable [QGVAR(isBurning), false] && { random 1 < 0.5 * fuel _veh } }) then {
             private "_key";
             for "_y" from 0 to 9001 do {
                 _key = QGVAR(vehicleFire_) + str _y;
@@ -102,10 +102,10 @@ if (_damage > 0.8 && { (_selection in _vehicleSelections) || _selection isEqualT
             private _radius = (_boundingRect select 2) / 2;
 
             private _burnTime = 600 * fuel _veh;
-            ["ace_fire_addFireSource", [_veh, _radius, 10 * (fuel _veh), _key, { (_this select 0) > time }, [_burnTime]]] call CBA_fnc_serverEvent;
+            ["ace_fire_addFireSource", [_veh, _radius, 10 * fuel _veh, _key, { _this select 0 > time }, [_burnTime]]] call CBA_fnc_serverEvent;
             _veh setVariable [QGVAR(isBurning), true, true];
 
-            [{time > (_this select 0)}, { (_this select 1) setVariable [QGVAR(isBurning), false, true] }, [_burnTime, _veh]] call CBA_fnc_waitUntilAndExecute;
+            [{time > _this select 0}, { (_this select 1) setVariable [QGVAR(isBurning), false, true] }, [_burnTime, _veh]] call CBA_fnc_waitUntilAndExecute;
         };
     } else {
         _damage = 0.8;

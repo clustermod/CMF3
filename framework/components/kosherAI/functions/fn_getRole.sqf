@@ -26,19 +26,19 @@ if (!isNil { _unit getVariable QGVAR(role) }) exitWith {
 private _fnc_isOperator = {
     private _unit = _this;
 
-    _unit isEqualTo (commander (vehicle _unit)) || 
-    { _unit isEqualTo (driver (vehicle _unit)) || 
-    { _unit isEqualTo  (gunner (vehicle _unit)) }};
+    _unit isEqualTo commander (vehicle _unit) || 
+    { _unit isEqualTo driver (vehicle _unit) || 
+    { _unit isEqualTo  gunner (vehicle _unit) }};
 };
 
 /* Crewman */
-if ((vehicle _unit) isKindOf "Tank" && { (_unit call _fnc_isOperator) }) exitWith {_unit setVariable [QGVAR(role), "CRW"]; "CRW"};
+if (vehicle _unit isKindOf "Tank" && { (_unit call _fnc_isOperator) }) exitWith {_unit setVariable [QGVAR(role), "CRW"]; "CRW"};
 
 /* Rotary Pilot */
-if ((vehicle _unit) isKindOf "Helicopter" && { (_unit call _fnc_isOperator) }) exitWith {_unit setVariable [QGVAR(role), "RPIL"]; "RPIL"};
+if (vehicle _unit isKindOf "Helicopter" && { (_unit call _fnc_isOperator) }) exitWith {_unit setVariable [QGVAR(role), "RPIL"]; "RPIL"};
 
 /* Fixed Wing Pilot */
-if ((vehicle _unit) isKindOf "Plane" && { (_unit call _fnc_isOperator) }) exitWith {_unit setVariable [QGVAR(role), "WPIL"]; "WPIL"};
+if (vehicle _unit isKindOf "Plane" && { (_unit call _fnc_isOperator) }) exitWith {_unit setVariable [QGVAR(role), "WPIL"]; "WPIL"};
 
 /* Medic */
 if (getNumber (configFile >> "CfgVehicles" >> typeOf _unit >> "attendant") isEqualTo 1) exitWith {_unit setVariable [QGVAR(role), "MED"]; "MED"};
@@ -47,16 +47,16 @@ if (getNumber (configFile >> "CfgVehicles" >> typeOf _unit >> "attendant") isEqu
 if (getNumber (configFile >> "CfgVehicles" >> typeOf _unit >> "engineer") isEqualTo 1) exitWith {_unit setVariable [QGVAR(role), "ENG"]; "ENG"};
 
 /* Anti-tank */
-if ((secondaryWeapon _unit) != "") exitWith {_unit setVariable [QGVAR(role), "AT"]; "AT"};
+if (secondaryWeapon _unit != "") exitWith {_unit setVariable [QGVAR(role), "AT"]; "AT"};
 
 /* Machinegunner */
-if (((primaryweapon _unit) call BIS_fnc_itemtype) select 1 isEqualTo "MachineGun") exitWith {_unit setVariable [QGVAR(role), "MG"]; "MG"};
+if ((primaryweapon _unit call BIS_fnc_itemtype) select 1 isEqualTo "MachineGun") exitWith {_unit setVariable [QGVAR(role), "MG"]; "MG"};
 
 /* Sniper */
-if (((primaryweapon _unit) call BIS_fnc_itemtype) select 1 isEqualTo "SniperRifle") exitWith {_unit setVariable [QGVAR(role), "MAR"]; "MAR"};
+if ((primaryweapon _unit call BIS_fnc_itemtype) select 1 isEqualTo "SniperRifle") exitWith {_unit setVariable [QGVAR(role), "MAR"]; "MAR"};
 
 /* Squad Leader */
-if ((leader _unit) isEqualTo _unit) exitWith {_unit setVariable [QGVAR(role), "SL"]; "SL"};
+if (leader _unit isEqualTo _unit) exitWith {_unit setVariable [QGVAR(role), "SL"]; "SL"};
 
 /* Rifleman */
 _unit setVariable [QGVAR(role), "RFL"]; "RFL"
