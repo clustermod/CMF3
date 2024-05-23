@@ -42,10 +42,6 @@ if (!fileExists "WARNO.sqf") exitWith {};
         "Weather: <font color=""#fcba03"">" + (_weather select 0) + " at " + (_weather select 1) + " with winds at " + (_weather select 2) + "</font>"
     ] joinString "<br/>";
 
-    private _toeRecord = ((cmf_player allDiaryRecords "cmf_toe") select 0) select 0;
-    private _rosterRecord = ((cmf_player allDiaryRecords "cmf_toe") select 0) select 0;
-
-
     /* Parse Markdown and remove chasing and trailing newlines */
     _warno = _warno apply { 
         _parsed = [_x, true] call EFUNC(common,parseMarkdown);

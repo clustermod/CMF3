@@ -103,3 +103,29 @@ private _specialMenu = [_path, LSTRING(special_elements_displayName), "ca\ui\dat
 
 /* Zeus unit */
 [_path, LSTRING(zeus_unit_displayName), "ZEUS", "a3\ui_f_curator\data\logos\arma3_zeus_icon_ca.paa"] call FUNC(3denUnitSpawner);
+
+/* Add Situation to mission overview */
+private _warno = call compile preprocessFileLineNumbers "WARNO.sqf";
+private _missionSituation = (_warno select 1) splitString toString [10, 13];
+private _startIndex = _missionSituation findIf { toUpper "## Description" in toUpper _x };
+private _stopIndex = _missionSituation findIf { toUpper "## Situation Overview" in toUpper _x };
+
+_missionSituation = (_missionSituation select [_startIndex + 1, _stopIndex - 1]) joinString toString [10, 13];
+
+/* Cleanup text */
+_missionSituation = _missionSituation regexReplace ["<!--[^>]*-->", ""];
+_missionSituation = _missionSituation regexReplace ["\*\*([\S\s]*?)\*\*", "$1"];
+_missionSituation = _missionSituation regexReplace ["\*([\S\s]*?)\*", "$1"];
+_missionSituation = _missionSituation regexReplace ["\n# (.*?)\n", endl + "$1" + endl];
+_missionSituation = _missionSituation regexReplace ["\n## (.*?)\n", endl + "$1" + endl];
+_missionSituation = _missionSituation regexReplace ["\n### (.*?)\n", endl + "$1" + endl];
+_missionSituation = _missionSituation regexReplace ["\n- ", endl + "• "];
+_missionSituation = _missionSituation regexReplace ["\\(.)", "$1"];
+_missionSituation = _missionSituation regexReplace ["<br>", endl];
+_missionSituation = _missionSituation regexReplace ["<br/>", endl];
+
+set3DENMissionAttributes [
+    ["Scenario", "OverviewText", _missionSituation],
+    ["Scenario", "OverviewTextLocked", _missionSituation],
+    ["Scenario", "OnLoadMission", _missionSituation]
+];
