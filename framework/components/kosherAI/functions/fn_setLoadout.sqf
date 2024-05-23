@@ -94,7 +94,7 @@ for "_i" from 0 to round (random 3) do {
 };
 
 /* Add Explosives */
-private _compatibleMagazines = compatibleMagazines primaryWeapon _unit + (compatibleMagazines handgunWeapon _unit + (compatibleMagazines secondaryWeapon _unit));
+private _compatibleMagazines = compatibleMagazines primaryWeapon _unit + (compatibleMagazines handgunWeapon _unit + compatibleMagazines secondaryWeapon _unit);
 private _explosives = _magazines select { !(_x in _compatibleMagazines) };
 for "_i" from 0 to round (random 2) do {
     _unit addMagazineGlobal selectRandom _explosives;
@@ -102,8 +102,8 @@ for "_i" from 0 to round (random 2) do {
 
 /* Add medical equipment */
 if (_role isEqualTo "MED") then {
-    for "_i" from 0 to (random 30) do {
-        _unit addItem (selectRandom (_whitelist select 8));
+    for "_i" from 0 to random 30 do {
+        _unit addItem selectRandom (_whitelist select 8);
     }
 } else {
     _unit addItem "Medikit"; _unit addItem "Medikit";
