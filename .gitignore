@@ -12,7 +12,8 @@ __pycache__
 mission.sqm
 framework/rsc/loadouts/*.sqf
 framework/rsc/scripts/*.sqf
-!framework/rsc/loadouts/*.sqf
+!framework/rsc/loadouts/!*.sqf
+framework/rsc/loadouts/!test*.sqf
 
 # Todos and changelogs
 TODO.md
