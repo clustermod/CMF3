@@ -25,17 +25,6 @@ private _ammoBoxAction = [
     }
 ];
 
-[
-    _path, 
-    "Kosher Arsenal",
-    "a3\3den\data\displays\display3den\toolbar\open_ca.paa",
-    {},
-    [],
-    [
-        _ammoBoxAction
-    ]
-] call EFUNC(3den,addMenuItem);
-
 private _randomLoadoutAction = [
     "Set Random Loadout",
     "a3\ui_f\data\gui\rsc\rscdisplayarsenal\uniform_ca.paa",
