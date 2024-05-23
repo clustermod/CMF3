@@ -254,3 +254,6 @@ class cmf_main_changelogDisplay {
 
 /* Include 3den Checklist */
 #include "RscMissionChecklist.hpp"
+
+/* Include AAR Reader */
+#include "RscAfterActionReader.hpp"

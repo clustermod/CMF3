@@ -24,13 +24,13 @@ private _submit = {
     private _name = [name player, ""] select _anon;
 
     /* Call script serverside (extDB3 only installed serverside) */
-    private _oldReports = missionNameSpace getVariable [QGVAR(AAR_playerReports), []];
+    private _oldReports = missionNameSpace getVariable [QGVAR(reports), []];
     _oldReports pushBack [_name, _mission, _player, (name player)];
-    GVAR(AAR_playerReports) = _oldReports;
-    publicVariable QGVAR(AAR_playerReports);
+    GVAR(reports) = _oldReports;
+    publicVariable QGVAR(reports);
 
     /* Raise event */
-    [QGVAR(debrief_onSubmit), []] call CBA_fnc_localEvent;
+    [QGVAR(onSubmitReport), []] call CBA_fnc_localEvent;
 };
 
 /* Create dialog using Zeus Enhanced */

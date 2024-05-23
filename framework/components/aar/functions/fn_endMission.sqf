@@ -61,6 +61,7 @@ EFUNC(inline_aar,endMission) = {
                 format ["    Your Enemy Kills: %1 <br/>", (player getVariable [QGVAR(stats_E_kills), 0])],
                 format [" Your Friendly Kills: %1 <br/>", (player getVariable [QGVAR(stats_F_kills), 0])],
                 format [" Your Civilian Kills: %1 <br/>", (player getVariable [QGVAR(stats_C_kills), 0])],
+                format ["    Your Shots Fired: %1 <br/>", (player getVariable [QGVAR(stats_shots_fired), 0])],
                 "</t>"
             ];
 
@@ -110,59 +111,10 @@ EFUNC(inline_aar,endMission) = {
             waitUntil { isNull (uiNamespace getVariable "zen_common_display") };
 
             /* Open dialog for reading */
-            waitUntil { count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) != 0 };
-
-            private _display = findDisplay 60000 createDisplay QGVAR(aarReadingDisplay);
-            uiNamespace setVariable [QGVAR(aarIndex), 0];
-
-            /* Set first AAR entry */
-            private _currentAAR = ( missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) select 0;
-            (_display displayCtrl 100) ctrlSetText (_currentAAR select 0);
-            (_display displayCtrl 101) ctrlSetText (_currentAAR select 1);
-            (_display displayCtrl 102) ctrlSetText (_currentAAR select 2);
-            (_display displayCtrl 300) ctrlSetText format ["AAR Feedback (%1/%2)", (uiNamespace getVariable [QGVAR(aarIndex), 0]) + 1, (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]))];
-
-            /* Update AAR amount */
-            _display spawn {
-                private _curValue = (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]));
-                while { !isNull _this } do {
-                    waitUntil { count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) != _curValue };
-                    private _curValue = (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]));
-                    (ctrlParent _ctrl displayCtrl 300) ctrlSetText format ["AAR Feedback (%1/%2)", (uiNamespace getVariable [QGVAR(aarIndex), 0]) + 1, _curValue];
-                };
-            };
-
-            /* Previous */
-            (_display displayCtrl 200) ctrlAddEventHandler ["ButtonClick", {
-                params ["_ctrl"];
-
-                private _index = uiNamespace getVariable [QGVAR(aarIndex), 0];
-                private _currentAAR = ( missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) select 0 max (_index - 1);
-                (ctrlParent _ctrl displayCtrl 100) ctrlSetText (_currentAAR select 0);
-                (ctrlParent _ctrl displayCtrl 101) ctrlSetText (_currentAAR select 1);
-                (ctrlParent _ctrl displayCtrl 102) ctrlSetText (_currentAAR select 2);
-                (ctrlParent _ctrl displayCtrl 300) ctrlSetText format ["AAR Feedback (%1/%2)", (0 max (_index + 1)), (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]))];
-
-                uiNamespace setVariable [QGVAR(aarIndex), (0 max (_index - 1))];
-            }];
-
-            /* Next */
-            (_display displayCtrl 201) ctrlAddEventHandler ["ButtonClick", {
-                params ["_ctrl"];
-
-                private _index = uiNamespace getVariable [QGVAR(aarIndex), 0];
-                private _currentAAR = ( missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) select count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) min (_index + 1);
-                (ctrlParent _ctrl displayCtrl 100) ctrlSetText (_currentAAR select 0);
-                (ctrlParent _ctrl displayCtrl 101) ctrlSetText (_currentAAR select 1);
-                (ctrlParent _ctrl displayCtrl 102) ctrlSetText (_currentAAR select 2);
-                (ctrlParent _ctrl displayCtrl 300) ctrlSetText format ["AAR Feedback (%1/%2)",
-                    (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) min (_index + 2)),
-                    (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]))
-                ];
-
-                uiNamespace setVariable [QGVAR(aarIndex), (count (missionNameSpace getVariable [QGVAR(AAR_playerReports), []]) min (_index + 1))];
-            }];
-
+            waitUntil { count (missionNameSpace getVariable [QGVAR(reports), []]) != 0 };
+            
+            /* Open reader display */
+            private _display = findDisplay 60000 createDisplay "CMF_RscAfterActionReader";
         }] remoteExec ["spawn", 0, true];
     };
 

@@ -1,23 +1,22 @@
 "
-<t size='1.1'>CMF3 Changelog v2.1.1.61 => v2.1.1.62</t>
-Reverted codebase back to v2.1.1.58
+<t size='1.1'>CMF3 Changelog v2.1.1.62 => v2.1.1.63</t>
 
 <t size='1.05' color='#00aa22'>Added</t>
-	• Added function to set a random loadout for a unit using a specified loadoutfile in 3den and zeus
-	• Added function to set a crate loadout for a crate using a specified logistics file in 3den and zeus
-	• Added a script log viewer to the CMF menu
-	• Added `PATHTO` family of macros
-	• Added shots fired statistic to AAR
-	• Added cmf_common_fnc_displayAddInitEvent function
+	• Added A Checklist when exporting the mission to see if anything is missing
+	• Added the TO&E to the Warning Order
+	• Added a link to the weather to the warning order
+	• Added function to validate loadout file
 
 <t size='1.05' color='#009eaa'>Changed</t>
-	• Changed how ui elements are included. it now uses a master include file in the ui directory
-	• Changed how zeus/curator modules are registered
-	• Renamed all curator functions to reflect the change
-	• Changed so logistics crates will always be carryable / draggable regardless of weight
+	• Changed force primary default to not force primary
+	• Mission description will now be shown on the loading screen
 
 <t size='1.05' color='#009eaa'>Fixed</t>
-	• Fixed bug where vehicle rallypoints were placeable for everyone
+	• Fixed bug with kosher arsenal
+	• Fixed various bugs with the dynamic group system
+	• Fixed Force Closing issue when no primary weapon is present
+	• Fixed various other things
+	• Fixed After Action Report System
 "
 // @TODO: Use markdown parser with a custom stylesheet mimicking github markdown
 /*

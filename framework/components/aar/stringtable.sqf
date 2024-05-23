@@ -17,11 +17,11 @@
         ["Spanish", "¿Desea que este artículo informativo permanezca en el anonimato?"]
     ]],
     [DSTRING(player_feedback_title), [
-        ["English", "Player Performance Feedback"],
+        ["English", "Tactical Feedback"],
         ["Spanish", "Comentarios sobre el rendimiento de los jugadores"]
     ]],
     [DSTRING(player_feedback_tooltip), [
-        ["English", "Constructive Feedback on player performance"],
+        ["English", "Constructive Feedback on tactical performance"],
         ["Spanish", "Comentarios sobre el rendimiento de los jugadores"]
     ]],
     [DSTRING(mission_feedback_title), [

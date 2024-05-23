@@ -5,3 +5,5 @@ PREP(playback);
 PREP(submitAAR);
 PREP(stats);
 PREP(endMission);
+PREP(initDisplayReader);
+PREP(initDisplaySpectator);

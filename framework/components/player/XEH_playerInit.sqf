@@ -8,6 +8,5 @@ call FUNC(resizeMapMarkers);
 call FUNC(hideRespawnMarker);
 call FUNC(restrictLauncher);
 call FUNC(drinking);
-call FUNC(spectator);
 call FUNC(setRank);
 call FUNC(treatment);
