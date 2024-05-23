@@ -10,6 +10,7 @@
 <t size='1.05' color='#009eaa'>Changed</t>
 	• Changed force primary default to not force primary
 	• Mission description will now be shown on the loading screen
+	• Changed names of some 3den functions
 
 <t size='1.05' color='#009eaa'>Fixed</t>
 	• Fixed bug with kosher arsenal

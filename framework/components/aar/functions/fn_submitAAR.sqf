@@ -30,7 +30,7 @@ private _submit = {
     publicVariable QGVAR(reports);
 
     /* Raise event */
-    [QGVAR(onSubmitReport), []] call CBA_fnc_localEvent;
+    [QGVAR(onSubmitReport), []] call CBA_fnc_globalEvent;
 };
 
 /* Create dialog using Zeus Enhanced */

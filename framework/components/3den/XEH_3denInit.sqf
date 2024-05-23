@@ -34,7 +34,7 @@ private _indexMission = [
     }
 ] call FUNC(addMenuItem);
 
-[_indexMain] call FUNC(main_setConfig);
+[_indexMain] call FUNC(setMissionData);
 private _indexUnits = [[_indexMain], LSTRING(unit_spawner_displayName), "a3\ui_f\data\igui\rscingameui\rscunitinfo\si_stand_ca.paa"] call FUNC(addMenuItem);
 private _indexTools = [[_indexMain], LSTRING(tools_displayName), "a3\ui_f\data\gui\rsc\rscdisplayarcademap\icon_functions_ca.paa"] call FUNC(addMenuItem);
 
@@ -43,7 +43,7 @@ private _indexLobby = [[_indexMain], LSTRING(lobby_manager_displayName), "a3\ui_
 }] call FUNC(addMenuItem);
 
 private _indexIcons = [[_indexMain], LSTRING(iconviewer_displayName), "a3\3den\data\displays\display3den\panelleft\entitylist_layershow_ca.paa", {
-    ["onload"] call FUNC(main_iconViewer);
+    ["onload"] call FUNC(iconViewer);
 }] call FUNC(addMenuItem);
 
 private _indexBug = [[_indexMain], LSTRING(report_bug), "a3\3DEN\Data\Controls\ctrlMenu\link_ca.paa", {

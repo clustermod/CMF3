@@ -11,7 +11,7 @@
  * None
  *
  * Example:
- * ["onload"] call cmf_3den_fnc_main_iconViewer
+ * ["onload"] call cmf_3den_fnc_iconViewer
  *
  * Public: Yes
  */
@@ -40,7 +40,7 @@ switch _mode do {
 
         uiNamespace setVariable [QGVAR(icons_idd), _display];
 
-        ["create", []] call FUNC(main_iconViewer);
+        ["create", []] call FUNC(iconViewer);
 
         if (isNil {localNamespace getVariable QGVAR(gameIcons)}) then {
             [] spawn {
@@ -59,10 +59,10 @@ switch _mode do {
                 localNamespace setVariable [QGVAR(icons_numIcons), count _icons];
                 localNamespace setVariable [QGVAR(icons), _icons];
 
-                ["update", []] call FUNC(main_iconViewer);
+                ["update", []] call FUNC(iconViewer);
             };
         } else {
-            ["update", []] call FUNC(main_iconViewer);
+            ["update", []] call FUNC(iconViewer);
         };
     };
 
@@ -246,7 +246,7 @@ switch _mode do {
             (_this select 0) ctrlSetTooltip ([LSTRING(case_insensitive), LSTRING(case_sensitive)] select _checked);
             localNamespace setVariable [QGVAR(icons_caseSensitive), _checked];
 
-            ["filterItems", []] call FUNC(main_iconViewer);
+            ["filterItems", []] call FUNC(iconViewer);
         }];
         _ctrlSearchCheckbox ctrlCommit 0;
 
@@ -292,7 +292,7 @@ switch _mode do {
             if (_searchText != _oldText) then {
                 localNamespace setVariable [QGVAR(icons_searchText), _searchText];
 
-                ["filterItems", []] call FUNC(main_iconViewer);
+                ["filterItems", []] call FUNC(iconViewer);
             };
         }];
         _ctrlButtonSearch ctrlCommit 0;
@@ -325,7 +325,7 @@ switch _mode do {
         _ctrlButtonL ctrlSetBackgroundColor [1, 1, 1, 0.15];
         _ctrlButtonL ctrlSetFontHeight (((safezoneW / safezoneH min 1.2) / 1.2) / 25) * 1;
         _ctrlButtonL ctrlSetTextColor [0.95, 0.95, 0.95, 1];
-        _ctrlButtonL ctrlAddEventHandler ["ButtonClick", {["changePage", [-1]] call FUNC(main_iconViewer);}];
+        _ctrlButtonL ctrlAddEventHandler ["ButtonClick", {["changePage", [-1]] call FUNC(iconViewer);}];
         _ctrlButtonL ctrlCommit 0;
 
         private _ctrlButtonR = _display ctrlCreate ["ctrlButton", -1, _ctrlGroupMain];
@@ -341,7 +341,7 @@ switch _mode do {
         _ctrlButtonR ctrlSetBackgroundColor [1, 1, 1, 0.15];
         _ctrlButtonR ctrlSetFontHeight (((safezoneW / safezoneH min 1.2) / 1.2) / 25) * 1;
         _ctrlButtonR ctrlSetTextColor [0.95, 0.95, 0.95, 1];
-        _ctrlButtonR ctrlAddEventHandler ["ButtonClick", {["changePage", [1]] call FUNC(main_iconViewer);}];
+        _ctrlButtonR ctrlAddEventHandler ["ButtonClick", {["changePage", [1]] call FUNC(iconViewer);}];
         _ctrlButtonR ctrlCommit 0;
     };
 
@@ -361,7 +361,7 @@ switch _mode do {
 
         localNamespace setVariable [QGVAR(icons), _items];
         localNamespace setVariable [QGVAR(icons_page), 0];
-        ["update", []] call FUNC(main_iconViewer);
+        ["update", []] call FUNC(iconViewer);
     };
 
     case "changePage": {
@@ -371,7 +371,7 @@ switch _mode do {
 
         if (_maxPages isEqualTo 0) exitWith {
             localNamespace setVariable [QGVAR(icons_page), 0];
-            ["update", []] call FUNC(main_iconViewer);
+            ["update", []] call FUNC(iconViewer);
         };
 
         private _page = localNamespace getVariable [QGVAR(icons_page), 0];
@@ -384,7 +384,7 @@ switch _mode do {
         };
 
         localNamespace setVariable [QGVAR(icons_page), _amt];
-        ["update", []] call FUNC(main_iconViewer);
+        ["update", []] call FUNC(iconViewer);
     };
 
     case "update": {
