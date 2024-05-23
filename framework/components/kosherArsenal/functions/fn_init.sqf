@@ -23,7 +23,7 @@ if (!hasInterface) exitWith {};
 
 [{ cmf_player getVariable [QEGVAR(main,player_loaded), false] && { alive cmf_player } }, {
     [{
-        params[["_loadouts", nil, [[]]], /* ["_light", false], */ ["_forcePrimary", false], ["_randomPos", false]];
+        params[["_loadouts", nil, [[]]], ["_forcePrimary", false], ["_randomPos", false]];
 
         if (isNil "_loadouts") exitWith { ERROR_MSG("No loadoutfiles defined"); };
 
@@ -117,10 +117,10 @@ if (!hasInterface) exitWith {};
         [_arsenal, player, false] call ace_arsenal_fnc_openBox;
 
         /* add the force close button and disable voices and insignias */
-        [{ !isNull findDisplay IDD_ace_arsenal }, {
+        private _onOpen = {
             ((findDisplay IDD_ace_arsenal) displayCtrl IDC_buttonImport) ctrlShow false;
             (findDisplay IDD_ace_arsenal) ctrlCreate [QGVAR(forceClose), 2055, ((findDisplay IDD_ace_arsenal) displayCtrl IDC_menuBar)];
-
+    
             /* Disable voices and insignias */
             {
                 private _ctrl = (findDisplay IDD_ace_arsenal) displayctrl _x;
@@ -128,17 +128,20 @@ if (!hasInterface) exitWith {};
                 _ctrl ctrlSetFade 0.6;
                 _ctrl ctrlCommit 0;
             } forEach [2035, 2037];
-        }] call CBA_fnc_waitUntilAndExecute;
+        };
+
+        [{ !isNull findDisplay IDD_ace_arsenal }, _onOpen] call CBA_fnc_waitUntilAndExecute;
 
         /* handle closing the arsenal */
         private _onClose = {
-            _thisArgs params["_forcedprimary", "_arsenal", "_light", "_lightobject"];
+            _thisArgs params["_forcedprimary", "_arsenal", "_light", "_lightobject", "_onOpen"];
 
             /* if force primary is enabled and the player doesn't have a primary selected kick him back into the arsenal */
             if (_forcedprimary && { primaryWeapon player isEqualTo "" && { !(player getVariable [QGVAR(close), false]) } }) exitWith {
                 ["<t color='#ff0000'>"+LSTRING(required_primary)+"</t>", -1, -1, 5, 1, 0, 9459] spawn bis_fnc_dynamicText;
                 [{
                     [_this, cmf_player, false] call ace_arsenal_fnc_openBox;
+                    [{ !isNull findDisplay IDD_ace_arsenal }, _onOpen] call CBA_fnc_waitUntilAndExecute;
                 }, _arsenal, 0.1] call CBA_fnc_waitAndExecute;
 
                 [{ !isNull findDisplay IDD_ace_arsenal }, {
@@ -148,7 +151,7 @@ if (!hasInterface) exitWith {};
             };
 
             /* Delete arsenal object */
-            //deleteVehicle _arsenal;
+            deleteVehicle _arsenal;
 
             /* Delete light if enabled */
             if (_light) then {
@@ -172,7 +175,7 @@ if (!hasInterface) exitWith {};
         }] call CBA_fnc_waitUntilAndExecute;
 
         /* Add closed eventhandler */
-        ["ace_arsenal_displayClosed", _onClose, [_forcePrimary, _arsenal, _light, _lightobject]] call CBA_fnc_addEventHandlerArgs;
+        ["ace_arsenal_displayClosed", _onClose, [_forcePrimary, _arsenal, _light, _lightobject, _onOpen]] call CBA_fnc_addEventHandlerArgs;
 
         /* Raise event */
         [QGVAR(onOpen), [false]] call CBA_fnc_localEvent;

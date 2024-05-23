@@ -6,9 +6,9 @@ class cmf_kosherArsenal_forceClose: cmf_RscButton {
     style = "0x02 + 0x40 + 0x80";
     text = "FORCE CLOSE";
     tooltip = "Force closes kosher arsenal (This will strip you naked)";
-    w = "(((safezoneW - 2 * (93 * (pixelW * pixelGridNoUIScale * 0.25))) - 6 * ((safezoneW - 2 * (93 * (pixelW * pixelGridNoUIScale * 0.25))) / 100)) / 5)";
+    w = "(((safezoneW - 2 * (93 * (pixelW * pixelGridNoUIScale * 0.25))) - 7 * ((safezoneW - 2 * (93 * (pixelW * pixelGridNoUIScale * 0.25))) / 100)) / 6)";
     h = "7 * (pixelH * pixelGridNoUIScale * 0.25)";
-    x = "4 * ((safezoneW - 2 * (93 * (pixelW * pixelGridNoUIScale * 0.25))) / 100) + 3 * (((safezoneW - 2 * (93 * (pixelW * pixelGridNoUIScale * 0.25))) - 6 * ((safezoneW - 2 * (93 * (pixelW * pixelGridNoUIScale * 0.25))) / 100)) / 5)";
+    x = "4 * ((safezoneW - 2 * (93 * (pixelW * pixelGridNoUIScale * 0.25))) / 100) + 3 * (((safezoneW - 2 * (93 * (pixelW * pixelGridNoUIScale * 0.25))) - 7 * ((safezoneW - 2 * (93 * (pixelW * pixelGridNoUIScale * 0.25))) / 100)) / 6)";
     y = "0";
     colorBackground[] = {0.85,0,0,0.8};
     colorBackgroundActive[] = {0.95,0,0,1};
