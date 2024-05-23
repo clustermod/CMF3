@@ -61,7 +61,8 @@ if (!hasInterface) exitWith {};
         if (_reJip && { ESETTING(gameplay,safestart) && { missionNamespace getVariable [QEGVAR(gameplay,safestart_disable), false] } }) exitWith { };
 
         /* Create the arsenal object and initialize ace arsenal */
-        private _arsenal = "HeliHEmpty" createVehicleLocal [0,0,0];
+        private _arsenal = (createGroup sideLogic) createUnit ["Logic", [0, 0, 0], [], 0, "CAN_COLLIDE"];
+        systemChat str _arsenal;
         [_arsenal, []] call ace_arsenal_fnc_initBox;
 
         /* Load the whitelist */
@@ -147,7 +148,7 @@ if (!hasInterface) exitWith {};
             };
 
             /* Delete arsenal object */
-            deleteVehicle _arsenal;
+            //deleteVehicle _arsenal;
 
             /* Delete light if enabled */
             if (_light) then {

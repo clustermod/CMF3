@@ -24,7 +24,7 @@ if (_object getVariable [QGVAR(ammobox_initialized), false]) exitWith { false };
 /* ammobox function */
 private _onOpen = {
     /* Create the arsenal object and initialize ace arsenal on it */
-    private _arsenal = "HeliHEmpty" createVehicleLocal [0,0,0];
+    private _arsenal = (createGroup sideLogic) createUnit ["Logic", [0, 0, 0], [], 0, "CAN_COLLIDE"];
     [_arsenal, []] call ace_arsenal_fnc_initBox;
 
     /* Get player's role and loadout */
