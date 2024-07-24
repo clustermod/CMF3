@@ -1,7 +1,7 @@
 #define MODULE respawn
 #define MODULE_BEAUTIFIED Respawn
 
-#define REQUIRED_ADDONS ["ace_interaction_menu"]
+#define REQUIRED_ADDONS ["ace_interact_menu"]
 #define REQUIRED_MODULES ["common"]
 
 #ifdef DEBUG_ENABLED_RESPAWN
