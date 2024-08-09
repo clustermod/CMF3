@@ -13,18 +13,43 @@ This page lists all current maintainers and contributors.
 ## Project Managers
 This lists all the maintainers responsible for project management and the overall direction of the CMF3 project.
 
-- [Eric "Tapawingo"](https://github.com/Tapawingo)
-    * Scripting, Config, Tools, project Management, Build Automation
+<div class="grid cards contributer-cards" markdown>
+
+-   [Eric "Tapawingo"](https://github.com/Tapawingo)
+
+    ---
+
+    Scripting, Config, Tools, project Management, Build Automation
+
+</div>
 
 ## Contributors
-- Ozzy
-    * Testing
+This lists all the contributors to CMF3.
 
-- Galil
-    * Testing
+<div class="grid cards contributer-cards" markdown>
 
-- Aleks
-    * Testing
+-   [Ozzy]()
 
-- Warming
-    * Testing
+    ---
+
+    Ideation, Testing
+
+-   [Galil]()
+
+    ---
+
+    Ideation, Testing
+
+-   [Aleks]()
+
+    ---
+
+    Ideation, Testing
+
+-   [Warming]()
+
+    ---
+
+    Ideation, Testing
+
+</div>
