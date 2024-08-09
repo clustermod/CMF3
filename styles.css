@@ -121,3 +121,13 @@ div.function.notes .md-button {
 .grid.cards.downloads-card li p {
     text-align: center;
 }
+
+.grid.cards.contributer-cards {
+    grid-template-columns: none;
+}
+
+.grid.cards.contributer-cards li {
+    background-color: #c3c3c31c;
+    min-width: 800px;
+    width:fit-content;
+}
