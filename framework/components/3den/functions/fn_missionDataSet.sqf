@@ -12,7 +12,7 @@
  * None
  * 
  * Example:
- * ["myVariable", _myValue, missionNameSpace] call cmf_3den_fnc_missionSettings
+ * ["myVariable", _myValue, missionNameSpace] call cmf_3den_fnc_missionDataSet
  * 
  * Public: Yes
  */

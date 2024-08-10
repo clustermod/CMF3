@@ -11,7 +11,7 @@
  * Deleted Success <BOOLEAN>
  *
  * Example:
- * [_entity, "this allowDamage false"] call cmf_3den_fnc_addToInit
+ * [_entity, "this allowDamage false"] call cmf_3den_fnc_removeFromInit
  *
  * Public: No
  */
