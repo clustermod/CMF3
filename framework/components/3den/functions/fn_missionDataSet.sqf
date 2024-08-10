@@ -1,18 +1,17 @@
 #include "script_component.hpp"
 /*
  * Author: Eric
- * Sets variables that can be accessed in the mission
+ * Gets variables that can be accessed in the mission
  * 
  * Arguments:
  * 0: Variable Name <STRING>
- * 1: Variable Value <ANY>
- * 2: Namespace (optional, default: { missionNameSpace }) <Code>
+ * 1: Default Variable Value <ANY>
  * 
  * Return Value:
- * None
+ * Value of variable <ANY>
  * 
  * Example:
- * ["myVariable", _myValue, missionNameSpace] call cmf_3den_fnc_missionSettings
+ * ["M_TITLE", "My Mission Title"] call cmf_3den_fnc_missionDataGet
  * 
  * Public: Yes
  */
