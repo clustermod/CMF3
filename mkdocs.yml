@@ -30,6 +30,7 @@ extra_css:
 theme:
   name: material
   custom_dir: docs/overrides
+  favicon: img/logo/favicon.png
   logo: img/logo/cmf3_logo_trans.png
   font:
     text: Open Sans
