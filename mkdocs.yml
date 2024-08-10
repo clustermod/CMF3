@@ -22,6 +22,7 @@ extra:
 
 nav:
   - Home: index.md
+  - Getting Started: getting_started/index.md
   - Wiki: wiki/index.md
   - CMF3 Contributors: contributors.md
 

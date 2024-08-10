@@ -6,7 +6,7 @@ hide:
 
 # wiki
 
-<h1>CMF Wiki and Documentation</h1>
+<h1>CMF3 Wiki and Documentation</h1>
 
 <div class="grid cards" markdown>
 
