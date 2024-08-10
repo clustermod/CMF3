@@ -6,7 +6,7 @@ hide:
 
 # wiki
 
-<h1 markdown>Class Names</h1>
+<h1>Class Names</h1>
 Everything is ordered alphabetically.
 
 You know an in-game name but want the class name? <kbd>CTRL</kbd> + <kbd>F</kbd>
