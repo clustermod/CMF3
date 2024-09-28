@@ -137,9 +137,6 @@ class cmf_main_changelogDisplay {
 //#include "common_notification.hpp"
 #include "viewdistance_menu.hpp"
 
-/* Include diagnostic component UI elements */
-#include "RscDiagnostic.hpp"
-
 /* Include 3den Checklist */
 #include "RscMissionChecklist.hpp"
 
